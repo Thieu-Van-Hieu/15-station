@@ -1,0 +1,127 @@
+[
+  {
+    "id": "R1-GDD",
+    "article": "Điều 1",
+    "title": "Giấy đi đường",
+    "page_text": "Người qua trạm phải xuất trình Giấy đi đường còn thời hạn, có dấu của Uỷ ban nhân dân xã nơi đi. Mọi hàng mang theo phải được ghi đủ trên Giấy đi đường. Hàng không ghi coi là hàng không rõ nguồn gốc.",
+    "day_from": "d1",
+    "day_to": "d5",
+    "condition": null,
+    "check": "GDD_HOP_LE",
+    "params": {
+      "doc": "GDD",
+      "seal_kinds": ["UBND_XA"],
+      "seal_place_field": "noi_di",
+      "declare_field": "hang_mang_theo",
+      "exempt_categories": ["DO_CA_NHAN"]
+    },
+    "emits": ["E1", "E3", "E5", "E6"],
+    "reprimand": "Trạm 15 để người không đủ Giấy đi đường hợp lệ qua trạm. Đề nghị đồng chí tổ trưởng kiểm tra kỹ hơn."
+  },
+  {
+    "id": "R2-DINH-MUC",
+    "article": "Điều 2",
+    "title": "Định mức lương thực",
+    "page_text": "Mỗi người chỉ được mang theo không quá 5 kg lương thực. Lương thực mua theo tem phiếu còn giá trị trong tháng được cộng thêm vào định mức. Vượt định mức là vận chuyển lương thực trái phép, phải tịch thu.",
+    "day_from": "d2",
+    "day_to": "d5",
+    "condition": null,
+    "check": "DINH_MUC_LUONG_THUC",
+    "params": { "max_kg": 5, "count_valid_tem_phieu": true },
+    "emits": ["E4"],
+    "reprimand": "Trạm 15 để lọt lương thực vượt định mức. Đề nghị đồng chí tổ trưởng chấn chỉnh."
+  },
+  {
+    "id": "R3-DON-THUOC",
+    "article": "Điều 3",
+    "title": "Thuốc thuộc danh mục quản lý",
+    "page_text": "Thuốc tân dược thuộc danh mục quản lý dưới đây chỉ được mang qua trạm khi có đơn thuốc còn hạn, có dấu bệnh viện, ghi đúng tên và số lượng thuốc.",
+    "day_from": "d3",
+    "day_to": "d5",
+    "condition": null,
+    "check": "DON_THUOC",
+    "params": {
+      "doc": "DT",
+      "seal_kinds": ["BENH_VIEN"],
+      "danh_muc_thuoc": [
+        { "ma": "penicillin", "ten": "Penicillin" },
+        { "ma": "tetracyclin", "ten": "Tetracyclin" },
+        { "ma": "quinin", "ten": "Quinin" },
+        { "ma": "streptomycin", "ten": "Streptomycin" }
+      ]
+    },
+    "emits": ["E1", "E3", "E5", "E6"],
+    "reprimand": "Trạm 15 để lọt thuốc thuộc danh mục quản lý không có đơn hợp lệ.",
+    "note": "Danh mục thuốc là hư cấu – mô phỏng. KB có thể đổi, nhưng mã thuốc trong cargo và DT phải dùng đúng mã ở đây."
+  },
+  {
+    "id": "R4-KHOP-TEN",
+    "article": "Điều 4",
+    "title": "Đối chiếu hộ khẩu",
+    "page_text": "Người qua trạm phải xuất trình Sổ hộ khẩu. Họ tên và năm sinh trên mọi giấy tờ phải khớp với Sổ hộ khẩu.",
+    "day_from": "d4",
+    "day_to": "d5",
+    "condition": null,
+    "check": "KHOP_TEN",
+    "params": { "reference_doc": "SHK", "compare_birth_year": true },
+    "emits": ["E2", "E5"],
+    "reprimand": "Trạm 15 để người có giấy tờ không khớp hộ khẩu qua trạm."
+  },
+  {
+    "id": "R5-CHUNG-TU",
+    "article": "Điều 5",
+    "title": "Chứng từ hàng hoá",
+    "page_text": "Hàng tiêu dùng, thực phẩm và vật tư vận chuyển qua trạm phải có Hoá đơn hợp tác xã hoặc Giấy phép vận chuyển của Công ty Thương nghiệp, ghi đủ mặt hàng và số lượng. Giấy phép phải còn thời hạn.",
+    "day_from": "d5",
+    "day_to": "d5",
+    "condition": null,
+    "check": "CHUNG_TU_HANG_HOA",
+    "params": {
+      "categories": ["HANG_TIEU_DUNG", "THUC_PHAM", "VAT_TU"],
+      "accepted_docs": ["HDHTX", "GPVC"]
+    },
+    "emits": ["E1", "E3", "E5", "E6"],
+    "reprimand": "Trạm 15 để lọt hàng hoá không có chứng từ hợp lệ."
+  },
+  {
+    "id": "R5K-KHOAN",
+    "article": "Điều 2 (bổ sung)",
+    "title": "Sản phẩm khoán",
+    "page_text": "Lương thực có Giấy xác nhận sản phẩm khoán do hợp tác xã nơi sản xuất cấp, đúng tên người mang, được miễn định mức tại Điều 2 trong phạm vi số lượng ghi trên giấy.",
+    "day_from": "d5",
+    "day_to": "d5",
+    "condition": { "issue_triggered": "KN-KHOAN" },
+    "check": "MIEN_DINH_MUC_KHOAN",
+    "params": {
+      "target_rule": "R2-DINH-MUC",
+      "doc": "GXNK",
+      "seal_kinds": ["HTX"],
+      "seal_place_field": "xa",
+      "require_holder_match": true
+    },
+    "emits": [],
+    "reprimand": "Trạm 15 xử lý sai giấy xác nhận sản phẩm khoán.",
+    "note": "Quy định miễn trừ: không tự sinh lỗi, chỉ nới hạn mức của R2-DINH-MUC. Chỉ có hiệu lực khi KN-KHOAN đã chạm ngưỡng."
+  },
+  {
+    "id": "R6-HANG-CAM",
+    "article": "Thông báo",
+    "title": "Danh mục hàng cấm lưu thông",
+    "page_text": "Thực hiện chủ trương xoá bỏ các hình thức cấm đoán lưu thông, chia cắt thị trường, các quy định trước đây của sổ này hết hiệu lực. Trạm chỉ giữ lại hàng thuộc danh mục cấm lưu thông dưới đây.",
+    "day_from": "d6",
+    "day_to": "d6",
+    "condition": null,
+    "check": "HANG_CAM",
+    "params": {
+      "danh_muc": [
+        { "ma": "thuoc-phien", "ten": "Thuốc phiện" },
+        { "ma": "vu-khi", "ten": "Vũ khí, đạn dược" },
+        { "ma": "chat-no", "ten": "Chất nổ" },
+        { "ma": "hang-nhap-lau", "ten": "Hàng nhập lậu qua biên giới" }
+      ]
+    },
+    "emits": [],
+    "reprimand": "Trạm 15 để lọt hàng thuộc danh mục cấm lưu thông.",
+    "note": "Vi phạm R6 không gắn mã lỗi E*: error = null. Danh mục là hư cấu – mô phỏng, KB đối chiếu lại trước khi chốt."
+  }
+]

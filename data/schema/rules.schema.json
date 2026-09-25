@@ -1,0 +1,485 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "rules.schema.json",
+  "title": "rules.json",
+  "description": "Sổ chỉ thị. Đặc tả: docs/03-rules-spec.md mục 4. Mỗi 'check' là một hàm cố định trong src/engine; 'params' cấu hình hàm đó.",
+  "type": "array",
+  "minItems": 1,
+  "items": {
+    "$ref": "#/$defs/rule"
+  },
+  "$defs": {
+    "dayId": {
+      "enum": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5",
+        "d6"
+      ]
+    },
+    "ruleId": {
+      "enum": [
+        "R1-GDD",
+        "R2-DINH-MUC",
+        "R3-DON-THUOC",
+        "R4-KHOP-TEN",
+        "R5-CHUNG-TU",
+        "R5K-KHOAN",
+        "R6-HANG-CAM"
+      ]
+    },
+    "issueId": {
+      "enum": [
+        "KN-KHOAN",
+        "KN-THUONG-BINH"
+      ]
+    },
+    "errorCode": {
+      "enum": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ]
+    },
+    "sealKind": {
+      "enum": [
+        "UBND_XA",
+        "UBND_HUYEN",
+        "CONG_AN",
+        "PHONG_LUONG_THUC",
+        "HTX",
+        "CTY_THUONG_NGHIEP",
+        "BENH_VIEN",
+        "TRAM_Y_TE",
+        "TB_XH"
+      ]
+    },
+    "itemCode": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "category": {
+      "enum": [
+        "LUONG_THUC",
+        "THUC_PHAM",
+        "THUOC",
+        "HANG_TIEU_DUNG",
+        "VAT_TU",
+        "DO_CA_NHAN",
+        "HANG_CAM"
+      ]
+    },
+    "rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "article",
+        "title",
+        "page_text",
+        "day_from",
+        "day_to",
+        "condition",
+        "check",
+        "params",
+        "emits",
+        "reprimand"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/ruleId"
+        },
+        "article": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Số điều hiển thị trên sổ, ví dụ 'Điều 2' hoặc 'Điều 2 (bổ sung)'."
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "page_text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "day_from": {
+          "$ref": "#/$defs/dayId"
+        },
+        "day_to": {
+          "$ref": "#/$defs/dayId"
+        },
+        "condition": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "issue_triggered"
+              ],
+              "properties": {
+                "issue_triggered": {
+                  "$ref": "#/$defs/issueId"
+                }
+              }
+            }
+          ]
+        },
+        "check": {
+          "enum": [
+            "GDD_HOP_LE",
+            "DINH_MUC_LUONG_THUC",
+            "DON_THUOC",
+            "KHOP_TEN",
+            "CHUNG_TU_HANG_HOA",
+            "MIEN_DINH_MUC_KHOAN",
+            "HANG_CAM"
+          ]
+        },
+        "params": {
+          "type": "object"
+        },
+        "emits": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/errorCode"
+          }
+        },
+        "reprimand": {
+          "type": "string",
+          "minLength": 1
+        },
+        "note": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "check": {
+                "const": "GDD_HOP_LE"
+              }
+            },
+            "required": [
+              "check"
+            ]
+          },
+          "then": {
+            "properties": {
+              "params": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "doc",
+                  "seal_kinds",
+                  "seal_place_field",
+                  "declare_field",
+                  "exempt_categories"
+                ],
+                "properties": {
+                  "doc": {
+                    "const": "GDD"
+                  },
+                  "seal_kinds": {
+                    "type": "array",
+                    "minItems": 1,
+                    "uniqueItems": true,
+                    "items": {
+                      "$ref": "#/$defs/sealKind"
+                    }
+                  },
+                  "seal_place_field": {
+                    "const": "noi_di"
+                  },
+                  "declare_field": {
+                    "const": "hang_mang_theo"
+                  },
+                  "exempt_categories": {
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                      "$ref": "#/$defs/category"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "check": {
+                "const": "DINH_MUC_LUONG_THUC"
+              }
+            },
+            "required": [
+              "check"
+            ]
+          },
+          "then": {
+            "properties": {
+              "params": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "max_kg",
+                  "count_valid_tem_phieu"
+                ],
+                "properties": {
+                  "max_kg": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  },
+                  "count_valid_tem_phieu": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "check": {
+                "const": "DON_THUOC"
+              }
+            },
+            "required": [
+              "check"
+            ]
+          },
+          "then": {
+            "properties": {
+              "params": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "doc",
+                  "seal_kinds",
+                  "danh_muc_thuoc"
+                ],
+                "properties": {
+                  "doc": {
+                    "const": "DT"
+                  },
+                  "seal_kinds": {
+                    "type": "array",
+                    "minItems": 1,
+                    "uniqueItems": true,
+                    "items": {
+                      "$ref": "#/$defs/sealKind"
+                    }
+                  },
+                  "danh_muc_thuoc": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "ma",
+                        "ten"
+                      ],
+                      "properties": {
+                        "ma": {
+                          "$ref": "#/$defs/itemCode"
+                        },
+                        "ten": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "check": {
+                "const": "KHOP_TEN"
+              }
+            },
+            "required": [
+              "check"
+            ]
+          },
+          "then": {
+            "properties": {
+              "params": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "reference_doc",
+                  "compare_birth_year"
+                ],
+                "properties": {
+                  "reference_doc": {
+                    "const": "SHK"
+                  },
+                  "compare_birth_year": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "check": {
+                "const": "CHUNG_TU_HANG_HOA"
+              }
+            },
+            "required": [
+              "check"
+            ]
+          },
+          "then": {
+            "properties": {
+              "params": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "categories",
+                  "accepted_docs"
+                ],
+                "properties": {
+                  "categories": {
+                    "type": "array",
+                    "minItems": 1,
+                    "uniqueItems": true,
+                    "items": {
+                      "$ref": "#/$defs/category"
+                    }
+                  },
+                  "accepted_docs": {
+                    "type": "array",
+                    "minItems": 1,
+                    "uniqueItems": true,
+                    "items": {
+                      "enum": [
+                        "HDHTX",
+                        "GPVC"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "check": {
+                "const": "MIEN_DINH_MUC_KHOAN"
+              }
+            },
+            "required": [
+              "check"
+            ]
+          },
+          "then": {
+            "properties": {
+              "params": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "target_rule",
+                  "doc",
+                  "seal_kinds",
+                  "seal_place_field",
+                  "require_holder_match"
+                ],
+                "properties": {
+                  "target_rule": {
+                    "const": "R2-DINH-MUC"
+                  },
+                  "doc": {
+                    "const": "GXNK"
+                  },
+                  "seal_kinds": {
+                    "type": "array",
+                    "minItems": 1,
+                    "uniqueItems": true,
+                    "items": {
+                      "$ref": "#/$defs/sealKind"
+                    }
+                  },
+                  "seal_place_field": {
+                    "const": "xa"
+                  },
+                  "require_holder_match": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "check": {
+                "const": "HANG_CAM"
+              }
+            },
+            "required": [
+              "check"
+            ]
+          },
+          "then": {
+            "properties": {
+              "params": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "danh_muc"
+                ],
+                "properties": {
+                  "danh_muc": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "ma",
+                        "ten"
+                      ],
+                      "properties": {
+                        "ma": {
+                          "$ref": "#/$defs/itemCode"
+                        },
+                        "ten": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

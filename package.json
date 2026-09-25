@@ -1,0 +1,7 @@
+{
+	"devDependencies": {
+		"tsx": "^4.23.15",
+		"ajv": "^8.20.0",
+		"ajv-formats": "^3.0.1"
+	}
+}

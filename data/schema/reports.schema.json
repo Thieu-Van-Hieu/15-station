@@ -1,0 +1,172 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "reports.schema.json",
+  "title": "reports.json",
+  "description": "Vấn đề kiến nghị. Đặc tả: docs/03-rules-spec.md mục 6.",
+  "type": "array",
+  "minItems": 1,
+  "items": {
+    "$ref": "#/$defs/issue"
+  },
+  "$defs": {
+    "dayId": {
+      "enum": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5",
+        "d6"
+      ]
+    },
+    "ruleId": {
+      "enum": [
+        "R1-GDD",
+        "R2-DINH-MUC",
+        "R3-DON-THUOC",
+        "R4-KHOP-TEN",
+        "R5-CHUNG-TU",
+        "R5K-KHOAN",
+        "R6-HANG-CAM"
+      ]
+    },
+    "issueId": {
+      "enum": [
+        "KN-KHOAN",
+        "KN-THUONG-BINH"
+      ]
+    },
+    "issue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "description",
+        "unlock_day",
+        "threshold",
+        "delay",
+        "effect",
+        "reasons"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/issueId"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "unlock_day": {
+          "$ref": "#/$defs/dayId"
+        },
+        "threshold": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 6
+        },
+        "delay": {
+          "enum": [
+            "next_day",
+            "next_act"
+          ]
+        },
+        "effect": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "rule",
+            "text"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "activate_rule",
+                "narrative"
+              ]
+            },
+            "rule": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "$ref": "#/$defs/ruleId"
+                }
+              ]
+            },
+            "text": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "type": {
+                    "const": "activate_rule"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "rule": {
+                    "$ref": "#/$defs/ruleId"
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "type": {
+                    "const": "narrative"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "rule": {
+                    "type": "null"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "reasons": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 2,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "text"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^LD-[A-Z0-9]+(-[A-Z0-9]+)*$"
+              },
+              "text": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

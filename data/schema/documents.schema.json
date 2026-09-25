@@ -1,0 +1,441 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "documents.schema.json",
+  "title": "documents.json",
+  "description": "Định nghĩa 8 loại giấy. Trường của từng loại phải khớp đúng các $defs doc_* trong travelers.schema.json. Đặc tả: docs/03-rules-spec.md mục 1.4.",
+  "type": "array",
+  "minItems": 8,
+  "maxItems": 8,
+  "items": {
+    "$ref": "#/$defs/documentType"
+  },
+  "$defs": {
+    "dayId": {
+      "enum": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5",
+        "d6"
+      ]
+    },
+    "docType": {
+      "enum": [
+        "GDD",
+        "SHK",
+        "TP",
+        "HDHTX",
+        "GPVC",
+        "DT",
+        "CNTB",
+        "GXNK"
+      ]
+    },
+    "sealKind": {
+      "enum": [
+        "UBND_XA",
+        "UBND_HUYEN",
+        "CONG_AN",
+        "PHONG_LUONG_THUC",
+        "HTX",
+        "CTY_THUONG_NGHIEP",
+        "BENH_VIEN",
+        "TRAM_Y_TE",
+        "TB_XH"
+      ]
+    },
+    "field": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "key",
+        "label",
+        "kind"
+      ],
+      "properties": {
+        "key": {
+          "type": "string",
+          "pattern": "^[a-z_]+$"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "enum": [
+            "text",
+            "int",
+            "date",
+            "month",
+            "item",
+            "items"
+          ]
+        }
+      }
+    },
+    "documentType": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "name",
+        "description",
+        "introduced_day",
+        "fields",
+        "allowed_seal_kinds",
+        "seal_place_field",
+        "holder_field",
+        "birth_year_field",
+        "expiry_field",
+        "expiry_kind",
+        "layout"
+      ],
+      "properties": {
+        "code": {
+          "$ref": "#/$defs/docType"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "introduced_day": {
+          "$ref": "#/$defs/dayId"
+        },
+        "fields": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/field"
+          }
+        },
+        "allowed_seal_kinds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/sealKind"
+          }
+        },
+        "seal_place_field": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "holder_field": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "birth_year_field": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "expiry_field": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "expiry_kind": {
+          "enum": [
+            "date",
+            "month",
+            "none"
+          ]
+        },
+        "layout": {
+          "enum": [
+            "giay-doc",
+            "giay-ngang",
+            "so",
+            "phieu-nho",
+            "the"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "code": {
+                "const": "GDD"
+              }
+            },
+            "required": [
+              "code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "fields": {
+                "items": {
+                  "properties": {
+                    "key": {
+                      "enum": [
+                        "ho_ten",
+                        "nam_sinh",
+                        "noi_di",
+                        "noi_den",
+                        "ly_do",
+                        "hang_mang_theo",
+                        "ngay_cap",
+                        "co_gia_tri_den"
+                      ]
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "code": {
+                "const": "SHK"
+              }
+            },
+            "required": [
+              "code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "fields": {
+                "items": {
+                  "properties": {
+                    "key": {
+                      "enum": [
+                        "so_so",
+                        "chu_ho",
+                        "ho_ten",
+                        "nam_sinh",
+                        "quan_he_chu_ho",
+                        "dia_chi"
+                      ]
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "code": {
+                "const": "TP"
+              }
+            },
+            "required": [
+              "code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "fields": {
+                "items": {
+                  "properties": {
+                    "key": {
+                      "enum": [
+                        "ho_ten",
+                        "thang",
+                        "mat_hang"
+                      ]
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "code": {
+                "const": "HDHTX"
+              }
+            },
+            "required": [
+              "code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "fields": {
+                "items": {
+                  "properties": {
+                    "key": {
+                      "enum": [
+                        "so_hd",
+                        "htx_ten",
+                        "nguoi_nhan",
+                        "mat_hang",
+                        "ngay"
+                      ]
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "code": {
+                "const": "GPVC"
+              }
+            },
+            "required": [
+              "code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "fields": {
+                "items": {
+                  "properties": {
+                    "key": {
+                      "enum": [
+                        "so_gp",
+                        "don_vi_cap",
+                        "nguoi_van_chuyen",
+                        "mat_hang",
+                        "tu",
+                        "den",
+                        "ngay_cap",
+                        "co_gia_tri_den"
+                      ]
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "code": {
+                "const": "DT"
+              }
+            },
+            "required": [
+              "code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "fields": {
+                "items": {
+                  "properties": {
+                    "key": {
+                      "enum": [
+                        "benh_nhan",
+                        "thuoc",
+                        "bac_si",
+                        "ngay_ke",
+                        "co_gia_tri_den"
+                      ]
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "code": {
+                "const": "CNTB"
+              }
+            },
+            "required": [
+              "code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "fields": {
+                "items": {
+                  "properties": {
+                    "key": {
+                      "enum": [
+                        "ho_ten",
+                        "nam_sinh",
+                        "hang",
+                        "so_the",
+                        "don_vi_cap"
+                      ]
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "code": {
+                "const": "GXNK"
+              }
+            },
+            "required": [
+              "code"
+            ]
+          },
+          "then": {
+            "properties": {
+              "fields": {
+                "items": {
+                  "properties": {
+                    "key": {
+                      "enum": [
+                        "ho_ten",
+                        "xa",
+                        "htx_ten",
+                        "san_pham",
+                        "san_pham_ma",
+                        "so_luong_kg",
+                        "vu",
+                        "ngay"
+                      ]
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

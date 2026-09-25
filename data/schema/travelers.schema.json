@@ -1,0 +1,1162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "travelers.schema.json",
+  "title": "travelers.json",
+  "description": "26 lượt khách. Đặc tả: docs/03-rules-spec.md mục 2, 3, 5. Đáp án trong 'expected' chỉ để đối chiếu, engine tự tính từ rules.json.",
+  "type": "array",
+  "items": {
+    "$ref": "#/$defs/traveler"
+  },
+  "$defs": {
+    "traveler": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "day",
+        "order",
+        "character",
+        "tags",
+        "portrait",
+        "dialogue",
+        "documents",
+        "cargo",
+        "planted",
+        "expected",
+        "kn",
+        "bribe",
+        "flag_key",
+        "outcomes",
+        "art_note"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/travelerId"
+        },
+        "day": {
+          "$ref": "#/$defs/dayId"
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "character": {
+          "$ref": "#/$defs/characterId"
+        },
+        "tags": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "huong-dan",
+              "buon-lau-that",
+              "luot-trung-tam",
+              "dung-trinh-bay",
+              "dong-cam"
+            ]
+          }
+        },
+        "portrait": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "expression"
+          ],
+          "properties": {
+            "expression": {
+              "enum": [
+                "binh-thuong",
+                "vui",
+                "lo-lang",
+                "buon",
+                "gian",
+                "ne-tranh",
+                "met-moi"
+              ]
+            }
+          }
+        },
+        "dialogue": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/line"
+          }
+        },
+        "reactions": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "CHO_QUA": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/line"
+              }
+            },
+            "GIU_LAI": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/line"
+              }
+            },
+            "LAM_NGO": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/line"
+              }
+            }
+          }
+        },
+        "documents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/document"
+          }
+        },
+        "cargo": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/cargoItem"
+          }
+        },
+        "planted": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "error",
+              "doc",
+              "field",
+              "note"
+            ],
+            "properties": {
+              "error": {
+                "$ref": "#/$defs/errorCode"
+              },
+              "doc": {
+                "oneOf": [
+                  {
+                    "$ref": "#/$defs/docType"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "field": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "note": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "expected": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "verdict",
+            "violations"
+          ],
+          "properties": {
+            "verdict": {
+              "enum": [
+                "CHO_QUA",
+                "GIU_LAI"
+              ]
+            },
+            "violations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "rule",
+                  "error"
+                ],
+                "properties": {
+                  "rule": {
+                    "$ref": "#/$defs/ruleId"
+                  },
+                  "error": {
+                    "oneOf": [
+                      {
+                        "$ref": "#/$defs/errorCode"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "verdict": {
+                    "const": "CHO_QUA"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "violations": {
+                    "maxItems": 0,
+                    "type": "array"
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "verdict": {
+                    "const": "GIU_LAI"
+                  }
+                }
+              },
+              "then": {
+                "properties": {
+                  "violations": {
+                    "minItems": 1,
+                    "type": "array"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "kn": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "issue",
+                "note"
+              ],
+              "properties": {
+                "issue": {
+                  "$ref": "#/$defs/issueId"
+                },
+                "note": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          ]
+        },
+        "bribe": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "amount",
+                "lines",
+                "consequence_note"
+              ],
+              "properties": {
+                "amount": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "lines": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "$ref": "#/$defs/line"
+                  }
+                },
+                "consequence_note": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          ]
+        },
+        "flag_key": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/flagKey"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "outcomes": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "CHO_QUA",
+            "GIU_LAI"
+          ],
+          "properties": {
+            "CHO_QUA": {
+              "$ref": "#/$defs/outcome"
+            },
+            "GIU_LAI": {
+              "$ref": "#/$defs/outcome"
+            },
+            "LAM_NGO": {
+              "$ref": "#/$defs/outcome"
+            }
+          }
+        },
+        "art_note": {
+          "type": "string"
+        }
+      }
+    },
+    "outcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "deltas",
+        "notes"
+      ],
+      "properties": {
+        "deltas": {
+          "$ref": "#/$defs/deltas"
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "deltas": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "luong_thuc_vao_thi_xa": {
+          "type": "integer",
+          "minimum": -20,
+          "maximum": 20
+        },
+        "ho_thieu_an": {
+          "type": "integer",
+          "minimum": -60,
+          "maximum": 60
+        },
+        "gia_gao_index": {
+          "type": "integer",
+          "minimum": -20,
+          "maximum": 20
+        }
+      }
+    },
+    "document": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/doc_GDD"
+        },
+        {
+          "$ref": "#/$defs/doc_SHK"
+        },
+        {
+          "$ref": "#/$defs/doc_TP"
+        },
+        {
+          "$ref": "#/$defs/doc_HDHTX"
+        },
+        {
+          "$ref": "#/$defs/doc_GPVC"
+        },
+        {
+          "$ref": "#/$defs/doc_DT"
+        },
+        {
+          "$ref": "#/$defs/doc_CNTB"
+        },
+        {
+          "$ref": "#/$defs/doc_GXNK"
+        }
+      ]
+    },
+    "seal": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "place",
+            "legible"
+          ],
+          "properties": {
+            "kind": {
+              "$ref": "#/$defs/sealKind"
+            },
+            "place": {
+              "type": "string",
+              "minLength": 1
+            },
+            "legible": {
+              "type": "boolean"
+            }
+          }
+        }
+      ]
+    },
+    "doc_GDD": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "fields",
+        "seal"
+      ],
+      "properties": {
+        "type": {
+          "const": "GDD"
+        },
+        "fields": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "ho_ten",
+            "nam_sinh",
+            "noi_di",
+            "noi_den",
+            "ly_do",
+            "hang_mang_theo",
+            "ngay_cap",
+            "co_gia_tri_den"
+          ],
+          "properties": {
+            "ho_ten": {
+              "$ref": "#/$defs/name"
+            },
+            "nam_sinh": {
+              "$ref": "#/$defs/birthYear"
+            },
+            "noi_di": {
+              "type": "string",
+              "minLength": 1
+            },
+            "noi_den": {
+              "type": "string",
+              "minLength": 1
+            },
+            "ly_do": {
+              "type": "string",
+              "minLength": 1
+            },
+            "hang_mang_theo": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/item"
+              }
+            },
+            "ngay_cap": {
+              "$ref": "#/$defs/date"
+            },
+            "co_gia_tri_den": {
+              "$ref": "#/$defs/date"
+            }
+          }
+        },
+        "seal": {
+          "$ref": "#/$defs/seal"
+        },
+        "damaged": {
+          "type": "boolean"
+        }
+      }
+    },
+    "doc_SHK": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "fields",
+        "seal"
+      ],
+      "properties": {
+        "type": {
+          "const": "SHK"
+        },
+        "fields": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "so_so",
+            "chu_ho",
+            "ho_ten",
+            "nam_sinh",
+            "quan_he_chu_ho",
+            "dia_chi"
+          ],
+          "properties": {
+            "so_so": {
+              "type": "string",
+              "minLength": 1
+            },
+            "chu_ho": {
+              "$ref": "#/$defs/name"
+            },
+            "ho_ten": {
+              "$ref": "#/$defs/name"
+            },
+            "nam_sinh": {
+              "$ref": "#/$defs/birthYear"
+            },
+            "quan_he_chu_ho": {
+              "type": "string",
+              "minLength": 1
+            },
+            "dia_chi": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "seal": {
+          "$ref": "#/$defs/seal"
+        },
+        "damaged": {
+          "type": "boolean"
+        }
+      }
+    },
+    "doc_TP": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "fields",
+        "seal"
+      ],
+      "properties": {
+        "type": {
+          "const": "TP"
+        },
+        "fields": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "ho_ten",
+            "thang",
+            "mat_hang"
+          ],
+          "properties": {
+            "ho_ten": {
+              "$ref": "#/$defs/name"
+            },
+            "thang": {
+              "$ref": "#/$defs/month"
+            },
+            "mat_hang": {
+              "$ref": "#/$defs/item"
+            }
+          }
+        },
+        "seal": {
+          "$ref": "#/$defs/seal"
+        },
+        "damaged": {
+          "type": "boolean"
+        }
+      }
+    },
+    "doc_HDHTX": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "fields",
+        "seal"
+      ],
+      "properties": {
+        "type": {
+          "const": "HDHTX"
+        },
+        "fields": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "so_hd",
+            "htx_ten",
+            "nguoi_nhan",
+            "mat_hang",
+            "ngay"
+          ],
+          "properties": {
+            "so_hd": {
+              "type": "string",
+              "minLength": 1
+            },
+            "htx_ten": {
+              "type": "string",
+              "minLength": 1
+            },
+            "nguoi_nhan": {
+              "$ref": "#/$defs/name"
+            },
+            "mat_hang": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/item"
+              }
+            },
+            "ngay": {
+              "$ref": "#/$defs/date"
+            }
+          }
+        },
+        "seal": {
+          "$ref": "#/$defs/seal"
+        },
+        "damaged": {
+          "type": "boolean"
+        }
+      }
+    },
+    "doc_GPVC": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "fields",
+        "seal"
+      ],
+      "properties": {
+        "type": {
+          "const": "GPVC"
+        },
+        "fields": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "so_gp",
+            "don_vi_cap",
+            "nguoi_van_chuyen",
+            "mat_hang",
+            "tu",
+            "den",
+            "ngay_cap",
+            "co_gia_tri_den"
+          ],
+          "properties": {
+            "so_gp": {
+              "type": "string",
+              "minLength": 1
+            },
+            "don_vi_cap": {
+              "type": "string",
+              "minLength": 1
+            },
+            "nguoi_van_chuyen": {
+              "$ref": "#/$defs/name"
+            },
+            "mat_hang": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/item"
+              }
+            },
+            "tu": {
+              "type": "string",
+              "minLength": 1
+            },
+            "den": {
+              "type": "string",
+              "minLength": 1
+            },
+            "ngay_cap": {
+              "$ref": "#/$defs/date"
+            },
+            "co_gia_tri_den": {
+              "$ref": "#/$defs/date"
+            }
+          }
+        },
+        "seal": {
+          "$ref": "#/$defs/seal"
+        },
+        "damaged": {
+          "type": "boolean"
+        }
+      }
+    },
+    "doc_DT": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "fields",
+        "seal"
+      ],
+      "properties": {
+        "type": {
+          "const": "DT"
+        },
+        "fields": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "benh_nhan",
+            "thuoc",
+            "bac_si",
+            "ngay_ke",
+            "co_gia_tri_den"
+          ],
+          "properties": {
+            "benh_nhan": {
+              "$ref": "#/$defs/name"
+            },
+            "thuoc": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/item"
+              }
+            },
+            "bac_si": {
+              "type": "string",
+              "minLength": 1
+            },
+            "ngay_ke": {
+              "$ref": "#/$defs/date"
+            },
+            "co_gia_tri_den": {
+              "$ref": "#/$defs/date"
+            }
+          }
+        },
+        "seal": {
+          "$ref": "#/$defs/seal"
+        },
+        "damaged": {
+          "type": "boolean"
+        }
+      }
+    },
+    "doc_CNTB": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "fields",
+        "seal"
+      ],
+      "properties": {
+        "type": {
+          "const": "CNTB"
+        },
+        "fields": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "ho_ten",
+            "nam_sinh",
+            "hang",
+            "so_the",
+            "don_vi_cap"
+          ],
+          "properties": {
+            "ho_ten": {
+              "$ref": "#/$defs/name"
+            },
+            "nam_sinh": {
+              "$ref": "#/$defs/birthYear"
+            },
+            "hang": {
+              "type": "string",
+              "pattern": "^[1-4]/4$"
+            },
+            "so_the": {
+              "type": "string",
+              "minLength": 1
+            },
+            "don_vi_cap": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "seal": {
+          "$ref": "#/$defs/seal"
+        },
+        "damaged": {
+          "type": "boolean"
+        }
+      }
+    },
+    "doc_GXNK": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "fields",
+        "seal"
+      ],
+      "properties": {
+        "type": {
+          "const": "GXNK"
+        },
+        "fields": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "ho_ten",
+            "xa",
+            "htx_ten",
+            "san_pham",
+            "san_pham_ma",
+            "so_luong_kg",
+            "vu",
+            "ngay"
+          ],
+          "properties": {
+            "ho_ten": {
+              "$ref": "#/$defs/name"
+            },
+            "xa": {
+              "type": "string",
+              "minLength": 1
+            },
+            "htx_ten": {
+              "type": "string",
+              "minLength": 1
+            },
+            "san_pham": {
+              "type": "string",
+              "minLength": 1
+            },
+            "san_pham_ma": {
+              "$ref": "#/$defs/itemCode"
+            },
+            "so_luong_kg": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "vu": {
+              "type": "string",
+              "minLength": 1
+            },
+            "ngay": {
+              "$ref": "#/$defs/date"
+            }
+          }
+        },
+        "seal": {
+          "$ref": "#/$defs/seal"
+        },
+        "damaged": {
+          "type": "boolean"
+        }
+      }
+    },
+    "item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ma",
+        "ten",
+        "so_luong",
+        "don_vi"
+      ],
+      "properties": {
+        "ma": {
+          "$ref": "#/$defs/itemCode"
+        },
+        "ten": {
+          "type": "string",
+          "minLength": 1
+        },
+        "so_luong": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "don_vi": {
+          "$ref": "#/$defs/unit"
+        }
+      }
+    },
+    "cargoItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ma",
+        "ten",
+        "so_luong",
+        "don_vi",
+        "category"
+      ],
+      "properties": {
+        "ma": {
+          "$ref": "#/$defs/itemCode"
+        },
+        "ten": {
+          "type": "string",
+          "minLength": 1
+        },
+        "so_luong": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "don_vi": {
+          "$ref": "#/$defs/unit"
+        },
+        "category": {
+          "enum": [
+            "LUONG_THUC",
+            "THUC_PHAM",
+            "THUOC",
+            "HANG_TIEU_DUNG",
+            "VAT_TU",
+            "DO_CA_NHAN",
+            "HANG_CAM"
+          ]
+        },
+        "an_giau": {
+          "type": "boolean"
+        }
+      }
+    },
+    "line": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "speaker",
+        "text"
+      ],
+      "properties": {
+        "speaker": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/characterId"
+            },
+            {
+              "enum": [
+                "traveler",
+                "radio",
+                "narrator"
+              ]
+            }
+          ]
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "when": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/condition"
+          }
+        }
+      }
+    },
+    "condition": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "flag",
+            "in"
+          ],
+          "properties": {
+            "flag": {
+              "$ref": "#/$defs/flagKey"
+            },
+            "in": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "$ref": "#/$defs/flagValue"
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "issue_triggered",
+            "value"
+          ],
+          "properties": {
+            "issue_triggered": {
+              "$ref": "#/$defs/issueId"
+            },
+            "value": {
+              "type": "boolean"
+            }
+          }
+        }
+      ]
+    },
+    "dayId": {
+      "enum": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5",
+        "d6"
+      ]
+    },
+    "travelerId": {
+      "type": "string",
+      "pattern": "^d[1-6]-t[1-5]$"
+    },
+    "characterId": {
+      "anyOf": [
+        {
+          "enum": [
+            "ba-tu",
+            "anh-hung",
+            "ong-quynh",
+            "thang-ti",
+            "chi-thu",
+            "tram-truong-doi",
+            "thanh",
+            "hoa",
+            "be-mai",
+            "be-binh",
+            "me-thanh"
+          ]
+        },
+        {
+          "type": "string",
+          "pattern": "^np-[a-z0-9]+(-[a-z0-9]+)*$"
+        }
+      ]
+    },
+    "docType": {
+      "enum": [
+        "GDD",
+        "SHK",
+        "TP",
+        "HDHTX",
+        "GPVC",
+        "DT",
+        "CNTB",
+        "GXNK"
+      ]
+    },
+    "sealKind": {
+      "enum": [
+        "UBND_XA",
+        "UBND_HUYEN",
+        "CONG_AN",
+        "PHONG_LUONG_THUC",
+        "HTX",
+        "CTY_THUONG_NGHIEP",
+        "BENH_VIEN",
+        "TRAM_Y_TE",
+        "TB_XH"
+      ]
+    },
+    "errorCode": {
+      "enum": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ]
+    },
+    "ruleId": {
+      "enum": [
+        "R1-GDD",
+        "R2-DINH-MUC",
+        "R3-DON-THUOC",
+        "R4-KHOP-TEN",
+        "R5-CHUNG-TU",
+        "R5K-KHOAN",
+        "R6-HANG-CAM"
+      ]
+    },
+    "issueId": {
+      "enum": [
+        "KN-KHOAN",
+        "KN-THUONG-BINH"
+      ]
+    },
+    "flagKey": {
+      "type": "string",
+      "pattern": "^[a-z]+(-[a-z]+)*\\.m[1-4][a-z]?$"
+    },
+    "flagValue": {
+      "enum": [
+        "qua",
+        "giu",
+        "lam-ngo",
+        "qua-kn",
+        "giu-kn",
+        "qua-tien",
+        "lam-ngo-tien"
+      ]
+    },
+    "itemCode": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "unit": {
+      "enum": [
+        "kg",
+        "cay",
+        "bao",
+        "hop",
+        "lo",
+        "vi",
+        "vien",
+        "met",
+        "chiec",
+        "lit"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "minLength": 2
+    },
+    "birthYear": {
+      "type": "integer",
+      "minimum": 1890,
+      "maximum": 1987
+    },
+    "date": {
+      "type": "string",
+      "pattern": "^(19[0-9]{2})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"
+    },
+    "month": {
+      "type": "string",
+      "pattern": "^(19[0-9]{2})-(0[1-9]|1[0-2])$"
+    }
+  }
+}

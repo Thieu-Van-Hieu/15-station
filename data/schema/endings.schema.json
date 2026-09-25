@@ -1,0 +1,302 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "endings.schema.json",
+  "title": "endings.json",
+  "description": "Năm kết cục, xét theo priority tăng dần, chọn kết cục đầu tiên thoả mọi điều kiện. END-SONG-SOT là mặc định, không có điều kiện. Đặc tả: docs/03-rules-spec.md mục 9.",
+  "type": "array",
+  "minItems": 5,
+  "maxItems": 5,
+  "items": {
+    "$ref": "#/$defs/ending"
+  },
+  "$defs": {
+    "characterId": {
+      "anyOf": [
+        {
+          "enum": [
+            "ba-tu",
+            "anh-hung",
+            "ong-quynh",
+            "thang-ti",
+            "chi-thu",
+            "tram-truong-doi",
+            "thanh",
+            "hoa",
+            "be-mai",
+            "be-binh",
+            "me-thanh"
+          ]
+        },
+        {
+          "type": "string",
+          "pattern": "^np-[a-z0-9]+(-[a-z0-9]+)*$"
+        }
+      ]
+    },
+    "flagKey": {
+      "type": "string",
+      "pattern": "^[a-z]+(-[a-z]+)*\\.m[1-4][a-z]?$"
+    },
+    "flagValue": {
+      "enum": [
+        "qua",
+        "giu",
+        "lam-ngo",
+        "qua-kn",
+        "giu-kn",
+        "qua-tien",
+        "lam-ngo-tien"
+      ]
+    },
+    "issueId": {
+      "enum": [
+        "KN-KHOAN",
+        "KN-THUONG-BINH"
+      ]
+    },
+    "endingId": {
+      "enum": [
+        "END-AN-TIEN",
+        "END-LAM-NGO",
+        "END-KIEN-NGHI",
+        "END-GAC-CONG",
+        "END-SONG-SOT"
+      ]
+    },
+    "statCondition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stat",
+        "op",
+        "value"
+      ],
+      "properties": {
+        "stat": {
+          "enum": [
+            "true_compliance",
+            "reported_compliance",
+            "valid_reports",
+            "invalid_reports",
+            "lam_ngo_violations",
+            "bribes_accepted",
+            "bribe_total",
+            "issues_triggered",
+            "hardship",
+            "overtime_days",
+            "reprimands"
+          ]
+        },
+        "op": {
+          "enum": [
+            ">=",
+            "<=",
+            "==",
+            ">",
+            "<"
+          ]
+        },
+        "value": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "condition": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "flag",
+            "in"
+          ],
+          "properties": {
+            "flag": {
+              "$ref": "#/$defs/flagKey"
+            },
+            "in": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "$ref": "#/$defs/flagValue"
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "issue_triggered",
+            "value"
+          ],
+          "properties": {
+            "issue_triggered": {
+              "$ref": "#/$defs/issueId"
+            },
+            "value": {
+              "type": "boolean"
+            }
+          }
+        },
+        {
+          "$ref": "#/$defs/statCondition"
+        }
+      ]
+    },
+    "ending": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "priority",
+        "conditions",
+        "scenes",
+        "quote",
+        "character_lines",
+        "closing_question"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/endingId"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "priority": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/statCondition"
+          }
+        },
+        "scenes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "text"
+            ],
+            "properties": {
+              "text": {
+                "type": "string",
+                "minLength": 1
+              },
+              "image": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+              },
+              "when": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "$ref": "#/$defs/condition"
+                }
+              }
+            }
+          }
+        },
+        "quote": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "text",
+            "chapter",
+            "section"
+          ],
+          "properties": {
+            "text": {
+              "type": "string",
+              "minLength": 1
+            },
+            "chapter": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 7
+            },
+            "section": {
+              "type": "string",
+              "pattern": "^[0-9]+(\\.[0-9]+)*$"
+            }
+          }
+        },
+        "character_lines": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "character",
+              "text"
+            ],
+            "properties": {
+              "character": {
+                "$ref": "#/$defs/characterId"
+              },
+              "text": {
+                "type": "string",
+                "minLength": 1
+              },
+              "when": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "$ref": "#/$defs/condition"
+                }
+              }
+            }
+          }
+        },
+        "closing_question": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "id": {
+                "const": "END-SONG-SOT"
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          "then": {
+            "properties": {
+              "conditions": {
+                "maxItems": 0,
+                "type": "array"
+              },
+              "priority": {
+                "const": 5
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "conditions": {
+                "minItems": 1,
+                "type": "array"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

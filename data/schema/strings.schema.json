@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "strings.schema.json",
+  "title": "strings.json",
+  "description": "Chữ giao diện, khoá dạng khu_vực.thành_phần[.tên]. Chữ có thể chứa biến {{ten_bien}} theo docs/03-rules-spec.md mục 1.13.",
+  "type": "object",
+  "required": [
+    "intro.disclaimer",
+    "intro.guide_bao_cap",
+    "desk.stamp.approve",
+    "desk.stamp.reject",
+    "desk.ignore",
+    "desk.report",
+    "report.title",
+    "report.invalid",
+    "board.left.title",
+    "board.right.title",
+    "board.right.simulated",
+    "end.history_card",
+    "reprimand.giu_oan"
+  ],
+  "properties": {
+    "intro.disclaimer": {
+      "type": "string",
+      "minLength": 1
+    },
+    "intro.guide_bao_cap": {
+      "type": "string",
+      "minLength": 1
+    },
+    "desk.stamp.approve": {
+      "type": "string",
+      "minLength": 1
+    },
+    "desk.stamp.reject": {
+      "type": "string",
+      "minLength": 1
+    },
+    "desk.ignore": {
+      "type": "string",
+      "minLength": 1
+    },
+    "desk.report": {
+      "type": "string",
+      "minLength": 1
+    },
+    "report.title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "report.invalid": {
+      "type": "string",
+      "minLength": 1
+    },
+    "board.left.title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "board.right.title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "board.right.simulated": {
+      "type": "string",
+      "minLength": 1
+    },
+    "end.history_card": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reprimand.giu_oan": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "patternProperties": {
+    "^[a-z][a-z0-9_]*(\\.[a-z0-9_]+)+$": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": false
+}

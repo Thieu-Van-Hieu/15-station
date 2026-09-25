@@ -1,0 +1,507 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "days.schema.json",
+  "title": "days.json",
+  "description": "Sáu ngày chơi. Đặc tả: docs/03-rules-spec.md mục 1.2, 7, 8.",
+  "type": "array",
+  "minItems": 6,
+  "maxItems": 6,
+  "items": {
+    "$ref": "#/$defs/day"
+  },
+  "$defs": {
+    "dayId": {
+      "enum": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5",
+        "d6"
+      ]
+    },
+    "travelerId": {
+      "type": "string",
+      "pattern": "^d[1-6]-t[1-5]$"
+    },
+    "ruleId": {
+      "enum": [
+        "R1-GDD",
+        "R2-DINH-MUC",
+        "R3-DON-THUOC",
+        "R4-KHOP-TEN",
+        "R5-CHUNG-TU",
+        "R5K-KHOAN",
+        "R6-HANG-CAM"
+      ]
+    },
+    "characterId": {
+      "anyOf": [
+        {
+          "enum": [
+            "ba-tu",
+            "anh-hung",
+            "ong-quynh",
+            "thang-ti",
+            "chi-thu",
+            "tram-truong-doi",
+            "thanh",
+            "hoa",
+            "be-mai",
+            "be-binh",
+            "me-thanh"
+          ]
+        },
+        {
+          "type": "string",
+          "pattern": "^np-[a-z0-9]+(-[a-z0-9]+)*$"
+        }
+      ]
+    },
+    "line": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "speaker",
+        "text"
+      ],
+      "properties": {
+        "speaker": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/characterId"
+            },
+            {
+              "enum": [
+                "traveler",
+                "radio",
+                "narrator"
+              ]
+            }
+          ]
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "when": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/condition"
+          }
+        }
+      }
+    },
+    "flagKey": {
+      "type": "string",
+      "pattern": "^[a-z]+(-[a-z]+)*\\.m[1-4][a-z]?$"
+    },
+    "flagValue": {
+      "enum": [
+        "qua",
+        "giu",
+        "lam-ngo",
+        "qua-kn",
+        "giu-kn",
+        "qua-tien",
+        "lam-ngo-tien"
+      ]
+    },
+    "issueId": {
+      "enum": [
+        "KN-KHOAN",
+        "KN-THUONG-BINH"
+      ]
+    },
+    "deltas": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "luong_thuc_vao_thi_xa": {
+          "type": "integer",
+          "minimum": -20,
+          "maximum": 20
+        },
+        "ho_thieu_an": {
+          "type": "integer",
+          "minimum": -60,
+          "maximum": 60
+        },
+        "gia_gao_index": {
+          "type": "integer",
+          "minimum": -20,
+          "maximum": 20
+        }
+      }
+    },
+    "date": {
+      "type": "string",
+      "pattern": "^(19[0-9]{2})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"
+    },
+    "condition": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "flag",
+            "in"
+          ],
+          "properties": {
+            "flag": {
+              "$ref": "#/$defs/flagKey"
+            },
+            "in": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "$ref": "#/$defs/flagValue"
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "issue_triggered",
+            "value"
+          ],
+          "properties": {
+            "issue_triggered": {
+              "$ref": "#/$defs/issueId"
+            },
+            "value": {
+              "type": "boolean"
+            }
+          }
+        }
+      ]
+    },
+    "indicators": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "luong_thuc_vao_thi_xa",
+        "ho_thieu_an",
+        "gia_gao_index"
+      ],
+      "properties": {
+        "luong_thuc_vao_thi_xa": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "ho_thieu_an": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "gia_gao_index": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "day": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "act",
+        "label",
+        "game_date",
+        "new_rules",
+        "travelers",
+        "kn_enabled",
+        "clock",
+        "economy",
+        "other_factor",
+        "interludes",
+        "family_event"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/dayId"
+        },
+        "act": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "game_date": {
+          "$ref": "#/$defs/date"
+        },
+        "transition_card": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "lines"
+          ],
+          "properties": {
+            "lines": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "new_rules": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/ruleId"
+          }
+        },
+        "travelers": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 5,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/travelerId"
+          }
+        },
+        "kn_enabled": {
+          "type": "boolean"
+        },
+        "clock": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "start",
+            "end",
+            "per_traveler_min",
+            "per_report_min"
+          ],
+          "properties": {
+            "start": {
+              "type": "string",
+              "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$"
+            },
+            "end": {
+              "type": "string",
+              "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$"
+            },
+            "per_traveler_min": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "per_report_min": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "economy": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "income",
+            "fine_per_error",
+            "bonus_xuat_sac",
+            "expenses"
+          ],
+          "properties": {
+            "income": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "fine_per_error": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "bonus_xuat_sac": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "currency_reform_divisor": {
+              "type": "integer",
+              "minimum": 2,
+              "description": "Chia số tiền mang sang ngày này (đổi tiền 9/1985: 10 đồng cũ = 1 đồng mới)."
+            },
+            "expenses": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "label",
+                  "cost",
+                  "essential"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+                  },
+                  "label": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "cost": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "essential": {
+                    "type": "boolean"
+                  },
+                  "member": {
+                    "$ref": "#/$defs/characterId"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "other_factor": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "text",
+            "deltas"
+          ],
+          "properties": {
+            "text": {
+              "type": "string",
+              "minLength": 1
+            },
+            "deltas": {
+              "$ref": "#/$defs/deltas"
+            }
+          }
+        },
+        "interludes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "at",
+              "lines"
+            ],
+            "properties": {
+              "at": {
+                "anyOf": [
+                  {
+                    "enum": [
+                      "start",
+                      "end"
+                    ]
+                  },
+                  {
+                    "$ref": "#/$defs/travelerId"
+                  }
+                ]
+              },
+              "lines": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "$ref": "#/$defs/line"
+                }
+              },
+              "when": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "$ref": "#/$defs/condition"
+                }
+              }
+            }
+          }
+        },
+        "family_event": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "text"
+              ],
+              "properties": {
+                "text": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          ]
+        },
+        "indicators_start": {
+          "$ref": "#/$defs/indicators"
+        },
+        "savings_start": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "id": {
+                "const": "d1"
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          "then": {
+            "required": [
+              "indicators_start",
+              "savings_start"
+            ],
+            "properties": {
+              "indicators_start": {
+                "$ref": "#/$defs/indicators"
+              },
+              "savings_start": {
+                "type": "integer",
+                "minimum": 0
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "indicators_start": false,
+              "savings_start": false
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "id": {
+                "const": "d6"
+              }
+            },
+            "required": [
+              "id"
+            ]
+          },
+          "then": {
+            "properties": {
+              "kn_enabled": {
+                "const": false
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

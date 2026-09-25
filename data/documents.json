@@ -1,0 +1,378 @@
+[
+  {
+    "code": "GDD",
+    "name": "Giấy đi đường",
+    "description": "Giấy do Uỷ ban nhân dân xã nơi cư trú cấp cho người đi khỏi địa phương. Ghi rõ nơi đến, lý do và toàn bộ hàng mang theo.",
+    "introduced_day": "d1",
+    "fields": [
+      {
+        "key": "ho_ten",
+        "label": "Họ và tên",
+        "kind": "text"
+      },
+      {
+        "key": "nam_sinh",
+        "label": "Năm sinh",
+        "kind": "int"
+      },
+      {
+        "key": "noi_di",
+        "label": "Nơi đi (xã)",
+        "kind": "text"
+      },
+      {
+        "key": "noi_den",
+        "label": "Nơi đến",
+        "kind": "text"
+      },
+      {
+        "key": "ly_do",
+        "label": "Lý do",
+        "kind": "text"
+      },
+      {
+        "key": "hang_mang_theo",
+        "label": "Hàng mang theo",
+        "kind": "items"
+      },
+      {
+        "key": "ngay_cap",
+        "label": "Ngày cấp",
+        "kind": "date"
+      },
+      {
+        "key": "co_gia_tri_den",
+        "label": "Có giá trị đến",
+        "kind": "date"
+      }
+    ],
+    "allowed_seal_kinds": [
+      "UBND_XA"
+    ],
+    "seal_place_field": "noi_di",
+    "holder_field": "ho_ten",
+    "birth_year_field": "nam_sinh",
+    "expiry_field": "co_gia_tri_den",
+    "expiry_kind": "date",
+    "layout": "giay-doc"
+  },
+  {
+    "code": "SHK",
+    "name": "Sổ hộ khẩu",
+    "description": "Sổ đăng ký hộ khẩu do công an quản lý. Trong game chỉ hiển thị trang của người đang qua trạm.",
+    "introduced_day": "d1",
+    "fields": [
+      {
+        "key": "so_so",
+        "label": "Số sổ",
+        "kind": "text"
+      },
+      {
+        "key": "chu_ho",
+        "label": "Chủ hộ",
+        "kind": "text"
+      },
+      {
+        "key": "ho_ten",
+        "label": "Họ và tên",
+        "kind": "text"
+      },
+      {
+        "key": "nam_sinh",
+        "label": "Năm sinh",
+        "kind": "int"
+      },
+      {
+        "key": "quan_he_chu_ho",
+        "label": "Quan hệ với chủ hộ",
+        "kind": "text"
+      },
+      {
+        "key": "dia_chi",
+        "label": "Địa chỉ",
+        "kind": "text"
+      }
+    ],
+    "allowed_seal_kinds": [
+      "CONG_AN"
+    ],
+    "seal_place_field": null,
+    "holder_field": "ho_ten",
+    "birth_year_field": "nam_sinh",
+    "expiry_field": null,
+    "expiry_kind": "none",
+    "layout": "so"
+  },
+  {
+    "code": "TP",
+    "name": "Tem phiếu",
+    "description": "Phiếu mua hàng theo định lượng, chỉ có giá trị trong tháng ghi trên phiếu.",
+    "introduced_day": "d1",
+    "fields": [
+      {
+        "key": "ho_ten",
+        "label": "Người được mua",
+        "kind": "text"
+      },
+      {
+        "key": "thang",
+        "label": "Tháng",
+        "kind": "month"
+      },
+      {
+        "key": "mat_hang",
+        "label": "Mặt hàng",
+        "kind": "item"
+      }
+    ],
+    "allowed_seal_kinds": [
+      "PHONG_LUONG_THUC"
+    ],
+    "seal_place_field": null,
+    "holder_field": "ho_ten",
+    "birth_year_field": null,
+    "expiry_field": "thang",
+    "expiry_kind": "month",
+    "layout": "phieu-nho"
+  },
+  {
+    "code": "HDHTX",
+    "name": "Hoá đơn hợp tác xã",
+    "description": "Hoá đơn xuất hàng của hợp tác xã, ghi người nhận và từng mặt hàng.",
+    "introduced_day": "d1",
+    "fields": [
+      {
+        "key": "so_hd",
+        "label": "Số hoá đơn",
+        "kind": "text"
+      },
+      {
+        "key": "htx_ten",
+        "label": "Hợp tác xã",
+        "kind": "text"
+      },
+      {
+        "key": "nguoi_nhan",
+        "label": "Người nhận hàng",
+        "kind": "text"
+      },
+      {
+        "key": "mat_hang",
+        "label": "Mặt hàng",
+        "kind": "items"
+      },
+      {
+        "key": "ngay",
+        "label": "Ngày",
+        "kind": "date"
+      }
+    ],
+    "allowed_seal_kinds": [
+      "HTX"
+    ],
+    "seal_place_field": null,
+    "holder_field": null,
+    "birth_year_field": null,
+    "expiry_field": null,
+    "expiry_kind": "none",
+    "layout": "giay-ngang"
+  },
+  {
+    "code": "GPVC",
+    "name": "Giấy phép vận chuyển",
+    "description": "Giấy phép của Công ty Thương nghiệp cho phép vận chuyển hàng hoá trên một tuyến trong thời hạn nhất định.",
+    "introduced_day": "d1",
+    "fields": [
+      {
+        "key": "so_gp",
+        "label": "Số giấy phép",
+        "kind": "text"
+      },
+      {
+        "key": "don_vi_cap",
+        "label": "Đơn vị cấp",
+        "kind": "text"
+      },
+      {
+        "key": "nguoi_van_chuyen",
+        "label": "Người vận chuyển",
+        "kind": "text"
+      },
+      {
+        "key": "mat_hang",
+        "label": "Mặt hàng",
+        "kind": "items"
+      },
+      {
+        "key": "tu",
+        "label": "Từ",
+        "kind": "text"
+      },
+      {
+        "key": "den",
+        "label": "Đến",
+        "kind": "text"
+      },
+      {
+        "key": "ngay_cap",
+        "label": "Ngày cấp",
+        "kind": "date"
+      },
+      {
+        "key": "co_gia_tri_den",
+        "label": "Có giá trị đến",
+        "kind": "date"
+      }
+    ],
+    "allowed_seal_kinds": [
+      "CTY_THUONG_NGHIEP"
+    ],
+    "seal_place_field": null,
+    "holder_field": "nguoi_van_chuyen",
+    "birth_year_field": null,
+    "expiry_field": "co_gia_tri_den",
+    "expiry_kind": "date",
+    "layout": "giay-ngang"
+  },
+  {
+    "code": "DT",
+    "name": "Đơn thuốc",
+    "description": "Đơn do bác sĩ bệnh viện kê. Người mang đơn có thể không phải bệnh nhân.",
+    "introduced_day": "d1",
+    "fields": [
+      {
+        "key": "benh_nhan",
+        "label": "Bệnh nhân",
+        "kind": "text"
+      },
+      {
+        "key": "thuoc",
+        "label": "Thuốc",
+        "kind": "items"
+      },
+      {
+        "key": "bac_si",
+        "label": "Bác sĩ",
+        "kind": "text"
+      },
+      {
+        "key": "ngay_ke",
+        "label": "Ngày kê",
+        "kind": "date"
+      },
+      {
+        "key": "co_gia_tri_den",
+        "label": "Có giá trị đến",
+        "kind": "date"
+      }
+    ],
+    "allowed_seal_kinds": [
+      "BENH_VIEN"
+    ],
+    "seal_place_field": null,
+    "holder_field": null,
+    "birth_year_field": null,
+    "expiry_field": "co_gia_tri_den",
+    "expiry_kind": "date",
+    "layout": "phieu-nho"
+  },
+  {
+    "code": "CNTB",
+    "name": "Giấy chứng nhận thương binh",
+    "description": "Thẻ chứng nhận thương binh, ghi hạng thương tật.",
+    "introduced_day": "d1",
+    "fields": [
+      {
+        "key": "ho_ten",
+        "label": "Họ và tên",
+        "kind": "text"
+      },
+      {
+        "key": "nam_sinh",
+        "label": "Năm sinh",
+        "kind": "int"
+      },
+      {
+        "key": "hang",
+        "label": "Hạng",
+        "kind": "text"
+      },
+      {
+        "key": "so_the",
+        "label": "Số thẻ",
+        "kind": "text"
+      },
+      {
+        "key": "don_vi_cap",
+        "label": "Đơn vị cấp",
+        "kind": "text"
+      }
+    ],
+    "allowed_seal_kinds": [
+      "TB_XH"
+    ],
+    "seal_place_field": null,
+    "holder_field": "ho_ten",
+    "birth_year_field": "nam_sinh",
+    "expiry_field": null,
+    "expiry_kind": "none",
+    "layout": "the"
+  },
+  {
+    "code": "GXNK",
+    "name": "Giấy xác nhận sản phẩm khoán",
+    "description": "Giấy hợp tác xã xác nhận phần sản phẩm vượt khoán xã viên được hưởng.",
+    "introduced_day": "d3",
+    "fields": [
+      {
+        "key": "ho_ten",
+        "label": "Xã viên",
+        "kind": "text"
+      },
+      {
+        "key": "xa",
+        "label": "Xã",
+        "kind": "text"
+      },
+      {
+        "key": "htx_ten",
+        "label": "Hợp tác xã",
+        "kind": "text"
+      },
+      {
+        "key": "san_pham",
+        "label": "Sản phẩm",
+        "kind": "text"
+      },
+      {
+        "key": "san_pham_ma",
+        "label": "Mã sản phẩm",
+        "kind": "text"
+      },
+      {
+        "key": "so_luong_kg",
+        "label": "Số lượng vượt khoán (kg)",
+        "kind": "int"
+      },
+      {
+        "key": "vu",
+        "label": "Vụ",
+        "kind": "text"
+      },
+      {
+        "key": "ngay",
+        "label": "Ngày xác nhận",
+        "kind": "date"
+      }
+    ],
+    "allowed_seal_kinds": [
+      "HTX"
+    ],
+    "seal_place_field": "xa",
+    "holder_field": "ho_ten",
+    "birth_year_field": null,
+    "expiry_field": null,
+    "expiry_kind": "none",
+    "layout": "giay-doc"
+  }
+]
