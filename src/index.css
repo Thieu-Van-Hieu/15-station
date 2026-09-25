@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+/*
+ * Bảng màu TẠM theo art direction ở docs/00-idea.md mục 8:
+ * nâu đất, xám xi măng, vàng giấy ố, đỏ dấu. Thay mã hex khi docs/05-art-brief.md chốt.
+ */
+@theme {
+  --color-nau: #6b4f36;
+  --color-xi-mang: #8a8a85;
+  --color-giay: #efe3c2;
+  --color-dau-do: #b3261e;
+  --color-muc: #2b2a28;
+
+  /* Font máy chữ sẽ tự host trong public/fonts/ ở P7. Tạm dùng font monospace của hệ thống. */
+  --font-may-chu: "Courier New", Courier, ui-monospace, monospace;
+}
