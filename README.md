@@ -17,22 +17,17 @@
 
 ## 1. Bắt đầu nhanh
 
-```bash
-# Tạo cây thư mục trong ./tram-15
-bash scaffold.sh
-
-# Tạo và chép luôn file ý tưởng vào docs/00-idea.md
-bash scaffold.sh tram-15 path/to/idea-tram-15.md
-```
-
-Script an toàn khi chạy lại: file đã tồn tại sẽ được bỏ qua, không bị ghi đè. Trên Windows chạy bằng Git Bash hoặc WSL.
-
-Công cụ cho phần kiểm tra dữ liệu (Node 20 trở lên):
+Cần Node 20 trở lên. Dự án dùng **pnpm**, phiên bản ghi ở trường `packageManager` trong `package.json`. Không dùng `npm install`, vì hai công cụ sẽ làm lockfile lệch nhau.
 
 ```bash
-npm i -D tsx ajv ajv-formats
-npx tsx scripts/validate-data.ts
+git clone https://github.com/Thieu-Van-Hieu/15-station.git
+cd 15-station
+npm i -g pnpm          # chỉ cần một lần trên mỗi máy
+pnpm install
+pnpm validate          # kiểm tra toàn bộ data/
 ```
+
+Kế hoạch triển khai nằm ở `docs/07-trien-khai.md`. Danh sách việc và test của từng phase nằm ở `docs/08-cac-phase.md`.
 
 ---
 
@@ -48,7 +43,9 @@ tram-15/
 │   ├── 03-rules-spec.md        ← đặc tả luật chơi — CHỐT ĐẦU TIÊN
 │   ├── 04-sources.md           ← câu trích giáo trình, mốc lịch sử
 │   ├── 05-art-brief.md         ← danh sách asset
-│   └── 06-presentation.md      ← kịch bản trình bày, hỏi đáp
+│   ├── 06-presentation.md      ← kịch bản trình bày, hỏi đáp
+│   ├── 07-trien-khai.md        ← kế hoạch triển khai, kiến trúc src/, deploy
+│   └── 08-cac-phase.md         ← việc và test của từng phase P0–P9
 ├── content/                    ← nội dung viết bằng văn (Markdown)
 │   ├── templates/
 │   │   ├── T1-luot-khach.md
@@ -268,8 +265,9 @@ Các bước phụ thuộc nhau theo một chiều. Mỗi bước có một **c�
 ## 8. Lệnh thường dùng và quy ước Git
 
 ```bash
-npx tsx scripts/validate-data.ts   # kiểm tra toàn bộ data/
-npm run dev                        # chạy game (sau khi dựng Vite trong src/)
+pnpm validate                      # kiểm tra toàn bộ data/
+pnpm validate --data <thư mục>     # kiểm tra một thư mục dữ liệu khác (phải có schema/ bên trong)
+pnpm dev                           # chạy game (từ phase P1)
 ```
 
 **Quy ước Git:**
