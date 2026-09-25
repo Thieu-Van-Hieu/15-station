@@ -55,18 +55,21 @@ Bắt đầu ngay sau buổi họp.
 - [x] Khung thư mục `src/engine/__fixtures__/`, `src/screens/`, `src/components/`, `public/` — 25/09
 - [x] Test P1-01 (dev server phục vụ trang và CSS Tailwind), P1-02, P1-03, P1-04, P1-05, P1-06 — 25/09
 - [ ] P1-01: mở `pnpm dev` bằng trình duyệt, xem trang và console bằng mắt
-- [ ] Commit và đẩy lên GitHub
-- [ ] Kết nối Vercel, có bản preview (07 mục 6) — cần tài khoản Vercel của nhóm
-- [ ] Test P1-07: mở URL preview
+- [x] Commit và đẩy lên GitHub, merge PR #1 — 25/09
+- [x] Kết nối Vercel Production — 25/09
+- [x] Test P1-07: bản Production hiện đúng trang tạm — 25/09
 
 ## P2 — Engine (GP)
 
-- [ ] Hàm dựng dữ liệu test trong `src/engine/__fixtures__/`
-- [ ] `compare.ts` — CMP-01 → CMP-14
-- [ ] `active.ts` — ACT-01 → ACT-05
-- [ ] `checks/` — R1-*, R2-*, R3-*, R4-*, R5-*, R6-*
-- [ ] `evaluate.ts` — EV-01 → EV-05
-- [ ] `conditions.ts`, `turn.ts`, `reports.ts`, `day-end.ts`, `economy.ts`, `endings.ts`, `text.ts`, `game.ts`
+- [x] Hàm dựng dữ liệu test trong `src/engine/__fixtures__/` — 25/09
+- [x] `compare.ts` — CMP-01 → CMP-14 — 25/09
+- [x] `active.ts` — ACT-01 → ACT-05 — 25/09
+- [x] `checks/` — R1-*, R2-*, R3-*, R4-*, R5-*, R6-* — 25/09
+- [x] `evaluate.ts` — EV-01 → EV-05 — 25/09
+- [x] `conditions.ts` (CON), `turn.ts` (TRN), `reports.ts` (REP), `day-end.ts` (DAY), `economy.ts` (ECO), `endings.ts` (END), `text.ts` (TXT), `game.ts` (GAM) — 25/09
+- [x] `simulate.ts`: chơi tự động theo chiến lược (dùng lại ở P5, P6) — 25/09
+- [x] 145 test xanh; đã thử làm hỏng 7 chỗ trong engine, test đều bắt được — 25/09
+- [ ] Sau buổi họp chốt luật: nếu 5 câu hỏi ở 07 mục 9 chốt khác đề xuất, sửa các chỗ ghi "Câu hỏi mở số N" trong `turn.ts`, `endings.ts` và test tương ứng
 
 ## P3 — Nội dung nền (KB, UI, KT)
 

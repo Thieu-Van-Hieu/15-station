@@ -1,0 +1,148 @@
+{
+  "id": "d3-t3",
+  "day": "d3",
+  "order": 3,
+  "character": "ba-tu",
+  "tags": [
+    "luot-trung-tam",
+    "dung-trinh-bay",
+    "dong-cam"
+  ],
+  "portrait": {
+    "expression": "lo-lang"
+  },
+  "dialogue": [
+    {
+      "speaker": "ba-tu",
+      "text": "Chú Thành, lại gặp chú. Gạo này là phần vượt khoán nhà tôi được hưởng, hợp tác xã có giấy xác nhận đây."
+    },
+    {
+      "speaker": "ba-tu",
+      "text": "Tôi mang ra thị xã đổi thuốc cho thằng cháu. Nó sốt mấy hôm nay rồi."
+    },
+    {
+      "speaker": "ba-tu",
+      "text": "Lần trước chú cho tôi qua, tôi vẫn nhớ.",
+      "when": [
+        {
+          "flag": "ba-tu.m1",
+          "in": [
+            "qua",
+            "qua-kn"
+          ]
+        }
+      ]
+    }
+  ],
+  "reactions": {
+    "CHO_QUA": [
+      {
+        "speaker": "ba-tu",
+        "text": "Tôi cảm ơn chú."
+      }
+    ],
+    "GIU_LAI": [
+      {
+        "speaker": "ba-tu",
+        "text": "Giấy hợp tác xã cấp đàng hoàng mà chú..."
+      }
+    ]
+  },
+  "documents": [
+    {
+      "type": "GDD",
+      "fields": {
+        "ho_ten": "Trần Thị Lành",
+        "nam_sinh": 1929,
+        "noi_di": "Phú Hoà",
+        "noi_den": "Thị xã",
+        "ly_do": "Mang sản phẩm vượt khoán đi đổi thuốc",
+        "hang_mang_theo": [
+          {
+            "ma": "gao",
+            "ten": "Gạo",
+            "so_luong": 18,
+            "don_vi": "kg"
+          }
+        ],
+        "ngay_cap": "1981-03-14",
+        "co_gia_tri_den": "1981-03-20"
+      },
+      "seal": {
+        "kind": "UBND_XA",
+        "place": "Phú Hoà",
+        "legible": true
+      }
+    },
+    {
+      "type": "GXNK",
+      "fields": {
+        "ho_ten": "Trần Thị Lành",
+        "xa": "Phú Hoà",
+        "htx_ten": "HTX nông nghiệp Phú Hoà",
+        "san_pham": "Gạo",
+        "san_pham_ma": "gao",
+        "so_luong_kg": 13,
+        "vu": "Vụ mùa 1980",
+        "ngay": "1981-03-10"
+      },
+      "seal": {
+        "kind": "HTX",
+        "place": "Phú Hoà",
+        "legible": true
+      }
+    }
+  ],
+  "cargo": [
+    {
+      "ma": "gao",
+      "ten": "Gạo",
+      "so_luong": 18,
+      "don_vi": "kg",
+      "category": "LUONG_THUC"
+    }
+  ],
+  "planted": [
+    {
+      "error": "E4",
+      "doc": null,
+      "field": null,
+      "note": "18 kg gạo, vượt định mức 5 kg. Phần vượt đúng bằng 13 kg ghi trên giấy khoán, nhưng sổ chưa có mục nào công nhận giấy khoán."
+    }
+  ],
+  "expected": {
+    "verdict": "GIU_LAI",
+    "violations": [
+      {
+        "rule": "R2-DINH-MUC",
+        "error": "E4"
+      }
+    ]
+  },
+  "kn": {
+    "issue": "KN-KHOAN",
+    "note": "Giấy khoán đã có theo chủ trương cấp trên nhưng sổ chỉ thị của trạm chưa công nhận."
+  },
+  "bribe": null,
+  "flag_key": "ba-tu.m2",
+  "outcomes": {
+    "CHO_QUA": {
+      "deltas": {
+        "luong_thuc_vao_thi_xa": 1,
+        "gia_gao_index": -1
+      },
+      "notes": [
+        "Gạo khoán của bà Tư đến được chợ thị xã."
+      ]
+    },
+    "GIU_LAI": {
+      "deltas": {
+        "ho_thieu_an": 4
+      },
+      "notes": [
+        "18 kg gạo bị tịch thu. Bà Tư không đổi được thuốc cho cháu."
+      ]
+    }
+  },
+  "art_note": "Bà Tư đội nón, gánh hai thúng gạo. Tay cầm tờ giấy khoán gấp tư."
+}

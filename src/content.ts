@@ -5,11 +5,12 @@
  * tự import JSON mà nhận GameContent qua tham số, để scripts/validate-data.ts
  * dùng lại được đúng các hàm đó với một thư mục dữ liệu khác.
  *
- * Kiểu hiện tại suy ra thẳng từ JSON. Ở P2, khi có src/engine/types.ts, ép kiểu
- * về GameContent tại đây một lần duy nhất: validate-data.ts đã bảo đảm dữ liệu
- * đúng schema.
+ * Ép kiểu về GameContent tại đây, một lần duy nhất. An toàn vì validate-data.ts
+ * đã bảo đảm dữ liệu đúng schema; TypeScript không tự suy ra được các kiểu hợp
+ * (union) từ JSON nên phải qua `unknown`.
  */
 
+import type { GameContent } from "./engine/types";
 import characters from "../data/characters.json";
 import days from "../data/days.json";
 import documents from "../data/documents.json";
@@ -28,6 +29,4 @@ export const content = {
   reports,
   endings,
   strings,
-};
-
-export type RawContent = typeof content;
+} as unknown as GameContent;

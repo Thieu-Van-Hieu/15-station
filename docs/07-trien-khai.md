@@ -139,7 +139,10 @@ src/
 │   ├── economy.ts          ← 03 mục 8
 │   ├── endings.ts          ← 03 mục 9
 │   ├── text.ts             ← thay biến {{...}} (03 mục 1.13)
+│   ├── state.ts            ← GameState, bộ đếm, tra cứu dùng chung
 │   ├── game.ts             ← reducer tổng
+│   ├── simulate.ts         ← chơi tự động theo chiến lược
+│   ├── index.ts            ← API công khai
 │   └── *.test.ts
 ├── screens/                ← Intro, DayStart, Desk, DayEnd, Budget, Ending
 └── components/             ← Window, DocumentPaper, Rulebook, Stamp, ReportDialog, Board…
@@ -149,27 +152,36 @@ src/
 
 ### 3.3. Giao diện của engine
 
+Đã hiện thực ở P2. Giao diện và `scripts/` chỉ import từ `src/engine/index.ts`.
+
 ```ts
 // evaluate.ts — validate-data.ts tầng 3 gọi đúng hàm này
 export function evaluate(
   traveler: Traveler,
-  day: Day,
-  rules: Rule[],
+  day: Pick<Day, "id" | "game_date">,
+  book: RuleBook,                       // { rules, documents }: dấu hợp lệ và hạn của từng loại giấy nằm trong documents.json
   issuesActive: ReadonlySet<IssueId>,
 ): { verdict: "CHO_QUA" | "GIU_LAI"; violations: { rule: RuleId; error: ErrorCode | null }[] };
 
-// game.ts
+// game.ts — hành động sai phase trả về đúng state cũ (cùng tham chiếu)
 export function newGame(content: GameContent): GameState;
 export function reduce(state: GameState, action: GameAction, content: GameContent): GameState;
 
 type GameAction =
-  | { type: "BAT_DAU_NGAY" }
+  | { type: "BAT_DAU_GAME" }            // INTRO → DAY_START
+  | { type: "BAT_DAU_NGAY" }            // DAY_START → TRAVELER
   | { type: "NHAN_PHONG_BI" }
   | { type: "QUYET_DINH"; action: "CHO_QUA" | "GIU_LAI" | "LAM_NGO"; reasonId: string | null }
-  | { type: "KET_THUC_NGAY" }
-  | { type: "TRA_CHI_TIEU"; expenseIds: string[] }
-  | { type: "SANG_NGAY_SAU" };
+  | { type: "KET_THUC_NGAY" }           // DAY_END → BUDGET
+  | { type: "TRA_CHI_TIEU"; expenseIds: string[] };  // BUDGET → ngày sau, hoặc ENDING sau d6
+
+// simulate.ts — chơi tự động theo chiến lược; dùng cho test, bot P5, chế độ nhảy lượt P6
+export function simulate(content: GameContent, strategy: Strategy, options?: { stopAt?: TravelerId }): GameState;
 ```
+
+Giao diện hỏi engine thao tác nào đang được phép qua `allowedActions`, `canReport`, `canTakeBribe`; lấy chữ giấy nhắc nhở qua `reprimandText`; lọc lời thoại qua `filterByWhen(lines, conditionState(state))`.
+
+Năm câu hỏi ở mục 9 đang dùng **phương án đề xuất**, có ghi chú "Câu hỏi mở số N" trong code (`turn.ts`, `endings.ts`). Nhóm chốt khác thì sửa đúng các chỗ đó.
 
 `evaluate` nhận `issuesActive` thay vì cả `GameState`. Lý do: tầng 3 phải chạy mỗi lượt d5 trong cả hai trạng thái `KN-KHOAN` (03 mục 10, tầng 3, điều 1).
 
