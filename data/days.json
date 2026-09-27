@@ -1,1 +1,314 @@
-[]
+[
+  {
+    "id": "d1",
+    "act": 1,
+    "label": "Tháng 10/1979 — Ngày 1",
+    "game_date": "1979-10-15",
+    "new_rules": ["R1-GDD"],
+    "travelers": ["d1-t1", "d1-t2", "d1-t3"],
+    "kn_enabled": false,
+    "clock": {
+      "start": "07:00",
+      "end": "17:00",
+      "per_traveler_min": 100,
+      "per_report_min": 60
+    },
+    "economy": {
+      "income": 20,
+      "fine_per_error": 2,
+      "bonus_xuat_sac": 3,
+      "expenses": [
+        { "id": "gao", "label": "Gạo phân phối", "cost": 8, "essential": true },
+        { "id": "than", "label": "Than đun nấu", "cost": 3, "essential": true },
+        { "id": "thuoc-me", "label": "Thuốc huyết áp cho mẹ", "cost": 4, "essential": true, "member": "me-thanh" },
+        { "id": "hoc-phi-mai", "label": "Học phí của Mai", "cost": 2, "essential": true, "member": "be-mai" }
+      ]
+    },
+    "other_factor": {
+      "text": "Thời tiết đầu vụ thuận lợi, các xã đang bước vào thu hoạch vụ mùa.",
+      "deltas": {
+        "luong_thuc_vao_thi_xa": 2,
+        "ho_thieu_an": -5,
+        "gia_gao_index": -2
+      }
+    },
+    "interludes": [
+      {
+        "at": "start",
+        "lines": [
+          { "speaker": "tram-truong-doi", "text": "Thành, hôm nay bắt đầu áp dụng quy định mới về Giấy đi đường. Cậu phải kiểm tra kỹ con dấu của UBND xã nơi đi, không được để lọt hàng lậu." }
+        ]
+      },
+      {
+        "at": "end",
+        "lines": [
+          { "speaker": "tram-truong-doi", "text": "Hết ca rồi, kiểm đếm sổ sách rồi về sớm đi." }
+        ]
+      }
+    ],
+    "family_event": null,
+    "indicators_start": {
+      "luong_thuc_vao_thi_xa": 100,
+      "ho_thieu_an": 210,
+      "gia_gao_index": 100
+    },
+    "savings_start": 10
+  },
+  {
+    "id": "d2",
+    "act": 1,
+    "label": "Tháng 10/1979 — Ngày 2",
+    "game_date": "1979-10-22",
+    "new_rules": ["R2-DINH-MUC"],
+    "travelers": ["d2-t1", "d2-t2", "d2-t3", "d2-t4"],
+    "kn_enabled": false,
+    "clock": {
+      "start": "07:00",
+      "end": "17:00",
+      "per_traveler_min": 100,
+      "per_report_min": 60
+    },
+    "economy": {
+      "income": 20,
+      "fine_per_error": 2,
+      "bonus_xuat_sac": 3,
+      "expenses": [
+        { "id": "gao", "label": "Gạo phân phối", "cost": 8, "essential": true },
+        { "id": "than", "label": "Than đun nấu", "cost": 3, "essential": true },
+        { "id": "thuoc-me", "label": "Thuốc huyết áp cho mẹ", "cost": 4, "essential": true, "member": "me-thanh" },
+        { "id": "hoc-phi-mai", "label": "Học phí của Mai", "cost": 2, "essential": true, "member": "be-mai" }
+      ]
+    },
+    "other_factor": {
+      "text": "Mưa lũ sớm cục bộ ở thượng nguồn làm ngập úng một số chân ruộng tại Phú Hoà.",
+      "deltas": {
+        "luong_thuc_vao_thi_xa": -5,
+        "ho_thieu_an": 15,
+        "gia_gao_index": 8
+      }
+    },
+    "interludes": [
+      {
+        "at": "start",
+        "lines": [
+          { "speaker": "tram-truong-doi", "text": "Hôm nay áp dụng thêm Điều 2 về định mức lương thực. Cá nhân chỉ được mang tối đa 5kg gạo hoặc ngô, vượt định mức mà không có tem phiếu là phải giữ lại." }
+        ]
+      },
+      {
+        "at": "end",
+        "lines": [
+          { "speaker": "tram-truong-doi", "text": "Tình hình thị xã đang căng gạo, các trạm đều phải siết chặt." }
+        ]
+      }
+    ],
+    "family_event": null
+  },
+  {
+    "id": "d3",
+    "act": 2,
+    "label": "Tháng 3/1981 — Ngày 3",
+    "game_date": "1981-03-16",
+    "new_rules": ["R3-DON-THUOC"],
+    "travelers": ["d3-t1", "d3-t2", "d3-t3", "d3-t4"],
+    "kn_enabled": true,
+    "clock": {
+      "start": "07:00",
+      "end": "17:00",
+      "per_traveler_min": 100,
+      "per_report_min": 60
+    },
+    "economy": {
+      "income": 22,
+      "fine_per_error": 3,
+      "bonus_xuat_sac": 3,
+      "expenses": [
+        { "id": "gao", "label": "Gạo phân phối", "cost": 11, "essential": true },
+        { "id": "than", "label": "Than đun nấu", "cost": 4, "essential": true },
+        { "id": "thuoc-me", "label": "Thuốc huyết áp cho mẹ", "cost": 6, "essential": true, "member": "me-thanh" },
+        { "id": "hoc-phi-mai", "label": "Học phí của Mai", "cost": 2, "essential": true, "member": "be-mai" }
+      ]
+    },
+    "other_factor": {
+      "text": "Rét đậm kéo dài, một phần diện tích mạ xuân ở Phú Hoà bị chết.",
+      "deltas": {
+        "luong_thuc_vao_thi_xa": -4,
+        "ho_thieu_an": 12,
+        "gia_gao_index": 5
+      }
+    },
+    "interludes": [
+      {
+        "at": "start",
+        "lines": [
+          { "speaker": "radio", "text": "Ngày 13 tháng 1 năm 1981, Ban Bí thư đã ban hành Chỉ thị số 100 về cải tiến công tác khoán, mở rộng khoán sản phẩm đến nhóm lao động và người lao động trong hợp tác xã nông nghiệp." }
+        ]
+      },
+      {
+        "at": "end",
+        "lines": [
+          { "speaker": "tram-truong-doi", "text": "Nhớ kiểm tra kỹ đơn thuốc của bệnh viện, thuốc kháng sinh quản lý đang bị thất thoát ra ngoài nhiều." }
+        ]
+      }
+    ],
+    "family_event": null
+  },
+  {
+    "id": "d4",
+    "act": 2,
+    "label": "Tháng 3/1981 — Ngày 4",
+    "game_date": "1981-03-23",
+    "new_rules": ["R4-KHOP-TEN"],
+    "travelers": ["d4-t1", "d4-t2", "d4-t3", "d4-t4", "d4-t5"],
+    "kn_enabled": true,
+    "clock": {
+      "start": "07:00",
+      "end": "17:00",
+      "per_traveler_min": 100,
+      "per_report_min": 60
+    },
+    "economy": {
+      "income": 22,
+      "fine_per_error": 3,
+      "bonus_xuat_sac": 3,
+      "expenses": [
+        { "id": "gao", "label": "Gạo phân phối", "cost": 11, "essential": true },
+        { "id": "than", "label": "Than đun nấu", "cost": 4, "essential": true },
+        { "id": "thuoc-me", "label": "Thuốc huyết áp cho mẹ", "cost": 6, "essential": true, "member": "me-thanh" },
+        { "id": "hoc-phi-mai", "label": "Học phí của Mai", "cost": 2, "essential": true, "member": "be-mai" }
+      ]
+    },
+    "other_factor": {
+      "text": "Hàng công nghiệp tiêu dùng từ Trung ương phân phối về địa phương bị chậm tiến độ.",
+      "deltas": {
+        "luong_thuc_vao_thi_xa": -3,
+        "ho_thieu_an": 8,
+        "gia_gao_index": 6
+      }
+    },
+    "interludes": [
+      {
+        "at": "start",
+        "lines": [
+          { "speaker": "tram-truong-doi", "text": "Từ hôm nay áp dụng Điều 4: Họ tên và năm sinh trên Giấy đi đường, Chứng nhận thương binh phải khớp với Sổ hộ khẩu. Sai một chữ hay lệch một năm cũng không được cho qua." }
+        ]
+      },
+      {
+        "at": "end",
+        "lines": [
+          { "speaker": "tram-truong-doi", "text": "Nhiều người mượn giấy tờ của nhau đi buôn, phải đối chiếu hộ khẩu thật chặt." }
+        ]
+      }
+    ],
+    "family_event": null
+  },
+  {
+    "id": "d5",
+    "act": 3,
+    "label": "Tháng 4/1986 — Ngày 5",
+    "game_date": "1986-04-14",
+    "new_rules": ["R5-CHUNG-TU"],
+    "travelers": ["d5-t1", "d5-t2", "d5-t3", "d5-t4", "d5-t5"],
+    "kn_enabled": true,
+    "clock": {
+      "start": "07:00",
+      "end": "17:00",
+      "per_traveler_min": 100,
+      "per_report_min": 60
+    },
+    "economy": {
+      "income": 420,
+      "fine_per_error": 40,
+      "bonus_xuat_sac": 30,
+      "currency_reform_divisor": 10,
+      "expenses": [
+        { "id": "gao", "label": "Gạo đong chợ tự do", "cost": 230, "essential": true },
+        { "id": "than", "label": "Than tổ ong", "cost": 60, "essential": true },
+        { "id": "thuoc-me", "label": "Thuốc trợ tim cho mẹ", "cost": 90, "essential": true, "member": "me-thanh" },
+        { "id": "thuoc-binh", "label": "Thuốc kháng sinh cho bé Bình", "cost": 120, "essential": true, "member": "be-binh" },
+        { "id": "hoc-phi-mai", "label": "Học phí và tiền sách của Mai", "cost": 20, "essential": true, "member": "be-mai" }
+      ]
+    },
+    "other_factor": {
+      "text": "Ảnh hưởng cuộc tổng điều chỉnh giá - lương - tiền, giá cả ngoài thị trường tự do tăng phi mã.",
+      "deltas": {
+        "luong_thuc_vao_thi_xa": -8,
+        "ho_thieu_an": 35,
+        "gia_gao_index": 18
+      }
+    },
+    "interludes": [
+      {
+        "at": "start",
+        "lines": [
+          { "speaker": "tram-truong-doi", "text": "Sau đổi tiền, tình hình phức tạp lắm. Điều 5 bắt buộc mọi hàng hoá tiêu dùng, thực phẩm phải có Hoá đơn HTX hoặc Giấy phép vận chuyển của Công ty Thương nghiệp." }
+        ]
+      },
+      {
+        "at": "end",
+        "lines": [
+          { "speaker": "tram-truong-doi", "text": "Cậu Thành, tháng này xếp loại kém là bị cắt tiền thưởng đấy. Giờ tiền mất giá, mất thưởng là cả nhà đói." }
+        ]
+      }
+    ],
+    "family_event": {
+      "text": "Bé Bình bị sốt cao li bì từ đêm qua, bác sĩ bảo phải mua thuốc kháng sinh ngoài hiệu thuốc tư nhân thị xã."
+    }
+  },
+  {
+    "id": "d6",
+    "act": 4,
+    "label": "Tháng 6/1987 — Ngày 6",
+    "game_date": "1987-06-15",
+    "transition_card": {
+      "lines": [
+        "Tháng 12 năm 1986.",
+        "Đại hội đại biểu toàn quốc lần thứ VI của Đảng khởi xướng đường lối Đổi mới toàn diện đất nước.",
+        "\"Nhìn thẳng vào sự thật, đánh giá đúng sự thật, nói rõ sự thật.\"",
+        "Tháng 4 năm 1987, Hội nghị Trung ương 2 khoá VI yêu cầu xoá bỏ ngay tất cả các hình thức ngăn sông cấm chợ, giải thể các trạm kiểm soát lưu thông hàng hoá."
+      ]
+    },
+    "new_rules": ["R6-HANG-CAM"],
+    "travelers": ["d6-t1", "d6-t2", "d6-t3", "d6-t4", "d6-t5"],
+    "kn_enabled": false,
+    "clock": {
+      "start": "07:00",
+      "end": "17:00",
+      "per_traveler_min": 100,
+      "per_report_min": 60
+    },
+    "economy": {
+      "income": 1500,
+      "fine_per_error": 0,
+      "bonus_xuat_sac": 0,
+      "expenses": [
+        { "id": "gao", "label": "Gạo thị trường tự do", "cost": 800, "essential": true },
+        { "id": "than", "label": "Chất đốt gia đình", "cost": 180, "essential": true },
+        { "id": "thuoc-me", "label": "Thuốc cho mẹ", "cost": 300, "essential": true, "member": "me-thanh" },
+        { "id": "hoc-phi-mai", "label": "Tiền học của Mai", "cost": 80, "essential": true, "member": "be-mai" }
+      ]
+    },
+    "other_factor": {
+      "text": "Xoá bỏ các trạm kiểm soát lưu thông, hàng hoá từ các tỉnh lân cận bắt đầu đổ về chợ thị xã.",
+      "deltas": {
+        "luong_thuc_vao_thi_xa": 12,
+        "ho_thieu_an": -20,
+        "gia_gao_index": -10
+      }
+    },
+    "interludes": [
+      {
+        "at": "start",
+        "lines": [
+          { "speaker": "tram-truong-doi", "text": "Hôm nay là ca trực cuối cùng của Trạm 15. Thu hồi toàn bộ cuốn sổ chỉ thị dày cộp cũ. Giờ chỉ còn tờ danh mục hàng cấm: vũ khí, chất nổ, thuốc phiện. Hàng hoá thông thường được tự do lưu thông." }
+        ]
+      },
+      {
+        "at": "end",
+        "lines": [
+          { "speaker": "tram-truong-doi", "text": "Thu dọn bàn ghế, tháo barie đi thôi Thành. Trạm kiểm soát kết thúc nhiệm vụ rồi." }
+        ]
+      }
+    ],
+    "family_event": null
+  }
+]

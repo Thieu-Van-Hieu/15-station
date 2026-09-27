@@ -141,7 +141,12 @@ export type DocGXNK = DocBase<
 >;
 
 export type TravelerDocument = DocGDD | DocSHK | DocTP | DocHDHTX | DocGPVC | DocDT | DocCNTB | DocGXNK;
+export type Document = TravelerDocument;
 export type DocOf<T extends DocType> = Extract<TravelerDocument, { type: T }>;
+
+export type { GameState, Phase, Counters, IssueProgress, Reprimand, TurnRecord } from "./state";
+export type { Budget, Budget as BudgetSummary } from "./economy";
+export type { DayReport } from "./day-end";
 
 /** Một loại giấy trong documents.json. */
 export interface DocumentDef {
