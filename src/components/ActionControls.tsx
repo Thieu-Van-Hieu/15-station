@@ -120,23 +120,27 @@ export function ActionControls({
 
   return (
     <div className="sticky bottom-0 z-20 lg:static border-t border-vien bg-ban/95 backdrop-blur-sm">
-      <div className="flex flex-col xl:flex-row xl:items-center gap-3 px-4 md:px-6 py-3">
-        <div className="flex items-center gap-3 min-w-0 xl:w-[340px] shrink-0">
-          <div className="w-11 h-11 rounded-full border-2 border-ho-phach/70 text-ho-phach grid place-items-center font-nhan font-bold shrink-0">
+      <div className="flex flex-col xl:flex-row xl:items-center gap-3 px-4 md:px-6 py-3 max-sm:gap-2 max-sm:px-3 max-sm:py-2 max-sm:pb-[max(0.5rem,env(safe-area-inset-bottom))]">
+        <div className="flex items-center gap-3 min-w-0 xl:w-[340px] shrink-0 max-sm:gap-2">
+          <div className="w-11 h-11 rounded-full border-2 border-ho-phach/70 text-ho-phach grid place-items-center font-nhan font-bold shrink-0 max-sm:w-7 max-sm:h-7 max-sm:text-[12px]">
             {travelerOrder ?? "•"}
           </div>
           <div className="min-w-0">
             <Label className="text-giay block">
               {s("desk.decision_title")} {travelerOrder ?? ""}
             </Label>
-            <p className="text-[11px] text-chu-ban-phu/70 leading-snug min-h-[2.1rem] line-clamp-2">
+            {/* Chỉ trên điện thoại: chạm con dấu là đóng thẳng lên giấy. */}
+            <span className="sm:hidden block text-[10px] text-chu-ban-phu/60 leading-tight">
+              {chosenAction ? s("desk.decision_done") : s("desk.stamp_tap_hint")}
+            </span>
+            <p className="text-[11px] text-chu-ban-phu/70 leading-snug min-h-[2.1rem] line-clamp-2 max-sm:hidden">
               {chosenAction ? s("desk.decision_done") : dragHint && onStampDrop ? s("desk.stamp_drag_hint") : s("desk.decision_hint")}
             </p>
           </div>
         </div>
 
-        <div className="flex-1 flex flex-col lg:flex-row gap-2.5">
-          <div className="flex-1 grid grid-cols-2 lg:grid-cols-4 gap-2.5">
+        <div className="flex-1 flex flex-col lg:flex-row gap-2.5 max-sm:gap-2">
+          <div className="flex-1 grid grid-cols-2 lg:grid-cols-4 gap-2.5 max-sm:gap-2">
             <StampButton
               tone="muc-xanh"
               title={s("desk.report")}
@@ -163,7 +167,7 @@ export function ActionControls({
                 disabled={isRejectDisabled}
                 selected={chosenAction === "GIU_LAI"}
                 onDrop={(x, y) => drop("GIU_LAI", x, y)}
-                onTap={() => setDragHint(true)}
+                onTap={(touch) => (touch ? drop("GIU_LAI", null, null) : setDragHint(true))}
               />
             ) : (
               <StampButton
@@ -185,7 +189,7 @@ export function ActionControls({
                 disabled={isApproveDisabled}
                 selected={chosenAction === "CHO_QUA"}
                 onDrop={(x, y) => drop("CHO_QUA", x, y)}
-                onTap={() => setDragHint(true)}
+                onTap={(touch) => (touch ? drop("CHO_QUA", null, null) : setDragHint(true))}
               />
             ) : (
               <StampButton
@@ -204,7 +208,7 @@ export function ActionControls({
           <PrimaryButton
             onClick={onNext}
             disabled={!chosenAction}
-            className={cx("lg:w-[220px] shrink-0", chosenAction ? "animate-truot-vao" : "invisible")}
+            className={cx("lg:w-[220px] shrink-0 max-sm:py-2.5", chosenAction ? "animate-truot-vao" : "invisible max-lg:hidden")}
           >
             {s("desk.next_traveler")}
           </PrimaryButton>

@@ -95,8 +95,8 @@ interface DraggableStampProps {
   selected?: boolean;
   /** Thả con dấu tại toạ độ màn hình. Trả `true` nếu thả trúng giấy (dấu ăn), `false` để con dấu bật về. */
   onDrop: (x: number, y: number) => boolean;
-  /** Bấm mà không kéo. */
-  onTap?: () => void;
+  /** Bấm mà không kéo. `touch` = chạm trên màn hình cảm ứng (điện thoại, máy tính bảng). */
+  onTap?: (touch: boolean) => void;
 }
 
 type Drag = { x: number; y: number; homeX: number; homeY: number; returning: boolean };
@@ -116,6 +116,8 @@ interface Session {
   lastX: number;
   lastY: number;
   moved: boolean;
+  /** Kéo bằng ngón tay/bút, không phải chuột. */
+  touch: boolean;
   homeX: number;
   homeY: number;
   detach: () => void;
@@ -139,7 +141,7 @@ export function DraggableStamp({ action, title, sub, icon, disabled, selected, o
     ss.detach();
     if (!ss.moved) {
       setDrag(null);
-      if (!cancel) handlers.current.onTap?.();
+      if (!cancel) handlers.current.onTap?.(ss.touch);
       return;
     }
     if (!cancel && handlers.current.onDrop(x, y)) {
@@ -176,6 +178,10 @@ export function DraggableStamp({ action, title, sub, icon, disabled, selected, o
       if (ss) finish(ss.lastX, ss.lastY, true);
     };
     const onKey = (ev: KeyboardEvent) => ev.key === "Escape" && abort();
+    // Cảm ứng: chặn cú "click" giả trình duyệt phát sau khi nhấc ngón tay. Đóng dấu làm nút LƯỢT KẾ TIẾP hiện ra
+    // đúng dưới ngón tay, và cú click giả ấy sẽ bấm luôn nút đó.
+    const swallowClick = (ev: TouchEvent) => ev.cancelable && ev.preventDefault();
+    if (e.pointerType !== "mouse") window.addEventListener("touchend", swallowClick, { passive: false, once: true });
 
     window.addEventListener("pointermove", move);
     window.addEventListener("pointerup", up);
@@ -190,6 +196,7 @@ export function DraggableStamp({ action, title, sub, icon, disabled, selected, o
       lastX: e.clientX,
       lastY: e.clientY,
       moved: false,
+      touch: e.pointerType !== "mouse",
       homeX: r.left + r.width / 2,
       homeY: r.top + r.height / 2,
       detach: () => {
@@ -199,6 +206,8 @@ export function DraggableStamp({ action, title, sub, icon, disabled, selected, o
         window.removeEventListener("blur", abort);
         window.removeEventListener("keydown", onKey);
         document.removeEventListener("visibilitychange", abort);
+        // Gỡ sau một nhịp, để trình nghe kịp nhận touchend của chính lần chạm này.
+        setTimeout(() => window.removeEventListener("touchend", swallowClick), 0);
       },
     };
     setDrag({ x: e.clientX, y: e.clientY, homeX: r.left + r.width / 2, homeY: r.top + r.height / 2, returning: false });
@@ -233,7 +242,7 @@ export function DraggableStamp({ action, title, sub, icon, disabled, selected, o
         onPointerDown={onPointerDown}
         title={s("desk.stamp_drag_hint")}
         className={cx(
-          "group relative flex items-center gap-3 border-[3px] border-double px-4 py-2.5 text-left min-w-0 min-h-[62px] touch-none select-none",
+          "group relative flex items-center gap-3 border-[3px] border-double px-4 py-2.5 text-left min-w-0 min-h-[62px] touch-none select-none max-sm:min-h-[46px] max-sm:px-2.5 max-sm:py-1.5 max-sm:gap-2",
           "transition-[background-color,color,opacity]",
           selected ? cx(color.on, "shadow-kep") : color.idle,
           disabled && !selected && "opacity-35 cursor-not-allowed grayscale-[40%]",
@@ -251,7 +260,7 @@ export function DraggableStamp({ action, title, sub, icon, disabled, selected, o
         {icon && <span className="shrink-0 -ml-1">{icon}</span>}
         <span className="min-w-0">
           <span className="block font-nhan font-bold text-[13px] tracking-[0.15em] uppercase leading-tight">{title}</span>
-          {sub && <span className="block text-[10px] leading-snug opacity-80 mt-0.5 line-clamp-2">{sub}</span>}
+          {sub && <span className="block text-[10px] leading-snug opacity-80 mt-0.5 line-clamp-2 max-sm:hidden">{sub}</span>}
         </span>
       </button>
 

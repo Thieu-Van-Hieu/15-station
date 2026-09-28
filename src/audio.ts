@@ -293,9 +293,16 @@ export function preloadSfx() {
 // Hiệu ứng
 // ---------------------------------------------------------------------------
 
+/** Lần phát gần nhất của từng hiệu ứng, để một âm bị gọi hai lần liền (ví dụ React StrictMode ở chế độ dev) chỉ phát một lần. */
+const lastPlayed = new Map<SfxName, number>();
+const DEDUPE_MS = 80;
+
 export function playSfx(name: SfxName) {
   const ac = ready();
   if (!ac || !master || muted) return;
+  const now = performance.now();
+  if (now - (lastPlayed.get(name) ?? -Infinity) < DEDUPE_MS) return;
+  lastPlayed.set(name, now);
   const out = master;
   void load(ac, name).then((loaded) => {
     try {

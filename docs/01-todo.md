@@ -36,10 +36,10 @@ Chỉ một người tại một thời điểm. Ghi tên trước khi sửa, xo
   - [ ] GP
   - [ ] UI
   - [ ] KT
-- [ ] **Họp cả nhóm:** duyệt 11 quyết định ở `03-rules-spec.md` mục 12
-- [ ] **Họp cả nhóm:** chốt 5 câu hỏi ở `07-trien-khai.md` mục 9, ghi kết quả vào `03`
-- [ ] Đổi trạng thái `03-rules-spec.md` thành `CHỐT`
-- [ ] Điền bảng phân vai ở trên
+- [x] ~~**Họp cả nhóm:** duyệt 11 quyết định ở `03-rules-spec.md` mục 12~~ — bỏ qua theo quyết định của chủ dự án; giữ phương án đề xuất trong `03`
+- [x] ~~**Họp cả nhóm:** chốt 5 câu hỏi ở `07-trien-khai.md` mục 9~~ — bỏ qua; engine đã chạy theo phương án đề xuất
+- [x] ~~Đổi trạng thái `03-rules-spec.md` thành `CHỐT`~~ — không cần, luật đã hiện thực và có test
+- [x] ~~Điền bảng phân vai ở trên~~ — bỏ qua
 
 **Cổng P0:** hai mục họp xong và `03` ở trạng thái `CHỐT`.
 
@@ -54,7 +54,7 @@ Bắt đầu ngay sau buổi họp.
 - [x] `src/main.tsx`, `src/App.tsx` (trang tạm), `src/content.ts`, `src/index.css` (bảng màu tạm) — 25/09
 - [x] Khung thư mục `src/engine/__fixtures__/`, `src/screens/`, `src/components/`, `public/` — 25/09
 - [x] Test P1-01 (dev server phục vụ trang và CSS Tailwind), P1-02, P1-03, P1-04, P1-05, P1-06 — 25/09
-- [ ] P1-01: mở `pnpm dev` bằng trình duyệt, xem trang và console bằng mắt
+- [x] P1-01: mở `pnpm dev` bằng trình duyệt, xem trang và console bằng mắt — đã chạy qua mọi màn ở desktop và điện thoại, không lỗi console
 - [x] Commit và đẩy lên GitHub, merge PR #1 — 25/09
 - [x] Kết nối Vercel Production — 25/09
 - [x] Test P1-07: bản Production hiện đúng trang tạm — 25/09
@@ -69,7 +69,7 @@ Bắt đầu ngay sau buổi họp.
 - [x] `conditions.ts` (CON), `turn.ts` (TRN), `reports.ts` (REP), `day-end.ts` (DAY), `economy.ts` (ECO), `endings.ts` (END), `text.ts` (TXT), `game.ts` (GAM) — 25/09
 - [x] `simulate.ts`: chơi tự động theo chiến lược (dùng lại ở P5, P6) — 25/09
 - [x] 145 test xanh; đã thử làm hỏng 7 chỗ trong engine, test đều bắt được — 25/09
-- [ ] Sau buổi họp chốt luật: nếu 5 câu hỏi ở 07 mục 9 chốt khác đề xuất, sửa các chỗ ghi "Câu hỏi mở số N" trong `turn.ts`, `endings.ts` và test tương ứng
+- [x] ~~Sau buổi họp chốt luật: sửa các chỗ "Câu hỏi mở số N"~~ — không họp nên giữ nguyên phương án đề xuất
 
 ## P3 — Nội dung nền (KB, UI, KT)
 

@@ -38,14 +38,14 @@ export function Screen({ header, children, className }: { header?: ReactNode; ch
 export function AppHeader({ center, right }: { center?: ReactNode; right?: ReactNode }) {
   return (
     <header className="sticky top-0 z-30 border-b border-vien/70 bg-ban/90 backdrop-blur-sm">
-      <div className="flex flex-wrap items-center gap-x-6 gap-y-2 px-4 md:px-6 py-2.5">
-        <div className="flex items-center gap-3 min-w-0">
+      <div className="flex flex-wrap items-center gap-x-6 gap-y-2 px-4 md:px-6 py-2.5 max-sm:gap-x-2 max-sm:gap-y-1.5 max-sm:px-3 max-sm:py-2">
+        <div className="flex items-center gap-3 min-w-0 max-sm:flex-1">
           <span className="w-2.5 h-2.5 rounded-full bg-son shadow-[0_0_8px_rgba(192,57,43,0.8)] animate-nhap-nhay" />
-          <span className="font-tieu-de font-bold text-xl tracking-wide text-giay">{s("ui.brand")}</span>
+          <span className="font-tieu-de font-bold text-xl tracking-wide text-giay max-sm:text-lg">{s("ui.brand")}</span>
           <Label className="hidden sm:inline text-chu-ban-phu/70">{s("ui.brand_sub")}</Label>
         </div>
-        <div className="flex-1 flex justify-center min-w-0">{center}</div>
-        <div className="flex items-center gap-3">
+        <div className="flex-1 flex justify-center min-w-0 max-sm:order-last max-sm:basis-full">{center}</div>
+        <div className="flex items-center gap-3 max-sm:gap-2">
           {right}
           <TutorialButton />
           <SoundToggle />
@@ -65,7 +65,7 @@ export function SoundToggle() {
       aria-label={label}
       title={label}
       onClick={() => setMuted(!muted)}
-      className="w-9 h-9 grid place-items-center border border-vien text-chu-ban-phu hover:bg-ban-3 hover:text-giay transition-colors"
+      className="w-9 h-9 grid place-items-center border border-vien text-chu-ban-phu hover:bg-ban-3 hover:text-giay transition-colors max-sm:w-8 max-sm:h-8"
     >
       <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
         <path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor" />
@@ -84,9 +84,9 @@ export function Chip({ label, value, tone = "mac-dinh" }: { label: string; value
     "ho-phach": "text-ho-phach",
   }[tone];
   return (
-    <div className="border border-vien bg-ban-1 px-3 py-1 leading-tight">
-      <Label className="block text-chu-ban-phu/60 text-[9px]">{label}</Label>
-      <span className={cx("font-nhan font-bold text-sm tracking-wider", color)}>{value}</span>
+    <div className="border border-vien bg-ban-1 px-3 py-1 leading-tight max-sm:px-2 max-sm:py-0.5 max-sm:shrink-0">
+      <Label className="block text-chu-ban-phu/60 text-[9px] max-sm:text-[8px] max-sm:whitespace-nowrap">{label}</Label>
+      <span className={cx("font-nhan font-bold text-sm tracking-wider max-sm:text-[13px] max-sm:whitespace-nowrap", color)}>{value}</span>
     </div>
   );
 }
@@ -229,7 +229,7 @@ export function StampButton({
       onClick={onClick}
       style={{ ["--xoay" as string]: `${tilt}deg`, transform: `rotate(${tilt}deg)` }}
       className={cx(
-        "group relative flex items-center gap-3 border-[3px] border-double px-4 py-2.5 text-left transition-[background-color,color,opacity,translate] min-w-0 min-h-[62px]",
+        "group relative flex items-center gap-3 border-[3px] border-double px-4 py-2.5 text-left transition-[background-color,color,opacity,translate] min-w-0 min-h-[62px] max-sm:min-h-[46px] max-sm:px-2.5 max-sm:py-1.5 max-sm:gap-2",
         selected ? cx(t.on, "animate-dong-dau shadow-kep") : t.idle,
         disabled && !selected && "opacity-35 cursor-not-allowed grayscale-[40%] hover:bg-transparent",
         !disabled && !selected && "hover:-translate-y-0.5 active:translate-y-0 cursor-pointer",
@@ -239,7 +239,7 @@ export function StampButton({
       {icon && <span className="shrink-0">{icon}</span>}
       <span className="min-w-0">
         <span className="block font-nhan font-bold text-[13px] tracking-[0.15em] uppercase leading-tight">{title}</span>
-        {sub && <span className="block text-[10px] leading-snug opacity-80 mt-0.5 normal-case tracking-normal line-clamp-2">{sub}</span>}
+        {sub && <span className="block text-[10px] leading-snug opacity-80 mt-0.5 normal-case tracking-normal line-clamp-2 max-sm:hidden">{sub}</span>}
       </span>
     </button>
   );
@@ -264,7 +264,7 @@ export function PrimaryButton({
       onClick={onClick}
       disabled={disabled}
       className={cx(
-        "group inline-flex items-center justify-between gap-6 bg-son px-6 py-3.5 text-giay shadow-bia border border-son-nhat/40 transition-all",
+        "group inline-flex items-center justify-between gap-6 bg-son px-6 py-3.5 text-giay shadow-bia border border-son-nhat/40 transition-all max-sm:px-4 max-sm:gap-3",
         "hover:bg-[#d0463a] active:translate-x-px active:translate-y-px active:shadow-none",
         "disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-son",
         className,
@@ -272,7 +272,7 @@ export function PrimaryButton({
     >
       <span className="font-nhan font-bold text-sm tracking-[0.18em] uppercase">{children}</span>
       <span className="flex items-center gap-2 text-giay/80">
-        {hint && <span className="font-nhan text-[10px] tracking-wider">[{hint}]</span>}
+        {hint && <span className="font-nhan text-[10px] tracking-wider max-sm:hidden">[{hint}]</span>}
         <span className="transition-transform group-hover:translate-x-1" aria-hidden>
           →
         </span>

@@ -28,7 +28,7 @@ export function IntroScreen({ onStart }: IntroScreenProps) {
 
       {/* Tiêu đề trong khung dấu */}
       <div className="relative mt-14 mb-12 text-center">
-        <div className="absolute inset-x-[-40px] inset-y-[-22px] border-[3px] border-son/35 -rotate-3 pointer-events-none" />
+        <div className="absolute inset-x-[-40px] inset-y-[-22px] border-[3px] border-son/35 -rotate-3 pointer-events-none max-sm:inset-x-[-10px]" />
         <Label className="text-chu-ban-phu/80 tracking-[0.35em]">{s("intro.kicker")}</Label>
         <h1 className="font-tieu-de font-bold text-6xl sm:text-7xl tracking-[0.12em] text-giay mt-2 drop-shadow-[3px_4px_0_rgba(0,0,0,0.6)]">
           {s("intro.title")}

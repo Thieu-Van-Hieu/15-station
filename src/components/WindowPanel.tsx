@@ -84,7 +84,7 @@ export function WindowPanel({
           <Label className="text-ho-phach">{s("desk.window_title")}</Label>
           <Label className="text-chu-ban-phu/50 text-[10px]">{traveler.id.toUpperCase()}</Label>
         </div>
-        <div key={traveler.id} className="border-[6px] border-ban-4 bg-ban-1 shadow-noi animate-truot-vao">
+        <div key={traveler.id} className="border-[6px] border-ban-4 bg-ban-1 shadow-noi animate-truot-vao max-lg:max-w-[340px] max-lg:mx-auto max-sm:max-w-[250px]">
           <div className="relative">
             <Portrait charKey={portrait.key} expression={portrait.expression} alt={name} className="aspect-[5/6] w-full" />
             {/* Quá giờ hết ca: ngoài ô cửa tối dần. */}

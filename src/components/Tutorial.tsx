@@ -317,7 +317,7 @@ export function TutorialButton({ variant = "icon", className }: { variant?: "ico
           type="button"
           onClick={show}
           className={cx(
-            "group inline-flex items-center justify-between gap-6 border border-vien-sang/60 bg-ban-2 px-6 py-3 text-chu-ban hover:bg-ban-3 hover:text-giay transition-colors",
+            "group inline-flex items-center justify-between gap-6 border border-vien-sang/60 bg-ban-2 px-6 py-3 max-sm:px-4 max-sm:gap-3 text-chu-ban hover:bg-ban-3 hover:text-giay transition-colors",
             className,
           )}
         >
@@ -325,7 +325,7 @@ export function TutorialButton({ variant = "icon", className }: { variant?: "ico
             <span className="w-6 h-6 grid place-items-center border border-ho-phach/70 text-ho-phach font-nhan font-bold text-[12px]">?</span>
             <span className="font-nhan font-bold text-sm tracking-[0.18em] uppercase">{s("tutorial.open")}</span>
           </span>
-          <span className="font-nhan text-[10px] tracking-wider text-chu-ban-phu/60">{PAGES} {s("tutorial.step").toLowerCase()} · H</span>
+          <span className="font-nhan text-[10px] tracking-wider text-chu-ban-phu/60 max-sm:hidden">{PAGES} {s("tutorial.step").toLowerCase()} · H</span>
         </button>
       )}
       {open && <Tutorial onClose={() => setOpen(false)} />}

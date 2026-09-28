@@ -79,11 +79,11 @@ type Layout = "giay-doc" | "giay-ngang" | "so" | "phieu-nho" | "the";
 type ItemLike = { ma?: string; ten?: string; so_luong: number; don_vi: string };
 
 const WIDTH: Record<Layout, string> = {
-  "giay-doc": "w-[290px]",
-  "giay-ngang": "w-[350px]",
-  so: "w-[290px]",
+  "giay-doc": "w-[290px] max-sm:max-w-full",
+  "giay-ngang": "w-[350px] max-sm:w-full max-sm:max-w-[350px]",
+  so: "w-[290px] max-sm:max-w-full",
   "phieu-nho": "w-[230px]",
-  the: "w-[270px]",
+  the: "w-[270px] max-sm:max-w-full",
 };
 
 export function DocumentPaper({ doc, def, tilt = 0, className, style, onFocus, index = 0, inks, pencil }: DocumentPaperProps) {

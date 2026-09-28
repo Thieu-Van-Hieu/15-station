@@ -351,7 +351,7 @@ export function DeskScreen({
           <div
             key={traveler.id}
             className={cx(
-              "flex-1 flex flex-wrap content-start justify-center gap-x-2 gap-y-6 px-6 pt-8 pb-10",
+              "flex-1 flex flex-wrap content-start justify-center gap-x-2 gap-y-6 px-6 pt-8 pb-10 max-sm:px-3 max-sm:pt-5 max-sm:gap-y-5",
               leaving && "animate-truot-ra pointer-events-none",
             )}
           >
@@ -365,7 +365,7 @@ export function DeskScreen({
                 return (
                   <div
                     key={idx}
-                    className="relative animate-truot-vao"
+                    className="relative animate-truot-vao max-sm:!ml-0 max-sm:!mt-0 max-sm:max-w-full"
                     style={{
                       marginLeft: idx > 0 ? p.x : 0,
                       marginTop: p.y,
@@ -390,7 +390,7 @@ export function DeskScreen({
           </div>
 
           {confrontView && (
-            <div className="absolute inset-x-4 bottom-20 z-30 flex justify-center">
+            <div className="absolute inset-x-4 bottom-20 z-30 flex justify-center max-lg:fixed max-lg:inset-x-3 max-lg:bottom-auto max-lg:top-24 max-lg:z-40 max-lg:max-h-[60vh] max-lg:overflow-y-auto">
               <ConfrontPanel view={confrontView} onClose={() => setConfrontView(null)} />
             </div>
           )}
@@ -491,7 +491,7 @@ function ControlSlip({ traveler, day, inks }: { traveler: Traveler; day: Day; in
   return (
     <div
       data-stamp-target="slip"
-      className="relative w-[230px] self-start mt-4 giay-than-hat border-2 border-dashed border-ke shadow-giay p-3 text-muc text-[11px] rotate-[1.5deg] animate-truot-vao"
+      className="relative w-[230px] self-start mt-4 max-sm:self-center max-sm:mt-0 giay-than-hat border-2 border-dashed border-ke shadow-giay p-3 text-muc text-[11px] rotate-[1.5deg] animate-truot-vao"
       style={{ animationDelay: "200ms", animationFillMode: "backwards" }}
     >
       <div className="text-center border-b border-muc/30 pb-1.5 mb-2">

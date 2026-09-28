@@ -19,10 +19,10 @@ export function TopBar({ state, day, currentTravelerOrder, totalTravelersInDay, 
   return (
     <AppHeader
       center={
-        <div className="flex flex-wrap items-center justify-center gap-2">
-          <div className="border border-vien bg-ban-1 px-3 py-1 leading-tight text-center">
-            <Label className="block text-ho-phach text-[10px]">{day.label}</Label>
-            <span className="font-nhan text-[11px] text-chu-ban-phu/70">{day.game_date}</span>
+        <div className="flex flex-wrap items-center justify-center gap-2 max-sm:flex-nowrap max-sm:gap-1.5 max-sm:w-full">
+          <div className="border border-vien bg-ban-1 px-3 py-1 leading-tight text-center max-sm:px-2 max-sm:py-0.5 max-sm:flex-1 max-sm:min-w-0 max-sm:text-left">
+            <Label className="block text-ho-phach text-[10px] max-sm:text-[9px] max-sm:truncate">{day.label}</Label>
+            <span className="font-nhan text-[11px] text-chu-ban-phu/70 max-sm:text-[10px]">{day.game_date}</span>
           </div>
           <div className={cx("transition-transform duration-300", jumping && "scale-110")}>
             <Chip

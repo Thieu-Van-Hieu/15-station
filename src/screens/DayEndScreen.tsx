@@ -13,6 +13,9 @@ interface DayEndScreenProps {
   onContinue: () => void;
 }
 
+/** Con dấu xếp loại đập xuống sau khi tiếng máy chữ dứt; hình và tiếng dùng chung mốc này để khớp nhau. */
+const STAMP_DELAY_MS = 900;
+
 const GRADE_KEY = { XUAT_SAC: "grade.xuat_sac", KHA: "grade.kha", TRUNG_BINH: "grade.trung_binh" } as const;
 
 export function DayEndScreen({ day, dayReport, indicatorsStart, indicatorsEnd, onContinue }: DayEndScreenProps) {
@@ -27,7 +30,8 @@ export function DayEndScreen({ day, dayReport, indicatorsStart, indicatorsEnd, o
 
   useEffect(() => {
     playSfx("typewriter");
-    const t = setTimeout(() => playSfx("stamp"), 900);
+    // Tiếng dấu đi cùng con dấu xếp loại đập xuống (cùng mốc STAMP_DELAY_MS với hoạt ảnh bên dưới).
+    const t = setTimeout(() => playSfx("stamp"), STAMP_DELAY_MS);
     return () => clearTimeout(t);
   }, [day.id]);
 
@@ -92,17 +96,17 @@ export function DayEndScreen({ day, dayReport, indicatorsStart, indicatorsEnd, o
             <div className="relative mt-6 pt-4 border-t border-dashed border-muc/40 min-h-28">
               <Label className="text-muc-nhat text-[10px]">{s("board.left.rating")}</Label>
               {endLine && (
-                <p className="mt-2 pr-36 text-[12.5px] italic leading-relaxed">
+                <p className="mt-2 pr-36 text-[12.5px] italic leading-relaxed max-sm:pr-0">
                   &ldquo;{endLine.text}&rdquo;
                   <span className="block not-italic text-[11px] text-muc-nhat mt-1">— {endSpeaker?.name ?? endLine.speaker}</span>
                 </p>
               )}
               <div
                 className={cx(
-                  "absolute right-2 top-6 border-4 border-double px-3 py-1.5 font-tieu-de font-bold text-xl uppercase tracking-wider mix-blend-multiply animate-dong-dau",
+                  "absolute right-2 top-6 max-sm:static max-sm:inline-block max-sm:mt-4 border-4 border-double px-3 py-1.5 font-tieu-de font-bold text-xl uppercase tracking-wider mix-blend-multiply animate-dong-dau",
                   dayReport.grade === "XUAT_SAC" ? "border-son text-son" : dayReport.grade === "KHA" ? "border-muc-xanh text-muc-xanh" : "border-muc-nhat text-muc-nhat",
                 )}
-                style={{ ["--xoay" as string]: "-8deg", transform: "rotate(-8deg)", animationDelay: "400ms", animationFillMode: "backwards" }}
+                style={{ ["--xoay" as string]: "-8deg", transform: "rotate(-8deg)", animationDelay: `${STAMP_DELAY_MS}ms`, animationFillMode: "backwards" }}
               >
                 {s(GRADE_KEY[dayReport.grade])}
               </div>

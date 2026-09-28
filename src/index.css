@@ -9,262 +9,303 @@
  * Tất cả tự host qua @fontsource (import trong src/main.tsx), không gọi CDN.
  */
 @theme {
-  /* Mặt bàn */
-  --color-ban: #17130f;
-  --color-ban-1: #1f1b17;
-  --color-ban-2: #231f1b;
-  --color-ban-3: #2e2925;
-  --color-ban-4: #39342f;
-  --color-vien: #59413d;
-  --color-vien-sang: #a88a85;
-  --color-chu-ban: #ebe1da;
-  --color-chu-ban-phu: #d4c5a9;
+    /* Mặt bàn */
+    --color-ban: #17130f;
+    --color-ban-1: #1f1b17;
+    --color-ban-2: #231f1b;
+    --color-ban-3: #2e2925;
+    --color-ban-4: #39342f;
+    --color-vien: #59413d;
+    --color-vien-sang: #a88a85;
+    --color-chu-ban: #ebe1da;
+    --color-chu-ban-phu: #d4c5a9;
 
-  /* Giấy */
-  --color-bia: #d4c5a9;
-  --color-bia-dam: #c7b696;
-  --color-giay: #f0ead6;
-  --color-giay-than: #e2d7c3;
-  --color-giay-vien: #c2b59d;
-  --color-ke: #a89a84;
-  --color-muc: #181513;
-  --color-muc-nhat: #4a423a;
+    /* Giấy */
+    --color-bia: #d4c5a9;
+    --color-bia-dam: #c7b696;
+    --color-giay: #f0ead6;
+    --color-giay-than: #e2d7c3;
+    --color-giay-vien: #c2b59d;
+    --color-ke: #a89a84;
+    --color-muc: #181513;
+    --color-muc-nhat: #4a423a;
 
-  /* Mực và dấu */
-  --color-son: #c0392b;
-  --color-son-nhat: #ffb4a9;
-  --color-son-dam: #8b2626;
-  --color-xanh-so: #27ae60;
-  --color-xanh-so-nhat: #61de8a;
-  --color-xanh-so-dam: #1b6b3c;
-  --color-muc-xanh: #2f4f86;
-  --color-muc-xanh-nhat: #9fb6e0;
-  --color-ho-phach: #d9a441;
-  --color-kep: #7f8c8d;
+    /* Mực và dấu */
+    --color-son: #c0392b;
+    --color-son-nhat: #ffb4a9;
+    --color-son-dam: #8b2626;
+    --color-xanh-so: #27ae60;
+    --color-xanh-so-nhat: #61de8a;
+    --color-xanh-so-dam: #1b6b3c;
+    --color-muc-xanh: #2f4f86;
+    --color-muc-xanh-nhat: #9fb6e0;
+    --color-ho-phach: #d9a441;
+    --color-kep: #7f8c8d;
 
-  --font-tieu-de: "Noto Serif", "Times New Roman", serif;
-  --font-may-chu: "IBM Plex Mono", "Courier New", ui-monospace, monospace;
-  --font-nhan: "Space Mono", "IBM Plex Mono", ui-monospace, monospace;
+    --font-tieu-de: "Noto Serif", "Times New Roman", serif;
+    --font-may-chu: "IBM Plex Mono", "Courier New", ui-monospace, monospace;
+    --font-nhan: "Space Mono", "IBM Plex Mono", ui-monospace, monospace;
 
-  --shadow-bia: 2px 3px 0 rgba(0, 0, 0, 0.45);
-  --shadow-giay: 3px 5px 0 rgba(18, 15, 13, 0.35);
-  --shadow-noi: 6px 10px 0 rgba(10, 8, 7, 0.5);
-  --shadow-kep: 1px 2px 1px rgba(0, 0, 0, 0.6);
+    --shadow-bia: 2px 3px 0 rgba(0, 0, 0, 0.45);
+    --shadow-giay: 3px 5px 0 rgba(18, 15, 13, 0.35);
+    --shadow-noi: 6px 10px 0 rgba(10, 8, 7, 0.5);
+    --shadow-kep: 1px 2px 1px rgba(0, 0, 0, 0.6);
 
-  --animate-dong-dau: dong-dau 260ms cubic-bezier(0.2, 0.9, 0.3, 1.2);
-  --animate-truot-vao: truot-vao 320ms ease-out;
-  --animate-nhap-nhay: nhap-nhay 1.6s ease-in-out infinite;
-  --animate-truot-ra: truot-ra 380ms ease-in forwards;
-  --animate-nhuc-nhich: nhuc-nhich 700ms ease-in-out;
-  --animate-run-ret: run-ret 0.35s ease-in-out infinite;
-  --animate-cho-doi: cho-doi 3.4s ease-in-out infinite;
-  --animate-tay-dong-dau: tay-dong-dau 1.8s ease-in-out infinite;
+    --animate-dong-dau: dong-dau 260ms cubic-bezier(0.2, 0.9, 0.3, 1.2);
+    --animate-truot-vao: truot-vao 320ms ease-out;
+    --animate-nhap-nhay: nhap-nhay 1.6s ease-in-out infinite;
+    --animate-truot-ra: truot-ra 380ms ease-in forwards;
+    --animate-nhuc-nhich: nhuc-nhich 700ms ease-in-out;
+    --animate-run-ret: run-ret 0.35s ease-in-out infinite;
+    --animate-cho-doi: cho-doi 3.4s ease-in-out infinite;
+    --animate-tay-dong-dau: tay-dong-dau 1.8s ease-in-out infinite;
 }
 
 @keyframes dong-dau {
-  0% {
-    transform: scale(1.08) rotate(var(--xoay, -3deg));
-    opacity: 0;
-  }
-  60% {
-    transform: scale(0.98) rotate(var(--xoay, -3deg));
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1) rotate(var(--xoay, -3deg));
-    opacity: 1;
-  }
+    0% {
+        transform: scale(1.08) rotate(var(--xoay, -3deg));
+        opacity: 0;
+    }
+    60% {
+        transform: scale(0.98) rotate(var(--xoay, -3deg));
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1) rotate(var(--xoay, -3deg));
+        opacity: 1;
+    }
 }
 
 @keyframes truot-vao {
-  from {
-    transform: translateY(12px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
+    from {
+        transform: translateY(12px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 /* Giấy đã đóng dấu trượt khỏi bàn (V5). */
 @keyframes truot-ra {
-  to {
-    transform: translate(60%, -8%) rotate(6deg);
-    opacity: 0;
-  }
+    to {
+        transform: translate(60%, -8%) rotate(6deg);
+        opacity: 0;
+    }
 }
 
 /* Hàng người ngoài cửa sổ nhúc nhích khi đồng hồ nhảy giờ (V6). */
 @keyframes nhuc-nhich {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  25% {
-    transform: translateX(-3px);
-  }
-  60% {
-    transform: translateX(2px);
-  }
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-3px);
+    }
+    60% {
+        transform: translateX(2px);
+    }
 }
 
 /* Người đứng chờ ngoài cửa sổ: thở nhẹ, đổi chân. Dùng `translate` để không đè `transform` của phần tử SVG. */
 @keyframes cho-doi {
-  0%,
-  100% {
-    translate: 0 0;
-  }
-  45% {
-    translate: 0 -0.7px;
-  }
-  70% {
-    translate: 0.4px -0.3px;
-  }
+    0%,
+    100% {
+        translate: 0 0;
+    }
+    45% {
+        translate: 0 -0.7px;
+    }
+    70% {
+        translate: 0.4px -0.3px;
+    }
 }
 
 /* Minh hoạ trong sổ tay: con dấu nhấc lên rồi dập xuống. */
 @keyframes tay-dong-dau {
-  0%,
-  100% {
-    translate: 0 -14px;
-    rotate: -8deg;
-  }
-  45% {
-    translate: 0 -14px;
-    rotate: -8deg;
-  }
-  60% {
-    translate: 0 0;
-    rotate: -4deg;
-  }
-  75% {
-    translate: 0 0;
-    rotate: -4deg;
-  }
+    0%,
+    100% {
+        translate: 0 -14px;
+        rotate: -8deg;
+    }
+    45% {
+        translate: 0 -14px;
+        rotate: -8deg;
+    }
+    60% {
+        translate: 0 0;
+        rotate: -4deg;
+    }
+    75% {
+        translate: 0 0;
+        rotate: -4deg;
+    }
 }
 
 /* Bóng người co ro run vì rét khi quá giờ hết ca. */
 @keyframes run-ret {
-  0%,
-  100% {
-    translate: 0 0;
-  }
-  50% {
-    translate: 0.6px 0;
-  }
+    0%,
+    100% {
+        translate: 0 0;
+    }
+    50% {
+        translate: 0.6px 0;
+    }
 }
 
 @keyframes nhap-nhay {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.45;
-  }
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.45;
+    }
 }
 
 html,
 body,
 #root {
-  min-height: 100%;
+    min-height: 100%;
 }
 
 body {
-  margin: 0;
-  background: var(--color-ban);
-  color: var(--color-chu-ban);
-  font-family: var(--font-may-chu);
-  -webkit-font-smoothing: antialiased;
+    margin: 0;
+    background: var(--color-ban);
+    color: var(--color-chu-ban);
+    font-family: var(--font-may-chu);
+    -webkit-font-smoothing: antialiased;
 }
 
 /* Mặt bàn gỗ: vân gỗ dọc mờ + vignette. */
 .mat-ban {
-  background-color: var(--color-ban);
-  background-image:
-    radial-gradient(ellipse at 50% 30%, rgba(80, 60, 45, 0.28), transparent 70%),
-    repeating-linear-gradient(
-      92deg,
-      rgba(255, 235, 210, 0.018) 0 2px,
-      transparent 2px 7px,
-      rgba(0, 0, 0, 0.05) 7px 9px,
-      transparent 9px 16px
-    ),
-    linear-gradient(180deg, #1c1714, #120f0c);
+    background-color: var(--color-ban);
+    background-image:
+        radial-gradient(
+            ellipse at 50% 30%,
+            rgba(80, 60, 45, 0.28),
+            transparent 70%
+        ),
+        repeating-linear-gradient(
+            92deg,
+            rgba(255, 235, 210, 0.018) 0 2px,
+            transparent 2px 7px,
+            rgba(0, 0, 0, 0.05) 7px 9px,
+            transparent 9px 16px
+        ),
+        linear-gradient(180deg, #1c1714, #120f0c);
 }
 
 /* Mặt bàn làm việc ở giữa: chấm tròn như dạ phủ bàn. */
 .mat-ban-cham {
-  background-color: #241e19;
-  background-image:
-    radial-gradient(rgba(0, 0, 0, 0.35) 1.4px, transparent 1.6px),
-    radial-gradient(ellipse at 50% 40%, rgba(120, 90, 60, 0.18), transparent 75%);
-  background-size:
-    22px 22px,
-    100% 100%;
+    background-color: #241e19;
+    background-image:
+        radial-gradient(rgba(0, 0, 0, 0.35) 1.4px, transparent 1.6px),
+        radial-gradient(
+            ellipse at 50% 40%,
+            rgba(120, 90, 60, 0.18),
+            transparent 75%
+        );
+    background-size:
+        22px 22px,
+        100% 100%;
 }
 
 /* Giấy có hạt và vệt ố. */
 .giay-hat {
-  background-color: var(--color-giay);
-  background-image:
-    radial-gradient(ellipse at 15% 10%, rgba(160, 120, 60, 0.1), transparent 45%),
-    radial-gradient(ellipse at 90% 95%, rgba(140, 100, 50, 0.12), transparent 50%),
-    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.012) 0 1px, transparent 1px 3px);
+    background-color: var(--color-giay);
+    background-image:
+        radial-gradient(
+            ellipse at 15% 10%,
+            rgba(160, 120, 60, 0.1),
+            transparent 45%
+        ),
+        radial-gradient(
+            ellipse at 90% 95%,
+            rgba(140, 100, 50, 0.12),
+            transparent 50%
+        ),
+        repeating-linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.012) 0 1px,
+            transparent 1px 3px
+        );
 }
 
 .giay-than-hat {
-  background-color: var(--color-giay-than);
-  background-image:
-    radial-gradient(ellipse at 80% 5%, rgba(150, 110, 60, 0.12), transparent 50%),
-    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.014) 0 1px, transparent 1px 3px);
+    background-color: var(--color-giay-than);
+    background-image:
+        radial-gradient(
+            ellipse at 80% 5%,
+            rgba(150, 110, 60, 0.12),
+            transparent 50%
+        ),
+        repeating-linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.014) 0 1px,
+            transparent 1px 3px
+        );
 }
 
 /* Giấy kẻ dòng có lề đỏ (sổ chỉ thị). */
 .giay-ke-dong {
-  background-color: #efe6cf;
-  background-image:
-    linear-gradient(90deg, transparent 30px, rgba(192, 57, 43, 0.45) 30px 31px, transparent 31px),
-    repeating-linear-gradient(180deg, transparent 0 25px, rgba(47, 79, 134, 0.14) 25px 26px);
+    background-color: #efe6cf;
+    background-image:
+        linear-gradient(
+            90deg,
+            transparent 30px,
+            rgba(192, 57, 43, 0.45) 30px 31px,
+            transparent 31px
+        ),
+        repeating-linear-gradient(
+            180deg,
+            transparent 0 25px,
+            rgba(47, 79, 134, 0.14) 25px 26px
+        );
 }
 
 /* Góc cắt 45° cho thẻ hồ sơ. */
 .goc-cat {
-  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
 }
 
 /* Lớp nhiễu màn hình CRT rất nhẹ phủ toàn trang. */
 .lop-nhieu::after {
-  content: "";
-  pointer-events: none;
-  position: fixed;
-  inset: 0;
-  z-index: 60;
-  background-image: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.06) 0 1px, transparent 1px 3px);
-  mix-blend-mode: multiply;
+    content: "";
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    background-image: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.06) 0 1px,
+        transparent 1px 3px
+    );
+    mix-blend-mode: multiply;
 }
 
 /* Giữ sẵn chỗ cho thanh cuộn để cột không hẹp lại khi nội dung dài ra. */
 .thanh-cuon {
-  scrollbar-gutter: stable;
+    scrollbar-gutter: stable;
 }
 .thanh-cuon::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+    width: 8px;
+    height: 8px;
 }
 .thanh-cuon::-webkit-scrollbar-thumb {
-  background: rgba(168, 138, 133, 0.35);
+    background: rgba(168, 138, 133, 0.35);
 }
 .thanh-cuon::-webkit-scrollbar-track {
-  background: transparent;
+    background: transparent;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 1ms !important;
-    transition-duration: 1ms !important;
-  }
+    *,
+    *::before,
+    *::after {
+        animation-duration: 1ms !important;
+        transition-duration: 1ms !important;
+    }
 }
