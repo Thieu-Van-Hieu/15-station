@@ -1,1 +1,42 @@
-[]
+[
+  {
+    "id": "KN-KHOAN",
+    "title": "Sản phẩm vượt khoán của xã viên",
+    "description": "Giấy xác nhận sản phẩm khoán chưa có trong sổ",
+    "unlock_day": "d3",
+    "threshold": 3,
+    "delay": "next_act",
+    "effect": {
+      "type": "activate_rule",
+      "rule": "R5K-KHOAN",
+      "text": "Bổ sung Điều 2 (bổ sung): Miễn định mức lương thực đối với sản phẩm vượt khoán có Giấy xác nhận của HTX."
+    },
+    "reasons": [
+      {
+        "id": "LD-KHOAN-SAN-PHAM",
+        "text": "Giấy xác nhận sản phẩm khoán của HTX chưa có trong sổ chỉ thị"
+      }
+    ],
+    "note": "Sau Chỉ thị 100 tháng 1/1981, nông dân có sản phẩm vượt khoán hợp pháp nhưng trạm kiểm soát chưa có hướng dẫn công nhận giấy này."
+  },
+  {
+    "id": "KN-THUONG-BINH",
+    "title": "Chính sách ưu tiên thương binh",
+    "description": "Sổ không có mục nào cho người có giấy chứng nhận thương binh",
+    "unlock_day": "d3",
+    "threshold": 3,
+    "delay": "next_act",
+    "effect": {
+      "type": "narrative",
+      "rule": null,
+      "text": "Ý kiến kiến nghị ưu tiên lưu thông cho thương binh được ghi nhận trong báo cáo tổng hợp tình hình của huyện."
+    },
+    "reasons": [
+      {
+        "id": "LD-THUONG-BINH-CHINH-SACH",
+        "text": "Sổ chỉ thị chưa có quy định miễn trừ hoặc ưu tiên cho người có Giấy chứng nhận thương binh"
+      }
+    ],
+    "note": "Thương binh phục viên mưu sinh vận chuyển hàng hoá nhỏ lẻ thường xuyên gặp khó khăn vì sổ chỉ thị không có điều khoản chiếu cố đặc thù."
+  }
+]

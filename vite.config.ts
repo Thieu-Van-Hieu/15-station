@@ -6,7 +6,7 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   test: {
-    // Test engine và script validate chạy trên Node. Test component (P6) sẽ tự khai jsdom.
+    // Test engine và script validate chạy trên Node. Test component tự khai jsdom qua @vitest-environment jsdom.
     environment: "node",
     include: ["src/**/*.test.{ts,tsx}", "scripts/**/*.test.ts"],
   },

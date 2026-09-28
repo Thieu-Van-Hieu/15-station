@@ -1,1 +1,352 @@
-[]
+[
+  {
+    "id": "thanh",
+    "name": "Nguyễn Văn Thành",
+    "role": "nguoi-choi",
+    "age": 28,
+    "home": "Thị xã",
+    "background": "Cán bộ kiểm soát viên tại Trạm 15, phục viên sau chiến tranh bảo vệ biên giới phía Bắc. Là trụ cột trong gia đình gồm mẹ già, vợ và hai con nhỏ.",
+    "voice": "Trầm tĩnh, kiệm lời, có lương tâm và tinh thần trách nhiệm cao. Trong công việc cố gắng giữ đúng quy định nhưng luôn trăn trở trước nỗi khó khăn của người dân.",
+    "portrait": {
+      "key": "thanh",
+      "expressions": ["binh-thuong", "lo-lang", "met-moi"],
+      "description": "Thanh niên 28 tuổi, gương mặt cương nghị, mặc đồng phục cán bộ kiểm soát màu cỏ úa."
+    },
+    "fixed_fields": {
+      "ho_ten": "Nguyễn Văn Thành",
+      "nam_sinh": 1951,
+      "noi_o": "Thị xã",
+      "so_shk": "TX-0115"
+    },
+    "appearances": []
+  },
+  {
+    "id": "ba-tu",
+    "name": "Bà Tư Lành",
+    "role": "chinh",
+    "age": 50,
+    "home": "xã Phú Hoà",
+    "background": "Xã viên Hợp tác xã Nông nghiệp Phú Hoà. Chồng mất trong kháng chiến, nuôi đứa cháu nội mồ côi mẹ. Là một trong những hộ nông dân đi đầu nhận khoán sản phẩm.",
+    "voice": "Xưng tôi, gọi Thành là chú hoặc chú Thành. Giọng nói chậm rãi, mộc mạc, lễ phép, hay nhắc lại ân tình cũ. Không bao giờ cãi cọ, chỉ kiên trì trình bày hoàn cảnh.",
+    "portrait": {
+      "key": "ba-tu",
+      "expressions": ["binh-thuong", "vui", "lo-lang", "buon"],
+      "description": "Phụ nữ nông thôn ngoài 50 tuổi, đội nón lá cũ, áo nâu vá vai, gánh đôi thúng chai."
+    },
+    "fixed_fields": {
+      "ho_ten": "Trần Thị Lành",
+      "nam_sinh": 1929,
+      "noi_o": "Phú Hoà",
+      "so_shk": "PH-0217"
+    },
+    "appearances": ["d1-t2", "d3-t3", "d5-t1", "d6-t1"]
+  },
+  {
+    "id": "anh-hung",
+    "name": "Anh Hùng",
+    "role": "chinh",
+    "age": 27,
+    "home": "xã Phú Hoà",
+    "background": "Thương binh hạng 2/4, mất cánh tay phải ngoài mặt trận. Phục viên về quê lập gia đình, cần cù lao động, sau này tham gia tổ hợp tác sửa chữa xe đạp máy móc ở địa phương.",
+    "voice": "Xưng tôi, gọi Thành là chú em hoặc đồng chí. Nói năng đĩnh đạc, khẳng khái, thẳng thắn, không luồn cúi, nhưng đôi lúc uất nghẹn trước những rào cản giấy tờ vô cảm.",
+    "portrait": {
+      "key": "anh-hung",
+      "expressions": ["binh-thuong", "lo-lang", "gian", "vui"],
+      "description": "Nam thanh niên cụt tay phải, mặc áo lính bạc màu cài khuy kín cổ, mắt sáng cương trực."
+    },
+    "fixed_fields": {
+      "ho_ten": "Lê Văn Hùng",
+      "nam_sinh": 1952,
+      "noi_o": "Phú Hoà",
+      "so_shk": "PH-0541"
+    },
+    "appearances": ["d3-t2", "d4-t2", "d5-t3", "d6-t2"]
+  },
+  {
+    "id": "ong-quynh",
+    "name": "Ông Quỳnh",
+    "role": "chinh",
+    "age": 41,
+    "home": "Thị xã",
+    "background": "Cán bộ điều độ của Công ty Thương nghiệp tỉnh. Nắm giữ các nguồn phân phối hàng hoá, vật tư, đường, vải. Am hiểu luật lệ và cơ chế, giấy tờ luôn đầy đủ con dấu hợp pháp.",
+    "voice": "Xưng tôi, gọi Thành là đồng chí hoặc cậu Thành. Lời lẽ nhã nhặn, chuẩn mực kiểu công chức nhưng ẩn chứa sự tự tin trịch thượng của người được cơ chế bao bọc.",
+    "portrait": {
+      "key": "ong-quynh",
+      "expressions": ["binh-thuong", "vui", "ne-tranh"],
+      "description": "Người đàn ông trung niên béo tốt, mặc áo đại cán xám, đầu chải mượt, kẹp cặp da đen bóng."
+    },
+    "fixed_fields": {
+      "ho_ten": "Vũ Đình Quỳnh",
+      "nam_sinh": 1938,
+      "noi_o": "Thị xã",
+      "so_shk": "TX-1082"
+    },
+    "appearances": ["d2-t3", "d4-t4", "d5-t2"]
+  },
+  {
+    "id": "thang-ti",
+    "name": "Thằng Tí",
+    "role": "chinh",
+    "age": 10,
+    "home": "xã Phú Hoà",
+    "background": "Con trai ông Thược thợ rèn xã Phú Hoà. Nhà nghèo, bố ốm liệt giường nhiều năm. Tí phải bươn chải từ sớm, đi bộ ra thị xã kiếm thuốc hoặc chở mớ rau đổi gạo.",
+    "voice": "Xưng cháu, gọi chú hoặc chú Thành. Giọng ngây thơ, thật thà nhưng có nét già dặn sớm vì gia cảnh khốn khó.",
+    "portrait": {
+      "key": "thang-ti",
+      "expressions": ["binh-thuong", "lo-lang", "buon", "vui"],
+      "description": "Cậu bé gầy gò, mắt to sáng, quần đùi đen, áo cộc sờn rách, đi chân đất."
+    },
+    "fixed_fields": {
+      "ho_ten": "Nguyễn Văn Tí",
+      "nam_sinh": 1969,
+      "noi_o": "Phú Hoà",
+      "so_shk": "PH-0893"
+    },
+    "appearances": ["d2-t2", "d3-t1", "d4-t3", "d6-t3"]
+  },
+  {
+    "id": "chi-thu",
+    "name": "Chị Thu",
+    "role": "phu",
+    "age": 34,
+    "home": "Thị xã",
+    "background": "Cán bộ Ban Nông nghiệp huyện uỷ, thường xuyên xuống cơ sở nắm bắt tình hình khoán và đời sống nhân dân. Là người cầu thị, ủng hộ đổi mới và thu thập ý kiến thực tiễn.",
+    "voice": "Xưng tôi hoặc chị, gọi chú Thành hoặc đồng chí Thành. Giọng nói ấm áp, nghiêm túc nhưng cởi mở, thấu hiểu.",
+    "portrait": {
+      "key": "chi-thu",
+      "expressions": ["binh-thuong", "vui", "lo-lang"],
+      "description": "Phụ nữ 34 tuổi, tóc buộc gọn gàng, mặc áo sơ mi bộ đội giản dị, đeo túi vải bạt đựng tài liệu."
+    },
+    "fixed_fields": {
+      "ho_ten": "Hoàng Thị Thu",
+      "nam_sinh": 1945,
+      "noi_o": "Thị xã",
+      "so_shk": "TX-0382"
+    },
+    "appearances": ["d4-t5", "d6-t4"]
+  },
+  {
+    "id": "tram-truong-doi",
+    "name": "Trạm trưởng Đối",
+    "role": "phu",
+    "age": 48,
+    "home": "Thị xã",
+    "background": "Trưởng trạm kiểm soát liên ngành số 15. Là cán bộ nguyên tắc máy móc, luôn lo lắng về chỉ tiêu thi đua, sợ cấp trên khiển trách và sợ chịu trách nhiệm cá nhân.",
+    "voice": "Xưng tôi, gọi cậu hoặc Thành. Giọng gắt gỏng, bề trên, hay nhắc nhở kỷ luật: \"Cậu lo việc đóng dấu đi, đừng có bày vẽ!\".",
+    "portrait": {
+      "key": "tram-truong-doi",
+      "expressions": ["binh-thuong", "gian", "lo-lang"],
+      "description": "Người đàn ông trung niên mặt nghiêm khắc, ria mép ngắn, đội mũ cối, tay luôn cầm sổ chỉ thị."
+    },
+    "fixed_fields": null,
+    "appearances": []
+  },
+  {
+    "id": "hoa",
+    "name": "Hoà",
+    "role": "gia-dinh",
+    "age": 26,
+    "home": "Thị xã",
+    "background": "Vợ của Thành, công nhân tại nhà máy dệt thị xã. Chịu thương chịu khó, quán xuyến cơm nước và chăm sóc mẹ già, con thơ trong hoàn cảnh tem phiếu thiếu thốn.",
+    "voice": "Xưng em, gọi anh hoặc mình. Dịu dàng, nhẫn nại nhưng đượm vẻ lo âu khi bàn về chuyện chi tiêu gia đình cuối tháng.",
+    "portrait": {
+      "key": "hoa",
+      "expressions": ["binh-thuong", "lo-lang", "vui"],
+      "description": "Người phụ nữ trẻ hiền hậu, tóc búi sau gáy, mặc áo hoa nhã nhặn."
+    },
+    "fixed_fields": null,
+    "appearances": []
+  },
+  {
+    "id": "be-mai",
+    "name": "Bé Mai",
+    "role": "gia-dinh",
+    "age": 8,
+    "home": "Thị xã",
+    "background": "Con gái lớn của Thành và Hoà, học lớp 3 trường cấp 1 thị xã. Ngoan ngoãn, thích đi học và thường giúp mẹ trông em.",
+    "voice": "Xưng con, gọi bố. Trong trẻo, lễ phép.",
+    "portrait": {
+      "key": "be-mai",
+      "expressions": ["binh-thuong", "vui"],
+      "description": "Bé gái 8 tuổi, tết tóc hai bên, quàng khăn đỏ."
+    },
+    "fixed_fields": null,
+    "appearances": []
+  },
+  {
+    "id": "be-binh",
+    "name": "Bé Bình",
+    "role": "gia-dinh",
+    "age": 1,
+    "home": "Thị xã",
+    "background": "Con trai út của Thành và Hoà, sinh năm 1983. Hay đau ốm vặt, sốt cao ở Màn 3 cần thuốc điều trị.",
+    "voice": "Chập chững biết nói, bi bô.",
+    "portrait": {
+      "key": "be-binh",
+      "expressions": ["binh-thuong", "buon"],
+      "description": "Bé trai nhỏ tuổi gầy gò, mắt tròn xoe."
+    },
+    "fixed_fields": null,
+    "appearances": []
+  },
+  {
+    "id": "me-thanh",
+    "name": "Mẹ Thành",
+    "role": "gia-dinh",
+    "age": 63,
+    "home": "Thị xã",
+    "background": "Mẹ ruột của Thành, tuổi già sức yếu, bị bệnh huyết áp cao kinh niên phải dùng thuốc hỗ trợ định kỳ mỗi tuần.",
+    "voice": "Xưng mẹ, gọi con hoặc anh Thành. Giọng chậm rãi, bao dung của người mẹ cả đời vất vả vì con cháu.",
+    "portrait": {
+      "key": "me-thanh",
+      "expressions": ["binh-thuong", "met-moi"],
+      "description": "Bà cụ tóc bạc phơ, da mồi, mặc áo bà ba sẫm màu."
+    },
+    "fixed_fields": null,
+    "appearances": []
+  },
+  {
+    "id": "np-sinh-vien",
+    "name": "Cô sinh viên",
+    "role": "mot-lan",
+    "age": 20,
+    "home": "xã Phú Hoà",
+    "background": "Sinh viên trường Sư phạm thị xã về quê nghỉ phép thăm gia đình, chỉ mang vài cân gạo mẹ đùm cho và tư trang cá nhân.",
+    "voice": "Xưng cháu, gọi chú. Rụt rè, lễ phép, nói nhỏ nhẹ.",
+    "portrait": {
+      "key": "np-sinh-vien",
+      "expressions": ["binh-thuong", "lo-lang"],
+      "description": "Cô gái trẻ buộc tóc đuôi gà, mặc áo sơ mi trắng sờn, đeo ba lô con cóc."
+    },
+    "fixed_fields": null,
+    "appearances": ["d1-t1"]
+  },
+  {
+    "id": "np-buon-thuoc-la",
+    "name": "Người buôn thuốc lá",
+    "role": "mot-lan",
+    "age": 35,
+    "home": "xã Phú Mỹ",
+    "background": "Tay buôn chuyến chuyên thu gom thuốc lá cuốn từ các vùng lân cận để tuồn ra thị xã bán kiếm lời chênh lệch lớn. Giấy tờ ghi đi thăm người thân nhưng giấu 8 cây thuốc lá dưới đáy bao tải.",
+    "voice": "Xưng tôi, gọi cán bộ. Giọng lấm lét, ấp úng, mắt đảo quanh tránh nhìn thẳng.",
+    "portrait": {
+      "key": "np-buon-thuoc-la",
+      "expressions": ["ne-tranh", "lo-lang"],
+      "description": "Người đàn ông gầy còm, da xạm, mặc áo mưa rách khoác ngoài chiếc bao tải lớn."
+    },
+    "fixed_fields": null,
+    "appearances": ["d1-t3"]
+  },
+  {
+    "id": "np-nguoi-dua-tang",
+    "name": "Người đi đám tang",
+    "role": "mot-lan",
+    "age": 45,
+    "home": "xã Phú Mỹ",
+    "background": "Đang vội sang thị xã viếng tang họ hàng, có mang theo nén hương và vài cân gạo nếp làm lễ phúng viếng theo phong tục truyền thống.",
+    "voice": "Xưng tôi, gọi chú. Giọng nghẹn ngào, khẩn khoản, vội vã.",
+    "portrait": {
+      "key": "np-nguoi-dua-tang",
+      "expressions": ["buon", "lo-lang"],
+      "description": "Người đàn ông đeo băng tang đen trên ngực áo trắng, nét mặt buồn rầu đau đớn."
+    },
+    "fixed_fields": null,
+    "appearances": ["d2-t1"]
+  },
+  {
+    "id": "np-dau-co-gao",
+    "name": "Lái buôn gạo",
+    "role": "mot-lan",
+    "age": 38,
+    "home": "xã Phú Mỹ",
+    "background": "Chở xe thồ 40kg gạo không có tem phiếu chứng từ hợp lệ nhằm bán ra chợ đen kiếm lời cắt cổ trong lúc thị xã đang khan hiếm lương thực.",
+    "voice": "Xưng tôi, gọi cán bộ hoặc anh em. Cợt nhả, nài nỉ, ranh mãnh.",
+    "portrait": {
+      "key": "np-dau-co-gao",
+      "expressions": ["ne-tranh", "gian"],
+      "description": "Người đàn ông vạm vỡ, quần xắn móng lợn, mồ hôi nhễ nhại bên chiếc xe thồ nặng trĩu."
+    },
+    "fixed_fields": null,
+    "appearances": ["d2-t4"]
+  },
+  {
+    "id": "np-dau-co-vai",
+    "name": "Con buôn vải",
+    "role": "mot-lan",
+    "age": 40,
+    "home": "Thị xã",
+    "background": "Thu mua vải phân phối từ các xí nghiệp dệt mang về thị xã bán tự do trốn thuế và phá vỡ quy định phân phối tem phiếu của nhà nước.",
+    "voice": "Xưng tôi, gọi cán bộ. Giọng đon đả, khéo léo nhưng xảo quyệt.",
+    "portrait": {
+      "key": "np-dau-co-vai",
+      "expressions": ["ne-tranh", "lo-lang"],
+      "description": "Phụ nữ trạc tứ tuần, bịt khăn rằn, giấu các súc vải sau sọt hàng."
+    },
+    "fixed_fields": null,
+    "appearances": ["d3-t4"]
+  },
+  {
+    "id": "np-nong-dan-khoan",
+    "name": "Bác Khoan nông dân",
+    "role": "mot-lan",
+    "age": 53,
+    "home": "xã Phú Hoà",
+    "background": "Xã viên thuộc đội 3 HTX Phú Hoà. Cùng với bà Tư, bác nhận khoán và thu hoạch vượt mức, đem gạo thừa đi đổi phân bón và dụng cụ lao động.",
+    "voice": "Xưng tôi, gọi đồng chí cán bộ. Chân chất, khẳng khái, tin tưởng vào đường lối khoán mới của Chỉ thị 100.",
+    "portrait": {
+      "key": "np-nong-dan-khoan",
+      "expressions": ["binh-thuong", "lo-lang"],
+      "description": "Bác nông dân luống tuổi, râu ria lởm chởm, da đen cháy nắng, tay cầm tờ giấy khoán ép phẳng phiu."
+    },
+    "fixed_fields": null,
+    "appearances": ["d4-t1"]
+  },
+  {
+    "id": "np-buon-chuyen-nghiep",
+    "name": "Gã đầu cơ gạo",
+    "role": "mot-lan",
+    "age": 42,
+    "home": "Thị xã",
+    "background": "Đầu mối thu gom hàng tấn lương thực của các xã mang về đầu cơ tại thị xã. Ở Màn 3, hắn chủ động đưa phong bì 120 đồng hối lộ Thành qua khe cửa kính để xe gạo 300kg lọt trạm.",
+    "voice": "Xưng em, gọi anh Thành hoặc đại ca. Giọng thì thào, mơn trớn, biết Thành đang thiếu tiền chữa bệnh cho con.",
+    "portrait": {
+      "key": "np-buon-chuyen-nghiep",
+      "expressions": ["ne-tranh", "vui"],
+      "description": "Gã đàn ông mắt ti hí, ăn mặc bảnh bao hơn người thường, nụ cười giả lả đầy mưu toan."
+    },
+    "fixed_fields": null,
+    "appearances": ["d5-t4"]
+  },
+  {
+    "id": "np-nong-dan-gao",
+    "name": "Chị Lụa làm khoán",
+    "role": "mot-lan",
+    "age": 32,
+    "home": "xã Phú Hoà",
+    "background": "Xã viên làm khoán giỏi, đem thóc gạo vượt khoán đi bán lấy tiền đổi dầu hoả và vải vóc cho đàn con nhỏ ở thời điểm lạm phát phi mã năm 1986.",
+    "voice": "Xưng em, gọi anh cán bộ. Giọng mộc mạc, tha thiết.",
+    "portrait": {
+      "key": "np-nong-dan-gao",
+      "expressions": ["lo-lang", "met-moi"],
+      "description": "Người phụ nữ nông thôn gầy gò, áo vá chằng vá đụp, đôi mắt trũng sâu vì thiếu ngủ."
+    },
+    "fixed_fields": null,
+    "appearances": ["d5-t5"]
+  },
+  {
+    "id": "np-buon-thuoc-phien",
+    "name": "Kẻ chở hàng cấm",
+    "role": "mot-lan",
+    "age": 36,
+    "home": "Vùng núi cao",
+    "background": "Lợi dụng chủ trương xoá bỏ trạm ngăn sông cấm chợ năm 1987 để tuồn thuốc phiện trái phép từ miền ngược xuôi về thị xã tiêu thụ. Đây là đối tượng tội phạm thực sự mà luật pháp bắt buộc phải ngăn chặn.",
+    "voice": "Xưng tôi, gọi ông bạn. Cố làm ra vẻ bình thản tự nhiên nhưng động tác giật thót, căng thẳng khi bị kiểm tra hàng.",
+    "portrait": {
+      "key": "np-buon-thuoc-phien",
+      "expressions": ["ne-tranh", "gian"],
+      "description": "Gã đàn ông phong trần, khoác áo chàm sẫm, mắt gườm gườm cảnh giác bên bọc hàng giấu kín."
+    },
+    "fixed_fields": null,
+    "appearances": ["d6-t5"]
+  }
+]

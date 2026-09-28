@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <radialGradient id="frost" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#E8D8BA" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#242220" stop-opacity="0.9" />
+    </radialGradient>
+    <filter id="blurFilter">
+      <feGaussianBlur stdDeviation="1.5" />
+    </filter>
+  </defs>
+
+  <!-- Nền kính mờ trạm kiểm soát -->
+  <rect width="200" height="200" fill="#1F1E1D" />
+  <rect width="200" height="200" fill="url(#frost)" />
+
+  <!-- Khung cửa sổ kính mờ mờ ảo -->
+  <circle cx="100" cy="100" r="92" fill="#2E2B27" stroke="#4A3525" stroke-width="4" />
+
+  <!-- Thân người (vai áo) -->
+  <path d="M35,190 C45,130 70,120 100,120 C130,120 155,130 165,190 Z" fill="#18181B" />
+
+  <!-- Cổ và đầu (bóng silhouette) -->
+  <rect x="90" y="95" width="20" height="28" fill="#242220" />
+  <ellipse cx="100" cy="68" rx="28" ry="34" fill="#242220" />
+
+  <!-- Mắt silhouette -->
+  <ellipse cx="88" cy="65" rx="3.5" ry="2" fill="#E8D8BA" opacity="0.7" />
+  <ellipse cx="112" cy="65" rx="3.5" ry="2" fill="#E8D8BA" opacity="0.7" />
+
+  <!-- Miệng biểu cảm -->
+  <path d="M86,85 Q100,100 114,85" stroke="#E8D8BA" stroke-width="2" fill="none" opacity="0.8" stroke-linecap="round" />
+
+  <!-- Phụ kiện đặc trưng -->
+  <polygon points="30,45 100,15 170,45" fill="#3B281B" opacity="0.9" />
+
+  <!-- Hiệu ứng bóng đổ kính mờ -->
+  <rect width="200" height="200" fill="black" opacity="0.12" style="mix-blend-mode: multiply;" />
+</svg>

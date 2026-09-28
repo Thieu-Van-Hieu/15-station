@@ -73,21 +73,65 @@ Bắt đầu ngay sau buổi họp.
 
 ## P3 — Nội dung nền (KB, UI, KT)
 
-Bắt đầu sau khi `03` ở trạng thái `CHỐT`.
+- [x] `docs/02-bible.md` (KB) — Hoàn tất
+- [x] `content/characters.md` → `data/characters.json` (KB) — Đủ 20 nhân vật
+- [x] Khung T2 của `ngay-1.md` … `ngay-6.md` → `data/days.json` (KB) — Đủ 6 ngày
+- [x] `data/reports.json` (KB + GP) — Đủ 2 vấn đề (KN-KHOAN, KN-THUONG-BINH)
+- [x] `content/ui-text.md` → `data/strings.json` (UI) — Đủ chuỗi giao diện không hardcode
+- [x] `prompts/P2-logic-review.md`, `prompts/P3-fact-check.md` (KB + KT) — Đã rà soát
+- [x] `docs/04-sources.md` (KB), `docs/05-art-brief.md` (UI) — Đầy đủ nguồn và art brief
+- [x] Test P3-01 → P3-08 đạt 100%
 
-- [ ] `docs/02-bible.md` (KB)
-- [ ] `content/characters.md` → `data/characters.json` (KB)
-- [ ] Khung T2 của `ngay-1.md` … `ngay-6.md` → `data/days.json` (KB)
-- [ ] `data/reports.json` (KB + GP)
-- [ ] `content/ui-text.md` → `data/strings.json` (UI)
-- [ ] `prompts/P2-logic-review.md`, `prompts/P3-fact-check.md` (KB + KT)
-- [ ] Bắt đầu `docs/04-sources.md` (KB), `docs/05-art-brief.md` (UI)
-- [ ] Test P3-01 → P3-08
+## P4 — Nội dung 6 ngày và validate tầng 2 (KB, GP)
 
-## P6 — Giao diện (UI), làm song song
+- [x] Hoàn thiện kịch bản 6 ngày trong `content/ngay-1.md` đến `ngay-6.md` (trạng thái ĐÃ CHUYỂN JSON)
+- [x] `data/travelers.json` đủ 26 lượt khách
+- [x] `data/endings.json` đủ 5 kết cục
+- [x] Validate tầng 2 trong `scripts/validate-data.ts` (10 điều tham chiếu chéo)
+- [x] Test V2-01 đến V2-15 trong `scripts/validate-tang2.test.ts` xanh 100%
 
-- [ ] Bố cục ba khu với lượt mẫu `d3-t3` (bắt đầu khi P1 xong)
+## P5 — Validate tầng 3 và bot chơi thử (GP)
 
-## P4, P5, P7, P8, P9
+- [x] Validate tầng 3 trong `scripts/validate-data.ts` (11 điều logic game & đối chiếu engine)
+- [x] Bốn bot chơi thử trong `scripts/bots.ts`: Theo sổ, Kiến nghị, Làm ngơ, Ăn tiền
+- [x] Test BOT-01 đến BOT-06 trong `scripts/bots.test.ts` xanh 100%
+- [x] Test V3-01 đến V3-15 trong `scripts/validate-tang3.test.ts` xanh 100%
+- [x] Bảng tóm tắt 26 lượt và kiểm tra `pnpm validate --strict` đạt
 
-Chép danh sách việc từ `08-cac-phase.md` vào đây khi đến lượt.
+## P6 — Giao diện React UI (UI, GP)
+
+- [x] Bố cục ba khu và TopBar: ngày, đồng hồ, lượt khách, ngân sách
+- [x] `DocumentPaper` hiển thị 8 loại giấy tờ, click phóng to/thu nhỏ
+- [x] `Rulebook` hiển thị sổ chỉ thị kích hoạt theo ngày và vấn đề kiến nghị
+- [x] `WindowPanel` hiển thị chân dung SVG, khung thoại lọc `when`, phong bì hối lộ, giấy nhắc nhở
+- [x] `ActionControls` 2 con dấu, làm ngơ, lập biên bản (modal chọn lý do), chặn thao tác đúng điều kiện
+- [x] `DayEndScreen` hai bảng cạnh nhau, tỷ lệ chấp hành, chỉ số huyện, yếu tố khác
+- [x] `BudgetScreen` chi tiêu gia đình, cảnh báo khoản thiết yếu và tiền phong bì tách riêng
+- [x] `EndingScreen` màn kết đủ cảnh, số phận nhân vật, câu trích giáo trình có chương, câu hỏi suy ngẫm
+- [x] `IntroScreen` màn chú thích lịch sử và hướng dẫn cách chơi
+- [x] Chế độ nhảy lượt `?tu=dX-tY` và tự động lưu/khôi phục `localStorage`
+- [x] Bộ test UI-01 đến UI-12 trong `src/ui.test.tsx` xanh 100% (không có chữ tiếng Việt có dấu hardcode trong JSX)
+
+## P7 — Art, âm thanh, màn kết (UI, KT)
+
+- [x] 51 file chân dung SVG vector monochrome silhouette trong `public/art/portraits/`
+- [x] 4 hiệu ứng âm thanh SFX offline trong `public/sfx/` (`sfx_window_slide.mp3`, `sfx_paper_rustle.mp3`, `sfx_stamp_down.mp3`, `sfx_radio_tune.mp3`)
+- [x] Module `src/audio.ts` phát SFX sau tương tác đầu tiên của người chơi
+- [x] File font `public/fonts/typewriter.woff2` tự host offline
+- [x] Không phụ thuộc CDN hay Google Fonts ngoài
+- [x] Bộ test ART-01 đến ART-06 trong `src/assets.test.ts` xanh 100%
+
+## P8 — Chơi thử và cân độ khó (KT)
+
+- [x] Bốn bot mô phỏng chơi tự động toàn bộ 26 lượt và đạt cả 4 kết cục khác nhau
+- [x] Chỉ số huyện và tiền được kiểm tra không âm, không bị nghẽn ở bất kỳ phase nào
+- [x] Lượt bà Tư mang giấy khoán d5 ra đúng `CHO_QUA` khi kiến nghị kích hoạt
+- [x] Lệnh `pnpm check` chạy toàn diện: validate + test + build đều xanh
+
+## P9 — Deploy và trình bày (GP, KT)
+
+- [x] Script build bundle `pnpm build` (`tsc && vite build`) hoàn tất sạch sẽ
+- [x] Tạo file CI GitHub Actions `.github/workflows/check.yml`
+- [x] Hỗ trợ chế độ nhảy lượt `?tu=d3-t3` để demo 4 phút cho buổi thuyết trình
+- [x] Hỗ trợ chơi offline hoàn toàn qua `pnpm preview` không cần mạng
+

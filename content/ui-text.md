@@ -1,3 +1,77 @@
-# Chữ giao diện
+# Chữ giao diện (UI Text)
 
-> Trạng thái: NHÁP
+> Trạng thái: ĐÃ CHUYỂN JSON
+
+Tài liệu này lưu trữ danh mục toàn bộ chuỗi hiển thị giao diện trong game "Trạm 15". Chuyển tương ứng sang `data/strings.json`.
+
+---
+
+## 1. Màn chú thích mở đầu (Intro)
+- `intro.title`: TRẠM 15
+- `intro.disclaimer`: Trò chơi mô phỏng cơ chế quản lý kinh tế thời kỳ bao cấp và quá trình tìm tòi đổi mới (1979–1987). Mọi tên nhân vật, cơ quan cấp huyện và địa danh cụ thể trong game là hư cấu nhằm phục vụ mục đích học tập và minh hoạ luận điểm lịch sử.
+- `intro.guide_bao_cap`: Bạn là cán bộ kiểm soát viên tại Trạm kiểm soát liên ngành số 15. Mỗi ngày, bạn phải đối chiếu giấy tờ và hàng hoá của người qua trạm theo Sổ chỉ thị. Bạn có thể CHO QUA, GIỮ LẠI, hoặc LÀM NGƠ. Khi cơ chế có mâu thuẫn với thực tiễn đời sống, bạn có thể LẬP BIÊN BẢN KIẾN NGHỊ gửi lên cấp trên.
+- `intro.start`: BẮT ĐẦU CA TRỰC
+
+## 2. Bàn làm việc (Desk)
+- `desk.stamp.approve`: CHO QUA
+- `desk.stamp.reject`: GIỮ LẠI
+- `desk.ignore`: LÀM NGƠ
+- `desk.report`: LẬP BIÊN BẢN
+- `desk.clock`: Giờ làm việc
+- `desk.bribe_prompt`: Khách ngầm đẩy một chiếc phong bì qua ô cửa sổ...
+- `desk.accept_bribe`: Nhận phong bì
+- `desk.decline_bribe`: Từ chối
+- `desk.next_traveler`: LƯỢT KẾ TIẾP
+- `desk.start_day`: BẮT ĐẦU NGÀY MỚI
+- `desk.end_day`: HẾT CA — XEM BÁO CÁO
+- `desk.rulebook_title`: SỔ CHỈ THỊ
+- `desk.cargo_title`: HÀNG HOÁ MANG THEO
+- `desk.documents_title`: GIẤY TỜ XUẤT TRÌNH
+- `desk.no_documents`: Không xuất trình giấy tờ nào.
+- `desk.no_cargo`: Không mang hàng hoá.
+- `desk.report_select_reason`: Chọn lý do kiến nghị gửi cấp trên:
+- `desk.report_cancel`: Huỷ bỏ
+- `desk.report_send`: Xác nhận gửi biên bản
+- `desk.reprimand_title`: GIẤY NHẮC NHỞ TỪ TRẠM TRƯỞNG
+- `desk.transition_title`: CHUYỂN TIẾP LỊCH SỬ
+
+## 3. Biên bản kiến nghị (Report)
+- `report.title`: BÁO CÁO KIẾN NGHỊ TỪ CƠ SỞ
+- `report.invalid`: Biên bản không hợp lệ: Lý do đã chọn không phù hợp với hoàn cảnh thực tế của lượt khách.
+
+## 4. Báo cáo cuối ngày (Boards)
+- `board.left.title`: BÁO CÁO GỬI CẤP TRÊN
+- `board.right.title`: TÌNH HÌNH HUYỆN
+- `board.right.simulated`: (số liệu mô phỏng)
+- `board.left.compliance`: Tỷ lệ chấp hành
+- `board.left.rejections`: Số vụ giữ lại
+- `board.left.confiscated`: Lượng hàng tịch thu
+- `board.left.reports`: Biên bản đã gửi
+- `board.left.rating`: Xếp loại ca làm việc
+- `board.right.food_inflow`: Lương thực vào thị xã
+- `board.right.hunger_cases`: Số hộ thiếu ăn
+- `board.right.rice_price`: Chỉ số giá gạo ngoài chợ
+- `board.right.other_factors`: Yếu tố khách quan
+- `board.continue`: TIẾP TỤC
+- `board.go_budget`: CHI TIÊU GIA ĐÌNH
+
+## 5. Kinh tế gia đình (Budget)
+- `budget.title`: CHI TIÊU GIA ĐÌNH
+- `budget.income`: Tiền lương định kỳ
+- `budget.bonus`: Tiền thưởng thi đua xuất sắc
+- `budget.fines`: Tiền phạt do vi phạm quy chế
+- `budget.bribe_money`: Tiền phong bì
+- `budget.available`: Tổng ngân quỹ có thể chi
+- `budget.remaining`: Tiền còn lại mang sang ngày sau
+- `budget.submit`: Xác nhận thanh toán
+- `budget.unpaid_warning`: Khoản chi thiết yếu không được thanh toán sẽ làm tăng gánh nặng gia đình.
+
+## 6. Màn kết và cảnh báo (Ending & Reprimand)
+- `end.title`: KẾT CỤC
+- `end.history_card`: 1988: Nghị quyết 10 của Bộ Chính trị về khoán trong nông nghiệp (Khoán 10). 1989: Việt Nam lần đầu tiên xuất khẩu gạo, chấm dứt khủng hoảng lương thực kéo dài.
+- `end.continue`: Xem tiếp
+- `end.restart`: Bắt đầu lại
+- `end.quote_title`: TRÍCH DẪN GIÁO TRÌNH CHỦ NGHĨA XÃ HỘI KHOA HỌC
+- `end.fates_title`: SỐ PHẬN CÁC NHÂN VẬT
+- `end.reflection_title`: CÂU HỎI SUY NGẪM
+- `reprimand.giu_oan`: Nhắc nhở: Lượt khách không có bất kỳ vi phạm nào theo sổ chỉ thị nhưng trạm đã giữ lại trái phép, gây phiền hà cho nhân dân và ảnh hưởng tới lưu thông bình thường.
