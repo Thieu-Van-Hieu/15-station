@@ -57,6 +57,8 @@
   --animate-truot-ra: truot-ra 380ms ease-in forwards;
   --animate-nhuc-nhich: nhuc-nhich 700ms ease-in-out;
   --animate-run-ret: run-ret 0.35s ease-in-out infinite;
+  --animate-cho-doi: cho-doi 3.4s ease-in-out infinite;
+  --animate-tay-dong-dau: tay-dong-dau 1.8s ease-in-out infinite;
 }
 
 @keyframes dong-dau {
@@ -104,6 +106,41 @@
   }
   60% {
     transform: translateX(2px);
+  }
+}
+
+/* Người đứng chờ ngoài cửa sổ: thở nhẹ, đổi chân. Dùng `translate` để không đè `transform` của phần tử SVG. */
+@keyframes cho-doi {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  45% {
+    translate: 0 -0.7px;
+  }
+  70% {
+    translate: 0.4px -0.3px;
+  }
+}
+
+/* Minh hoạ trong sổ tay: con dấu nhấc lên rồi dập xuống. */
+@keyframes tay-dong-dau {
+  0%,
+  100% {
+    translate: 0 -14px;
+    rotate: -8deg;
+  }
+  45% {
+    translate: 0 -14px;
+    rotate: -8deg;
+  }
+  60% {
+    translate: 0 0;
+    rotate: -4deg;
+  }
+  75% {
+    translate: 0 0;
+    rotate: -4deg;
   }
 }
 

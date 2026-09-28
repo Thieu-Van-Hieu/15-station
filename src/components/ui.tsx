@@ -7,6 +7,7 @@ import { createPortal } from "react-dom";
 import { content } from "../content";
 import { isMuted, onMuteChange, setMuted } from "../audio";
 import type { Expression, Seal } from "../engine/types";
+import { TutorialButton } from "./Tutorial";
 
 export function s(key: string): string {
   return content.strings[key] ?? key;
@@ -46,6 +47,7 @@ export function AppHeader({ center, right }: { center?: ReactNode; right?: React
         <div className="flex-1 flex justify-center min-w-0">{center}</div>
         <div className="flex items-center gap-3">
           {right}
+          <TutorialButton />
           <SoundToggle />
         </div>
       </div>

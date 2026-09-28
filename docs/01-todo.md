@@ -115,7 +115,7 @@ Bắt đầu ngay sau buổi họp.
 ## P7 — Art, âm thanh, màn kết (UI, KT)
 
 - [x] 51 file chân dung SVG vector monochrome silhouette trong `public/art/portraits/`
-- [x] 4 hiệu ứng âm thanh SFX offline trong `public/sfx/` (`sfx_window_slide.mp3`, `sfx_paper_rustle.mp3`, `sfx_stamp_down.mp3`, `sfx_radio_tune.mp3`)
+- [x] 4 hiệu ứng âm thanh SFX offline trong `public/audio/` (`sfx_window.mp3`, `sfx_paper.mp3`, `sfx_stamp.mp3`, `sfx_radio_tune.mp3`; danh sách đầy đủ ở `docs/09-am-thanh.md`)
 - [x] Module `src/audio.ts` phát SFX sau tương tác đầu tiên của người chơi
 - [x] File font `public/fonts/typewriter.woff2` tự host offline
 - [x] Không phụ thuộc CDN hay Google Fonts ngoài

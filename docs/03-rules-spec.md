@@ -506,6 +506,7 @@ Quyết định CHO QUA / GIỮ LẠI là thao tác kéo thả, không phải b�
 | Thả ngoài giấy | Không ăn, con dấu bật về khay |
 | Bấm con dấu mà không kéo | Không ăn. Hiện lời nhắc: kéo con dấu xuống giấy, hoặc dùng phím 1, 2 |
 | Phím `1` / `2` | CHO QUA / GIỮ LẠI, vệt mực đặt ngẫu nhiên gần giữa tờ giấy đầu tiên |
+| Esc, đổi tab hoặc cửa sổ, nhả chuột ngoài trình duyệt giữa lúc kéo | Huỷ lần kéo, con dấu bay về khay |
 
 Mỗi lượt có một **phiếu kiểm soát** luôn nằm trên bàn, nên người không mang giấy nào vẫn có chỗ đóng dấu. Vệt mực nghiêng ngẫu nhiên ±9°, độ đậm từ 0,72 đến 0,95. CHO QUA mực đỏ, GIỮ LẠI mực đen. Khi dấu ăn: tiếng `stamp`, mặt bàn rung một khung (110 ms). Bấm "Tiếp" thì giấy trượt khỏi bàn (380 ms, tiếng `paper`) rồi mới sang lượt kế.
 

@@ -144,6 +144,8 @@ Validate tầng 3 điều 12 xanh. Và khi chơi, người chơi phải mở s�
 | Giấy trượt ra | Bấm "Tiếp" thì giấy trượt khỏi bàn (380 ms, tiếng `paper`) rồi mới sang lượt |
 | Âm thanh | File `sfx_stamp.mp3` có 0,5 s im lặng ở đầu nên tiếng dấu kêu trễ sau cú thả. Game giờ tự bỏ khoảng lặng đầu file và giới hạn thời lượng từng âm (`docs/09-am-thanh.md` mục 6) |
 
+| Sửa lỗi kẹt (28/9) | Con dấu có lúc đứng yên giữa màn hình, chỉ chạy theo chuột khi rê qua nút. Nguyên nhân: lần kéo dựa vào pointer capture của nút, mà capture có thể mất giữa chừng (đổi tab, nhả chuột ngoài cửa sổ, nút bị khoá) trong khi trạng thái kéo vẫn còn. Giờ mỗi lần kéo gắn trình nghe lên `window` và mọi cách kết thúc bất thường (mất `pointerup`, đổi cửa sổ, Esc, nút bị khoá) đều cho con dấu bay về khay. Test `src/stamping.test.tsx` |
+
 File: `stamping.tsx`, `ActionControls.tsx`, `DeskScreen.tsx`, `DocumentPaper.tsx`, `index.css`, `audio.ts`, `03-rules-spec.md` mục 5.4, `05-art-brief.md` mục 4b.
 
 ### Kiểm tra là đã sửa xong
@@ -164,7 +166,7 @@ Người chơi thử đóng dấu ba lượt rồi hỏi họ thấy thế nào.
 
 | Hướng | Việc |
 |---|---|
-| Hàng người | Dải bóng người ngay dưới ô cửa, số bóng bằng số lượt còn lại trong ngày (tối đa 8). Ba dáng: gánh hàng, đội nón, dắt xe đạp. `src/components/QueueStrip.tsx` |
+| Hàng người | Cảnh nhìn qua cửa sổ ngay dưới ô cửa: đường đất, luỹ tre, người xếp hàng to nhỏ theo khoảng cách, số người bằng số lượt còn lại trong ngày (tối đa 6). Năm dáng: gánh hàng, mũ cối, dắt xe đạp, bế con, cụ già chống gậy. Vẽ lại ngày 28/9 vì bản đầu là biểu tượng quá nhỏ. `src/components/QueueStrip.tsx` |
 | Trời tối dần | Từ 90 phút trước giờ hết ca trời chuyển chạng vạng; quá giờ thì tối hẳn, bóng người co lại và run vì rét |
 | Cái giá của biên bản | Kèm biên bản thì đồng hồ nhảy trước 60 phút ngay lúc bấm, có hoạt ảnh (phóng to, chữ đỏ, số chạy), và hàng người nhúc nhích |
 

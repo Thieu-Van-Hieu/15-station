@@ -2,7 +2,7 @@
  * Con dấu là vật thể (V5): nhấn giữ, kéo xuống mặt giấy, thả mới ăn. Thả ngoài giấy thì bật về chỗ cũ.
  * Vệt mực in đúng chỗ thả, nghiêng và đậm nhạt ngẫu nhiên. CHO QUA mực đỏ, GIỮ LẠI mực đen (05-art-brief mục 4b).
  */
-import { useRef, useState, type PointerEvent as ReactPointerEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import type { Verdict } from "../engine/types";
 import { cx, s } from "./ui";
@@ -101,44 +101,123 @@ interface DraggableStampProps {
 
 type Drag = { x: number; y: number; homeX: number; homeY: number; returning: boolean };
 
+/** Thời gian con dấu bay về khay khi thả trượt, khớp `duration-250` của bóng con dấu. */
+const RETURN_MS = 260;
+
+/**
+ * Một lần kéo. Sự kiện được gắn lên `window` trong suốt lần kéo, không dựa vào pointer capture của nút:
+ * capture có thể mất giữa chừng (đổi tab, nhả chuột ngoài cửa sổ, nút bị khoá) mà nút không hay biết,
+ * làm con dấu kẹt giữa màn hình và chỉ chạy theo chuột khi chuột nằm trên nút.
+ */
+interface Session {
+  pointerId: number;
+  startX: number;
+  startY: number;
+  lastX: number;
+  lastY: number;
+  moved: boolean;
+  homeX: number;
+  homeY: number;
+  detach: () => void;
+}
+
 export function DraggableStamp({ action, title, sub, icon, disabled, selected, onDrop, onTap }: DraggableStampProps) {
   const [drag, setDrag] = useState<Drag | null>(null);
-  const start = useRef<{ x: number; y: number; moved: boolean } | null>(null);
+  const session = useRef<Session | null>(null);
+  const returnTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const btn = useRef<HTMLButtonElement>(null);
   const tone = action === "CHO_QUA" ? "xanh" : "son";
+  // Hàm mới nhất của cha, để trình nghe gắn từ lúc bắt đầu kéo không gọi nhầm hàm cũ.
+  const handlers = useRef({ onDrop, onTap });
+  handlers.current = { onDrop, onTap };
+
+  /** Kết thúc lần kéo. `cancel` = kéo bị ngắt bất thường: con dấu luôn bay về, không đóng dấu, không tính là bấm. */
+  function finish(x: number, y: number, cancel: boolean) {
+    const ss = session.current;
+    if (!ss) return;
+    session.current = null;
+    ss.detach();
+    if (!ss.moved) {
+      setDrag(null);
+      if (!cancel) handlers.current.onTap?.();
+      return;
+    }
+    if (!cancel && handlers.current.onDrop(x, y)) {
+      setDrag(null);
+      return;
+    }
+    // Thả ngoài giấy, hoặc kéo bị ngắt: con dấu bật về khay.
+    setDrag({ x: ss.homeX, y: ss.homeY, homeX: ss.homeX, homeY: ss.homeY, returning: true });
+    clearTimeout(returnTimer.current);
+    returnTimer.current = setTimeout(() => setDrag(null), RETURN_MS);
+  }
 
   function onPointerDown(e: ReactPointerEvent<HTMLButtonElement>) {
-    if (disabled || e.button !== 0) return;
+    if (disabled || e.button !== 0 || session.current || !btn.current) return;
     e.preventDefault();
-    btn.current?.setPointerCapture(e.pointerId);
-    const r = btn.current!.getBoundingClientRect();
-    start.current = { x: e.clientX, y: e.clientY, moved: false };
+    clearTimeout(returnTimer.current);
+    const r = btn.current.getBoundingClientRect();
+    const id = e.pointerId;
+
+    const move = (ev: PointerEvent) => {
+      const ss = session.current;
+      if (!ss || ev.pointerId !== id) return;
+      // Chuột đã nhả mà không nhận được pointerup (nhả ngoài cửa sổ trình duyệt): coi như kéo bị ngắt.
+      if (ev.pointerType === "mouse" && ev.buttons === 0) return finish(ev.clientX, ev.clientY, true);
+      ss.lastX = ev.clientX;
+      ss.lastY = ev.clientY;
+      if (!ss.moved && Math.hypot(ev.clientX - ss.startX, ev.clientY - ss.startY) > 6) ss.moved = true;
+      setDrag({ x: ev.clientX, y: ev.clientY, homeX: ss.homeX, homeY: ss.homeY, returning: false });
+    };
+    const up = (ev: PointerEvent) => ev.pointerId === id && finish(ev.clientX, ev.clientY, false);
+    const cancel = (ev: PointerEvent) => ev.pointerId === id && finish(ev.clientX, ev.clientY, true);
+    const abort = () => {
+      const ss = session.current;
+      if (ss) finish(ss.lastX, ss.lastY, true);
+    };
+    const onKey = (ev: KeyboardEvent) => ev.key === "Escape" && abort();
+
+    window.addEventListener("pointermove", move);
+    window.addEventListener("pointerup", up);
+    window.addEventListener("pointercancel", cancel);
+    window.addEventListener("blur", abort);
+    window.addEventListener("keydown", onKey);
+    document.addEventListener("visibilitychange", abort);
+    session.current = {
+      pointerId: id,
+      startX: e.clientX,
+      startY: e.clientY,
+      lastX: e.clientX,
+      lastY: e.clientY,
+      moved: false,
+      homeX: r.left + r.width / 2,
+      homeY: r.top + r.height / 2,
+      detach: () => {
+        window.removeEventListener("pointermove", move);
+        window.removeEventListener("pointerup", up);
+        window.removeEventListener("pointercancel", cancel);
+        window.removeEventListener("blur", abort);
+        window.removeEventListener("keydown", onKey);
+        document.removeEventListener("visibilitychange", abort);
+      },
+    };
     setDrag({ x: e.clientX, y: e.clientY, homeX: r.left + r.width / 2, homeY: r.top + r.height / 2, returning: false });
   }
 
-  function onPointerMove(e: ReactPointerEvent<HTMLButtonElement>) {
-    if (!start.current || !drag) return;
-    if (Math.hypot(e.clientX - start.current.x, e.clientY - start.current.y) > 6) start.current.moved = true;
-    setDrag({ ...drag, x: e.clientX, y: e.clientY });
-  }
+  // Nút bị khoá giữa lúc kéo (ví dụ vừa bấm phím 1 hoặc 2): huỷ lần kéo.
+  useEffect(() => {
+    if (disabled && session.current) finish(session.current.lastX, session.current.lastY, true);
+  });
 
-  function onPointerUp(e: ReactPointerEvent<HTMLButtonElement>) {
-    const st = start.current;
-    start.current = null;
-    if (!st || !drag) return;
-    if (!st.moved) {
-      setDrag(null);
-      onTap?.();
-      return;
-    }
-    if (onDrop(e.clientX, e.clientY)) {
-      setDrag(null);
-    } else {
-      // Thả ngoài giấy: con dấu bật về khay.
-      setDrag({ ...drag, x: drag.homeX, y: drag.homeY, returning: true });
-      setTimeout(() => setDrag(null), 260);
-    }
-  }
+  // Gỡ trình nghe và hẹn giờ khi con dấu biến mất (sang lượt khác, đổi màn).
+  useEffect(
+    () => () => {
+      session.current?.detach();
+      session.current = null;
+      clearTimeout(returnTimer.current);
+    },
+    [],
+  );
 
   const color =
     tone === "xanh"
@@ -152,12 +231,6 @@ export function DraggableStamp({ action, title, sub, icon, disabled, selected, o
         type="button"
         disabled={disabled}
         onPointerDown={onPointerDown}
-        onPointerMove={onPointerMove}
-        onPointerUp={onPointerUp}
-        onPointerCancel={() => {
-          start.current = null;
-          setDrag(null);
-        }}
         title={s("desk.stamp_drag_hint")}
         className={cx(
           "group relative flex items-center gap-3 border-[3px] border-double px-4 py-2.5 text-left min-w-0 min-h-[62px] touch-none select-none",
@@ -185,7 +258,7 @@ export function DraggableStamp({ action, title, sub, icon, disabled, selected, o
       {drag &&
         createPortal(
           <div
-            className={cx("fixed z-[70] pointer-events-none", drag.returning && "transition-[left,top] duration-250 ease-out")}
+            className={cx("fixed z-[70] pointer-events-none", drag.returning && "transition-[left,top] duration-[260ms] ease-out")}
             style={{ left: drag.x, top: drag.y, transform: "translate(-50%, -88%) rotate(-8deg)" }}
           >
             <StampObject action={action} />
@@ -197,7 +270,7 @@ export function DraggableStamp({ action, title, sub, icon, disabled, selected, o
 }
 
 /** Con dấu cầm tay khi đang kéo: cán gỗ, đế cao su tẩm mực. */
-function StampObject({ action }: { action: Verdict }) {
+export function StampObject({ action }: { action: Verdict }) {
   return (
     <div className="flex flex-col items-center drop-shadow-[4px_10px_6px_rgba(0,0,0,0.55)]">
       <div className="w-9 h-11 rounded-t-[50%] bg-gradient-to-r from-[#5a3d25] via-[#8a6040] to-[#5a3d25] border border-black/50" />

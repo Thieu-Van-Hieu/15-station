@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { setLoop } from "../audio";
 import { Label, Paper, PaperClip, PrimaryButton, Screen, s } from "../components/ui";
+import { TutorialButton } from "../components/Tutorial";
 
 interface IntroScreenProps {
   onStart: () => void;
@@ -80,6 +81,7 @@ export function IntroScreen({ onStart }: IntroScreenProps) {
       <PrimaryButton onClick={onStart} hint="ENTER" className="w-full max-w-2xl mt-8">
         {s("intro.start")}
       </PrimaryButton>
+      <TutorialButton variant="wide" className="w-full max-w-2xl mt-3" />
 
       <p className="max-w-2xl mt-6 text-[11px] text-chu-ban-phu/60 text-center leading-relaxed">
         <span className="text-son-nhat font-nhan font-bold mr-1">[!]</span>

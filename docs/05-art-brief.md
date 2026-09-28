@@ -94,23 +94,25 @@ Khung chữ nhật 148 × 70, viền đôi (ngoài 4 px, trong 1,6 px), chữ Sp
 
 ## 4c. Hàng người chờ ngoài cửa sổ (V6)
 
-Dải cao 48 px ngay dưới ô cửa (`src/components/QueueStrip.tsx`). Bóng người là SVG một màu, không có mặt, cao 26–31 px, mờ dần về cuối hàng. Tối đa 8 bóng.
+Dải cao 96 px ngay dưới ô cửa (`src/components/QueueStrip.tsx`), một cảnh SVG nhìn qua cửa sổ: con đường đất chạy xa dần về bên phải, đồng ruộng, luỹ tre và mái nhà ở chân trời. Người đứng xếp hàng quay mặt về phía trạm (bên trái). Người đầu hàng gần nhất nên to nhất; về cuối hàng mỗi người nhỏ đi 10% và đứng cao dần theo mặt đường. Tối đa 6 bóng, mỗi bóng có bóng đổ dưới chân.
 
-Ba dáng xoay vòng:
+Năm dáng, xếp sao cho hai người liền nhau không cùng dáng:
 
-1. Gánh hàng: đòn gánh ngang vai, hai thúng hai đầu.
-2. Đội nón lá.
-3. Dắt xe đạp.
+1. Người đàn bà đội nón lá, gánh đòn gánh với hai quang thúng.
+2. Người đàn ông đội mũ cối, đeo túi dết.
+3. Người dắt xe đạp, yên sau chở bao hàng.
+4. Người phụ nữ đội nón bế con, tay xách làn.
+5. Cụ già đội khăn xếp, chống gậy, lưng hơi còng.
 
-Hai mức ánh sáng, chuyển trong 1,5 s:
+Ba mức ánh sáng, chuyển màu trong 1,5 s:
 
-| Lúc | Nền trời | Bóng người |
-|---|---|---|
-| Ban ngày (trước giờ hết ca 90 phút) | Vàng đất `#d9c9a6 → #b89f76` | Nâu sẫm `#2a2119` |
-| Chạng vạng | Nâu `#8f7a60 → #5e4c3a` | Nâu sẫm |
-| Quá giờ hết ca | Xanh đêm `#1d2230 → #2c2a2a` | Đen `#0c0a09`, co lại 12% chiều cao và run nhẹ vì rét |
+| Lúc | Trời | Chân trời, mặt đất | Bóng người |
+|---|---|---|---|
+| Ban ngày (trước giờ hết ca 90 phút) | Vàng đất `#e4d6b4 → #c9b187` | Nâu nhạt | Nâu sẫm `#2a2119` |
+| Chạng vạng | Nâu `#a88d6c → #6f5a44` | Nâu đậm | `#1e1812` |
+| Quá giờ hết ca | Xanh đêm `#161b28 → #2a2c3a`, vài ngôi sao | Gần đen | Đen `#07080a`, co lại 10% và run vì rét; ánh đèn vàng từ trạm hắt ra mặt đường |
 
-Khi người chơi kèm biên bản, cả hàng nhúc nhích một lần (hoạt ảnh `nhuc-nhich`), cùng lúc đồng hồ trên thanh trên nhảy 60 phút.
+Lúc đứng chờ, mỗi người thở nhẹ (hoạt ảnh `cho-doi`, lệch pha nhau). Khi người chơi kèm biên bản, cả hàng nhúc nhích một lần (`nhuc-nhich`), cùng lúc đồng hồ trên thanh trên nhảy 60 phút. Số người đang chờ ghi trên một tấm biển giấy ở góc phải, đọc được cả khi trời tối.
 
 ## 4d. Thẻ kết quả (V7)
 
@@ -137,7 +139,7 @@ Tên người chơi **tuỳ chọn** và hỏi ngay ở màn kết, cạnh nút 
 
 
 Bốn âm thanh chủ đạo xây dựng không khí trải nghiệm, chỉ kích hoạt sau tương tác đầu tiên của người dùng:
-1. `sfx_window_slide.mp3`: Tiếng ô cửa kính trượt lách cách khi khách tiến lại ô cửa trạm.
-2. `sfx_paper_rustle.mp3`: Tiếng sột soạt nhẹ khi cầm, lật hoặc kéo giấy tờ trên mặt bàn gỗ.
-3. `sfx_stamp_down.mp3`: Tiếng "Cộp!" đanh gọn và vang của con dấu gỗ đập xuống mặt giấy.
+1. `sfx_window.mp3`: Tiếng ô cửa kính trượt lách cách khi khách tiến lại ô cửa trạm.
+2. `sfx_paper.mp3`: Tiếng sột soạt nhẹ khi cầm, lật hoặc kéo giấy tờ trên mặt bàn gỗ.
+3. `sfx_stamp.mp3`: Tiếng "Cộp!" đanh gọn và vang của con dấu gỗ đập xuống mặt giấy.
 4. `sfx_radio_tune.mp3`: Tiếng rè rè của đài radio bán dẫn chuyển kênh trước khi phát bản tin chính sách.
