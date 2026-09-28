@@ -61,3 +61,31 @@ export function useCheatCode(onMatch: () => void, code = CHEAT_CODE) {
     return () => window.removeEventListener("keydown", onKey);
   }, [onMatch, code]);
 }
+
+/**
+ * Đọc tham số `?tu=` (chế độ nhảy lượt, UI-09). Chấp nhận `d3-t3`, `D3-T3`, `d3t3`, `3-3` và khoảng trắng thừa;
+ * `d3` hoặc `3` nhảy tới đầu ngày 3. Trả `null` nếu không có lượt hoặc ngày nào như vậy,
+ * để giao diện báo lỗi thay vì âm thầm chơi hết game.
+ */
+export function parseJump(content: GameContent, raw: string): { traveler: TravelerId } | { day: number } | null {
+  const v = raw.trim().toLowerCase().replace(/\s+/g, "");
+  const turn = v.match(/^d?(\d+)-?t?(\d+)$/);
+  if (turn && (v.includes("t") || v.includes("-"))) {
+    const id = `d${Number(turn[1])}-t${Number(turn[2])}` as TravelerId;
+    return content.days.some((d) => d.travelers.includes(id)) ? { traveler: id } : null;
+  }
+  const day = v.match(/^d?(\d+)$/);
+  if (day) {
+    const i = Number(day[1]) - 1;
+    return i >= 0 && i < content.days.length ? { day: i } : null;
+  }
+  return null;
+}
+
+/** Trạng thái mở đầu cho `?tu=`. Null nếu giá trị không hợp lệ. */
+export function stateFromJump(content: GameContent, raw: string): GameState | null {
+  const j = parseJump(content, raw);
+  if (!j) return null;
+  return "traveler" in j ? simulate(content, followRulebook, { stopAt: j.traveler }) : previewDay(content, j.day);
+}
+

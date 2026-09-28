@@ -1,12 +1,11 @@
 import { useCallback, useState, useEffect } from "react";
 import { CheatPanel } from "./components/CheatPanel";
-import { previewDay, previewEnding, useCheatCode } from "./cheat";
+import { previewDay, previewEnding, stateFromJump, useCheatCode } from "./cheat";
 import { content } from "./content";
 import { newGame, reduce, type GameAction } from "./engine/game";
-import { simulate, followRulebook } from "./engine/simulate";
 import { conditionState, currentDay, currentTraveler } from "./engine/state";
 import { reprimandText } from "./engine/turn";
-import type { Action, GameState, TravelerId } from "./engine/types";
+import type { Action, GameState } from "./engine/types";
 import { DeskScreen } from "./screens/DeskScreen";
 import { DayEndScreen } from "./screens/DayEndScreen";
 import { BudgetScreen } from "./screens/BudgetScreen";
@@ -16,14 +15,20 @@ import { DayStartScreen } from "./screens/DayStartScreen";
 
 const STORAGE_KEY = "tram15_state";
 
+/** Giá trị `?tu=` không hợp lệ ở lần tải trang này, để hiện thông báo. */
+let jumpError: string | null = null;
+
 function getInitialState(): GameState {
   if (typeof window !== "undefined") {
     // UI-09: Chế độ nhảy lượt ?tu=dX-tY
     try {
       const params = new URLSearchParams(window.location.search);
       const tu = params.get("tu");
-      if (tu) {
-        return simulate(content, followRulebook, { stopAt: tu as TravelerId });
+      if (tu !== null && tu.trim() !== "") {
+        const jumped = stateFromJump(content, tu);
+        if (jumped) return jumped;
+        // Giá trị sai: không chơi mò tới cuối game, báo cho người dùng rồi mở ván bình thường.
+        jumpError = tu;
       }
     } catch {
       // Bỏ qua lỗi URL params
@@ -72,11 +77,27 @@ export default function App() {
   }
 
   const [cheatOpen, setCheatOpen] = useState(false);
+  // `?tu=` gõ sai: hiện thông báo vài giây thay vì âm thầm mở màn khác.
+  const [jumpNotice, setJumpNotice] = useState<string | null>(() => jumpError);
+  useEffect(() => {
+    if (!jumpNotice) return;
+    const t = setTimeout(() => setJumpNotice(null), 8000);
+    return () => clearTimeout(t);
+  }, [jumpNotice]);
   useCheatCode(useCallback(() => setCheatOpen(true), []));
 
   return (
     <>
       {renderScreen()}
+      {jumpNotice !== null && (
+        <div
+          role="alert"
+          onClick={() => setJumpNotice(null)}
+          className="fixed top-3 left-1/2 -translate-x-1/2 z-[80] max-w-[92vw] border-2 border-son bg-giay text-muc px-4 py-2.5 shadow-noi text-[13px] cursor-pointer"
+        >
+          <b className="text-son">{content.strings["jump.invalid"]}</b> &ldquo;{jumpNotice}&rdquo;. {content.strings["jump.hint"]}
+        </div>
+      )}
       {cheatOpen && (
         <CheatPanel
           onClose={() => setCheatOpen(false)}

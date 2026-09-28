@@ -277,5 +277,7 @@
   "tutorial.7.b2": "Ca hết lúc 17:00. Quá giờ là làm ngoài giờ, và xếp loại của ngày hôm đó bị hạ một bậc.",
   "tutorial.7.b3": "Ngoài cửa sổ là những người còn đang chờ. Càng gần hết ca trời càng tối.",
   "tutorial.7.b4": "Cuối ngày có báo cáo gửi cấp trên, rồi đến chi tiêu của gia đình bạn với đồng lương và những gì bạn mang về.",
-  "desk.stamp_tap_hint": "Chạm con dấu để đóng lên giấy, hoặc giữ và kéo."
+  "desk.stamp_tap_hint": "Chạm con dấu để đóng lên giấy, hoặc giữ và kéo.",
+  "jump.invalid": "Không tìm thấy lượt",
+  "jump.hint": "Viết theo dạng ?tu=d3-t3 (ngày 3, lượt 3) hoặc ?tu=d3 (đầu ngày 3). Đã mở ván đang lưu."
 }
