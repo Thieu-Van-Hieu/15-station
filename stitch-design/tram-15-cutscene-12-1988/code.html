@@ -1,0 +1,306 @@
+<!DOCTYPE html><html lang="vi"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>TRẠM 15 - STATION 15 | Màn hình chính</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&amp;family=Special+Elite&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+    body {
+      font-family: 'Courier Prime', monospace, serif;
+      background-color: #2B2622;
+      color: #1A1A1A;
+      background-image: 
+        radial-gradient(circle at 50% 35%, rgba(68, 59, 52, 0.4) 0%, rgba(30, 26, 23, 0.95) 80%),
+        repeating-linear-gradient(0deg, rgba(0,0,0,0.08) 0px, rgba(0,0,0,0.08) 1px, transparent 1px, transparent 3px);
+    }
+
+    .typewriter-title {
+      font-family: 'Special Elite', 'Courier Prime', monospace;
+      letter-spacing: 0.15em;
+    }
+
+    /* Paper texture & aged card styling */
+    .aged-paper {
+      background-color: #E8DFD1;
+      background-image: 
+        radial-gradient(#d3c6b2 1px, transparent 1px),
+        radial-gradient(#dfd4c0 1px, #E8DFD1 1px);
+      background-size: 24px 24px;
+      background-position: 0 0, 12px 12px;
+      box-shadow: 
+        0 1px 1px rgba(0,0,0,0.15), 
+        0 8px 0 -2px #1f1b18,
+        0 15px 35px rgba(0, 0, 0, 0.6),
+        inset 0 0 60px rgba(168, 140, 100, 0.22);
+    }
+
+    /* Vintage rubber stamp effect */
+    .stamp-badge {
+      border: 3px double #A83232;
+      color: #A83232;
+      mask-image: radial-gradient(circle, rgba(0,0,0,1) 75%, rgba(0,0,0,0.6) 100%);
+      text-transform: uppercase;
+      transform: rotate(-7deg);
+    }
+
+    /* Button retro style */
+    .btn-retro {
+      background-color: #D9CEBE;
+      border: 2px solid #3A322C;
+      box-shadow: 3px 3px 0px #1A1614;
+      transition: all 0.12s ease-in-out;
+      font-family: 'Courier Prime', monospace;
+      font-weight: 700;
+    }
+
+    .btn-retro:hover {
+      background-color: #EFE6D8;
+      border-color: #A83232;
+      color: #A83232;
+      box-shadow: 4px 4px 0px #A83232;
+      transform: translate(-1px, -1px);
+    }
+
+    .btn-retro:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0px #1A1614;
+    }
+
+    .btn-primary-retro {
+      background-color: #4A3E35;
+      color: #F3EBDD;
+      border: 2px solid #1A1614;
+      box-shadow: 3px 3px 0px #0F0D0B;
+    }
+
+    .btn-primary-retro:hover {
+      background-color: #A83232;
+      color: #FFFFFF;
+      border-color: #5A1616;
+      box-shadow: 4px 4px 0px #2D0B0B;
+    }
+
+    /* Vintage paperclip */
+    .paperclip {
+      position: absolute;
+      top: -14px;
+      right: 36px;
+      width: 16px;
+      height: 44px;
+      border: 3px solid #6E685F;
+      border-radius: 10px;
+      border-bottom: none;
+      z-index: 20;
+    }
+    .paperclip::after {
+      content: '';
+      position: absolute;
+      top: 6px;
+      left: 2px;
+      width: 6px;
+      height: 28px;
+      border: 2px solid #57524A;
+      border-radius: 6px;
+      border-top: none;
+    }
+
+    /* Stamp overlay behind title */
+    .title-stamp-watermark {
+      color: rgba(168, 50, 50, 0.18);
+      border: 4px dashed rgba(168, 50, 50, 0.22);
+      pointer-events: none;
+      user-select: none;
+    }
+  </style>
+<meta content="web_standard" name="shell-type"></head>
+<body class="min-h-screen flex flex-col justify-between items-center p-4 sm:p-6 selection:bg-[#A83232] selection:text-white">
+<!-- Top Ambient Header / Classified Tag -->
+<header class="w-full max-w-2xl flex items-center justify-between text-xs tracking-wider text-[#8C8074] border-b border-[#443B33] pb-2 pt-1 font-mono">
+<div class="flex items-center space-x-2">
+<span class="inline-block w-2 h-2 bg-[#A83232] rounded-full animate-pulse"></span>
+<span class="uppercase tracking-widest text-[#B3A698]">TỈNH LỘ 15 • TRẠM KIỂM SOÁT LIÊN HUYỆN</span>
+</div>
+<div class="text-[#7A6E63]">GIAI ĐOẠN 1979 – 1987</div>
+</header>
+<!-- Main Container -->
+<main class="w-full max-w-xl flex flex-col items-center my-auto py-6"><div class="flex flex-col w-full items-center justify-between relative select-none">
+<!-- Subtle Vignette & Glow Backdrop -->
+<div class="absolute -inset-10 bg-radial from-surface-container-high/40 via-surface-dim/80 to-surface-container-lowest pointer-events-none -z-10"></div>
+<div class="absolute -top-12 inset-x-0 h-40 bg-gradient-to-b from-primary-container/10 via-transparent to-transparent pointer-events-none blur-2xl"></div>
+<!-- Historical Context Pill Header -->
+<div class="w-full flex items-center justify-between pb-space-sm">
+<div class="flex items-center gap-space-sm bg-surface-container-lowest/80 px-space-md py-1 rounded shadow-sm">
+<span class="inline-block w-2 h-2 rounded-full bg-secondary animate-ping"></span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary">TIẾNG SÓNG QUỐC GIA • HÀ NỘI 540 kHz</span>
+</div>
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm text-outline">
+<span>TÀI LIỆU LỊCH SỬ</span>
+<span>•</span>
+<span class="text-on-surface-variant font-bold">15-12-1986</span>
+</div>
+</div>
+<!-- Central Visual Container: The Historic Soviet/Hùng Vương Radio & Transmission -->
+<div class="w-full my-space-sm flex flex-col items-center">
+<!-- Radio Device Frame -->
+<div class="w-full bg-gradient-to-b from-surface-container-high to-surface-container-lowest rounded-lg p-space-md shadow-xl relative overflow-hidden">
+<!-- Top Metal Trim Bar -->
+<div class="w-full flex items-center justify-between pb-space-sm mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-outline text-[16px]">radio</span>
+<span class="font-label-sm text-label-sm text-on-surface uppercase tracking-wider font-bold">MÁY THU THANH VEF-206 • TRẠM 15</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-outline tracking-tighter">BĂNG SÓNG TRUNG (MW)</span>
+</div>
+</div>
+<!-- Frequency Scale Glass Display (Phosphor Green Glow) -->
+<div class="w-full bg-[#0a120d] rounded p-space-sm shadow-inner relative overflow-hidden flex flex-col justify-between">
+<!-- Scale ticks & frequencies -->
+<div class="w-full flex justify-between font-label-sm text-[8px] text-secondary/70 tracking-tighter select-none pb-1">
+<span>520</span>
+<span class="text-secondary font-bold">540 (HÀ NỘI)</span>
+<span>600</span>
+<span>700</span>
+<span>900</span>
+<span>1200</span>
+<span>1600 kHz</span>
+</div>
+<!-- Frequency Needle Line -->
+<div class="w-full h-7 relative flex items-center">
+<div class="w-full h-[1px] bg-secondary/30"></div>
+<!-- Tuning Needle placed precisely over 540kHz marker -->
+<div class="absolute left-[16%] top-0 bottom-0 w-[2px] bg-primary shadow-[0_0_8px_#ffb4a9] z-10 flex flex-col items-center">
+<span class="w-2 h-1 bg-primary rounded-t-sm -mt-0.5"></span>
+</div>
+<!-- Cathode Ray / Audio Waveform Visualizer -->
+<div class="absolute inset-0 flex items-center justify-center gap-[3px] opacity-90">
+<span class="w-[2px] h-2 bg-secondary/60 rounded-full animate-pulse"></span>
+<span class="w-[2px] h-3 bg-secondary/70 rounded-full animate-pulse" style="animation-delay: 80ms"></span>
+<span class="w-[2px] h-5 bg-secondary rounded-full animate-pulse" style="animation-delay: 160ms"></span>
+<span class="w-[2px] h-3 bg-secondary/80 rounded-full animate-pulse" style="animation-delay: 110ms"></span>
+<span class="w-[2px] h-6 bg-secondary rounded-full animate-pulse" style="animation-delay: 210ms"></span>
+<span class="w-[2px] h-4 bg-secondary/80 rounded-full animate-pulse" style="animation-delay: 90ms"></span>
+<span class="w-[2px] h-7 bg-secondary rounded-full animate-pulse" style="animation-delay: 300ms"></span>
+<span class="w-[2px] h-3 bg-secondary/60 rounded-full animate-pulse" style="animation-delay: 140ms"></span>
+<span class="w-[2px] h-5 bg-secondary rounded-full animate-pulse" style="animation-delay: 190ms"></span>
+<span class="w-[2px] h-2 bg-secondary/50 rounded-full animate-pulse" style="animation-delay: 70ms"></span>
+<span class="w-[2px] h-4 bg-secondary/70 rounded-full animate-pulse" style="animation-delay: 240ms"></span>
+</div>
+</div>
+<!-- Subtitle Crawl / Radio Voice Transmission -->
+<div class="pt-1 flex items-center gap-space-xs text-secondary/90">
+<span class="font-body-sm text-[11px] italic tracking-wide truncate">
+            «...Đài Tiếng nói Việt Nam, phát thanh từ Hà Nội. Tiếp sóng phiên khai mạc Đại hội đại biểu toàn quốc lần thứ VI...»
+          </span>
+</div>
+</div>
+</div>
+<!-- The Historic Statement / Manila Archival Quote Box -->
+<div class="w-full bg-[#E5DCce] text-[#1a1715] p-space-lg rounded shadow-xl mt-space-md relative overflow-hidden">
+<!-- Red Corner Archival Stamp -->
+<div class="absolute -right-6 -top-6 w-24 h-24 bg-primary-container/10 rounded-full flex items-center justify-center pointer-events-none"></div>
+<div class="absolute right-3 top-3 flex items-center gap-1 font-label-sm text-[9px] text-[#8C271E] tracking-widest uppercase font-bold">
+<span class="material-symbols-outlined text-[13px]">verified</span>
+<span>NGHỊ QUYẾT ĐỔI MỚI</span>
+</div>
+<!-- Stylized Vintage Quote Watermark -->
+<div class="flex flex-col space-y-space-sm relative">
+<span class="font-headline-lg text-headline-lg text-[#8C271E]/40 leading-none select-none">“</span>
+<!-- Core Historic Motto -->
+<h2 class="font-body-lg text-[18px] sm:text-[20px] leading-snug font-bold uppercase tracking-wider text-[#1C1714] -mt-space-md px- space-xs">
+          NHÌN THẲNG VÀO SỰ THẬT, ĐÁNH GIÁ ĐÚNG SỰ THẬT, NÓI RÕ SỰ THẬT.
+        </h2>
+<!-- Official Academic Citation -->
+<div class="pt-space-xs text-[#524439] font-body-sm text-[11px] leading-relaxed">
+<p class="font-bold text-[#8C271E]">
+            — Văn kiện Đại hội đại biểu toàn quốc lần thứ VI (Tháng 12/1986)
+          </p>
+<p class="text-[10px] text-[#6E5D4F]">
+            Trích dẫn Giáo trình Chủ nghĩa xã hội khoa học (Bộ GD&amp;ĐT 2019, Chương 1, mục 2.3)
+          </p>
+</div>
+<!-- Narrative Historical Context (Station 15 Turning Point) -->
+<div class="mt-space-sm pt-space-sm bg-[#D8CEBE]/70 p-space-sm rounded text-[#332A24] font-body-sm text-[12px] leading-normal">
+          Sau những năm tháng khủng hoảng kinh tế – xã hội, tình trạng ngăn sông cấm chợ và lạm phát leo thang sau cải cách giá – lương – tiền 1985, Đại hội VI chính thức mở ra kỷ nguyên Đổi mới toàn diện đất nước. Tiếng nói tổng kết từ thực tiễn cơ sở đã trở thành sức mạnh sửa đổi thể chế.
+        </div>
+</div>
+</div>
+</div>
+<!-- Bottom Navigation, Ambient Control & Interactive Progression -->
+<div class="w-full flex flex-col sm:flex-row items-center justify-between gap-space-sm pt-space-md text-on-surface">
+<!-- Chapter Breadcrumb / Timeline Tracker -->
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm text-outline">
+<span class="text-on-surface-variant font-bold">MÀN 3 (1986)</span>
+<span>➔</span>
+<span class="text-primary font-bold">BƯỚC NGOẶT</span>
+<span>➔</span>
+<span class="opacity-60">MÀN 4 (06/1987: DỠ BỎ NGĂN SÔNG CẤM CHỢ)</span>
+</div>
+<!-- Right Controls: Audio Toggle & Continue Action -->
+<div class="flex items-center gap-space-md">
+<!-- Radio Noise Toggle -->
+<button class="flex items-center gap-1.5 px-space-sm py-1 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface font-label-sm text-label-sm transition-colors cursor-pointer" id="radioAudioBtn" title="Bật/Tắt âm thanh radio rè">
+<span class="material-symbols-outlined text-[15px] text-secondary" id="radioAudioIcon">volume_up</span>
+<span id="radioAudioLabel">Radio rè: Bật</span>
+</button>
+<!-- Primary Advance Action -->
+<button class="btn-primary-retro flex items-center gap-space-xs px-space-md py-2 rounded font-label-md text-label-md uppercase tracking-wider font-bold transition-transform cursor-pointer" id="continueBtn">
+<span>TIẾP TỤC [SPACE]</span>
+<span class="material-symbols-outlined text-[16px] animate-pulse">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<script>
+  // Simple ambient audio state toggle
+  const audioBtn = document.getElementById('radioAudioBtn');
+  const audioIcon = document.getElementById('radioAudioIcon');
+  const audioLabel = document.getElementById('radioAudioLabel');
+  let isMuted = false;
+
+  audioBtn.addEventListener('click', () => {
+    isMuted = !isMuted;
+    if (isMuted) {
+      audioIcon.textContent = 'volume_off';
+      audioIcon.classList.remove('text-secondary');
+      audioIcon.classList.add('text-outline');
+      audioLabel.textContent = 'Radio: Tắt';
+    } else {
+      audioIcon.textContent = 'volume_up';
+      audioIcon.classList.add('text-secondary');
+      audioIcon.classList.remove('text-outline');
+      audioLabel.textContent = 'Radio rè: Bật';
+    }
+  });
+
+  // Spacebar hotkey listener for story cutscene continuation
+  window.addEventListener('keydown', (e) => {
+    if (e.code === 'Space' || e.key === ' ') {
+      e.preventDefault();
+      const continueBtn = document.getElementById('continueBtn');
+      continueBtn.classList.add('scale-95');
+      setTimeout(() => {
+        continueBtn.classList.remove('scale-95');
+        // Triggers transition to next screen or act
+        if (typeof window.onContinueStory === 'function') {
+          window.onContinueStory();
+        }
+      }, 150);
+    }
+  });
+</script></main>
+<!-- Bottom Global Status Bar -->
+<footer class="w-full max-w-2xl border-t border-[#3D342D] pt-2 pb-1 flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#7A6E63] font-mono">
+<div class="flex items-center space-x-2">
+<span class="inline-block w-1.5 h-1.5 bg-[#4E7D55] rounded-full"></span>
+<span>PHIÊN BẢN 1.0 — ĐỒ ÁN MÔ PHỎNG HỌC THUẬT</span>
+</div>
+<div class="mt-1 sm:mt-0 text-[#6B6056]">
+      CẢM HỨNG TỪ: <span class="text-[#8F8274] italic">PAPERS, PLEASE</span>
+</div>
+</footer>
+</body></html>

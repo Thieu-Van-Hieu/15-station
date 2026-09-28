@@ -1,0 +1,255 @@
+<!DOCTYPE html><html lang="vi"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRẠM 15 - STATION 15 | Màn hình chính</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&amp;family=Special+Elite&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Courier Prime', monospace, serif;
+      background-color: #2B2622;
+      color: #1A1A1A;
+      background-image: 
+        radial-gradient(circle at 50% 35%, rgba(68, 59, 52, 0.4) 0%, rgba(30, 26, 23, 0.95) 80%),
+        repeating-linear-gradient(0deg, rgba(0,0,0,0.08) 0px, rgba(0,0,0,0.08) 1px, transparent 1px, transparent 3px);
+    }
+
+    .typewriter-title {
+      font-family: 'Special Elite', 'Courier Prime', monospace;
+      letter-spacing: 0.15em;
+    }
+
+    /* Paper texture & aged card styling */
+    .aged-paper {
+      background-color: #E8DFD1;
+      background-image: 
+        radial-gradient(#d3c6b2 1px, transparent 1px),
+        radial-gradient(#dfd4c0 1px, #E8DFD1 1px);
+      background-size: 24px 24px;
+      background-position: 0 0, 12px 12px;
+      box-shadow: 
+        0 1px 1px rgba(0,0,0,0.15), 
+        0 8px 0 -2px #1f1b18,
+        0 15px 35px rgba(0, 0, 0, 0.6),
+        inset 0 0 60px rgba(168, 140, 100, 0.22);
+    }
+
+    /* Vintage rubber stamp effect */
+    .stamp-badge {
+      border: 3px double #A83232;
+      color: #A83232;
+      mask-image: radial-gradient(circle, rgba(0,0,0,1) 75%, rgba(0,0,0,0.6) 100%);
+      text-transform: uppercase;
+      transform: rotate(-7deg);
+    }
+
+    /* Button retro style */
+    .btn-retro {
+      background-color: #D9CEBE;
+      border: 2px solid #3A322C;
+      box-shadow: 3px 3px 0px #1A1614;
+      transition: all 0.12s ease-in-out;
+      font-family: 'Courier Prime', monospace;
+      font-weight: 700;
+    }
+
+    .btn-retro:hover {
+      background-color: #EFE6D8;
+      border-color: #A83232;
+      color: #A83232;
+      box-shadow: 4px 4px 0px #A83232;
+      transform: translate(-1px, -1px);
+    }
+
+    .btn-retro:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0px #1A1614;
+    }
+
+    .btn-primary-retro {
+      background-color: #4A3E35;
+      color: #F3EBDD;
+      border: 2px solid #1A1614;
+      box-shadow: 3px 3px 0px #0F0D0B;
+    }
+
+    .btn-primary-retro:hover {
+      background-color: #A83232;
+      color: #FFFFFF;
+      border-color: #5A1616;
+      box-shadow: 4px 4px 0px #2D0B0B;
+    }
+
+    /* Vintage paperclip */
+    .paperclip {
+      position: absolute;
+      top: -14px;
+      right: 36px;
+      width: 16px;
+      height: 44px;
+      border: 3px solid #6E685F;
+      border-radius: 10px;
+      border-bottom: none;
+      z-index: 20;
+    }
+    .paperclip::after {
+      content: '';
+      position: absolute;
+      top: 6px;
+      left: 2px;
+      width: 6px;
+      height: 28px;
+      border: 2px solid #57524A;
+      border-radius: 6px;
+      border-top: none;
+    }
+
+    /* Stamp overlay behind title */
+    .title-stamp-watermark {
+      color: rgba(168, 50, 50, 0.18);
+      border: 4px dashed rgba(168, 50, 50, 0.22);
+      pointer-events: none;
+      user-select: none;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between items-center p-4 sm:p-6 selection:bg-[#A83232] selection:text-white">
+
+  <!-- Top Ambient Header / Classified Tag -->
+  <header class="w-full max-w-2xl flex items-center justify-between text-xs tracking-wider text-[#8C8074] border-b border-[#443B33] pb-2 pt-1 font-mono">
+    <div class="flex items-center space-x-2">
+      <span class="inline-block w-2 h-2 bg-[#A83232] rounded-full animate-pulse"></span>
+      <span class="uppercase tracking-widest text-[#B3A698]">TỈNH LỘ 15 • TRẠM KIỂM SOÁT LIÊN HUYỆN</span>
+    </div>
+    <div class="text-[#7A6E63]">GIAI ĐOẠN 1979 – 1987</div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="w-full max-w-xl flex flex-col items-center my-auto py-6">
+    
+    <!-- Title Area with Stamp Motif -->
+    <div class="relative w-full flex flex-col items-center text-center mb-6">
+      
+      <!-- Watermark Stamp Background -->
+      <div class="title-stamp-watermark absolute -top-4 w-72 h-28 rounded-md flex items-center justify-center -rotate-6">
+        <span class="text-3xl font-black tracking-widest uppercase">KIỂM SOÁT</span>
+      </div>
+
+      <!-- Bilingual Main Titles -->
+      <div class="relative z-10">
+        <span class="text-xs uppercase tracking-[0.3em] text-[#C2B5A5] font-semibold block mb-1">
+          HỒ SƠ MÔ PHỎNG LỊCH SỬ
+        </span>
+        <h1 class="text-4xl sm:text-5xl font-extrabold text-[#F0E6D8] tracking-[0.2em] typewriter-title drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+          TRẠM 15
+        </h1>
+        <div class="flex items-center justify-center space-x-3 mt-1 text-[#A89C8F]">
+          <span class="h-[1px] w-12 bg-[#554A40]"></span>
+          <span class="text-sm tracking-[0.25em] font-mono text-[#D4C7B5]">STATION 15</span>
+          <span class="h-[1px] w-12 bg-[#554A40]"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Central Panel: Aged Official Paper Card with Disclaimer -->
+    <section class="relative w-full aged-paper border-2 border-[#332A24] rounded-sm p-6 sm:p-7 text-[#241E1A] my-3">
+      <!-- Vintage Paperclip decoration -->
+      <div class="paperclip" title="Kẹp hồ sơ lưu trữ"></div>
+
+      <!-- Red Stamp Header inside Card -->
+      <div class="flex justify-between items-start border-b border-[#BAAA96] pb-3 mb-4">
+        <div>
+          <div class="text-[10px] uppercase font-bold tracking-widest text-[#5C5046]">HỘI ĐỒNG BỘ MÔN • GIÁO TRÌNH BỘ GD&amp;ĐT</div>
+          <div class="text-xs font-bold text-[#2A231E] tracking-wider mt-0.5">CHỦ NGHĨA XÃ HỘI KHOA HỌC (2019)</div>
+        </div>
+        <div class="stamp-badge px-2.5 py-0.5 text-[11px] font-bold tracking-wider">
+          LƯU HÀNH NỘI BỘ
+        </div>
+      </div>
+
+      <!-- Official Disclaimer Body -->
+      <div class="space-y-3 text-xs sm:text-sm leading-relaxed text-[#2B231D]">
+        <div class="flex items-start space-x-2">
+          <span class="text-[#A83232] font-bold text-base leading-none">▪</span>
+          <p class="font-bold tracking-wide text-[#1A1412]">
+            THÔNG BÁO VỀ TÍNH MÔ PHỎNG &amp; HƯ CẤU:
+          </p>
+        </div>
+
+        <blockquote class="bg-[#DFD3C2]/70 border-l-4 border-[#A83232] pl-3 py-2 text-[#312720] italic font-mono text-xs sm:text-[13px] leading-normal">
+          "Nhân vật, địa danh và số liệu trong trò chơi là hư cấu, mô phỏng. Các mốc chủ trương, văn kiện của Đảng và Nhà nước là có thật và được ghi rõ nguồn trích dẫn."
+        </blockquote>
+
+        <p class="text-[11px] sm:text-xs text-[#52463D] pt-1 leading-normal font-sans sm:font-mono">
+          Trải nghiệm nhập vai người tổ trưởng trạm kiểm soát (1979–1987) đối mặt mâu thuẫn giữa cuốn sổ chỉ thị cứng nhắc và thực tiễn vận động của đời sống xã hội.
+        </p>
+      </div>
+
+      <!-- Official Signature Footer -->
+      <div class="mt-5 pt-3 border-t border-dashed border-[#C4B5A3] flex items-center justify-between text-[11px] text-[#695D52]">
+        <span>Số hiệu lưu trữ: <strong class="text-[#2B231D] font-mono">T15/1979-KT</strong></span>
+        <span class="italic">Ban kiểm duyệt đồ án</span>
+      </div>
+    </section>
+
+    <!-- Bottom Menu Actions -->
+    <nav class="w-full flex flex-col space-y-3 mt-4" aria-label="Menu trò chơi">
+      
+      <!-- Option 1: Start Game -->
+      <button class="btn-retro btn-primary-retro w-full py-3.5 px-5 rounded-sm flex items-center justify-between group cursor-pointer">
+        <div class="flex items-center space-x-3">
+          <span class="w-2.5 h-2.5 bg-[#A83232] group-hover:bg-white rounded-full transition-colors"></span>
+          <span class="tracking-[0.2em] text-sm sm:text-base font-bold uppercase">BẮT ĐẦU VÀO CA (START GAME)</span>
+        </div>
+        <span class="font-mono text-xs opacity-75 group-hover:opacity-100 group-hover:translate-x-1 transition-all">
+          [ENTER] ➔
+        </span>
+      </button>
+
+      <!-- Option 2: Historical Sources -->
+      <button class="btn-retro w-full py-3 px-5 text-[#241E1A] rounded-sm flex items-center justify-between group cursor-pointer">
+        <div class="flex items-center space-x-3">
+          <span class="w-2 h-2 bg-[#706458] group-hover:bg-[#A83232] transition-colors"></span>
+          <span class="tracking-widest text-xs sm:text-sm font-bold uppercase">TRA CỨU VĂN KIỆN &amp; NGUỒN LỊCH SỬ</span>
+        </div>
+        <span class="font-mono text-[11px] text-[#63574C] group-hover:text-[#A83232]">
+          [SỔ TRA CỨU]
+        </span>
+      </button>
+
+      <!-- Option 3: Settings -->
+      <button class="btn-retro w-full py-2.5 px-5 text-[#38302A] rounded-sm flex items-center justify-between group cursor-pointer">
+        <div class="flex items-center space-x-3">
+          <span class="w-2 h-2 bg-[#706458] group-hover:bg-[#A83232] transition-colors"></span>
+          <span class="tracking-widest text-xs sm:text-sm font-bold uppercase">THIẾT LẬP HỆ THỐNG (SETTINGS)</span>
+        </div>
+        <span class="font-mono text-[11px] text-[#63574C] group-hover:text-[#A83232]">
+          [CẤU HÌNH]
+        </span>
+      </button>
+
+    </nav>
+
+    <!-- Quick Tip / Lore Note -->
+    <div class="mt-5 text-center text-[#9E9081] text-[11px] tracking-wider font-mono">
+      <span class="text-[#A83232] font-bold">[!] LƯU Ý:</span> Mỗi quyết định kiểm soát đều tác động song song tới báo cáo trạm và đời sống huyện.
+    </div>
+
+  </main>
+
+  <!-- Bottom Global Status Bar -->
+  <footer class="w-full max-w-2xl border-t border-[#3D342D] pt-2 pb-1 flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#7A6E63] font-mono">
+    <div class="flex items-center space-x-2">
+      <span class="inline-block w-1.5 h-1.5 bg-[#4E7D55] rounded-full"></span>
+      <span>PHIÊN BẢN 1.0 — ĐỒ ÁN MÔ PHỎNG HỌC THUẬT</span>
+    </div>
+    <div class="mt-1 sm:mt-0 text-[#6B6056]">
+      CẢM HỨNG TỪ: <span class="text-[#8F8274] italic">PAPERS, PLEASE</span>
+    </div>
+  </footer>
+
+
+
+</body></html>

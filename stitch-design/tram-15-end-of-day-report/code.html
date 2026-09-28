@@ -1,0 +1,482 @@
+<!DOCTYPE html><html class="dark" lang="vi"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_standard" name="shell-type"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&amp;family=Domine:wght@400..700&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}.scanlines{background:linear-gradient(rgba(18,16,16,0) 50%,rgba(0,0,0,0.3) 50%),linear-gradient(90deg,rgba(255,0,0,0.03),rgba(0,255,0,0.01),rgba(0,0,255,0.03));background-size:100% 4px,6px 100%;pointer-events:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "on-tertiary-container": "#ffe4e2",
+          "on-surface": "#ebe1da",
+          "inverse-on-surface": "#352f2b",
+          "surface-dim": "#17130f",
+          "primary-fixed-dim": "#ffb4a9",
+          "on-tertiary-fixed": "#410004",
+          "surface-container-lowest": "#110d0a",
+          "secondary-fixed-dim": "#61de8a",
+          "secondary-container": "#18a659",
+          "on-secondary-container": "#003115",
+          "surface-container-high": "#2e2925",
+          "on-tertiary": "#65080f",
+          "on-surface-variant": "#e1bfb9",
+          "on-tertiary-fixed-variant": "#852222",
+          "surface": "#17130f",
+          "on-primary-fixed-variant": "#8e130c",
+          "secondary": "#61de8a",
+          "surface-container-low": "#1f1b17",
+          "primary-fixed": "#ffdad5",
+          "background": "#17130f",
+          "surface-bright": "#3e3834",
+          "inverse-primary": "#b02d21",
+          "on-secondary-fixed": "#00210c",
+          "tertiary-container": "#b44441",
+          "outline-variant": "#59413d",
+          "error-container": "#93000a",
+          "on-error": "#690005",
+          "secondary-fixed": "#7efba4",
+          "on-background": "#ebe1da",
+          "on-primary": "#690001",
+          "tertiary-fixed": "#ffdad7",
+          "on-secondary": "#00391a",
+          "tertiary": "#ffb3ae",
+          "error": "#ffb4ab",
+          "surface-container": "#231f1b",
+          "on-error-container": "#ffdad6",
+          "on-secondary-fixed-variant": "#005228",
+          "surface-variant": "#39342f",
+          "on-primary-fixed": "#410000",
+          "primary": "#ffb4a9",
+          "tertiary-fixed-dim": "#ffb3ae",
+          "surface-container-highest": "#39342f",
+          "surface-tint": "#ffb4a9",
+          "outline": "#a88a85",
+          "primary-container": "#c0392b",
+          "inverse-surface": "#ebe1da",
+          "on-primary-container": "#ffe5e1"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "gutter": "1.25rem",
+          "space-xs": "0.25rem",
+          "margin": "2rem",
+          "space-sm": "0.5rem",
+          "gutter-mobile": "0.75rem",
+          "space-xl": "2.5rem",
+          "margin-mobile": "1rem",
+          "space-md": "1rem",
+          "space-lg": "1.5rem"
+        },
+        "fontFamily": {
+          "body-lg": [
+            "Courier Prime"
+          ],
+          "headline-sm": [
+            "Domine"
+          ],
+          "label-md": [
+            "Space Mono"
+          ],
+          "headline-lg": [
+            "Domine"
+          ],
+          "body-sm": [
+            "Courier Prime"
+          ],
+          "label-sm": [
+            "Space Mono"
+          ],
+          "body-md": [
+            "Courier Prime"
+          ],
+          "headline-md": [
+            "Domine"
+          ],
+          "headline-lg-mobile": [
+            "Domine"
+          ],
+          "label-lg": [
+            "Space Mono"
+          ]
+        },
+        "fontSize": {
+          "body-lg": [
+            "16px",
+            {
+              "lineHeight": "24px",
+              "letterSpacing": "0em",
+              "fontWeight": "400"
+            }
+          ],
+          "headline-sm": [
+            "18px",
+            {
+              "lineHeight": "26px",
+              "letterSpacing": "0.04em",
+              "fontWeight": "600"
+            }
+          ],
+          "label-md": [
+            "11px",
+            {
+              "lineHeight": "16px",
+              "letterSpacing": "0.1em",
+              "fontWeight": "700"
+            }
+          ],
+          "headline-lg": [
+            "36px",
+            {
+              "lineHeight": "44px",
+              "letterSpacing": "0.02em",
+              "fontWeight": "700"
+            }
+          ],
+          "body-sm": [
+            "12px",
+            {
+              "lineHeight": "18px",
+              "letterSpacing": "0.02em",
+              "fontWeight": "400"
+            }
+          ],
+          "label-sm": [
+            "9px",
+            {
+              "lineHeight": "12px",
+              "letterSpacing": "0.12em",
+              "fontWeight": "700"
+            }
+          ],
+          "body-md": [
+            "14px",
+            {
+              "lineHeight": "22px",
+              "letterSpacing": "0.01em",
+              "fontWeight": "400"
+            }
+          ],
+          "headline-md": [
+            "24px",
+            {
+              "lineHeight": "32px",
+              "letterSpacing": "0.03em",
+              "fontWeight": "700"
+            }
+          ],
+          "headline-lg-mobile": [
+            "26px",
+            {
+              "lineHeight": "34px",
+              "letterSpacing": "0.01em",
+              "fontWeight": "700"
+            }
+          ],
+          "label-lg": [
+            "13px",
+            {
+              "lineHeight": "18px",
+              "letterSpacing": "0.08em",
+              "fontWeight": "700"
+            }
+          ]
+        }
+      },
+    },
+  }</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased min-h-screen relative selection:bg-primary-container selection:text-on-primary-container"><div class="fixed inset-0 scanlines z-40"></div><header class="fixed top-0 w-full z-50 bg-surface-container-lowest/95 backdrop-blur-sm shadow-[0_4px_12px_rgba(0,0,0,0.6)]"><div class="h-16 w-full px-gutter flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-sm min-w-0"><div class="w-2.5 h-2.5 rounded-full bg-primary animate-pulse shadow-[0_0_8px_#c0392b]"></div><div class="truncate"><span class="font-headline-sm text-headline-sm text-on-surface tracking-wide uppercase">TRẠM 15</span><span class="font-label-md text-label-md text-outline ml-space-xs uppercase tracking-widest hidden sm:inline">• TỈNH LỘ NỐI VÙNG LÚA</span></div></div><div class="flex flex-col items-center justify-center text-center px-space-md py-space-xs bg-surface-container-low rounded"><div class="font-label-md text-label-md text-primary tracking-widest uppercase">MÀN 2 - NGÀY KIỂM SOÁT 02</div><div class="font-label-lg text-label-lg text-secondary tracking-widest">17:30:00 <span class="text-error">(HẾT CA)</span></div></div><div class="flex items-center gap-space-md"><div class="text-right hidden md:block"><div class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Cán Bộ Trực Ca</div><div class="font-body-sm text-body-sm text-on-surface font-bold">Tổ trưởng: Đ/c Nguyễn Văn Thành</div></div><nav class="hidden lg:flex items-center gap-space-xs p-space-xs bg-surface-container-low rounded" data-active-classes="bg-primary-container text-on-primary-container"><a aria-current="page" class="px-space-sm py-space-xs font-label-md uppercase transition-colors bg-primary-container text-on-primary-container" data-path="kiem-soat-giay-to" href="#">Kiểm Soát</a><a class="px-space-sm py-space-xs font-label-md text-label-md uppercase transition-colors text-on-surface-variant hover:text-on-surface" data-path="so-quy-dinh" href="#">Quy Định</a><a class="px-space-sm py-space-xs font-label-md text-label-md uppercase transition-colors text-on-surface-variant hover:text-on-surface" data-path="so-tang-vat" href="#">Tang Vật</a></nav><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 bg-surface min-h-screen relative z-10"><div class="flex flex-col w-full text-on-surface select-none pb-12">
+<!-- Subtle Ambient Glow -->
+<div class="fixed inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-surface-container-lowest/80 z-0"></div>
+<!-- Main Administrative Desk Workspace -->
+<div class="relative z-10 w-full max-w-7xl mx-auto px-gutter flex flex-col gap-space-lg pt-4">
+<!-- SUB-HEADER / BRASS & FILE TAB BANNER -->
+<div class="relative flex flex-col md:flex-row items-start md:items-center justify-between gap-space-sm bg-surface-container-low/95 p-space-md rounded-lg shadow-xl backdrop-blur-md">
+<!-- Left: Manila Dossier Tab Title -->
+<div class="flex items-center gap-space-md">
+<div class="flex items-center justify-center w-10 h-10 rounded bg-primary-container text-on-primary-container shadow-md">
+<span class="material-symbols-outlined text-[24px]">assignment_turned_in</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-outline font-label-sm text-label-sm tracking-widest uppercase">HỒ SƠ LƯU TRỮ: MẪU T-81</span>
+<span class="text-outline text-label-sm font-label-sm">• MẬT ĐỘ KIỂM SOÁT CẤP II</span>
+</div>
+<h1 class="font-headline-sm text-headline-sm text-on-surface tracking-wide uppercase mt-0.5">
+            BÁO CÁO TỔNG KẾT CUỐI NGÀY — NGÀY 02 / 03 / 1981
+          </h1>
+</div>
+</div>
+<!-- Right: Operational Clocks & Analytical Badge -->
+<div class="flex flex-wrap items-center gap-space-sm self-stretch md:self-auto justify-end">
+<div class="flex items-center gap-space-xs px-space-sm py-1.5 rounded bg-surface-container text-primary font-label-md text-label-md">
+<span class="w-2 h-2 rounded-full bg-primary animate-ping"></span>
+<span>17:30 • KẾT THÚC CA TRỰC TỈNH LỘ</span>
+</div>
+<div class="flex items-center gap-1.5 px-space-sm py-1.5 rounded bg-tertiary-container/30 text-tertiary font-label-md text-label-md uppercase tracking-wider">
+<span class="material-symbols-outlined text-[16px]">balance</span>
+<span>ĐỐI CHIẾU HAI MẶT CHỈ SỐ</span>
+</div>
+</div>
+</div>
+<!-- DUAL-COLUMN DESK VIEWPORT: PARADOX OF THE SUBSIDY ERA -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-space-lg items-start">
+<!-- ========================================================================= -->
+<!-- LEFT SHEET: BÁO CÁO GỬI CẤP TRÊN (Administrative Compliance Sheet)        -->
+<!-- ========================================================================= -->
+<div class="relative bg-[#F2EDE2] text-[#231F1B] rounded p-6 shadow-2xl transition-transform hover:-translate-y-0.5 duration-300">
+<!-- Visual Accent: Stamp Corner Clip Graphic -->
+<div class="absolute -top-3 left-8 w-12 h-6 bg-[#C4B79B]/80 rounded shadow-md flex items-center justify-center">
+<div class="w-8 h-1 bg-[#1F1C1A]/20 rounded-full"></div>
+</div>
+<!-- Official Red Star Administrative Crest & Seal -->
+<div class="absolute top-5 right-5 pointer-events-none opacity-85 rotate-[12deg] z-20">
+<div class="w-24 h-24 rounded-full p-1 flex flex-col items-center justify-center text-center bg-transparent">
+<div class="w-full h-full rounded-full flex flex-col items-center justify-center p-1">
+<span class="text-[9px] font-label-sm uppercase tracking-widest text-[#B02D21] font-bold">TRẠM KIỂM SOÁT 15</span>
+<span class="text-xs text-[#B02D21]">★ ★ ★</span>
+<span class="text-[10px] font-headline-sm uppercase font-bold text-[#B02D21] tracking-wider leading-tight">ĐÃ DUYỆT</span>
+<span class="text-[8px] font-label-sm text-[#B02D21]">02-03-1981</span>
+</div>
+</div>
+</div>
+<!-- Document Top Administrative Header -->
+<div class="text-center pb-4">
+<div class="font-label-sm text-label-sm tracking-widest uppercase text-[#59413D] font-bold">
+            ỦY BAN NHÂN DÂN HUYỆN • BAN CHỈ ĐẠO LƯU THÔNG
+          </div>
+<div class="font-headline-sm text-headline-sm text-[#110D0A] uppercase tracking-wider font-bold mt-1">
+            BÁO CÁO HOẠT ĐỘNG KIỂM SOÁT LIÊN HUYỆN
+          </div>
+<div class="font-body-sm text-body-sm text-[#59413D] italic mt-0.5">
+            Kèm theo Biên bản kiểm kê tang vật &amp; Sổ thông hành ca 2
+          </div>
+</div>
+<!-- Bureaucratic Divider Typewriter Emulation -->
+<div class="font-label-sm text-label-sm text-[#8B7E74] tracking-widest text-center my-3 overflow-hidden select-none">
+          ================================================================
+        </div>
+<!-- Vertical Metrics Data Grid -->
+<div class="flex flex-col gap-3 font-body-md text-body-md">
+<!-- Metric Row 1: Tỷ lệ chấp hành -->
+<div class="flex items-center justify-between p-2.5 bg-[#EAE3D2] rounded shadow-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-[#27AE60]">verified_user</span>
+<span class="text-sm font-semibold tracking-tight text-[#1F1C1A]">Tỷ lệ chấp hành quy định:</span>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="font-label-lg text-lg font-bold text-[#18A659] tracking-wider">98%</span>
+<span class="font-label-sm text-label-sm text-[#59413D] uppercase">(ĐẠT CHỈ TIÊU)</span>
+</div>
+</div>
+<!-- Metric Row 2: Số vụ giữ lại -->
+<div class="flex items-center justify-between p-2.5 bg-[#E6DEC9] rounded">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-[#B02D21]">gavel</span>
+<span class="text-sm font-semibold text-[#1F1C1A]">Số vụ giữ lại / lập biên bản vi phạm:</span>
+</div>
+<span class="font-label-md text-label-md font-bold text-[#93000A] bg-[#F2EDE2] px-2 py-0.5 rounded shadow-inner">
+              12 VỤ
+            </span>
+</div>
+<!-- Metric Row 3: Hàng hoá tịch thu -->
+<div class="flex items-center justify-between p-2.5 bg-[#EAE3D2] rounded shadow-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-[#59413D]">inventory_2</span>
+<span class="text-sm font-semibold text-[#1F1C1A]">Hàng hoá tịch thu nộp kho trạm:</span>
+</div>
+<div class="text-right">
+<span class="font-label-md text-label-md font-bold text-[#110D0A]">340 KG</span>
+<span class="font-label-sm text-label-sm text-[#59413D] block">lương thực &amp; nhu yếu phẩm</span>
+</div>
+</div>
+<!-- Metric Row 4: Biên bản kiến nghị -->
+<div class="p-3 bg-[#E3E8EC] rounded shadow-sm flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="text-sm font-semibold text-[#1B3A4B] flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">forward_to_inbox</span>
+                Biên bản kiến nghị gửi lên Huyện:
+              </span>
+<span class="font-label-md text-label-md font-bold text-[#1B3A4B]">01 BẢN</span>
+</div>
+<div class="px-2.5 py-1 rounded bg-[#D3DFE8] text-[#0F2837] font-label-sm text-label-sm flex items-center justify-between">
+<span class="truncate">Trích yếu: "Giấy xác nhận sản phẩm khoán HTX Nông nghiệp"</span>
+<span class="material-symbols-outlined text-[16px] shrink-0">drafts</span>
+</div>
+</div>
+</div>
+<!-- Mimeograph Spacer Dot Line -->
+<div class="font-label-sm text-label-sm text-[#A89A84] tracking-widest text-center my-3 select-none">
+          - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        </div>
+<!-- Official Evaluation & Grand Stamp Section -->
+<div class="relative bg-[#EAE3D2] p-4 rounded mt-1 overflow-hidden shadow-sm">
+<div class="font-label-sm text-label-sm uppercase tracking-widest text-[#59413D] font-bold">
+            ĐÁNH GIÁ CỦA TRẠM TRƯỞNG ĐỐI VỚI CA TRỰC:
+          </div>
+<!-- Big Slanted Rubber Stamp Imprint -->
+<div class="flex items-center justify-between mt-2">
+<div class="max-w-[65%]">
+<p class="font-body-sm text-body-sm text-[#1F1C1A] italic leading-relaxed">
+                "Hoàn thành tốt chỉ tiêu ngăn chặn tư thương lưu thông tự do ngoài chỉ tiêu. Tinh thần cảnh giác cao. Đề nghị tiếp tục siết chặt kiểm tra định mức qua trạm."
+              </p>
+<div class="font-label-sm text-label-sm text-[#59413D] mt-2 font-bold">
+                KÝ TÊN: Nguyễn Văn Thành (Trạm trưởng)
+              </div>
+</div>
+<!-- Heavy Double-Box Red Rubber Stamp -->
+<div class="rotate-[-8deg] shrink-0 pointer-events-none">
+<div class="p-1.5 bg-transparent rounded shadow-sm">
+<div class="px-4 py-1.5 bg-transparent text-center">
+<div class="font-headline-sm text-headline-sm text-[#B02D21] font-extrabold tracking-widest leading-none">
+                    XUẤT SẮC
+                  </div>
+<div class="font-label-sm text-[8px] text-[#B02D21] uppercase tracking-tighter mt-1 font-bold">
+                    BAN THI ĐUA KHEN THƯỞNG
+                  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Paper Edge Detail Footer -->
+<div class="flex justify-between items-center mt-4 pt-2 text-[10px] font-label-sm text-[#8A7B6B]">
+<span>MÃ BIÊN LAI: KS-81-0302-15</span>
+<span>BẢN GỐC LƯU TRỮ VĂN THƯ HUYỆN</span>
+</div>
+</div>
+<!-- ========================================================================= -->
+<!-- RIGHT SHEET: TÌNH HÌNH HUYỆN (Simulation Reality Data Under Pressure)     -->
+<!-- ========================================================================= -->
+<div class="relative bg-[#E6DFC9] text-[#26201B] rounded p-6 shadow-2xl transition-transform hover:-translate-y-0.5 duration-300">
+<!-- Physical Paper Clip Element on Top Right -->
+<div class="absolute -top-3 right-10 w-4 h-10 rounded-full bg-gradient-to-b from-[#8C9298] via-[#ADB5BD] to-[#6C757D] shadow-md z-30">
+<div class="w-1.5 h-7 mx-auto mt-1 rounded-full bg-[#343A40]/40"></div>
+</div>
+<!-- Top Urgent / Internal Observation Badge -->
+<div class="flex items-center justify-between pb-2">
+<div class="px-2 py-0.5 bg-[#D4C3A3] rounded text-[#4A3B2C] font-label-sm text-label-sm font-bold tracking-wider uppercase">
+            MẬT • LƯU HÀNH NỘI BỘ BAN KINH TẾ
+          </div>
+<span class="font-label-sm text-label-sm text-[#877561]">SỐ: 42/TN-KT</span>
+</div>
+<!-- Document Top Administrative Header -->
+<div class="text-center pb-3">
+<div class="font-label-sm text-label-sm tracking-widest uppercase text-[#6B5441] font-bold">
+            BAN NÔNG NGHIỆP &amp; ĐỜI SỐNG CƠ SỞ
+          </div>
+<div class="font-headline-sm text-headline-sm text-[#17130F] uppercase tracking-wider font-bold mt-1">
+            BẢNG THEO DÕI THỊ TRƯỜNG &amp; ĐỜI SỐNG HUYỆN
+          </div>
+<div class="font-body-sm text-body-sm text-[#B02D21] italic mt-0.5 font-bold">
+            (Số liệu mô phỏng theo phản ánh thực tế từ cơ sở xã &amp; thị xã)
+          </div>
+</div>
+<!-- Mimeograph Bar Divider -->
+<div class="font-label-sm text-label-sm text-[#94816C] tracking-widest text-center my-3 overflow-hidden select-none">
+          ----------------------------------------------------------------
+        </div>
+<!-- Harsh Reality Metric Rows -->
+<div class="flex flex-col gap-3 font-body-md text-body-md">
+<!-- Negative Metric 1: Lương thực lưu thông -->
+<div class="flex items-center justify-between p-2.5 bg-[#DDD3B8] rounded shadow-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-[#B02D21]">trending_down</span>
+<span class="text-sm font-semibold text-[#1F1C1A]">Lương thực lưu thông vào thị xã:</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="font-label-lg text-lg font-bold text-[#B02D21] tracking-wider">-14%</span>
+<span class="px-1.5 py-0.5 bg-[#C0392B]/15 text-[#93000A] font-label-sm text-label-sm font-bold rounded">
+                SỤT GIẢM ▼
+              </span>
+</div>
+</div>
+<!-- Negative Metric 2: Số hộ thiếu đói -->
+<div class="flex items-center justify-between p-2.5 bg-[#D7CBB0] rounded">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-[#C0392B]">family_restroom</span>
+<span class="text-sm font-semibold text-[#1F1C1A]">Số hộ gia đình thiếu đói giáp hạt:</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md text-[#59413D] line-through">210</span>
+<span class="material-symbols-outlined text-[14px] text-[#B02D21]">arrow_forward</span>
+<span class="font-label-lg text-lg font-bold text-[#93000A]">265 hộ</span>
+<span class="px-1.5 py-0.5 bg-[#93000A] text-on-error font-label-sm text-[9px] font-bold rounded uppercase">
+                +55 HỘ
+              </span>
+</div>
+</div>
+<!-- Negative Metric 3: Giá gạo chợ tự do -->
+<div class="flex items-center justify-between p-2.5 bg-[#DDD3B8] rounded shadow-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-[#B02D21]">payments</span>
+<span class="text-sm font-semibold text-[#1F1C1A]">Chỉ số giá gạo ngoài chợ tự do:</span>
+</div>
+<div class="text-right flex items-center gap-2">
+<span class="font-label-md text-label-md text-[#59413D]">100 (gốc)</span>
+<span class="material-symbols-outlined text-[14px] text-[#B02D21]">trending_up</span>
+<span class="font-label-lg text-lg font-bold text-[#93000A] tracking-wider">137</span>
+<span class="font-label-sm text-label-sm text-[#93000A] font-bold">(+37%)</span>
+</div>
+</div>
+<!-- Pin-attached Objective Factors Callout Card (Quan điểm toàn diện) -->
+<div class="relative bg-[#D2C3A2] p-3.5 rounded mt-1 shadow-sm">
+<!-- Simulated Pushpin Graphic -->
+<div class="absolute -top-2.5 left-4 w-5 h-5 rounded-full bg-[#B44441] shadow flex items-center justify-center">
+<div class="w-1.5 h-1.5 rounded-full bg-[#FFE5E1]"></div>
+</div>
+<div class="flex items-center gap-1.5 text-[#4A3828] font-label-sm text-label-sm font-bold uppercase tracking-wider mb-1">
+<span class="material-symbols-outlined text-[16px] text-[#8E130C]">psychology_alt</span>
+<span>YẾU TỐ KHÁCH QUAN TRONG NGÀY (CH.3 - QUAN ĐIỂM TOÀN DIỆN):</span>
+</div>
+<p class="font-body-sm text-body-sm text-[#1F1C1A] leading-relaxed italic bg-[#DFD2B5] p-2 rounded">
+              "Lũ sớm tại xã Phú Hoà làm ngập úng một phần diện tích mạ vụ Chiêm. Hàng nhập khẩu qua đường sắt phân phối chậm do thủ tục phê duyệt trung gian nhiều cấp."
+            </p>
+<div class="mt-2 flex items-start gap-1.5 text-[#5C4533] font-body-sm text-xs">
+<span class="material-symbols-outlined text-[14px] text-[#8E130C] shrink-0 mt-0.5">info</span>
+<span>
+<strong class="font-semibold text-[#3B291A]">Lời nhắc học thuật:</strong> Khó khăn đời sống không đơn thuần do rào chắn trạm kiểm soát, mà còn phụ thuộc sâu sắc vào điều kiện tự nhiên và cơ chế điều phối vĩ mô.
+              </span>
+</div>
+</div>
+</div>
+<!-- Footnote Stamped Memo -->
+<div class="flex justify-between items-center mt-3 pt-2 text-[10px] font-label-sm text-[#7D6B58]">
+<span>THEO DÕI LIÊN NGÀNH: HUYỆN &amp; XÃ</span>
+<span class="text-[#93000A] font-bold">MÂU THUẪN NGUỒN CUNG: BÁO ĐỘNG</span>
+</div>
+</div>
+</div>
+<!-- PHILOSOPHICAL OBSERVATION CARD (FULL WIDTH FOOTER CALLOUT) -->
+<div class="relative bg-surface-container-high rounded-lg p-space-md shadow-xl overflow-hidden">
+<div class="flex flex-col md:flex-row items-start md:items-center gap-space-md">
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0 text-primary">
+<span class="material-symbols-outlined text-[28px]">lightbulb</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="font-label-md text-label-md text-primary tracking-widest uppercase flex items-center gap-2">
+<span>QUY LUẬT NHẬN THỨC &amp; BIỆN CHỨNG LỊCH SỬ</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span class="text-outline">GIÁO TRÌNH BỘ GD&amp;ĐT (2019)</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            Tuân thủ quy định giúp trạm đạt thành tích thi đua và sự chấp thuận từ cấp trên; song cơ chế <span class="text-primary font-bold">"ngăn sông cấm chợ"</span> vô tình thắt chặt huyết mạch lưu thông, tạo áp lực nặng nề lên nguồn cung lương thực của thị xã. Tiếng nói kiến nghị thực tiễn từ cơ sở chính là chiếc chìa khóa duy nhất để từng bước điều chỉnh cuốn sổ chỉ thị hành chính.
+          </p>
+</div>
+</div>
+</div>
+<!-- BOTTOM ACTION BUTTONS / DESK CONTROLS -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-space-md pt-2 pb-6">
+<!-- Secondary: Review Log -->
+<button class="w-full sm:w-auto px-space-md py-3 rounded bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md uppercase tracking-wider flex items-center justify-center gap-2 transition-all active:scale-[0.98] shadow-md" type="button">
+<span class="material-symbols-outlined text-[18px]">menu_book</span>
+<span>XEM LẠI NHẬT KÝ CA TRỰC [TAB]</span>
+</button>
+<!-- Primary Grand Stamp-Key: Proceed to Family Ledger -->
+<button class="w-full sm:w-auto px-space-xl py-3.5 rounded bg-primary-container hover:bg-[#b02d21] text-on-primary-container font-label-lg text-label-lg uppercase tracking-widest flex items-center justify-center gap-3 transition-all hover:shadow-[0_0_20px_rgba(192,57,43,0.5)] active:scale-[0.98] shadow-xl font-bold" type="button">
+<span>TIẾP TỤC ĐẾN SỔ CHI TIÊU GIA ĐÌNH</span>
+<span class="material-symbols-outlined text-[20px] transition-transform group-hover:translate-x-1">arrow_forward</span>
+</button>
+</div>
+</div>
+</div></main><footer class="w-full bg-surface-container-lowest py-space-sm z-30 relative shadow-[0_-2px_8px_rgba(0,0,0,0.5)]"><div class="w-full px-gutter flex flex-col md:flex-row items-center justify-between gap-space-xs text-center md:text-left"><div class="font-body-sm text-body-sm text-outline"><span class="font-bold text-on-surface-variant">Đồ án mô phỏng học thuật:</span> Giáo trình Chủ nghĩa xã hội khoa học (Bộ GD&amp;ĐT 2019) • Cảm hứng: Papers, Please</div><div class="font-label-sm text-label-sm text-outline tracking-wider uppercase">CHỈ ĐẠO BẢO MẬT BAN KIỂM SOÁT LƯU THÔNG</div></div></footer></body></html>
