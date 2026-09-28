@@ -12,6 +12,11 @@ export function s(key: string): string {
   return content.strings[key] ?? key;
 }
 
+/** Tên đơn vị có dấu để hiển thị ("vien" → "viên"). */
+export function unit(u: string): string {
+  return content.strings[`unit.${u}`] ?? u;
+}
+
 export function cx(...parts: (string | false | null | undefined)[]): string {
   return parts.filter(Boolean).join(" ");
 }
@@ -222,7 +227,7 @@ export function StampButton({
       onClick={onClick}
       style={{ ["--xoay" as string]: `${tilt}deg`, transform: `rotate(${tilt}deg)` }}
       className={cx(
-        "group relative flex items-center gap-3 border-[3px] border-double px-4 py-2.5 text-left transition-all min-w-0",
+        "group relative flex items-center gap-3 border-[3px] border-double px-4 py-2.5 text-left transition-[background-color,color,opacity,translate] min-w-0 min-h-[62px]",
         selected ? cx(t.on, "animate-dong-dau shadow-kep") : t.idle,
         disabled && !selected && "opacity-35 cursor-not-allowed grayscale-[40%] hover:bg-transparent",
         !disabled && !selected && "hover:-translate-y-0.5 active:translate-y-0 cursor-pointer",
@@ -232,7 +237,7 @@ export function StampButton({
       {icon && <span className="shrink-0">{icon}</span>}
       <span className="min-w-0">
         <span className="block font-nhan font-bold text-[13px] tracking-[0.15em] uppercase leading-tight">{title}</span>
-        {sub && <span className="block text-[10px] leading-snug opacity-80 mt-0.5 normal-case tracking-normal">{sub}</span>}
+        {sub && <span className="block text-[10px] leading-snug opacity-80 mt-0.5 normal-case tracking-normal line-clamp-2">{sub}</span>}
       </span>
     </button>
   );

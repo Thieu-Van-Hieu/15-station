@@ -9,7 +9,11 @@
     "voice": "Trầm tĩnh, kiệm lời, có lương tâm và tinh thần trách nhiệm cao. Trong công việc cố gắng giữ đúng quy định nhưng luôn trăn trở trước nỗi khó khăn của người dân.",
     "portrait": {
       "key": "thanh",
-      "expressions": ["binh-thuong", "lo-lang", "met-moi"],
+      "expressions": [
+        "binh-thuong",
+        "lo-lang",
+        "met-moi"
+      ],
       "description": "Thanh niên 28 tuổi, gương mặt cương nghị, mặc đồng phục cán bộ kiểm soát màu cỏ úa."
     },
     "fixed_fields": {
@@ -30,7 +34,12 @@
     "voice": "Xưng tôi, gọi Thành là chú hoặc chú Thành. Giọng nói chậm rãi, mộc mạc, lễ phép, hay nhắc lại ân tình cũ. Không bao giờ cãi cọ, chỉ kiên trì trình bày hoàn cảnh.",
     "portrait": {
       "key": "ba-tu",
-      "expressions": ["binh-thuong", "vui", "lo-lang", "buon"],
+      "expressions": [
+        "binh-thuong",
+        "vui",
+        "lo-lang",
+        "buon"
+      ],
       "description": "Phụ nữ nông thôn ngoài 50 tuổi, đội nón lá cũ, áo nâu vá vai, gánh đôi thúng chai."
     },
     "fixed_fields": {
@@ -39,7 +48,12 @@
       "noi_o": "Phú Hoà",
       "so_shk": "PH-0217"
     },
-    "appearances": ["d1-t2", "d3-t3", "d5-t1", "d6-t1"]
+    "appearances": [
+      "d1-t2",
+      "d3-t3",
+      "d5-t1",
+      "d6-t1"
+    ]
   },
   {
     "id": "anh-hung",
@@ -51,7 +65,12 @@
     "voice": "Xưng tôi, gọi Thành là chú em hoặc đồng chí. Nói năng đĩnh đạc, khẳng khái, thẳng thắn, không luồn cúi, nhưng đôi lúc uất nghẹn trước những rào cản giấy tờ vô cảm.",
     "portrait": {
       "key": "anh-hung",
-      "expressions": ["binh-thuong", "lo-lang", "gian", "vui"],
+      "expressions": [
+        "binh-thuong",
+        "lo-lang",
+        "gian",
+        "vui"
+      ],
       "description": "Nam thanh niên cụt tay phải, mặc áo lính bạc màu cài khuy kín cổ, mắt sáng cương trực."
     },
     "fixed_fields": {
@@ -60,7 +79,12 @@
       "noi_o": "Phú Hoà",
       "so_shk": "PH-0541"
     },
-    "appearances": ["d3-t2", "d4-t2", "d5-t3", "d6-t2"]
+    "appearances": [
+      "d3-t2",
+      "d4-t2",
+      "d5-t3",
+      "d6-t2"
+    ]
   },
   {
     "id": "ong-quynh",
@@ -72,7 +96,11 @@
     "voice": "Xưng tôi, gọi Thành là đồng chí hoặc cậu Thành. Lời lẽ nhã nhặn, chuẩn mực kiểu công chức nhưng ẩn chứa sự tự tin trịch thượng của người được cơ chế bao bọc.",
     "portrait": {
       "key": "ong-quynh",
-      "expressions": ["binh-thuong", "vui", "ne-tranh"],
+      "expressions": [
+        "binh-thuong",
+        "vui",
+        "ne-tranh"
+      ],
       "description": "Người đàn ông trung niên béo tốt, mặc áo đại cán xám, đầu chải mượt, kẹp cặp da đen bóng."
     },
     "fixed_fields": {
@@ -81,7 +109,11 @@
       "noi_o": "Thị xã",
       "so_shk": "TX-1082"
     },
-    "appearances": ["d2-t3", "d4-t4", "d5-t2"]
+    "appearances": [
+      "d2-t3",
+      "d4-t4",
+      "d5-t2"
+    ]
   },
   {
     "id": "thang-ti",
@@ -93,7 +125,12 @@
     "voice": "Xưng cháu, gọi chú hoặc chú Thành. Giọng ngây thơ, thật thà nhưng có nét già dặn sớm vì gia cảnh khốn khó.",
     "portrait": {
       "key": "thang-ti",
-      "expressions": ["binh-thuong", "lo-lang", "buon", "vui"],
+      "expressions": [
+        "binh-thuong",
+        "lo-lang",
+        "buon",
+        "vui"
+      ],
       "description": "Cậu bé gầy gò, mắt to sáng, quần đùi đen, áo cộc sờn rách, đi chân đất."
     },
     "fixed_fields": {
@@ -102,7 +139,12 @@
       "noi_o": "Phú Hoà",
       "so_shk": "PH-0893"
     },
-    "appearances": ["d2-t2", "d3-t1", "d4-t3", "d6-t3"]
+    "appearances": [
+      "d2-t2",
+      "d3-t1",
+      "d4-t3",
+      "d6-t3"
+    ]
   },
   {
     "id": "chi-thu",
@@ -114,7 +156,11 @@
     "voice": "Xưng tôi hoặc chị, gọi chú Thành hoặc đồng chí Thành. Giọng nói ấm áp, nghiêm túc nhưng cởi mở, thấu hiểu.",
     "portrait": {
       "key": "chi-thu",
-      "expressions": ["binh-thuong", "vui", "lo-lang"],
+      "expressions": [
+        "binh-thuong",
+        "vui",
+        "lo-lang"
+      ],
       "description": "Phụ nữ 34 tuổi, tóc buộc gọn gàng, mặc áo sơ mi bộ đội giản dị, đeo túi vải bạt đựng tài liệu."
     },
     "fixed_fields": {
@@ -123,7 +169,10 @@
       "noi_o": "Thị xã",
       "so_shk": "TX-0382"
     },
-    "appearances": ["d4-t5", "d6-t4"]
+    "appearances": [
+      "d4-t5",
+      "d6-t4"
+    ]
   },
   {
     "id": "tram-truong-doi",
@@ -135,7 +184,11 @@
     "voice": "Xưng tôi, gọi cậu hoặc Thành. Giọng gắt gỏng, bề trên, hay nhắc nhở kỷ luật: \"Cậu lo việc đóng dấu đi, đừng có bày vẽ!\".",
     "portrait": {
       "key": "tram-truong-doi",
-      "expressions": ["binh-thuong", "gian", "lo-lang"],
+      "expressions": [
+        "binh-thuong",
+        "gian",
+        "lo-lang"
+      ],
       "description": "Người đàn ông trung niên mặt nghiêm khắc, ria mép ngắn, đội mũ cối, tay luôn cầm sổ chỉ thị."
     },
     "fixed_fields": null,
@@ -151,7 +204,11 @@
     "voice": "Xưng em, gọi anh hoặc mình. Dịu dàng, nhẫn nại nhưng đượm vẻ lo âu khi bàn về chuyện chi tiêu gia đình cuối tháng.",
     "portrait": {
       "key": "hoa",
-      "expressions": ["binh-thuong", "lo-lang", "vui"],
+      "expressions": [
+        "binh-thuong",
+        "lo-lang",
+        "vui"
+      ],
       "description": "Người phụ nữ trẻ hiền hậu, tóc búi sau gáy, mặc áo hoa nhã nhặn."
     },
     "fixed_fields": null,
@@ -167,7 +224,10 @@
     "voice": "Xưng con, gọi bố. Trong trẻo, lễ phép.",
     "portrait": {
       "key": "be-mai",
-      "expressions": ["binh-thuong", "vui"],
+      "expressions": [
+        "binh-thuong",
+        "vui"
+      ],
       "description": "Bé gái 8 tuổi, tết tóc hai bên, quàng khăn đỏ."
     },
     "fixed_fields": null,
@@ -183,7 +243,10 @@
     "voice": "Chập chững biết nói, bi bô.",
     "portrait": {
       "key": "be-binh",
-      "expressions": ["binh-thuong", "buon"],
+      "expressions": [
+        "binh-thuong",
+        "buon"
+      ],
       "description": "Bé trai nhỏ tuổi gầy gò, mắt tròn xoe."
     },
     "fixed_fields": null,
@@ -199,7 +262,10 @@
     "voice": "Xưng mẹ, gọi con hoặc anh Thành. Giọng chậm rãi, bao dung của người mẹ cả đời vất vả vì con cháu.",
     "portrait": {
       "key": "me-thanh",
-      "expressions": ["binh-thuong", "met-moi"],
+      "expressions": [
+        "binh-thuong",
+        "met-moi"
+      ],
       "description": "Bà cụ tóc bạc phơ, da mồi, mặc áo bà ba sẫm màu."
     },
     "fixed_fields": null,
@@ -215,11 +281,16 @@
     "voice": "Xưng cháu, gọi chú. Rụt rè, lễ phép, nói nhỏ nhẹ.",
     "portrait": {
       "key": "np-sinh-vien",
-      "expressions": ["binh-thuong", "lo-lang"],
+      "expressions": [
+        "binh-thuong",
+        "lo-lang"
+      ],
       "description": "Cô gái trẻ buộc tóc đuôi gà, mặc áo sơ mi trắng sờn, đeo ba lô con cóc."
     },
     "fixed_fields": null,
-    "appearances": ["d1-t1"]
+    "appearances": [
+      "d1-t1"
+    ]
   },
   {
     "id": "np-buon-thuoc-la",
@@ -231,11 +302,16 @@
     "voice": "Xưng tôi, gọi cán bộ. Giọng lấm lét, ấp úng, mắt đảo quanh tránh nhìn thẳng.",
     "portrait": {
       "key": "np-buon-thuoc-la",
-      "expressions": ["ne-tranh", "lo-lang"],
+      "expressions": [
+        "ne-tranh",
+        "lo-lang"
+      ],
       "description": "Người đàn ông gầy còm, da xạm, mặc áo mưa rách khoác ngoài chiếc bao tải lớn."
     },
     "fixed_fields": null,
-    "appearances": ["d1-t3"]
+    "appearances": [
+      "d1-t3"
+    ]
   },
   {
     "id": "np-nguoi-dua-tang",
@@ -247,11 +323,16 @@
     "voice": "Xưng tôi, gọi chú. Giọng nghẹn ngào, khẩn khoản, vội vã.",
     "portrait": {
       "key": "np-nguoi-dua-tang",
-      "expressions": ["buon", "lo-lang"],
+      "expressions": [
+        "buon",
+        "lo-lang"
+      ],
       "description": "Người đàn ông đeo băng tang đen trên ngực áo trắng, nét mặt buồn rầu đau đớn."
     },
     "fixed_fields": null,
-    "appearances": ["d2-t1"]
+    "appearances": [
+      "d2-t1"
+    ]
   },
   {
     "id": "np-dau-co-gao",
@@ -259,15 +340,20 @@
     "role": "mot-lan",
     "age": 38,
     "home": "xã Phú Mỹ",
-    "background": "Chở xe thồ 40kg gạo không có tem phiếu chứng từ hợp lệ nhằm bán ra chợ đen kiếm lời cắt cổ trong lúc thị xã đang khan hiếm lương thực.",
+    "background": "Chở xe thồ 40 kg gạo không có tem phiếu chứng từ hợp lệ nhằm bán ra chợ đen kiếm lời cắt cổ trong lúc thị xã đang khan hiếm lương thực.",
     "voice": "Xưng tôi, gọi cán bộ hoặc anh em. Cợt nhả, nài nỉ, ranh mãnh.",
     "portrait": {
       "key": "np-dau-co-gao",
-      "expressions": ["ne-tranh", "gian"],
+      "expressions": [
+        "ne-tranh",
+        "gian"
+      ],
       "description": "Người đàn ông vạm vỡ, quần xắn móng lợn, mồ hôi nhễ nhại bên chiếc xe thồ nặng trĩu."
     },
     "fixed_fields": null,
-    "appearances": ["d2-t4"]
+    "appearances": [
+      "d2-t4"
+    ]
   },
   {
     "id": "np-dau-co-vai",
@@ -279,11 +365,16 @@
     "voice": "Xưng tôi, gọi cán bộ. Giọng đon đả, khéo léo nhưng xảo quyệt.",
     "portrait": {
       "key": "np-dau-co-vai",
-      "expressions": ["ne-tranh", "lo-lang"],
+      "expressions": [
+        "ne-tranh",
+        "lo-lang"
+      ],
       "description": "Phụ nữ trạc tứ tuần, bịt khăn rằn, giấu các súc vải sau sọt hàng."
     },
     "fixed_fields": null,
-    "appearances": ["d3-t4"]
+    "appearances": [
+      "d3-t4"
+    ]
   },
   {
     "id": "np-nong-dan-khoan",
@@ -295,11 +386,16 @@
     "voice": "Xưng tôi, gọi đồng chí cán bộ. Chân chất, khẳng khái, tin tưởng vào đường lối khoán mới của Chỉ thị 100.",
     "portrait": {
       "key": "np-nong-dan-khoan",
-      "expressions": ["binh-thuong", "lo-lang"],
+      "expressions": [
+        "binh-thuong",
+        "lo-lang"
+      ],
       "description": "Bác nông dân luống tuổi, râu ria lởm chởm, da đen cháy nắng, tay cầm tờ giấy khoán ép phẳng phiu."
     },
     "fixed_fields": null,
-    "appearances": ["d4-t1"]
+    "appearances": [
+      "d4-t1"
+    ]
   },
   {
     "id": "np-buon-chuyen-nghiep",
@@ -307,15 +403,20 @@
     "role": "mot-lan",
     "age": 42,
     "home": "Thị xã",
-    "background": "Đầu mối thu gom hàng tấn lương thực của các xã mang về đầu cơ tại thị xã. Ở Màn 3, hắn chủ động đưa phong bì 120 đồng hối lộ Thành qua khe cửa kính để xe gạo 300kg lọt trạm.",
+    "background": "Đầu mối thu gom hàng tấn lương thực của các xã mang về đầu cơ tại thị xã. Ở Màn 3, hắn chủ động đưa phong bì 120 đồng hối lộ Thành qua khe cửa kính để xe gạo 300 kg lọt trạm.",
     "voice": "Xưng em, gọi anh Thành hoặc đại ca. Giọng thì thào, mơn trớn, biết Thành đang thiếu tiền chữa bệnh cho con.",
     "portrait": {
       "key": "np-buon-chuyen-nghiep",
-      "expressions": ["ne-tranh", "vui"],
+      "expressions": [
+        "ne-tranh",
+        "vui"
+      ],
       "description": "Gã đàn ông mắt ti hí, ăn mặc bảnh bao hơn người thường, nụ cười giả lả đầy mưu toan."
     },
     "fixed_fields": null,
-    "appearances": ["d5-t4"]
+    "appearances": [
+      "d5-t5"
+    ]
   },
   {
     "id": "np-nong-dan-gao",
@@ -327,11 +428,16 @@
     "voice": "Xưng em, gọi anh cán bộ. Giọng mộc mạc, tha thiết.",
     "portrait": {
       "key": "np-nong-dan-gao",
-      "expressions": ["lo-lang", "met-moi"],
+      "expressions": [
+        "lo-lang",
+        "met-moi"
+      ],
       "description": "Người phụ nữ nông thôn gầy gò, áo vá chằng vá đụp, đôi mắt trũng sâu vì thiếu ngủ."
     },
     "fixed_fields": null,
-    "appearances": ["d5-t5"]
+    "appearances": [
+      "d5-t6"
+    ]
   },
   {
     "id": "np-buon-thuoc-phien",
@@ -343,10 +449,36 @@
     "voice": "Xưng tôi, gọi ông bạn. Cố làm ra vẻ bình thản tự nhiên nhưng động tác giật thót, căng thẳng khi bị kiểm tra hàng.",
     "portrait": {
       "key": "np-buon-thuoc-phien",
-      "expressions": ["ne-tranh", "gian"],
+      "expressions": [
+        "ne-tranh",
+        "gian"
+      ],
       "description": "Gã đàn ông phong trần, khoác áo chàm sẫm, mắt gườm gườm cảnh giác bên bọc hàng giấu kín."
     },
     "fixed_fields": null,
-    "appearances": ["d6-t5"]
+    "appearances": [
+      "d6-t5"
+    ]
+  },
+  {
+    "id": "np-hang-xom",
+    "name": "Bác Nga hàng xóm",
+    "role": "mot-lan",
+    "age": 55,
+    "home": "Thị xã",
+    "background": "Công nhân về hưu của nhà máy dệt, ở dãy B khu tập thể, cùng dãy với nhà Thành. Hay giúp đỡ mẹ Thành những lúc Thành đi trực.",
+    "voice": "Xởi lởi, nói thẳng, xưng tôi gọi chú.",
+    "portrait": {
+      "key": "np-hang-xom",
+      "expressions": [
+        "binh-thuong",
+        "lo-lang"
+      ],
+      "description": "Người đàn bà trạc năm mươi, tóc búi, áo sơ mi công nhân cũ, xách túi lưới."
+    },
+    "fixed_fields": null,
+    "appearances": [
+      "d5-t4"
+    ]
   }
 ]

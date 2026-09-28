@@ -9,7 +9,8 @@
 import { finishDay, parseClock } from "./day-end";
 import { computeBudget, payExpenses } from "./economy";
 import { hiddenStats, pickEnding } from "./endings";
-import { type GameState, currentDay, emptyCounters } from "./state";
+import { CONFRONT_WRONG_MIN, confront } from "./confront";
+import { type GameState, conditionState, currentDay, currentTraveler, emptyCounters } from "./state";
 import { type Decision, canTakeBribe, decide } from "./turn";
 import type { Action, GameContent, Indicators } from "./types";
 
@@ -18,6 +19,8 @@ export type GameAction =
   | { type: "BAT_DAU_NGAY" }
   | { type: "NHAN_PHONG_BI" }
   | { type: "QUYET_DINH"; action: Action; reasonId: string | null }
+  /** Đối chất hai chỗ đã khoanh (V8). Không đổi đáp án; đối chất sai tốn thời gian ca. */
+  | { type: "DOI_CHAT"; a: string; b: string }
   | { type: "KET_THUC_NGAY" }
   | { type: "TRA_CHI_TIEU"; expenseIds: string[] };
 
@@ -92,6 +95,23 @@ export function reduce(state: GameState, action: GameAction, content: GameConten
       return decide(state, content, decision) ?? state;
     }
 
+    case "DOI_CHAT": {
+      if (state.phase !== "TRAVELER") return state;
+      const r = confront(currentTraveler(state, content), content.documents, action.a, action.b);
+      const bump = (c: GameState["total"]) => ({
+        ...c,
+        doi_chat: (c.doi_chat ?? 0) + 1,
+        doi_chat_dung: (c.doi_chat_dung ?? 0) + (r.found ? 1 : 0),
+      });
+      return {
+        ...state,
+        total: bump(state.total),
+        today: bump(state.today),
+        clockMin: state.clockMin + (r.found ? 0 : CONFRONT_WRONG_MIN),
+        turnConfrontFound: state.turnConfrontFound === true || r.found,
+      };
+    }
+
     case "KET_THUC_NGAY": {
       if (state.phase !== "DAY_END" || state.dayReport === null) return state;
       const budget = computeBudget(
@@ -106,7 +126,7 @@ export function reduce(state: GameState, action: GameAction, content: GameConten
 
     case "TRA_CHI_TIEU": {
       if (state.phase !== "BUDGET" || state.budget === null) return state;
-      const paid = payExpenses(state.budget, currentDay(state, content), action.expenseIds, state.hardship);
+      const paid = payExpenses(state.budget, currentDay(state, content), action.expenseIds, state.hardship, conditionState(state));
       if (paid === null) return state;
 
       const after: GameState = {

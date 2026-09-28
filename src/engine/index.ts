@@ -27,3 +27,5 @@ export { type Budget } from "./economy";
 export { hiddenStats, pickEnding } from "./endings";
 export { fillText, listVariables, textVars } from "./text";
 export { followRulebook, simulate, type Strategy, type StrategyChoice, type StrategyInput } from "./simulate";
+export { rulesForItem, isGoodsRule } from "./scope";
+export { portraitFor } from "./portrait";

@@ -45,7 +45,9 @@ tram-15/
 │   ├── 05-art-brief.md         ← danh sách asset
 │   ├── 06-presentation.md      ← kịch bản trình bày, hỏi đáp
 │   ├── 07-trien-khai.md        ← kế hoạch triển khai, kiến trúc src/, deploy
-│   └── 08-cac-phase.md         ← việc và test của từng phase P0–P9
+│   ├── 08-cac-phase.md         ← việc và test của từng phase P0–P9
+│   ├── 09-am-thanh.md          ← danh sách âm thanh cần tìm
+│   └── 10-can-sua.md           ← sổ các chỗ cần sửa từ chơi thử
 ├── content/                    ← nội dung viết bằng văn (Markdown)
 │   ├── templates/
 │   │   ├── T1-luot-khach.md
@@ -189,7 +191,7 @@ Nhóm 3 người: gộp KT vào KB và GP.
 | `documents.json` | Tám loại giấy: tên, các trường, trường bắt buộc, cách hiển thị | GP | Mã loại giấy theo mục 6 |
 | `characters.json` | Nhân vật và dữ liệu cố định trên giấy tờ | KB | Chuyển đầu tiên trong nhóm nội dung |
 | `days.json` | Sáu ngày chơi | KB | Thứ tự lượt phải tham chiếu mã có trong `travelers.json` |
-| `travelers.json` | 26 lượt khách — file lớn nhất | KB | Xem nguyên tắc bên dưới. Chỉ một người sửa tại một thời điểm |
+| `travelers.json` | 27 lượt khách — file lớn nhất | KB | Xem nguyên tắc bên dưới. Chỉ một người sửa tại một thời điểm |
 | `reports.json` | Vấn đề kiến nghị, lý do soạn sẵn, ngưỡng, hiệu ứng khi chạm ngưỡng | KB + GP | Ngưỡng mặc định 3 biên bản |
 | `endings.json` | Năm kết cục | KB | Câu trích phải khớp `04-sources.md` |
 | `strings.json` | Chữ giao diện | UI | Khoá giống `ui-text.md` |
@@ -237,7 +239,7 @@ Các bước phụ thuộc nhau theo một chiều. Mỗi bước có một **c�
 | **3. Prompt** | `prompts/P1`, `P2`, `P3` | Bước 1, 2 | Viết lại lượt mẫu ở bước 1 bằng T1, chạy P1, kết quả tương đương bản viết tay và qua validate |
 | **4. Bible và nhân vật** | `docs/02-bible.md`, `content/characters.md` → `data/characters.json` | Bước 2, 3 | `characters.json` qua validate |
 | **5. Nội dung** | `ngay-1` … `ngay-6`, `endings.md`, `ui-text.md` → JSON tương ứng. Thêm `validate-data.ts` tầng 2 | Bước 4 | Validate tầng 1–2 xanh, P2 và P3 không còn lỗi mở, mọi file ở trạng thái `ĐÃ CHUYỂN JSON` |
-| **6. Validate logic và ghép engine** | `validate-data.ts` tầng 3, engine trong `src/engine/` | Bước 5 | Validate tầng 3 xanh: đáp án engine tính khớp đáp án người viết ở cả 26 lượt |
+| **6. Validate logic và ghép engine** | `validate-data.ts` tầng 3, engine trong `src/engine/` | Bước 5 | Validate tầng 3 xanh: đáp án engine tính khớp đáp án người viết ở cả 27 lượt |
 
 > **Vì sao script validate không đợi đến cuối?** Tầng 1 chỉ là nạp schema và chạy Ajv, mất chừng nửa giờ, nhưng bước 3 cần nó để thử P1. Tầng 2 cần có dữ liệu thật nên làm ở bước 5. Chỉ tầng 3 mới phải đợi engine, nên nó nằm ở cuối.
 

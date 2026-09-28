@@ -3,6 +3,7 @@
  */
 
 import type { Grade } from "./day-end";
+import { type ConditionState, checkAll } from "./conditions";
 import type { Day, Expense } from "./types";
 
 export interface Budget {
@@ -46,9 +47,11 @@ const HOUSEHOLD_SIZE = 5;
  * Các khoản chi thực tế của ngày. Từ mức 3 cả nhà đã về quê: bỏ các khoản của từng người,
  * khoản chung (gạo, chất đốt) chỉ còn phần của một mình Thành.
  */
-export function expensesFor(day: Day, hardship: number): Expense[] {
-  if (familyLevel(hardship) < 3) return day.economy.expenses;
-  return day.economy.expenses
+export function expensesFor(day: Day, hardship: number, cs?: ConditionState): Expense[] {
+  // Khoản có `when` chỉ hiện khi điều kiện thoả; không có trạng thái để xét thì bỏ qua các khoản đó.
+  const listed = day.economy.expenses.filter((x) => x.when === undefined || (cs !== undefined && checkAll(x.when, cs)));
+  if (familyLevel(hardship) < 3) return listed;
+  return listed
     .filter((x) => x.member === undefined || x.member === null)
     .map((x) => ({ ...x, cost: Math.ceil(x.cost / HOUSEHOLD_SIZE) }));
 }
@@ -62,11 +65,12 @@ export function payExpenses(
   day: Day,
   ids: readonly string[],
   hardshipSoFar = 0,
+  cs?: ConditionState,
 ): { money: number; hardship: number } | null {
   const chosen = new Set(ids);
   if (chosen.size !== ids.length) return null;
 
-  const expenses = expensesFor(day, hardshipSoFar);
+  const expenses = expensesFor(day, hardshipSoFar, cs);
   if (ids.some((id) => !expenses.some((x) => x.id === id))) return null;
 
   const spent = expenses.filter((x) => chosen.has(x.id)).reduce((sum, x) => sum + x.cost, 0);

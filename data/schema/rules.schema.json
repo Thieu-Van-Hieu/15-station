@@ -88,7 +88,8 @@
         "check",
         "params",
         "emits",
-        "reprimand"
+        "reprimand",
+        "applies_to"
       ],
       "properties": {
         "id": {
@@ -159,6 +160,17 @@
         },
         "note": {
           "type": "string"
+        },
+        "applies_to": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/category"
+          }
+        },
+        "scope_note": {
+          "type": "string",
+          "minLength": 1
         }
       },
       "allOf": [

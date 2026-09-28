@@ -16,7 +16,7 @@
 ## Đồng hồ ca
 - Bắt đầu: 07:00
 - Hết ca: 17:00
-- Mỗi lượt (phút): 100
+- Mỗi lượt (phút): 85
 - Mỗi biên bản (phút): 60
 
 ## Kinh tế
@@ -27,13 +27,14 @@
 - Tiền để dành đầu game: không
 
 ### Khoản chi
-| Mã | Tên | Số tiền | Thiết yếu | Thành viên |
-|---|---|---|---|---|
-| gao | Gạo đong chợ tự do | 230 | có | |
-| than | Than tổ ong | 60 | có | |
-| thuoc-me | Thuốc trợ tim cho mẹ | 90 | có | me-thanh |
-| thuoc-binh | Thuốc kháng sinh cho bé Bình | 120 | có | be-binh |
-| hoc-phi-mai | Học phí và tiền sách của Mai | 20 | có | be-mai |
+| Mã | Tên | Số tiền | Thiết yếu | Thành viên | Điều kiện |
+|---|---|---|---|---|---|
+| gao | Gạo đong chợ tự do | 230 | có | | |
+| than | Than tổ ong | 60 | có | | |
+| thuoc-me | Thuốc huyết áp cho mẹ (bác Nga mang hộ) | 0 | có | me-thanh | hang-xom.m1 = qua, qua-kn, lam-ngo, qua-tien, lam-ngo-tien |
+| thuoc-me-cho-den | Thuốc huyết áp cho mẹ (mua chợ đen) | 180 | có | me-thanh | hang-xom.m1 = giu, giu-kn |
+| thuoc-binh | Thuốc kháng sinh cho bé Bình | 120 | có | be-binh | |
+| hoc-phi-mai | Học phí và tiền sách của Mai | 20 | có | be-mai | |
 
 ## Chỉ số đầu game
 - không
@@ -52,6 +53,13 @@
 - [tram-truong-doi] Sau đổi tiền, tình hình phức tạp lắm. Điều 5 bắt buộc mọi hàng hoá tiêu dùng, thực phẩm phải có Hoá đơn HTX hoặc Giấy phép vận chuyển của Công ty Thương nghiệp.
 ### Tại: end
 - [tram-truong-doi] Cậu Thành, tháng này xếp loại kém là bị cắt tiền thưởng đấy. Giờ tiền mất giá, mất thưởng là cả nhà đói.
+### Tại: d5-t1
+- [tram-truong-doi] Giấy khoán thì cứ đối chiếu đúng sổ. Tôi đứng đây xem.
+
+## Trạm trưởng đứng sau lưng
+- d5-t1
+
+Ở lượt này làm ngơ vẫn bị ghi sổ và nhắc nhở như cho qua (03 mục 5.4).
 
 ## Thứ tự lượt khách
 1. d5-t1
@@ -59,6 +67,7 @@
 3. d5-t3
 4. d5-t4
 5. d5-t5
+6. d5-t6
 
 ---
 
@@ -70,9 +79,17 @@
 - Nhãn: luot-trung-tam, dong-cam
 - Ghi chú vẽ: Bà Tư lưng đã còng hơn, tóc thêm nhiều sợi bạc, đôi quang thúng mòn vẹt.
 
+### Chân dung theo nhánh đời
+- {nếu đếm(ba-tu.m1, ba-tu.m2 = giu, giu-kn) >= 2} bộ ba-tu-khong-non, biểu cảm buon
+- {nếu đếm(ba-tu.m1, ba-tu.m2 = giu, giu-kn) == 0} biểu cảm vui
+
 ### Lời thoại
-- [ba-tu] Chào chú Thành. Mấy năm nay lạm phát ghê quá chú ơi, đồng tiền mới mất giá từng ngày.
-- [ba-tu] Vụ xuân này tôi lại được khoán 13 cân gạo, gánh ra thị xã đổi lấy mấy hộp sữa với cân đường cho cháu. Sổ hộ khẩu với giấy khoán đủ cả chú xem giùm.
+- [ba-tu] {nếu đếm(ba-tu.m1, ba-tu.m2 = giu, giu-kn) <= 1} Chào chú Thành. Mấy năm nay lạm phát ghê quá chú ơi, đồng tiền mới mất giá từng ngày.
+- [ba-tu] {nếu ba-tu.m2 = giu, giu-kn và đếm(ba-tu.m1, ba-tu.m2 = giu, giu-kn) <= 1} Năm ấy chú giữ gạo, thằng cháu không có thuốc, nằm mất nửa tháng. Giờ nó đỡ rồi.
+- [ba-tu] {nếu đếm(ba-tu.m1, ba-tu.m2 = giu, giu-kn) == 0} Mấy lần chú cho qua, tôi dành dụm lợp lại được mái bếp đấy chú.
+- [narrator] {nếu đếm(ba-tu.m1, ba-tu.m2 = giu, giu-kn) >= 2} Bà Tư không đội nón nữa. Bà không chào, đặt tờ giấy khoán lên bậu cửa rồi nhìn xuống đất.
+- [ba-tu] {nếu đếm(ba-tu.m1, ba-tu.m2 = giu, giu-kn) <= 1} Vụ xuân này tôi lại được khoán 13 cân gạo, gánh ra thị xã đổi lấy mấy hộp sữa với cân đường cho cháu. Sổ hộ khẩu với giấy khoán đủ cả chú xem giùm.
+- [ba-tu] {nếu đếm(ba-tu.m1, ba-tu.m2 = giu, giu-kn) >= 2} Giấy đây.
 
 ### Phản ứng
 - [CHO_QUA] Đội ơn chú Thành! Có hạt gạo khoán này gia đình tôi mới sống nổi.
@@ -99,14 +116,14 @@
 - Địa chỉ: Xã Phú Hoà
 - Dấu: CONG_AN | Phú Hoà | rõ
 #### GXNK
-- Họ và tên: Trần Thị Lành
+- Xã viên: Trần Thị Lành
 - Xã: Phú Hoà
-- Tên HTX: HTX nông nghiệp Phú Hoà
+- Hợp tác xã: HTX nông nghiệp Phú Hoà
 - Sản phẩm: Gạo
 - Mã sản phẩm: gao
-- Số lượng (kg): 13
+- Số lượng vượt khoán (kg): 13
 - Vụ: Vụ xuân 1986
-- Ngày: 1986-04-10
+- Ngày xác nhận: 1986-04-10
 - Dấu: HTX | Phú Hoà | rõ
 
 ### Hàng thực mang theo
@@ -140,7 +157,7 @@
 - Lương thực vào thị xã: 0
 - Hộ thiếu ăn: +5
 - Giá gạo: +2
-- Ghi chú: Tịch thu 18kg gạo khoán của bà Tư, đẩy giá gạo chợ đen lên cao.
+- Ghi chú: Tịch thu 18 kg gạo khoán của bà Tư, đẩy giá gạo chợ đen lên cao.
 
 ---
 
@@ -149,12 +166,13 @@
 ### Người đến ô cửa
 - Nhân vật: ong-quynh
 - Biểu cảm: binh-thuong
-- Nhãn: không
+- Nhãn: hop-le-ma-hai
 - Ghi chú vẽ: Ông Quỳnh đứng cạnh chiếc xe tải chở đầy các bao đường có dấu kiểm định.
 
 ### Lời thoại
 - [ong-quynh] Kìa đồng chí Thành! Chuyến này tôi áp tải 200 cân đường mật của công ty điều phối sang kho thị xã.
 - [ong-quynh] Giấy phép vận chuyển của Giám đốc Công ty Thương nghiệp ký duyệt, dấu má chuẩn trăm phần trăm. Cậu kiểm nhanh cho xe qua nhé.
+- [ong-quynh] {nếu gia_gao_index >= 105} Giá gạo ngoài chợ lên thế này thì đường cũng phải lên theo thôi anh Thành ạ. Người ta đói thì càng thèm ngọt.
 
 ### Phản ứng
 - [CHO_QUA] Cảm ơn đồng chí Thành. Cán bộ như cậu huyện nên cất nhắc sớm.
@@ -181,15 +199,15 @@
 - Địa chỉ: Thị xã
 - Dấu: CONG_AN | Thị xã | rõ
 #### GPVC
-- Số GP: GP-86/042
+- Số giấy phép: GP-86/042
 - Đơn vị cấp: Công ty Thương nghiệp tỉnh
 - Người vận chuyển: Vũ Đình Quỳnh
-- Mặt hàng:
-  - duong | Đường | 200 | kg
 - Từ: Phú Mỹ
 - Đến: Thị xã
 - Ngày cấp: 1986-04-12
 - Có giá trị đến: 1986-04-25
+- Mặt hàng:
+  - duong | Đường | 200 | kg
 - Dấu: CTY_THUONG_NGHIEP | Thị xã | rõ
 
 ### Hàng thực mang theo
@@ -216,12 +234,12 @@
 - Lương thực vào thị xã: 0
 - Hộ thiếu ăn: 0
 - Giá gạo: +3
-- Ghi chú: 200kg đường của ông Quỳnh lọt qua trạm đầy đủ giấy tờ hợp pháp, sau đó tuồn ra chợ đen làm giá đường tăng vọt.
+- Ghi chú: 200 kg đường của ông Quỳnh lọt qua trạm đầy đủ giấy tờ hợp pháp, sau đó tuồn ra chợ đen làm giá đường tăng vọt.
 #### GIU_LAI
 - Lương thực vào thị xã: 0
 - Hộ thiếu ăn: +2
 - Giá gạo: 0
-- Ghi chú: Giữ lô hàng 200kg đường của cán bộ thương nghiệp tỉnh.
+- Ghi chú: Giữ lô hàng 200 kg đường của cán bộ thương nghiệp tỉnh.
 
 ---
 
@@ -231,11 +249,18 @@
 - Nhân vật: anh-hung
 - Biểu cảm: lo-lang
 - Nhãn: dong-cam
-- Ghi chú vẽ: Anh Hùng đứng lặng nhìn qua cửa kính, áo lính cũ bạc phếch.
+- Ghi chú vẽ: Anh Hùng một tay xách bó chắn bùn buộc dây thép.
+
+### Chân dung theo nhánh đời
+- {nếu đếm(anh-hung.m2, anh-hung.m2b = giu, giu-kn) >= 2} bộ anh-hung-gay, biểu cảm met-moi
+- {nếu đếm(anh-hung.m2, anh-hung.m2b = giu, giu-kn) == 0} biểu cảm vui
 
 ### Lời thoại
-- [anh-hung] Chào chú Thành. Đợt đổi tiền vừa rồi làm tổ thợ sửa xe chúng tôi kiệt quệ quá.
-- [anh-hung] Tôi mang 15 cân gạo gia đình tăng gia được ra thị xã đổi phụ tùng với thuốc men. Giấy thương binh với hộ khẩu đây chú em.
+- [anh-hung] {nếu đếm(anh-hung.m2, anh-hung.m2b = giu, giu-kn) <= 1} Chào chú Thành. Đợt đổi tiền vừa rồi làm tổ thợ sửa xe chúng tôi kiệt quệ quá.
+- [anh-hung] {nếu đếm(anh-hung.m2, anh-hung.m2b = giu, giu-kn) == 0} Tổ bây giờ được bốn anh em rồi chú ạ, có cả hai cậu cụt chân ngồi gò. Nhờ mấy lần chú cho qua đấy.
+- [narrator] {nếu đếm(anh-hung.m2, anh-hung.m2b = giu, giu-kn) >= 2} Anh Hùng gầy rộc. Anh không chào, chỉ đẩy tập giấy qua khe cửa.
+- [anh-hung] Mười hai cái chắn bùn tổ tự gò, giao cho cửa hàng xe đạp thị xã. Tổ chưa được công nhận là hợp tác xã nên chẳng ai cấp hoá đơn cho.
+- [anh-hung] Chú giữ thì tháng này bốn anh em không có gạo.
 
 ### Phản ứng
 - [CHO_QUA] Cảm ơn chú Thành nhiều lắm.
@@ -247,11 +272,11 @@
 - Năm sinh: 1952
 - Nơi đi: Phú Hoà
 - Nơi đến: Thị xã
-- Lý do: Đi mua phụ tùng sửa chữa máy móc
+- Lý do: Giao hàng tổ sửa xe gia công
 - Ngày cấp: 1986-04-12
 - Có giá trị đến: 1986-04-20
 - Hàng mang theo:
-  - gao | Gạo | 15 | kg
+  - chan-bun | Chắn bùn xe đạp | 12 | chiec
 - Dấu: UBND_XA | Phú Hoà | rõ
 #### SHK
 - Số sổ: PH-0541
@@ -270,15 +295,15 @@
 - Dấu: TB_XH | Thị xã | rõ
 
 ### Hàng thực mang theo
-- gao | Gạo | 15 | kg | LUONG_THUC
+- chan-bun | Chắn bùn xe đạp | 12 | chiec | VAT_TU
 
 ### Lỗi cài cắm
-- E4 | không | không | 15 kg gạo vượt 5 kg.
+- E5 | không | không | Chắn bùn là vật tư, thuộc phạm vi Điều 5. Tổ thương binh chưa phải hợp tác xã nên không xuất được hoá đơn, cũng không có giấy phép vận chuyển.
 
 ### Đáp án mong đợi
 - Phán quyết: GIU_LAI
 - Vi phạm:
-  - R2-DINH-MUC | E4
+  - R5-CHUNG-TU | E5
 
 ### Biên bản kiến nghị
 - Vấn đề: KN-THUONG-BINH
@@ -292,19 +317,95 @@
 
 ### Tác động lên huyện
 #### CHO_QUA
-- Lương thực vào thị xã: +1
-- Hộ thiếu ăn: 0
+- Lương thực vào thị xã: 0
+- Hộ thiếu ăn: -1
 - Giá gạo: 0
-- Ghi chú: Gạo của anh Hùng đổi được phụ tùng duy trì xưởng sửa xe.
+- Ghi chú: Tổ sửa xe thương binh giao được hàng, bốn gia đình có gạo tháng này.
 #### GIU_LAI
 - Lương thực vào thị xã: 0
-- Hộ thiếu ăn: +2
+- Hộ thiếu ăn: +3
 - Giá gạo: 0
-- Ghi chú: Tịch thu 15kg gạo của anh Hùng, đời sống thương binh cùng cực.
+- Ghi chú: 12 chiếc chắn bùn của tổ thương binh bị tạm giữ vì không có hoá đơn.
 
 ---
 
 ## LƯỢT d5-t4
+
+### Người đến ô cửa
+- Nhân vật: np-hang-xom
+- Biểu cảm: binh-thuong
+- Nhãn: dong-cam, luot-trung-tam
+- Ghi chú vẽ: Người đàn bà trạc năm mươi, tóc búi, túi lưới đựng lọ thuốc và hai hộp sữa.
+
+### Lời thoại
+- [np-hang-xom] Chú Thành, tôi đây, Nga dãy B khu tập thể dệt đây mà.
+- [np-hang-xom] Bà cụ nhà chú hết thuốc huyết áp từ tuần trước, hiệu thuốc quốc doanh không có hàng. Tôi về quê nhờ được người quen mua hộ ba chục viên Reserpin, với hai hộp sữa cho thằng Bình đang ốm.
+- [np-hang-xom] Mua ngoài chợ nên làm gì có đơn với hoá đơn hả chú. Chú giữ thì tối nay chú lại phải đi mua chợ đen, giá gấp đôi đấy.
+
+### Phản ứng
+- [CHO_QUA] Tối nay tôi mang sang tận nhà cho bà cụ.
+- [GIU_LAI] Ừ thì... phép vua. Chú liệu mà lo thuốc cho bà cụ.
+
+### Giấy tờ
+#### GDD
+- Họ và tên: Đỗ Thị Nga
+- Năm sinh: 1931
+- Nơi đi: Phú Mỹ
+- Nơi đến: Thị xã
+- Lý do: Thăm quê về
+- Ngày cấp: 1986-04-12
+- Có giá trị đến: 1986-04-20
+- Hàng mang theo:
+  - reserpin | Reserpin (thuốc huyết áp) | 30 | vien
+  - sua-dac | Sữa đặc | 2 | hop
+- Dấu: UBND_XA | Phú Mỹ | rõ
+#### SHK
+- Số sổ: TX-1107
+- Chủ hộ: Đỗ Thị Nga
+- Họ và tên: Đỗ Thị Nga
+- Năm sinh: 1931
+- Quan hệ với chủ hộ: Chủ hộ
+- Địa chỉ: Khu tập thể dệt, Thị xã
+- Dấu: CONG_AN | Thị xã | rõ
+
+### Hàng thực mang theo
+- reserpin | Reserpin (thuốc huyết áp) | 30 | vien | THUOC
+- sua-dac | Sữa đặc | 2 | hop | THUC_PHAM
+
+### Lỗi cài cắm
+- E5 | không | không | Reserpin thuộc danh mục thuốc quản lý nhưng không có đơn (Điều 3).
+- E5 | không | không | Sữa đặc là thực phẩm, không có hoá đơn hay giấy phép (Điều 5).
+
+### Đáp án mong đợi
+- Phán quyết: GIU_LAI
+- Vi phạm:
+  - R3-DON-THUOC | E5
+  - R5-CHUNG-TU | E5
+
+### Biên bản kiến nghị
+- không
+
+### Phong bì
+- không
+
+### Cờ
+- hang-xom.m1
+
+### Tác động lên huyện
+#### CHO_QUA
+- Lương thực vào thị xã: 0
+- Hộ thiếu ăn: -1
+- Giá gạo: 0
+- Ghi chú: Bác Nga mang thuốc huyết áp sang tận nhà cho mẹ Thành.
+#### GIU_LAI
+- Lương thực vào thị xã: 0
+- Hộ thiếu ăn: +1
+- Giá gạo: 0
+- Ghi chú: Thuốc của mẹ Thành nằm trong kho tịch thu của chính trạm 15.
+
+---
+
+## LƯỢT d5-t5
 
 ### Người đến ô cửa
 - Nhân vật: np-buon-chuyen-nghiep
@@ -314,6 +415,7 @@
 
 ### Lời thoại
 - [np-buon-chuyen-nghiep] Anh Thành ơi! Em gom được 300 cân gạo bãi chuyển gấp lên thị xã cho các lò bánh bún.
+- [np-buon-chuyen-nghiep] Giấy đi đường là của thằng Lợi, em trai em, nó ốm nên em đi thay. Anh em ruột cả, sổ hộ khẩu em đây.
 - [np-buon-chuyen-nghiep] Em biết anh đang kẹt tiền chữa bệnh cho bé Bình sốt cao. Em gửi chiếc phong bì 120 đồng này anh lo thuốc men cho cháu, anh cho xe em qua êm thấm nhé.
 
 ### Phản ứng
@@ -322,8 +424,8 @@
 
 ### Giấy tờ
 #### GDD
-- Họ và tên: Bùi Văn Thắng
-- Năm sinh: 1944
+- Họ và tên: Bùi Văn Lợi
+- Năm sinh: 1950
 - Nơi đi: Thị xã
 - Nơi đến: Phú Hoà
 - Lý do: Thu mua nông sản
@@ -346,11 +448,13 @@
 
 ### Lỗi cài cắm
 - E4 | không | không | 300 kg gạo vượt định mức 5 kg.
+- E2 | GDD | ho_ten | Giấy đi đường đứng tên em trai (Bùi Văn Lợi, 1950), hộ khẩu là của Bùi Văn Thắng (1944). Lượt duy nhất Điều 4 bắt đúng người gian.
 
 ### Đáp án mong đợi
 - Phán quyết: GIU_LAI
 - Vi phạm:
   - R2-DINH-MUC | E4
+  - R4-KHOP-TEN | E2
 
 ### Biên bản kiến nghị
 - không
@@ -358,7 +462,7 @@
 ### Phong bì
 - Số tiền: 120
 - Lời nói: [np-buon-chuyen-nghiep] Anh Thành cầm lấy 120 đồng này mua thuốc kháng sinh cho cháu Bình. Anh cho xe em qua nhé.
-- Ghi chú hệ quả: 120 đồng nhận hối lộ để cho lọt xe tải chở 300kg gạo.
+- Ghi chú hệ quả: 120 đồng nhận hối lộ để cho lọt xe tải chở 300 kg gạo.
 
 ### Cờ
 - không
@@ -368,16 +472,16 @@
 - Lương thực vào thị xã: 0
 - Hộ thiếu ăn: +10
 - Giá gạo: +5
-- Ghi chú: 300kg gạo gom lậu tuồn vào thị xã làm giá gạo tự do bùng nổ, nhiều hộ nghèo không mua nổi gạo.
+- Ghi chú: 300 kg gạo gom lậu tuồn vào thị xã làm giá gạo tự do bùng nổ, nhiều hộ nghèo không mua nổi gạo.
 #### GIU_LAI
 - Lương thực vào thị xã: 0
 - Hộ thiếu ăn: -5
 - Giá gạo: 0
-- Ghi chú: Chặn đứng vụ đầu cơ 300kg gạo, tịch thu nhập kho quốc doanh.
+- Ghi chú: Chặn đứng vụ đầu cơ 300 kg gạo, tịch thu nhập kho quốc doanh.
 
 ---
 
-## LƯỢT d5-t5
+## LƯỢT d5-t6
 
 ### Người đến ô cửa
 - Nhân vật: np-nong-dan-gao
@@ -414,14 +518,14 @@
 - Địa chỉ: Xã Phú Hoà
 - Dấu: CONG_AN | Phú Hoà | rõ
 #### GXNK
-- Họ và tên: Nguyễn Thị Lụa
+- Xã viên: Nguyễn Thị Lụa
 - Xã: Phú Hoà
-- Tên HTX: HTX nông nghiệp Phú Hoà
+- Hợp tác xã: HTX nông nghiệp Phú Hoà
 - Sản phẩm: Gạo
 - Mã sản phẩm: gao
-- Số lượng (kg): 15
+- Số lượng vượt khoán (kg): 15
 - Vụ: Vụ xuân 1986
-- Ngày: 1986-04-10
+- Ngày xác nhận: 1986-04-10
 - Dấu: HTX | Phú Hoà | rõ
 
 ### Hàng thực mang theo
@@ -455,4 +559,4 @@
 - Lương thực vào thị xã: 0
 - Hộ thiếu ăn: +3
 - Giá gạo: 0
-- Ghi chú: Tịch thu 20kg gạo của chị Lụa xã viên làm khoán.
+- Ghi chú: Tịch thu 20 kg gạo của chị Lụa xã viên làm khoán.

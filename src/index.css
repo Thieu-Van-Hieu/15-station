@@ -54,15 +54,18 @@
   --animate-dong-dau: dong-dau 260ms cubic-bezier(0.2, 0.9, 0.3, 1.2);
   --animate-truot-vao: truot-vao 320ms ease-out;
   --animate-nhap-nhay: nhap-nhay 1.6s ease-in-out infinite;
+  --animate-truot-ra: truot-ra 380ms ease-in forwards;
+  --animate-nhuc-nhich: nhuc-nhich 700ms ease-in-out;
+  --animate-run-ret: run-ret 0.35s ease-in-out infinite;
 }
 
 @keyframes dong-dau {
   0% {
-    transform: scale(1.35) rotate(var(--xoay, -3deg));
+    transform: scale(1.08) rotate(var(--xoay, -3deg));
     opacity: 0;
   }
   60% {
-    transform: scale(0.96) rotate(var(--xoay, -3deg));
+    transform: scale(0.98) rotate(var(--xoay, -3deg));
     opacity: 1;
   }
   100% {
@@ -79,6 +82,39 @@
   to {
     transform: translateY(0);
     opacity: 1;
+  }
+}
+
+/* Giấy đã đóng dấu trượt khỏi bàn (V5). */
+@keyframes truot-ra {
+  to {
+    transform: translate(60%, -8%) rotate(6deg);
+    opacity: 0;
+  }
+}
+
+/* Hàng người ngoài cửa sổ nhúc nhích khi đồng hồ nhảy giờ (V6). */
+@keyframes nhuc-nhich {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-3px);
+  }
+  60% {
+    transform: translateX(2px);
+  }
+}
+
+/* Bóng người co ro run vì rét khi quá giờ hết ca. */
+@keyframes run-ret {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0.6px 0;
   }
 }
 
@@ -172,6 +208,10 @@ body {
   mix-blend-mode: multiply;
 }
 
+/* Giữ sẵn chỗ cho thanh cuộn để cột không hẹp lại khi nội dung dài ra. */
+.thanh-cuon {
+  scrollbar-gutter: stable;
+}
 .thanh-cuon::-webkit-scrollbar {
   width: 8px;
   height: 8px;

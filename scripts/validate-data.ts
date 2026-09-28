@@ -402,10 +402,10 @@ const SO_LUOT_NGAY_QUY_DINH: Record<string, number> = {
   d2: 4,
   d3: 4,
   d4: 5,
-  d5: 5,
+  d5: 6,
   d6: 5,
 };
-const TONG_SO_LUOT_QUY_DINH = 26;
+const TONG_SO_LUOT_QUY_DINH = 27;
 
 const DAY_ORDER: Record<string, number> = {
   d1: 1,
@@ -476,7 +476,7 @@ export function kiemTraDieu1(days: any[], travelers: any[]): PhatHien[] {
   return phatHien;
 }
 
-/** Điều 2: Số lượt mỗi ngày đúng 3, 4, 4, 5, 5, 5. Tổng cộng 26 lượt. */
+/** Điều 2: Số lượt mỗi ngày đúng 3, 4, 4, 5, 6, 5. Tổng cộng 27 lượt. */
 export function kiemTraDieu2(days: any[], travelers: any[], strict = false): PhatHien[] {
   const phatHien: PhatHien[] = [];
   const muc: MucDo = strict ? "loi" : "canh_bao";
@@ -893,15 +893,21 @@ export function kiemTraDieu10(days: any[], travelers: any[]): PhatHien[] {
     const t = travelers[i];
 
     function checkCondition(cond: any, viTri: string) {
-      if (cond && typeof cond === "object" && typeof cond.flag === "string") {
-        if (!definedFlagsSoFar.has(cond.flag)) {
+      if (!cond || typeof cond !== "object") return;
+      const keys: string[] = typeof cond.flag === "string" ? [cond.flag] : Array.isArray(cond.flag_count) ? cond.flag_count : [];
+      for (const key of keys) {
+        if (!definedFlagsSoFar.has(key)) {
           phatHien.push({
             muc: "loi",
             dieu: 10,
-            noi_dung: `Lượt "${t.id}" (${viTri}) sử dụng cờ "${cond.flag}" trong điều kiện when trước khi cờ này được ghi`,
+            noi_dung: `Lượt "${t.id}" (${viTri}) sử dụng cờ "${key}" trong điều kiện when trước khi cờ này được ghi`,
           });
         }
       }
+    }
+
+    for (const v of t.portrait?.variants ?? []) {
+      for (const cond of v.when ?? []) checkCondition(cond, "portrait.variants");
     }
 
     if (Array.isArray(t.dialogue)) {
@@ -1215,7 +1221,7 @@ export function kiemTraTang3Dieu11(travelers: any[]): PhatHien[] {
 /** Kiểm tra biến {{…}} trong strings.json và endings.json (TXT-04). */
 export function kiemTraBienChu(strings: Record<string, string>, endings: any, reports: any[]): PhatHien[] {
   const phatHien: PhatHien[] = [];
-  const validVars = new Set<string>(["bribe_total", "valid_reports", "hang_tich_thu_kg", "day_label", "tien_con_lai"]);
+  const validVars = new Set<string>(["bribe_total", "valid_reports", "hang_tich_thu_kg", "day_label", "tien_con_lai", "doi_chat_luot", "doi_chat_hanh_dong", "doi_chat_bo_qua"]);
 
   for (const r of reports) {
     validVars.add(`kn_remaining:${r.id}`);
@@ -1252,6 +1258,79 @@ export function kiemTraBienChu(strings: Record<string, string>, endings: any, re
   return phatHien;
 }
 
+/**
+ * Tầng 3 - Điều 12: Mỗi quy định có ít nhất 2 lượt vi phạm trong khoảng ngày nó có hiệu lực (V4).
+ * Miễn R5K-KHOAN (quy định miễn trừ, không ai vi phạm được) và R6-HANG-CAM (chỉ có một ngày).
+ */
+export function kiemTraTang3Dieu12(rules: any[], travelers: any[]): PhatHien[] {
+  const MIEN = new Set(["R5K-KHOAN", "R6-HANG-CAM"]);
+  const phatHien: PhatHien[] = [];
+  for (const r of rules) {
+    if (MIEN.has(r.id)) continue;
+    const from = DAY_ORDER[r.day_from];
+    const to = DAY_ORDER[r.day_to];
+    const n = travelers.filter(
+      (t) =>
+        DAY_ORDER[t.day] >= from &&
+        DAY_ORDER[t.day] <= to &&
+        (t.expected?.violations ?? []).some((v: any) => v.rule === r.id),
+    ).length;
+    if (n < 2) {
+      phatHien.push({
+        muc: "loi",
+        dieu: 12,
+        noi_dung: `${r.id} (${r.article}) chỉ có ${n} lượt vi phạm trong ${r.day_from}–${r.day_to}, yêu cầu ít nhất 2. Quy định không bắt được ai dạy người chơi rằng đọc sổ là phí công`,
+      });
+    }
+  }
+  return phatHien;
+}
+
+/**
+ * Tầng 3 - Điều 13: Nhãn phải khớp đáp án (V2).
+ * `buon-lau-that` phải có lỗi cụ thể; `hop-le-ma-hai` phải đủ giấy tờ, đáp án CHO_QUA.
+ */
+export function kiemTraTang3Dieu13(travelers: any[]): PhatHien[] {
+  const phatHien: PhatHien[] = [];
+  for (const t of travelers) {
+    const tags: string[] = t.tags ?? [];
+    const vio = t.expected?.violations ?? [];
+    if (tags.includes("buon-lau-that") && vio.length === 0) {
+      phatHien.push({ muc: "loi", dieu: 13, noi_dung: `Lượt buôn lậu thật "${t.id}" không có vi phạm cụ thể nào trong expected` });
+    }
+    if (tags.includes("hop-le-ma-hai") && (t.expected?.verdict !== "CHO_QUA" || vio.length > 0)) {
+      phatHien.push({ muc: "loi", dieu: 13, noi_dung: `Lượt "${t.id}" mang nhãn hop-le-ma-hai nhưng không phải CHO_QUA sạch` });
+    }
+    if (tags.includes("buon-lau-that") && tags.includes("hop-le-ma-hai")) {
+      phatHien.push({ muc: "loi", dieu: 13, noi_dung: `Lượt "${t.id}" không thể vừa buon-lau-that vừa hop-le-ma-hai` });
+    }
+  }
+  return phatHien;
+}
+
+/** Tầng 3 - Điều 14: `applies_to` khớp tham số mà hàm kiểm tra thực sự dùng, để trang sổ không nói khác engine (V2). */
+export function kiemTraTang3Dieu14(rules: any[]): PhatHien[] {
+  const phatHien: PhatHien[] = [];
+  const TAT_CA = ["LUONG_THUC", "THUC_PHAM", "THUOC", "HANG_TIEU_DUNG", "VAT_TU", "HANG_CAM", "DO_CA_NHAN"];
+  const same = (a: string[], b: string[]) => a.length === b.length && a.every((x) => b.includes(x));
+  for (const r of rules) {
+    let mongDoi: string[] | null = null;
+    if (r.check === "GDD_HOP_LE") mongDoi = TAT_CA.filter((c) => !(r.params?.exempt_categories ?? []).includes(c));
+    if (r.check === "CHUNG_TU_HANG_HOA") mongDoi = r.params?.categories ?? [];
+    if (r.check === "DINH_MUC_LUONG_THUC" || r.check === "MIEN_DINH_MUC_KHOAN") mongDoi = ["LUONG_THUC"];
+    if (r.check === "DON_THUOC") mongDoi = ["THUOC"];
+    if (r.check === "KHOP_TEN") mongDoi = [];
+    if (mongDoi !== null && !same(mongDoi, r.applies_to ?? [])) {
+      phatHien.push({
+        muc: "loi",
+        dieu: 14,
+        noi_dung: `${r.id}: applies_to [${(r.applies_to ?? []).join(", ")}] không khớp phạm vi hàm kiểm tra dùng [${mongDoi.join(", ")}]`,
+      });
+    }
+  }
+  return phatHien;
+}
+
 /** Chạy toàn bộ kiểm tra của Tầng 3. */
 export function kiemTraTang3(duLieu: TatCaDuLieu): PhatHien[] {
   return [
@@ -1265,6 +1344,9 @@ export function kiemTraTang3(duLieu: TatCaDuLieu): PhatHien[] {
     ...kiemTraTang3Dieu9(duLieu.travelers),
     ...kiemTraTang3Dieu10(duLieu.characters, duLieu.travelers),
     ...kiemTraTang3Dieu11(duLieu.travelers),
+    ...kiemTraTang3Dieu12(duLieu.rules, duLieu.travelers),
+    ...kiemTraTang3Dieu13(duLieu.travelers),
+    ...kiemTraTang3Dieu14(duLieu.rules),
     ...kiemTraBienChu(duLieu.strings, duLieu.endings, duLieu.reports),
   ];
 }
@@ -1317,13 +1399,13 @@ function inKetQuaTang3(phatHien: PhatHien[], duLieu: TatCaDuLieu): void {
   for (const p of thongTin) console.log(`  ℹ [Điều ${p.dieu}] Thông tin: ${p.noi_dung}`);
 
   if (loi.length === 0) {
-    console.log("✓ Đạt toàn bộ 11 điều kiểm tra logic.");
+    console.log("✓ Đạt toàn bộ 14 điều kiểm tra logic.");
   }
 
   console.log(`Tổng kết Tầng 3: ${loi.length} lỗi, ${canhBao.length} cảnh báo, ${thongTin.length} thông tin.`);
 
-  // Bảng tóm tắt 26 lượt
-  console.log("\nBẢNG TÓM TẮT 26 LƯỢT:");
+  // Bảng tóm tắt các lượt
+  console.log("\nBẢNG TÓM TẮT CÁC LƯỢT:");
   console.log("Mã lượt | Nhân vật           | Dự kiến   | Cài cắm | Ghi chú");
   console.log("-------+--------------------+-----------+---------+----------------------------");
   for (const t of duLieu.travelers) {

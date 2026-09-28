@@ -71,6 +71,11 @@ Bạn **không phải người viết**. Bạn không sáng tác, không biên t
 | `- [mã] nội dung` | `{ "speaker": mã, "text": nội dung }` |
 | `- [mã] {nếu điều kiện} nội dung` | như trên, thêm `"when": [ … ]` |
 | `<cờ> = a, b` | `{ "flag": cờ, "in": ["a", "b"] }` |
+| `đếm(<cờ 1>, <cờ 2> = a, b) >= 2` | `{ "flag_count": [cờ 1, cờ 2], "in": ["a", "b"], "op": ">=", "value": 2 }` |
+| `<chỉ số huyện> >= 105` (`luong_thuc_vao_thi_xa`, `ho_thieu_an`, `gia_gao_index`) | `{ "indicator": chỉ số, "op": ">=", "value": 105 }` |
+| `- Bộ chân dung: <key>` | `portrait.key` |
+| Mục "Chân dung theo nhánh đời": `- {nếu điều kiện} bộ <key>, biểu cảm <biểu cảm>` | `portrait.variants[]`: `{ "when": […], "key": key, "expression": biểu cảm }`, bỏ phần không ghi |
+| Cột "Điều kiện" trong bảng khoản chi | `"when"` của khoản chi |
 | `<vấn đề> đã kích hoạt` | `{ "issue_triggered": vấn đề, "value": true }` |
 | `<vấn đề> chưa kích hoạt` | `{ "issue_triggered": vấn đề, "value": false }` |
 | Nhiều điều kiện nối bằng ` và ` | Nhiều phần tử trong cùng mảng `when` |
@@ -162,7 +167,7 @@ Mọi giấy có đủ các khoá của loại đó. Không có khoá nào khác
 | Mã lượt | `d<1–6>-t<1–5>` |
 | Nhân vật | `ba-tu` `anh-hung` `ong-quynh` `thang-ti` `chi-thu` `tram-truong-doi` `thanh` `hoa` `be-mai` `be-binh` `me-thanh`, và `np-<chữ-thường-không-dấu>` |
 | Người nói đặc biệt | `traveler` `radio` `narrator` |
-| Nhãn | `huong-dan` `buon-lau-that` `luot-trung-tam` `dung-trinh-bay` `dong-cam` |
+| Nhãn | `huong-dan` `buon-lau-that` `luot-trung-tam` `dung-trinh-bay` `dong-cam` `hop-le-ma-hai` |
 | Biểu cảm | `binh-thuong` `vui` `lo-lang` `buon` `gian` `ne-tranh` `met-moi` |
 | Loại giấy | `GDD` `SHK` `TP` `HDHTX` `GPVC` `DT` `CNTB` `GXNK` |
 | Loại dấu | `UBND_XA` `UBND_HUYEN` `CONG_AN` `PHONG_LUONG_THUC` `HTX` `CTY_THUONG_NGHIEP` `BENH_VIEN` `TRAM_Y_TE` `TB_XH` |

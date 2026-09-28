@@ -1,16 +1,21 @@
+import { useEffect, useRef, useState } from "react";
 import type { Day, GameState } from "../engine/types";
 import { formatClock } from "../engine/day-end";
-import { AppHeader, Chip, Label, s } from "./ui";
+import { AppHeader, Chip, Label, cx, s } from "./ui";
 
 interface TopBarProps {
   state: GameState;
   day: Day;
   currentTravelerOrder: number;
   totalTravelersInDay: number;
+  /** Giờ hiển thị, mặc định là `state.clockMin`. Bàn làm việc cộng trước 60 phút khi người chơi kèm biên bản (V6). */
+  clockMin?: number;
 }
 
-export function TopBar({ state, day, currentTravelerOrder, totalTravelersInDay }: TopBarProps) {
-  const late = state.clockMin > toMin(day.clock.end);
+export function TopBar({ state, day, currentTravelerOrder, totalTravelersInDay, clockMin }: TopBarProps) {
+  const target = clockMin ?? state.clockMin;
+  const { shown, jumping } = useTweenedClock(target);
+  const late = shown > toMin(day.clock.end);
   return (
     <AppHeader
       center={
@@ -19,7 +24,13 @@ export function TopBar({ state, day, currentTravelerOrder, totalTravelersInDay }
             <Label className="block text-ho-phach text-[10px]">{day.label}</Label>
             <span className="font-nhan text-[11px] text-chu-ban-phu/70">{day.game_date}</span>
           </div>
-          <Chip label={s("desk.clock")} value={formatClock(state.clockMin)} tone={late ? "son" : "xanh"} />
+          <div className={cx("transition-transform duration-300", jumping && "scale-110")}>
+            <Chip
+              label={s("desk.clock")}
+              value={<span className={cx(jumping && "text-son-nhat")}>{formatClock(shown)}</span>}
+              tone={late ? "son" : "xanh"}
+            />
+          </div>
           <Chip label={s("ui.traveler_count")} value={`${String(currentTravelerOrder).padStart(2, "0")} / ${String(totalTravelersInDay).padStart(2, "0")}`} />
         </div>
       }
@@ -34,6 +45,45 @@ export function TopBar({ state, day, currentTravelerOrder, totalTravelersInDay }
       }
     />
   );
+}
+
+/** Kim đồng hồ chạy dần tới giờ mới thay vì nhảy bụp, để người chơi thấy thời gian vừa mất. */
+function useTweenedClock(target: number): { shown: number; jumping: boolean } {
+  const [shown, setShown] = useState(target);
+  const [jumping, setJumping] = useState(false);
+  const from = useRef(target);
+
+  useEffect(() => {
+    const start = from.current;
+    if (start === target) return;
+    // Sang ngày mới (giờ lùi lại) thì đặt luôn.
+    if (target < start) {
+      from.current = target;
+      setShown(target);
+      return;
+    }
+    setJumping(target - start >= 30);
+    const t0 = performance.now();
+    const dur = Math.min(900, 250 + (target - start) * 6);
+    let raf = 0;
+    const step = (now: number) => {
+      const k = Math.min(1, (now - t0) / dur);
+      const v = Math.round(start + (target - start) * (1 - Math.pow(1 - k, 3)));
+      setShown(v);
+      if (k < 1) raf = requestAnimationFrame(step);
+      else {
+        from.current = target;
+        setTimeout(() => setJumping(false), 350);
+      }
+    };
+    raf = requestAnimationFrame(step);
+    return () => {
+      cancelAnimationFrame(raf);
+      from.current = target;
+    };
+  }, [target]);
+
+  return { shown, jumping };
 }
 
 function toMin(hhmm: string): number {

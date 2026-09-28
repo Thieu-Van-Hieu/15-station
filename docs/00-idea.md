@@ -97,6 +97,13 @@ Sức nặng của game đến từ việc gặp lại cùng một người nhi�
 
 Số phận người bố không phụ thuộc vào một quyết định duy nhất của người chơi. Lựa chọn của người chơi chỉ làm thay đổi thái độ của Tí với trạm: chào hỏi, hay tránh mặt.
 
+> **Bổ sung sau chơi thử (V3, V4):**
+> - Đường đời ba nhánh `khá lên / cầm cự / gãy` cho bà Tư, anh Hùng, thằng Tí, thể hiện bằng chân dung và câu chào, chi tiết ở `02-bible.md` mục 3.2a.
+> - Thằng Tí ở màn 2 mang 20 viên quinin trong khi đơn chỉ kê 10 viên; nó nói thẳng trước cái giá của việc giữ lại. Năm 1987 nó quay lại, mười tám tuổi, là người buôn chuyến; nếu năm 1981 thuốc bị giữ, nó nhận ra Thành và không nói gì.
+> - Lượt bác Nga hàng xóm ở màn 3 (d5-t4), ngay trước phong bì đầu tiên của màn: thuốc huyết áp cho mẹ Thành, giấy tờ thiếu. Lần đầu bảng chỉ số và bảng chi tiêu gia đình nói về cùng một việc.
+> - Điều 4 bắt hai người vô tội (anh Hùng với năm sinh thời chiến ghi lệch) và một người có tội (gã đầu cơ đi bằng giấy của em trai).
+> - Tin đồn trong ngày: giữ hai lượt liên tiếp thì người thứ ba bước tới đã thủ thế. Trạm trưởng Đối đứng sau lưng ở d3-t3, d4-t3, d5-t1: làm ngơ lúc ấy cũng bị ghi sổ.
+
 **Nhân vật phụ lặp lại (nên có):** chị Thu, cán bộ huyện phụ trách nông nghiệp, xuất hiện ở màn 2 và màn 4. Chị là người nhận biên bản kiến nghị, là gương mặt của một bộ máy biết lắng nghe cơ sở.
 
 Ngoài ra có khoảng 10 nhân vật chỉ xuất hiện một lần: người buôn thuốc lá, gã đầu cơ gạo (người đưa phong bì), gã đầu cơ vải, cô sinh viên về quê, đoàn cán bộ đi công tác, người đưa tang…
@@ -142,7 +149,7 @@ Sáu loại là đủ để phong phú mà không làm người chơi rối.
 
 ### Sổ chỉ thị: luật cộng dồn theo ngày
 
-Mỗi ngày chỉ thêm một quy định, để người chơi không bao giờ bị ngợp. Tổng cộng 4 màn, 6 ngày chơi, 26 lượt khách.
+Mỗi ngày chỉ thêm một quy định, để người chơi không bao giờ bị ngợp. Tổng cộng 4 màn, 6 ngày chơi, 27 lượt khách (ban đầu 26; thêm lượt bác Nga ở d5 sau chơi thử).
 
 | Ngày | Màn | Số lượt | Quy định mới |
 | ---- | --- | ------- | ------------ |

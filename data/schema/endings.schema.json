@@ -84,7 +84,10 @@
             "issues_triggered",
             "hardship",
             "overtime_days",
-            "reprimands"
+            "reprimands",
+            "doi_chat_count",
+            "doi_chat_hanh_dong",
+            "doi_chat_bo_qua"
           ]
         },
         "op": {
@@ -143,6 +146,77 @@
         },
         {
           "$ref": "#/$defs/statCondition"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "flag_count",
+            "in",
+            "op",
+            "value"
+          ],
+          "properties": {
+            "flag_count": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "$ref": "#/$defs/flagKey"
+              }
+            },
+            "in": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "$ref": "#/$defs/flagValue"
+              }
+            },
+            "op": {
+              "enum": [
+                ">=",
+                "<=",
+                "==",
+                ">",
+                "<"
+              ]
+            },
+            "value": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "indicator",
+            "op",
+            "value"
+          ],
+          "properties": {
+            "indicator": {
+              "enum": [
+                "luong_thuc_vao_thi_xa",
+                "ho_thieu_an",
+                "gia_gao_index"
+              ]
+            },
+            "op": {
+              "enum": [
+                ">=",
+                "<=",
+                "==",
+                ">",
+                "<"
+              ]
+            },
+            "value": {
+              "type": "number"
+            }
+          }
         }
       ]
     },
@@ -157,7 +231,8 @@
         "scenes",
         "quote",
         "character_lines",
-        "closing_question"
+        "closing_question",
+        "card_line"
       ],
       "properties": {
         "id": {
@@ -262,6 +337,12 @@
             "string",
             "null"
           ]
+        },
+        "card_line": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 140,
+          "description": "Một dòng tóm tắt ngắn in trên thẻ kết quả (V7)."
         }
       },
       "allOf": [

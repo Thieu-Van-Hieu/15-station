@@ -22,7 +22,11 @@ describe("Asset tests (P7: ART-01 to ART-06)", () => {
     for (const t of content.travelers) {
       const char = content.characters.find((c) => c.id === t.character);
       if (char) {
-        requiredPortraits.add(`${char.portrait.key}_${t.portrait.expression}`);
+        const baseKey = t.portrait.key ?? char.portrait.key;
+        requiredPortraits.add(`${baseKey}_${t.portrait.expression}`);
+        for (const v of t.portrait.variants ?? []) {
+          requiredPortraits.add(`${v.key ?? baseKey}_${v.expression ?? t.portrait.expression}`);
+        }
       }
     }
 

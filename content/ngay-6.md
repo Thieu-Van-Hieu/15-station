@@ -72,9 +72,14 @@
 - Nhãn: dong-cam
 - Ghi chú vẽ: Bà Tư cười rạng rỡ, chiếc nón lá mới tinh, gánh gạo đầy ắp.
 
+### Chân dung theo nhánh đời
+- {nếu đếm(ba-tu.m1, ba-tu.m2, ba-tu.m3 = giu, giu-kn) >= 2} bộ ba-tu-khong-non, biểu cảm buon
+
 ### Lời thoại
-- [ba-tu] Chú Thành ơi! Nghe bảo trên Trung ương ra lệnh xoá bỏ trạm rồi phải không chú?
-- [ba-tu] Nay tôi chở 30 cân gạo ra chợ bán công khai, không cần phải xin giấy đi đường hay giấy khoán gì nữa hả chú?
+- [ba-tu] {nếu đếm(ba-tu.m1, ba-tu.m2, ba-tu.m3 = giu, giu-kn) <= 1} Chú Thành ơi! Nghe bảo trên Trung ương ra lệnh xoá bỏ trạm rồi phải không chú?
+- [ba-tu] {nếu đếm(ba-tu.m1, ba-tu.m2, ba-tu.m3 = giu, giu-kn) <= 1} Nay tôi chở 30 cân gạo ra chợ bán công khai, không cần phải xin giấy đi đường hay giấy khoán gì nữa hả chú?
+- [narrator] {nếu đếm(ba-tu.m1, ba-tu.m2, ba-tu.m3 = giu, giu-kn) >= 2} Bà Tư gánh gạo đi qua barie đã mở. Bà dừng lại trước ô cửa, không nhìn vào.
+- [ba-tu] {nếu đếm(ba-tu.m1, ba-tu.m2, ba-tu.m3 = giu, giu-kn) >= 2} Giờ thì không cần giấy nữa, phải không chú.
 
 ### Phản ứng
 - [CHO_QUA] Mừng quá chú ơi! Nông dân chúng tôi chờ ngày này bao năm rồi!
@@ -124,9 +129,14 @@
 - Nhãn: dong-cam
 - Ghi chú vẽ: Anh Hùng mặc áo sơ mi mới, khoẻ khoắn bên chiếc xe đạp chở phụ tùng.
 
+### Chân dung theo nhánh đời
+- {nếu đếm(anh-hung.m2, anh-hung.m2b, anh-hung.m3 = giu, giu-kn) >= 2} bộ anh-hung-gay, biểu cảm met-moi
+
 ### Lời thoại
-- [anh-hung] Chào chú em! Trạm sắp tháo barie rồi hả chú em?
-- [anh-hung] Tổ sửa xe của tôi nay tự do lên thị xã mua 10 bộ phụ tùng xích líp về mở rộng xưởng, không còn phải xin xỏ giấy phép phiền hà nữa.
+- [anh-hung] {nếu đếm(anh-hung.m2, anh-hung.m2b, anh-hung.m3 = giu, giu-kn) <= 1} Chào chú em! Trạm sắp tháo barie rồi hả chú em?
+- [anh-hung] {nếu đếm(anh-hung.m2, anh-hung.m2b, anh-hung.m3 = giu, giu-kn) <= 1} Tổ sửa xe của tôi nay tự do lên thị xã mua 10 bộ phụ tùng xích líp về mở rộng xưởng, không còn phải xin xỏ giấy phép phiền hà nữa.
+- [narrator] {nếu đếm(anh-hung.m2, anh-hung.m2b, anh-hung.m3 = giu, giu-kn) >= 2} Anh Hùng đứng xa ô cửa, tay xách mấy bộ xích líp cũ.
+- [anh-hung] {nếu đếm(anh-hung.m2, anh-hung.m2b, anh-hung.m3 = giu, giu-kn) >= 2} Tổ sửa xe giải tán từ năm ngoái rồi chú ạ. Tôi đi sửa xe lề đường. Bộ phụ tùng này là của người ta thuê tôi chở.
 
 ### Phản ứng
 - [CHO_QUA] Đổi mới thế này thì dân mới có cơ mở mày mở mặt chú em ạ!
@@ -173,22 +183,27 @@
 ### Người đến ô cửa
 - Nhân vật: thang-ti
 - Biểu cảm: vui
+- Bộ chân dung: thang-ti-lon
 - Nhãn: dong-cam
-- Ghi chú vẽ: Thằng Tí lớn phổng phao, áo lành lặn, nụ cười tươi rói.
+- Ghi chú vẽ: Thằng Tí năm 1987: mười tám tuổi, áo sơ mi cũ, đeo ba lô, cao hơn cả khung cửa.
+
+### Chân dung theo nhánh đời
+- {nếu thang-ti.m2 = giu, giu-kn} bộ thang-ti-lon, biểu cảm ne-tranh
 
 ### Lời thoại
-- [thang-ti] Chú Thành ơi! Bố cháu khỏi ốm rồi, hai bố con cháu chở sọt rau bãi 20 cân ra chợ bán đây ạ!
-- [thang-ti] Bố cháu bảo trạm tháo barie rồi nên cháu vào chào chú một câu.
+- [thang-ti] {nếu thang-ti.m2 = qua, qua-kn, lam-ngo, qua-tien, lam-ngo-tien} Chú Thành! Chú còn nhớ cháu không, thằng Tí con bố Thược rèn đây ạ!
+- [thang-ti] {nếu thang-ti.m2 = qua, qua-kn, lam-ngo, qua-tien, lam-ngo-tien} Cháu mười tám rồi. Bố cháu vẫn khoẻ, hai bố con giờ buôn chuyến vải lên thị xã. Giấy tờ theo luật mới đủ cả, chú cứ xem.
+- [narrator] {nếu thang-ti.m2 = giu, giu-kn} Một thanh niên gầy, cao lêu nghêu đặt tập giấy lên bậu cửa. Cậu nhìn Thành rất lâu, rồi nhìn đi chỗ khác. Cậu không nói gì cả.
 
 ### Phản ứng
-- [CHO_QUA] Cháu cảm ơn chú Thành suốt mấy năm qua đã thương hai bố con cháu!
-- [GIU_LAI] Sao chú lại giữ rau của bố con cháu...
+- [CHO_QUA] {nếu thang-ti.m2 = qua, qua-kn, lam-ngo, qua-tien, lam-ngo-tien} Cháu chào chú. Chú giữ sức khoẻ ạ.
+- [GIU_LAI] {nếu thang-ti.m2 = qua, qua-kn, lam-ngo, qua-tien, lam-ngo-tien} Trạm dỡ rồi mà chú vẫn giữ ạ...
 
 ### Giấy tờ
 - không
 
 ### Hàng thực mang theo
-- rau | Rau xanh các loại | 20 | kg | THUC_PHAM
+- vai | Vải | 40 | met | HANG_TIEU_DUNG
 
 ### Lỗi cài cắm
 - không
@@ -211,12 +226,12 @@
 - Lương thực vào thị xã: 0
 - Hộ thiếu ăn: -2
 - Giá gạo: 0
-- Ghi chú: Gia đình thằng Tí phấn khởi buôn bán nuôi sống gia đình.
+- Ghi chú: Chuyến vải của thằng Tí lên chợ thị xã.
 #### GIU_LAI
 - Lương thực vào thị xã: 0
 - Hộ thiếu ăn: +2
 - Giá gạo: 0
-- Ghi chú: Giữ rau củ của thằng Tí.
+- Ghi chú: Giữ chuyến vải của thằng Tí dù trạm đã xoá bỏ.
 
 ---
 
@@ -316,9 +331,9 @@
 - Lương thực vào thị xã: 0
 - Hộ thiếu ăn: +5
 - Giá gạo: 0
-- Ghi chú: 2kg thuốc phiện lọt vào thị xã đầu độc đời sống nhân dân.
+- Ghi chú: 2 kg thuốc phiện lọt vào thị xã đầu độc đời sống nhân dân.
 #### GIU_LAI
 - Lương thực vào thị xã: 0
 - Hộ thiếu ăn: 0
 - Giá gạo: 0
-- Ghi chú: Bắt giữ kịp thời 2kg thuốc phiện buôn lậu theo danh mục hàng cấm R6.
+- Ghi chú: Bắt giữ kịp thời 2 kg thuốc phiện buôn lậu theo danh mục hàng cấm R6.

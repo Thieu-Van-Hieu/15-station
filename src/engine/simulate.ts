@@ -7,7 +7,8 @@
 import { type Evaluation, evaluate } from "./evaluate";
 import { type GameAction, newGame, reduce } from "./game";
 import { type ReasonOption, reasonsOn } from "./reports";
-import { type GameState, currentDay, currentTraveler, issuesActiveOn } from "./state";
+import { type GameState, conditionState, currentDay, currentTraveler, issuesActiveOn } from "./state";
+import { expensesFor } from "./economy";
 import type { Action, Day, GameContent, Traveler, TravelerId } from "./types";
 
 export interface StrategyInput {
@@ -34,7 +35,7 @@ export const followRulebook: Strategy = ({ evaluation }) => ({ action: evaluatio
 export function payEssentialsInOrder(state: GameState, content: GameContent): string[] {
   let left = state.budget?.available ?? 0;
   const ids: string[] = [];
-  for (const x of currentDay(state, content).economy.expenses) {
+  for (const x of expensesFor(currentDay(state, content), state.hardship, conditionState(state))) {
     if (x.essential && x.cost <= left) {
       ids.push(x.id);
       left -= x.cost;

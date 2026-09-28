@@ -106,6 +106,15 @@ const SPECS: Record<string, Spec> = {
   "np-buon-chuyen-nghiep": { outfit: "bao-bao", head: "toc-chai-muot", features: ["mat-ti-hi", "ria"] },
   "np-nong-dan-gao": { outfit: "ao-nau", head: "toc-buoc-thap", features: ["ma-hop", "gay"], headRx: 27, skin: "sam" },
   "np-buon-thuoc-phien": { outfit: "ao-cham", head: "khan-cham", features: ["rau-lom-chom"], skin: "sam" },
+  "np-hang-xom": { outfit: "so-mi-tui-vai", head: "toc-bui", features: ["nep-nhan"], headRx: 27 },
+
+  // Nhánh đời (V3): cùng nhân vật, đổi dáng theo những gì đã xảy ra ở trạm.
+  // Bà Tư sau hai lần bị giữ: không đội nón nữa, tóc bạc búi vội, má hóp.
+  "ba-tu-khong-non": { outfit: "ao-nau", head: "toc-bac-bui", features: ["nep-nhan", "ma-hop", "gay"], skin: "sam" },
+  // Thằng Tí năm 1987, mười tám tuổi, đi buôn chuyến.
+  "thang-ti-lon": { outfit: "so-mi-ba-lo", head: "toc-ngan", features: ["gay"], shoulder: 40, headRx: 27, skin: "sam" },
+  // Anh Hùng khi tổ sửa xe tan: gầy rộc, râu không cạo, tóc bù.
+  "anh-hung-gay": { outfit: "ao-linh-cut-tay", head: "toc-bu-xu", features: ["ma-hop", "gay", "rau-lom-chom"] },
 };
 
 // ---------------------------------------------------------------------------
@@ -569,7 +578,11 @@ const pairs = new Set<string>();
 for (const c of characters) for (const e of c.portrait.expressions ?? []) pairs.add(`${c.portrait.key}_${e}`);
 for (const t of travelers) {
   const c = characters.find((x) => x.id === t.character);
-  if (c) pairs.add(`${c.portrait.key}_${t.portrait.expression}`);
+  if (!c) continue;
+  const p = t.portrait as { expression: string; key?: string; variants?: { key?: string; expression?: string }[] };
+  const baseKey = p.key ?? c.portrait.key;
+  pairs.add(`${baseKey}_${p.expression}`);
+  for (const v of p.variants ?? []) pairs.add(`${v.key ?? baseKey}_${v.expression ?? p.expression}`);
 }
 
 fs.mkdirSync(OUT, { recursive: true });

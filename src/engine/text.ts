@@ -25,6 +25,9 @@ export function textVars(state: GameState, content: GameContent): Record<string,
     hang_tich_thu_kg: state.total.hang_tich_thu_kg,
     day_label: currentDay(state, content).label,
     tien_con_lai: state.money,
+    doi_chat_luot: (state.total.doi_chat_hanh_dong ?? 0) + (state.total.doi_chat_bo_qua ?? 0),
+    doi_chat_hanh_dong: state.total.doi_chat_hanh_dong ?? 0,
+    doi_chat_bo_qua: state.total.doi_chat_bo_qua ?? 0,
   };
   for (const issue of content.reports) {
     const count = state.issues[issue.id]?.count ?? 0;

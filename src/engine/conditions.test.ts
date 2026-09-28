@@ -33,3 +33,22 @@ describe("conditions — 03 mục 1.10", () => {
     expect(checkCondition({ stat: "bribe_total", op: ">", value: 0 }, state({ stats }))).toBe(true);
   });
 });
+
+describe("conditions — dạng mới (V3)", () => {
+  const cs = {
+    flags: { "ba-tu.m1": "giu", "ba-tu.m2": "giu-kn", "ba-tu.m3": "qua" } as const,
+    issuesTriggered: new Set<never>(),
+    indicators: { luong_thuc_vao_thi_xa: 100, ho_thieu_an: 210, gia_gao_index: 108 },
+  };
+
+  it("CON-10 flag_count đếm số cờ có giá trị thuộc in", () => {
+    const keys = ["ba-tu.m1", "ba-tu.m2", "ba-tu.m3", "ba-tu.m4"];
+    expect(checkCondition({ flag_count: keys, in: ["giu", "giu-kn"], op: "==", value: 2 }, cs)).toBe(true);
+    expect(checkCondition({ flag_count: keys, in: ["giu", "giu-kn"], op: ">=", value: 3 }, cs)).toBe(false);
+  });
+
+  it("CON-11 indicator so chỉ số huyện hiện tại", () => {
+    expect(checkCondition({ indicator: "gia_gao_index", op: ">=", value: 105 }, cs)).toBe(true);
+    expect(checkCondition({ indicator: "ho_thieu_an", op: "<", value: 200 }, cs)).toBe(false);
+  });
+});

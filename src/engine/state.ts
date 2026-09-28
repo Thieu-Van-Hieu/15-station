@@ -40,6 +40,14 @@ export interface Counters {
   invalid_reports: number;
   bribes_accepted: number;
   bribe_total: number;
+  /** Số lần đối chất (V8, 03 mục 5.5). */
+  doi_chat: number;
+  /** Đối chất chỉ ra được chỗ lệch thật. */
+  doi_chat_dung: number;
+  /** Lượt có đối chất đúng mà người chơi giữ lại: biết và làm. */
+  doi_chat_hanh_dong: number;
+  /** Lượt có đối chất đúng mà người chơi vẫn cho qua hoặc làm ngơ: biết mà vẫn đóng dấu. */
+  doi_chat_bo_qua: number;
 }
 
 export function emptyCounters(): Counters {
@@ -56,6 +64,10 @@ export function emptyCounters(): Counters {
     invalid_reports: 0,
     bribes_accepted: 0,
     bribe_total: 0,
+    doi_chat: 0,
+    doi_chat_dung: 0,
+    doi_chat_hanh_dong: 0,
+    doi_chat_bo_qua: 0,
   };
 }
 
@@ -70,7 +82,7 @@ export interface IssueProgress {
 }
 
 /** Giấy nhắc nhở chờ hiện ở lượt kế tiếp. Giao diện tự tra chữ (rules.json hoặc strings.json). */
-export type Reprimand = { kind: "de-lot"; rule: RuleId } | { kind: "giu-oan" };
+export type Reprimand = { kind: "de-lot"; rule: RuleId } | { kind: "giu-oan"; traveler?: TravelerId };
 
 export interface TurnRecord {
   traveler: TravelerId;
@@ -106,6 +118,8 @@ export interface GameState {
   hardship: number;
   /** Số khoản thiết yếu bỏ lỡ ở lần chi tiêu gần nhất. Làm mỗi lượt hôm nay chậm hơn (03 mục 8.3). */
   fatigue: number;
+  /** Lượt hiện tại đã có một lần đối chất đúng (V8). Xoá khi quyết định. */
+  turnConfrontFound?: boolean;
   overtimeDays: number;
   log: TurnRecord[];
   dayReport: DayReport | null;
@@ -154,5 +168,5 @@ export function issuesTriggered(state: GameState): Set<IssueId> {
 }
 
 export function conditionState(state: GameState): ConditionState {
-  return { flags: state.flags, issuesTriggered: issuesTriggered(state), stats: hiddenStats(state) };
+  return { flags: state.flags, issuesTriggered: issuesTriggered(state), stats: hiddenStats(state), indicators: state.indicators };
 }

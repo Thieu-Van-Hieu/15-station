@@ -2,7 +2,9 @@
  * Chấm và cập nhật sau mỗi lượt — 03 mục 5.
  */
 
+import { activeRules } from "./active";
 import { FATIGUE_MIN_PER_POINT } from "./economy";
+import { isGoodsRule, rulesForItem } from "./scope";
 import { finishDay, addDeltas } from "./day-end";
 import { evaluate } from "./evaluate";
 import { fileReport, reasonsOn } from "./reports";
@@ -42,10 +44,28 @@ export function canTakeBribe(state: GameState, content: GameContent): boolean {
   return state.phase === "TRAVELER" && !state.bribeTaken && currentTraveler(state, content).bribe !== null;
 }
 
-/** Chữ của giấy nhắc nhở. */
+/** Chữ của giấy nhắc nhở. Giữ oan thì nêu từng dòng hàng thuộc điều nào, không thuộc điều nào (V2). */
 export function reprimandText(r: Reprimand, content: GameContent): string {
-  if (r.kind === "giu-oan") return content.strings["reprimand.giu_oan"] ?? "reprimand.giu_oan";
-  return content.rules.find((x) => x.id === r.rule)?.reprimand ?? r.rule;
+  const str = (k: string) => content.strings[k] ?? k;
+  if (r.kind === "de-lot") return content.rules.find((x) => x.id === r.rule)?.reprimand ?? r.rule;
+
+  const base = str("reprimand.giu_oan");
+  const t = r.traveler === undefined ? undefined : content.travelers.find((x) => x.id === r.traveler);
+  if (t === undefined) return base;
+
+  const goodsRules = activeRules(content.rules, t.day, new Set()).filter(isGoodsRule);
+  const lines = t.cargo
+    .filter((h) => h.category !== "DO_CA_NHAN")
+    .map((h) => {
+      const inScope = rulesForItem(goodsRules, h);
+      const outScope = goodsRules.filter((x) => !inScope.includes(x) && x.id !== "R5K-KHOAN");
+      const parts = [
+        inScope.length > 0 ? `${str("reprimand.scope_only")} ${inScope.map((x) => x.article).join(", ")}` : str("reprimand.scope_none"),
+        outScope.length > 0 ? `${str("reprimand.scope_out")} ${outScope.map((x) => x.article).join(", ")}` : null,
+      ].filter(Boolean);
+      return `${h.ten}: ${parts.join("; ")}.`;
+    });
+  return [base, ...lines, str("reprimand.papers_ok")].join("\n");
 }
 
 /** Tổng kg hàng bị tịch thu khi giữ lại: các dòng tính bằng kg, trừ đồ cá nhân. */
@@ -74,8 +94,11 @@ export function decide(state: GameState, content: GameContent, { action, reasonI
   const ev = evaluate(t, day, content, issuesActiveOn(state, day.id));
   const hv = ev.violations.length > 0;
   const correct = action === "GIU_LAI" ? hv : !hv;
-  const recorded = action !== "LAM_NGO";
+  // Trạm trưởng đứng sau lưng thì làm ngơ cũng bị thấy và ghi sổ (V3).
+  const observed = (day.observed ?? []).includes(t.id);
+  const recorded = action !== "LAM_NGO" || observed;
   const bribe = state.bribeTaken && t.bribe !== null ? t.bribe.amount : 0;
+  const found = state.turnConfrontFound === true;
 
   // Biên bản
   let issues = state.issues;
@@ -101,6 +124,11 @@ export function decide(state: GameState, content: GameContent, { action, reasonI
     invalid_reports: c.invalid_reports + (report?.valid === false ? 1 : 0),
     bribes_accepted: c.bribes_accepted + (bribe > 0 ? 1 : 0),
     bribe_total: c.bribe_total + bribe,
+    // V8: đã chỉ ra được chỗ lệch ở lượt này rồi mới quyết định.
+    doi_chat: c.doi_chat ?? 0,
+    doi_chat_dung: c.doi_chat_dung ?? 0,
+    doi_chat_hanh_dong: (c.doi_chat_hanh_dong ?? 0) + (found && action === "GIU_LAI" ? 1 : 0),
+    doi_chat_bo_qua: (c.doi_chat_bo_qua ?? 0) + (found && action !== "GIU_LAI" ? 1 : 0),
   });
 
   // Giấy nhắc nhở: chỉ khi sai và có ghi sổ. Làm ngơ thì cấp trên không biết.
@@ -108,7 +136,7 @@ export function decide(state: GameState, content: GameContent, { action, reasonI
   // lượt đầu của ngày sau; lượt cuối d6 thì không còn lượt nào để hiện.
   let pendingReprimand: Reprimand | null = null;
   if (recorded && !correct) {
-    pendingReprimand = action === "GIU_LAI" ? { kind: "giu-oan" } : { kind: "de-lot", rule: ev.violations[0].rule };
+    pendingReprimand = action === "GIU_LAI" ? { kind: "giu-oan", traveler: t.id } : { kind: "de-lot", rule: ev.violations[0].rule };
   }
 
   const outcome = t.outcomes[action] ?? t.outcomes.CHO_QUA;
@@ -142,6 +170,7 @@ export function decide(state: GameState, content: GameContent, { action, reasonI
       FATIGUE_MIN_PER_POINT * (state.fatigue ?? 0) +
       (report === null ? 0 : day.clock.per_report_min),
     bribeTaken: false,
+    turnConfrontFound: false,
     pendingReprimand,
     log: [...state.log, record],
   };

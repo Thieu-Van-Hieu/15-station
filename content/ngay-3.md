@@ -51,6 +51,13 @@
 - [radio] Ngày 13 tháng 1 năm 1981, Ban Bí thư đã ban hành Chỉ thị số 100 về cải tiến công tác khoán, mở rộng khoán sản phẩm đến nhóm lao động và người lao động trong hợp tác xã nông nghiệp.
 ### Tại: end
 - [tram-truong-doi] Nhớ kiểm tra kỹ đơn thuốc của bệnh viện, thuốc kháng sinh quản lý đang bị thất thoát ra ngoài nhiều.
+### Tại: d3-t3
+- [tram-truong-doi] Cậu cứ làm, tôi đứng sau xem một lát.
+
+## Trạm trưởng đứng sau lưng
+- d3-t3
+
+Ở lượt này làm ngơ vẫn bị ghi sổ và nhắc nhở như cho qua (03 mục 5.4).
 
 ## Thứ tự lượt khách
 1. d3-t1
@@ -65,16 +72,17 @@
 ### Người đến ô cửa
 - Nhân vật: thang-ti
 - Biểu cảm: lo-lang
-- Nhãn: dong-cam
-- Ghi chú vẽ: Cậu bé mồ hôi nhễ nhại, hai tay giữ chặt gói thuốc penicillin nhỏ.
+- Nhãn: dong-cam, luot-trung-tam
+- Ghi chú vẽ: Cậu bé run run, hai tay ôm gói thuốc bọc lá chuối, mắt đỏ hoe.
 
 ### Lời thoại
-- [thang-ti] Chú Thành! Bố cháu sốt rét mấy hôm nay rồi, trạm xá xã bảo phải lên bệnh viện thị xã mua penicillin.
-- [thang-ti] Cháu có đơn thuốc bác sĩ bệnh viện kê đây ạ, đúng 10 viên thuốc.
+- [thang-ti] Chú Thành! Bố cháu sốt rét ba hôm nay rồi, rét run cầm cập. Trạm xá xã hết sạch thuốc.
+- [thang-ti] Bác sĩ bệnh viện kê cho bố cháu 10 viên quinin. Nhưng bác ấy dặn sốt rét phải uống đủ đợt, bỏ giữa chừng là sốt lại, nặng hơn. Cháu bán con lợn con mua thêm 10 viên ngoài chợ cho đủ đợt.
+- [thang-ti] Chú mà giữ thì bố cháu uống dở chừng mất... Cháu xin chú.
 
 ### Phản ứng
-- [CHO_QUA] Cháu cảm ơn chú Thành nhiều lắm, cháu chạy về cho bố uống ngay!
-- [GIU_LAI] Sao lại giữ thuốc của bố cháu chú ơi...
+- [CHO_QUA] Cháu cảm ơn chú! Cháu chạy về cho bố uống ngay!
+- [GIU_LAI] ...Thế cháu mang 10 viên có đơn về cũng được ạ? Không ạ? Cả hai mươi viên luôn ạ...
 
 ### Giấy tờ
 #### GDD
@@ -82,11 +90,11 @@
 - Năm sinh: 1969
 - Nơi đi: Phú Hoà
 - Nơi đến: Thị xã
-- Lý do: Đi mua thuốc chữa bệnh cho bố
+- Lý do: Đi mua thuốc chữa sốt rét cho bố
 - Ngày cấp: 1981-03-15
 - Có giá trị đến: 1981-03-20
 - Hàng mang theo:
-  - penicillin | Penicillin | 10 | vien
+  - quinin | Quinin | 20 | vien
 - Dấu: UBND_XA | Phú Hoà | rõ
 #### DT
 - Bệnh nhân: Nguyễn Văn Thược
@@ -94,18 +102,19 @@
 - Ngày kê: 1981-03-15
 - Có giá trị đến: 1981-03-22
 - Thuốc:
-  - penicillin | Penicillin | 10 | vien
+  - quinin | Quinin | 10 | vien
 - Dấu: BENH_VIEN | Thị xã | rõ
 
 ### Hàng thực mang theo
-- penicillin | Penicillin | 10 | vien | THUOC
+- quinin | Quinin | 20 | vien | THUOC
 
 ### Lỗi cài cắm
-- không
+- E6 | DT | thuoc | Mang 20 viên quinin, đơn bệnh viện chỉ kê 10 viên. Phần mua thêm ở chợ không có đơn.
 
 ### Đáp án mong đợi
-- Phán quyết: CHO_QUA
-- Vi phạm: không
+- Phán quyết: GIU_LAI
+- Vi phạm:
+  - R3-DON-THUOC | E6
 
 ### Biên bản kiến nghị
 - không
@@ -121,12 +130,12 @@
 - Lương thực vào thị xã: 0
 - Hộ thiếu ăn: -1
 - Giá gạo: 0
-- Ghi chú: Bố thằng Tí có thuốc kháng sinh điều trị kịp thời.
+- Ghi chú: Bố thằng Tí uống đủ đợt quinin, cắt được cơn sốt rét.
 #### GIU_LAI
 - Lương thực vào thị xã: 0
 - Hộ thiếu ăn: +3
 - Giá gạo: 0
-- Ghi chú: Tịch thu thuốc kháng sinh của thằng Tí, bệnh tình người bố trở nặng.
+- Ghi chú: 20 viên quinin của thằng Tí nhập kho tịch thu. Bố nó bỏ dở đợt thuốc.
 
 ---
 
@@ -197,7 +206,7 @@
 - Lương thực vào thị xã: 0
 - Hộ thiếu ăn: +2
 - Giá gạo: 0
-- Ghi chú: Tịch thu 12kg gạo của thương binh Lê Văn Hùng.
+- Ghi chú: Tịch thu 12 kg gạo của thương binh Lê Văn Hùng.
 
 ---
 
@@ -213,6 +222,7 @@
 - [ba-tu] Chú Thành, lại gặp chú. Gạo này là phần vượt khoán nhà tôi được hưởng, hợp tác xã có giấy xác nhận đây.
 - [ba-tu] Tôi mang ra thị xã đổi thuốc cho thằng cháu. Nó sốt mấy hôm nay rồi.
 - [ba-tu] {nếu ba-tu.m1 = qua, qua-kn} Lần trước chú cho tôi qua, tôi vẫn nhớ.
+- [ba-tu] {nếu ba-tu.m1 = giu, giu-kn} Lần trước chú giữ gạo, tôi phải bán con gà mái đẻ mới có tiền mua áo cho cháu.
 
 ### Phản ứng
 - [CHO_QUA] Tôi cảm ơn chú.
@@ -332,9 +342,9 @@
 - Lương thực vào thị xã: 0
 - Hộ thiếu ăn: 0
 - Giá gạo: +1
-- Ghi chú: 50m vải tuồn trót lọt ra bán chợ tự do.
+- Ghi chú: 50 m vải tuồn trót lọt ra bán chợ tự do.
 #### GIU_LAI
 - Lương thực vào thị xã: 0
 - Hộ thiếu ăn: 0
 - Giá gạo: 0
-- Ghi chú: Tịch thu 50m vải giấy tờ sai quy cách.
+- Ghi chú: Tịch thu 50 m vải giấy tờ sai quy cách.

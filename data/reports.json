@@ -9,7 +9,7 @@
     "effect": {
       "type": "activate_rule",
       "rule": "R5K-KHOAN",
-      "text": "Bổ sung Điều 2 (bổ sung): Miễn định mức lương thực đối với sản phẩm vượt khoán có Giấy xác nhận của HTX."
+      "text": "Sổ chỉ thị có thêm Điều 2 (bổ sung): miễn định mức lương thực cho sản phẩm vượt khoán có Giấy xác nhận của HTX."
     },
     "reasons": [
       {
@@ -29,7 +29,7 @@
     "effect": {
       "type": "narrative",
       "rule": null,
-      "text": "Ý kiến kiến nghị ưu tiên lưu thông cho thương binh được ghi nhận trong báo cáo tổng hợp tình hình của huyện."
+      "text": "Kiến nghị ưu tiên lưu thông cho thương binh được ghi nhận trong báo cáo tổng hợp tình hình của huyện."
     },
     "reasons": [
       {

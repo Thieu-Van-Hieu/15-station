@@ -42,8 +42,20 @@ describe("turn — 03 mục 5", () => {
 
   it("TRN-04 giữ oan: nhắc nhở dùng chuỗi reprimand.giu_oan", () => {
     const { s, content } = play([good()], "d1", [quyet("GIU_LAI")], { "reprimand.giu_oan": "Trạm 15 giữ oan." });
-    expect(s.pendingReprimand).toEqual({ kind: "giu-oan" });
-    expect(reprimandText(s.pendingReprimand!, content)).toBe("Trạm 15 giữ oan.");
+    expect(s.pendingReprimand).toMatchObject({ kind: "giu-oan" });
+    const lines = reprimandText(s.pendingReprimand!, content).split("\n");
+    expect(lines[0]).toBe("Trạm 15 giữ oan.");
+    // V2: mỗi dòng hàng nêu điều nào áp dụng, điều nào không.
+    expect(lines.slice(1, -1).every((l) => l.includes("Điều"))).toBe(true);
+  });
+
+  it("TRN-13 trạm trưởng đứng sau lưng: làm ngơ lượt có vi phạm vẫn bị ghi sổ và nhắc nhở", () => {
+    const content = gameContent([bad()]);
+    content.days[0] = { ...content.days[0], observed: ["d1-t1"] };
+    let s = startAt(content, "d1");
+    s = reduce(s, quyet("LAM_NGO"), content);
+    expect(s.total).toMatchObject({ lam_ngo_violations: 1, recorded: 1, reprimands: 1 });
+    expect(s.pendingReprimand).toEqual({ kind: "de-lot", rule: "R1-GDD" });
   });
 
   it("TRN-05 làm ngơ lượt có vi phạm: cấp trên không biết", () => {

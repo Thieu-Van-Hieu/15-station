@@ -124,15 +124,19 @@ Mỗi mặt hàng có **mã hàng** (`ma`) dạng kebab-case không dấu: `gao`
 
 ### 1.7. Quy định
 
-| Mã | Điều | Hiệu lực | Điều kiện | Hàm kiểm tra | Lỗi sinh ra |
-|---|---|---|---|---|---|
-| `R1-GDD` | Điều 1 | d1–d5 | — | `GDD_HOP_LE` | E1, E3, E5, E6 |
-| `R2-DINH-MUC` | Điều 2 | d2–d5 | — | `DINH_MUC_LUONG_THUC` | E4 |
-| `R3-DON-THUOC` | Điều 3 | d3–d5 | — | `DON_THUOC` | E1, E3, E5, E6 |
-| `R4-KHOP-TEN` | Điều 4 | d4–d5 | — | `KHOP_TEN` | E2, E5 |
-| `R5-CHUNG-TU` | Điều 5 | d5 | — | `CHUNG_TU_HANG_HOA` | E1, E3, E5, E6 |
-| `R5K-KHOAN` | Điều 2 (bổ sung) | d5 | `KN-KHOAN` đã kích hoạt | `MIEN_DINH_MUC_KHOAN` | không — chỉ nới hạn mức R2 |
-| `R6-HANG-CAM` | Thông báo | d6 | — | `HANG_CAM` | không — vi phạm có `error: null` |
+| Mã | Điều | Hiệu lực | Áp dụng cho (`applies_to`) | Điều kiện | Hàm kiểm tra | Lỗi sinh ra |
+|---|---|---|---|---|---|---|
+| `R1-GDD` | Điều 1 | d1–d5 | Mọi hàng hoá, trừ `DO_CA_NHAN` | — | `GDD_HOP_LE` | E1, E3, E5, E6 |
+| `R2-DINH-MUC` | Điều 2 | d2–d5 | `LUONG_THUC` (gạo, ngô, sắn, bột mì) | — | `DINH_MUC_LUONG_THUC` | E4 |
+| `R3-DON-THUOC` | Điều 3 | d3–d5 | `THUOC` có mã trong danh mục | — | `DON_THUOC` | E1, E3, E5, E6 |
+| `R4-KHOP-TEN` | Điều 4 | d4–d5 | Không xét hàng: xét giấy tờ con người | — | `KHOP_TEN` | E2, E5 |
+| `R5-CHUNG-TU` | Điều 5 | d5 | `HANG_TIEU_DUNG`, `THUC_PHAM`, `VAT_TU` | — | `CHUNG_TU_HANG_HOA` | E1, E3, E5, E6 |
+| `R5K-KHOAN` | Điều 2 (bổ sung) | d5 | `LUONG_THUC` có giấy khoán | `KN-KHOAN` đã kích hoạt | `MIEN_DINH_MUC_KHOAN` | không — chỉ nới hạn mức R2 |
+| `R6-HANG-CAM` | Thông báo | d6 | `HANG_CAM` có mã trong danh mục | — | `HANG_CAM` | không — vi phạm có `error: null` |
+
+**Phạm vi áp dụng** (V2) nằm trong trường `applies_to` của `rules.json` (bắt buộc, giá trị lấy từ `$defs/category`), kèm `scope_note` là câu hiển thị trên trang sổ ngay dưới tiêu đề điều. Bàn làm việc đọc `applies_to` để gắn nhãn điều lên từng dòng hàng: vải ở d2 hiện "Điều 1", gạo hiện "Điều 1, Điều 2". Validate tầng 3 điều 14 bắt `applies_to` khớp tham số mà hàm kiểm tra thật sự dùng, để trang sổ không nói khác engine.
+
+Điều 2 **chỉ** quản lương thực. Vải, đường, hàng tiêu dùng không bị định mức; trước d5 thứ duy nhất ràng buộc chúng là Điều 1 (phải khai trên giấy đi đường). Người buôn vải đủ giấy thì đi lọt còn bà Tư mang gạo nhà mình bị giữ — cảm giác khó chịu ấy là chủ đích, và nhãn điều trên dòng hàng giúp người chơi hiểu vì sao.
 
 ### 1.8. Lỗi
 
@@ -175,6 +179,22 @@ Tập giá trị hợp lệ: `qua`, `giu`, `lam-ngo`, `qua-kn`, `giu-kn`, `qua-t
 | Theo cờ | `{ "flag": "ba-tu.m2", "in": ["giu", "giu-kn"] }` | Cờ chưa được ghi thì điều kiện sai |
 | Theo kiến nghị | `{ "issue_triggered": "KN-KHOAN", "value": true }` | |
 | Theo chỉ số ẩn | `{ "stat": "bribe_total", "op": ">", "value": 0 }` | Chỉ dùng trong `endings.json` |
+| Đếm cờ | `{ "flag_count": ["ba-tu.m1", "ba-tu.m2"], "in": ["giu", "giu-kn"], "op": ">=", "value": 2 }` | Số cờ trong danh sách có giá trị thuộc `in`. Dùng cho đường đời ba nhánh (V3) |
+| Theo chỉ số huyện | `{ "indicator": "gia_gao_index", "op": ">=", "value": 105 }` | So chỉ số huyện hiện tại, để lời thoại phản ứng với tình hình chung |
+
+Nhiều điều kiện trong một mảng `when` được nối bằng VÀ.
+
+**Đường đời ba nhánh** (V3). Mỗi lần gặp lại, nhân vật chính mang hậu quả những lần trước trên mặt, suy ra từ số lần bị giữ ở các cờ trước đó:
+
+| Nhánh | Điều kiện | Cách thể hiện |
+|---|---|---|
+| Khá lên | `flag_count(...) == 0` | Biểu cảm vui, câu kể chuyện làm ăn được |
+| Cầm cự | `flag_count(...) == 1` | Như bình thường, có câu nhắc lại lần bị giữ |
+| Gãy | `flag_count(...) >= 2` | Bộ chân dung khác (`portrait.variants`), không chào, lời dẫn `narrator` |
+
+`portrait.variants` của lượt khách là danh sách `{ when, key?, expression? }`; biến thể đầu tiên có `when` thoả thì thay bộ chân dung hoặc biểu cảm. `portrait.key` đổi bộ chân dung cho riêng một lượt (thằng Tí năm 1987 dùng `thang-ti-lon`).
+
+Khoản chi trong `days.json` cũng nhận `when`: khoản chỉ hiện khi điều kiện thoả. Đây là chỗ duy nhất quyết định ở trạm đổi thẳng tiền nhà Thành (lượt bác Nga d5-t4).
 
 Nhiều điều kiện trong một mảng `when` được nối bằng VÀ.
 
@@ -211,6 +231,7 @@ Nhiều điều kiện trong một mảng `when` được nối bằng VÀ.
 | `luot-trung-tam` | Lượt mang luận điểm chính |
 | `dung-trinh-bay` | Điểm dừng khi trình bày trước lớp |
 | `dong-cam` | Lượt nhằm tạo đồng cảm |
+| `hop-le-ma-hai` | Giấy tờ đủ, đáp án `CHO_QUA`, hậu quả nằm ở bảng chỉ số bên phải. Vai của ông Quỳnh. Khác `buon-lau-that`, vốn bắt buộc có lỗi cụ thể |
 
 **Biến trong chữ**, dùng trong `strings.json` và cảnh kết: `{{bribe_total}}`, `{{valid_reports}}`, `{{hang_tich_thu_kg}}`, `{{day_label}}`, `{{tien_con_lai}}` (tiền cuối cùng của gia đình), `{{kn_remaining:KN-KHOAN}}` (số biên bản còn thiếu để chạm ngưỡng).
 
@@ -363,6 +384,8 @@ nếu dấu của d không hợp lệ (BENH_VIEN):       vi phạm (R3, E3)
 với mỗi h trong TQ: nếu d.thuoc không phủ h:  vi phạm (R3, E6)
 ```
 
+Danh mục: penicillin, tetracyclin, quinin, streptomycin, reserpin (thuốc huyết áp, thêm cho lượt bác Nga d5-t4).
+
 Người mang đơn không cần là bệnh nhân. Thằng Tí mua thuốc cho bố là hợp lệ nếu đơn hợp lệ.
 
 ### 4.5. R4-KHOP-TEN — Đối chiếu hộ khẩu (d4–d5)
@@ -440,7 +463,11 @@ Gọi `hv` là "lượt có vi phạm theo `evaluate`".
 |---|---|---|---|
 | `CHO_QUA` | **Sai** — để lọt | Đúng | Có |
 | `GIU_LAI` | Đúng | **Sai** — giữ oan | Có |
-| `LAM_NGO` | Làm ngơ vi phạm | Đúng (vô hại) | **Không** |
+| `LAM_NGO` | Làm ngơ vi phạm | Đúng (vô hại) | **Không**, trừ lượt có trạm trưởng đứng sau lưng |
+
+**Trạm trưởng đứng sau lưng** (V3). `days[].observed` liệt kê các lượt trạm trưởng Đối đứng xem (d3-t3, d4-t3, d5-t1). Ở những lượt này làm ngơ cũng bị ghi sổ: `recorded = action ≠ LAM_NGO hoặc lượt bị quan sát`, nên làm ngơ lượt có vi phạm vừa tính `lam_ngo_violations` vừa bị nhắc nhở. Lời ông ta nằm trong `interludes` với `at` là mã lượt.
+
+**Giấy nhắc nhở giữ oan** nêu từng dòng hàng thuộc phạm vi điều nào và không thuộc điều nào đang hiệu lực, ví dụ: "Vải: chỉ thuộc phạm vi Điều 1; không thuộc phạm vi Điều 2."
 
 ### 5.3. Cập nhật sau mỗi lượt
 
@@ -449,7 +476,7 @@ total += 1
 correct = (CHO_QUA và không hv) hoặc (GIU_LAI và hv) hoặc (LAM_NGO và không hv)
 nếu correct: correct_total += 1
 
-nếu action ≠ LAM_NGO:
+nếu action ≠ LAM_NGO hoặc lượt nằm trong days[].observed:
     recorded += 1
     nếu correct: correct_recorded += 1
     ngược lại:   reprimands += 1; reprimands_hom_nay += 1
@@ -641,8 +668,10 @@ Từ mức 3, bảng chi tiêu bỏ mọi khoản có `member`, còn các khoả
 |---|---|---|---|---|---|---|---|---|---|
 | d1–d2 | 20 | 2 | 3 | 8 | 3 | 4 | — | 2 | 17 |
 | d3–d4 | 22 | 3 | 3 | 11 | 4 | 6 | — | 2 | 23 |
-| d5 | 420 | 40 | 30 | 230 | 60 | 90 | 120 | 20 | 520 |
+| d5 | 420 | 40 | 30 | 230 | 60 | 0 hoặc 180 ¹ | 120 | 20 | 430 hoặc 610 |
 | d6 | 1500 | — | — | 800 | 180 | 300 | — | 80 | 1360 |
+
+¹ Thuốc cho mẹ ở d5 phụ thuộc lượt bác Nga (d5-t4): cho qua hoặc làm ngơ thì bác mang thuốc sang tận nhà (0); giữ lại thì Thành mua chợ đen giá gấp đôi (180).
 
 `savings_start` = 10. Màn 1 dư dả, màn 2 hụt nhẹ, màn 3 hụt nặng đến mức không trả nổi mọi khoản thiết yếu — đúng lúc phong bì xuất hiện. Phong bì của gã đầu cơ gạo ở d5 nên đặt `amount = 120`, bằng tiền thuốc của bé Bình. Màn 4 dư ít, không nhảy vọt.
 
@@ -712,7 +741,7 @@ new Ajv2020({ strict: true, allErrors: true, allowUnionTypes: true, allowMatchin
 ### Tầng 2 — tham chiếu chéo
 
 1. Mỗi `days[i].travelers` trỏ đến lượt có thật; mỗi lượt thuộc đúng một ngày, `day` và `order` khớp vị trí.
-2. Số lượt mỗi ngày đúng 3, 4, 4, 5, 5, 5.
+2. Số lượt mỗi ngày đúng 3, 4, 4, 5, 6, 5 (27 lượt). d5 có 6 lượt nên `per_traveler_min` của d5 là 85.
 3. Mọi `character`, `speaker`, `member`, `ruleId`, `issueId` đều tồn tại.
 4. `characters[].appearances` khớp đúng các lượt có `character` đó.
 5. Với nhân vật có `fixed_fields`: mọi giấy có trường chủ giấy của họ ghi đúng `ho_ten`, mọi giấy có trường năm sinh ghi đúng `nam_sinh` — **trừ khi lượt đó cài E2 có chủ đích** trong `planted`.
@@ -735,6 +764,9 @@ new Ajv2020({ strict: true, allErrors: true, allowUnionTypes: true, allowMatchin
 9. Tổng số dịp kiến nghị hợp lệ trong d3–d5 ≥ 4.
 10. Mỗi nhân vật `chinh` xuất hiện ít nhất 3 lần.
 11. Không lượt nào vừa có `bribe` vừa có `kn`. Nhận tiền và kiến nghị cùng một lượt tạo ra kết hợp khó hiểu cho người chơi.
+12. Mỗi quy định có **ít nhất 2 lượt** vi phạm trong khoảng ngày nó có hiệu lực. Miễn `R5K-KHOAN` (quy định miễn trừ) và `R6-HANG-CAM` (chỉ có một ngày). Một điều luật không bao giờ bắt được ai dạy người chơi rằng đọc kỹ là phí công (V4).
+13. Nhãn khớp đáp án: `buon-lau-that` phải có ít nhất một vi phạm cụ thể (không được để giấy tờ đủ rồi mong người chơi "cảm thấy" là đầu cơ); `hop-le-ma-hai` phải là `CHO_QUA` không vi phạm; một lượt không mang cả hai nhãn.
+14. `applies_to` của mỗi quy định khớp phạm vi mà hàm kiểm tra dùng: R1 là mọi nhóm trừ `exempt_categories`, R5 bằng `params.categories`, R2 và R5K là `LUONG_THUC`, R3 là `THUOC`, R4 rỗng.
 
 ---
 

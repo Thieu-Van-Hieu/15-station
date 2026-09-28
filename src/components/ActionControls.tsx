@@ -1,9 +1,10 @@
-import { useState } from "react";
-import type { Action, Day } from "../engine/types";
+import { useEffect, useState } from "react";
+import type { Action, Day, Verdict } from "../engine/types";
 import { reasonsOn } from "../engine/reports";
 import { content } from "../content";
 import { playSfx } from "../audio";
 import { Label, Modal, Paper, PrimaryButton, StampButton, TypeRule, cx, s } from "./ui";
+import { DraggableStamp } from "./stamping";
 
 interface ActionControlsProps {
   day: Day;
@@ -13,6 +14,14 @@ interface ActionControlsProps {
   travelerOrder?: number;
   onDecide: (action: Action, reasonId?: string | null) => void;
   onNext: () => void;
+  /**
+   * Có thì CHO QUA và GIỮ LẠI là con dấu kéo thả (V5): trả `true` nếu thả trúng giấy.
+   * `x`, `y` null khi đóng bằng phím tắt 1 và 2 (tự đặt dấu lên giấy).
+   * Không có (ví dụ trong test) thì bấm nút là đóng dấu.
+   */
+  onStampDrop?: (action: Verdict, x: number | null, y: number | null) => boolean;
+  /** Báo khi người chơi kèm hoặc bỏ biên bản, để đồng hồ và hàng chờ phản ứng ngay (V6). */
+  onReportChange?: (reasonId: string | null) => void;
 }
 
 const IconReport = (
@@ -48,10 +57,15 @@ export function ActionControls({
   travelerOrder,
   onDecide,
   onNext,
+  onStampDrop,
+  onReportChange,
 }: ActionControlsProps) {
   const [showReportModal, setShowReportModal] = useState(false);
   const [selectedReason, setSelectedReason] = useState<string | null>(chosenReasonId ?? null);
   const [draftReason, setDraftReason] = useState<string | null>(null);
+  const [dragHint, setDragHint] = useState(false);
+
+  useEffect(() => onReportChange?.(selectedReason), [selectedReason, onReportChange]);
 
   const availableReasons = reasonsOn(content.reports, day.id);
 
@@ -75,6 +89,29 @@ export function ActionControls({
     onDecide(action, action === "LAM_NGO" ? null : selectedReason);
   }
 
+  /** Con dấu thả xuống: bàn làm việc quyết định có trúng giấy không, trúng thì đóng dấu. */
+  function drop(action: Verdict, x: number | null, y: number | null): boolean {
+    if ((action === "CHO_QUA" ? isApproveDisabled : isRejectDisabled) || !onStampDrop) return false;
+    if (!onStampDrop(action, x, y)) return false;
+    onDecide(action, selectedReason);
+    return true;
+  }
+
+  // Phím tắt: 1 cho qua, 2 giữ lại, Enter sang lượt kế tiếp.
+  useEffect(() => {
+    if (!onStampDrop) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (showReportModal || e.ctrlKey || e.metaKey || e.altKey) return;
+      const target = e.target as HTMLElement | null;
+      if (target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA")) return;
+      if (e.key === "1") drop("CHO_QUA", null, null);
+      else if (e.key === "2") drop("GIU_LAI", null, null);
+      else if (e.key === "Enter" && chosenAction && target?.tagName !== "BUTTON") onNext();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  });
+
   const reportSub = !day.kn_enabled
     ? s("desk.report_locked")
     : selectedReason
@@ -82,7 +119,7 @@ export function ActionControls({
       : s("desk.report_sub");
 
   return (
-    <div className="border-t border-vien bg-ban/95 backdrop-blur-sm">
+    <div className="sticky bottom-0 z-20 lg:static border-t border-vien bg-ban/95 backdrop-blur-sm">
       <div className="flex flex-col xl:flex-row xl:items-center gap-3 px-4 md:px-6 py-3">
         <div className="flex items-center gap-3 min-w-0 xl:w-[340px] shrink-0">
           <div className="w-11 h-11 rounded-full border-2 border-ho-phach/70 text-ho-phach grid place-items-center font-nhan font-bold shrink-0">
@@ -92,8 +129,8 @@ export function ActionControls({
             <Label className="text-giay block">
               {s("desk.decision_title")} {travelerOrder ?? ""}
             </Label>
-            <p className="text-[11px] text-chu-ban-phu/70 leading-snug">
-              {chosenAction ? s("desk.decision_done") : s("desk.decision_hint")}
+            <p className="text-[11px] text-chu-ban-phu/70 leading-snug min-h-[2.1rem] line-clamp-2">
+              {chosenAction ? s("desk.decision_done") : dragHint && onStampDrop ? s("desk.stamp_drag_hint") : s("desk.decision_hint")}
             </p>
           </div>
         </div>
@@ -118,7 +155,18 @@ export function ActionControls({
               selected={chosenAction === "LAM_NGO"}
               onClick={() => stamp("LAM_NGO")}
             />
-            <StampButton
+            {onStampDrop ? (
+              <DraggableStamp
+                action="GIU_LAI"
+                title={s("desk.stamp.reject")}
+                sub={s("desk.stamp.reject_sub")}
+                disabled={isRejectDisabled}
+                selected={chosenAction === "GIU_LAI"}
+                onDrop={(x, y) => drop("GIU_LAI", x, y)}
+                onTap={() => setDragHint(true)}
+              />
+            ) : (
+              <StampButton
               tone="son"
               title={s("desk.stamp.reject")}
               sub={s("desk.stamp.reject_sub")}
@@ -128,7 +176,19 @@ export function ActionControls({
               selected={chosenAction === "GIU_LAI"}
               onClick={() => stamp("GIU_LAI")}
             />
-            <StampButton
+            )}
+            {onStampDrop ? (
+              <DraggableStamp
+                action="CHO_QUA"
+                title={s("desk.stamp.approve")}
+                sub={s("desk.stamp.approve_sub")}
+                disabled={isApproveDisabled}
+                selected={chosenAction === "CHO_QUA"}
+                onDrop={(x, y) => drop("CHO_QUA", x, y)}
+                onTap={() => setDragHint(true)}
+              />
+            ) : (
+              <StampButton
               tone="xanh"
               title={s("desk.stamp.approve")}
               sub={s("desk.stamp.approve_sub")}
@@ -138,12 +198,16 @@ export function ActionControls({
               selected={chosenAction === "CHO_QUA"}
               onClick={() => stamp("CHO_QUA")}
             />
+            )}
           </div>
-          {chosenAction && (
-            <PrimaryButton onClick={onNext} className="lg:min-w-[220px] animate-truot-vao">
-              {s("desk.next_traveler")}
-            </PrimaryButton>
-          )}
+          {/* Nút luôn chiếm chỗ (ẩn khi chưa quyết định) để hàng con dấu không co giãn làm giật màn hình. */}
+          <PrimaryButton
+            onClick={onNext}
+            disabled={!chosenAction}
+            className={cx("lg:w-[220px] shrink-0", chosenAction ? "animate-truot-vao" : "invisible")}
+          >
+            {s("desk.next_traveler")}
+          </PrimaryButton>
         </div>
       </div>
 

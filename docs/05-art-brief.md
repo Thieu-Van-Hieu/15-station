@@ -60,7 +60,23 @@ Lấy cảm hứng từ không khí xã hội Việt Nam thời kỳ 1979–1987
 
 ---
 
+## 4a. Chân dung theo nhánh đời (V3)
+
+Chân dung vẽ bằng `scripts/generate-portraits.ts` (`pnpm art`), phác thảo mực nâu đơn sắc. Ngoài bộ thường của mỗi nhân vật, có thêm các bộ theo nhánh:
+
+| Mã ảnh | Biểu cảm | Dùng khi |
+|---|---|---|
+| `ba-tu-khong-non` | `buon` | Bà Tư đã bị giữ từ hai lần: không nón, tóc bạc búi vội, má hóp |
+| `anh-hung-gay` | `met-moi` | Anh Hùng đã bị giữ từ hai lần: gầy rộc, râu không cạo, tóc bù |
+| `thang-ti-lon` | `vui`, `ne-tranh` | Thằng Tí năm 1987, mười tám tuổi, áo sơ mi, ba lô |
+| `np-hang-xom` | `binh-thuong`, `lo-lang` | Bác Nga hàng xóm, d5-t4 |
+
+Muốn thêm nhánh thì khai `portrait.variants` trong lượt khách và thêm mô tả vẽ vào `SPECS` của script.
+
 ## 5. Hiệu ứng âm thanh (Audio / SFX)
+
+> Danh sách file âm thanh hiện hành, tên file và mô tả nằm ở `docs/09-am-thanh.md`. Mục dưới đây là định hướng ban đầu.
+
 
 Bốn âm thanh chủ đạo xây dựng không khí trải nghiệm, chỉ kích hoạt sau tương tác đầu tiên của người dùng:
 1. `sfx_window_slide.mp3`: Tiếng ô cửa kính trượt lách cách khi khách tiến lại ô cửa trạm.

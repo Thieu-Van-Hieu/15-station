@@ -48,7 +48,7 @@
 
 ## Lời chen giữa
 ### Tại: start
-- [tram-truong-doi] Hôm nay áp dụng thêm Điều 2 về định mức lương thực. Cá nhân chỉ được mang tối đa 5kg gạo hoặc ngô, vượt định mức mà không có tem phiếu là phải giữ lại.
+- [tram-truong-doi] Hôm nay áp dụng thêm Điều 2 về định mức lương thực. Cá nhân chỉ được mang tối đa 5 kg gạo hoặc ngô, vượt định mức mà không có tem phiếu là phải giữ lại.
 ### Tại: end
 - [tram-truong-doi] Tình hình thị xã đang căng gạo, các trạm đều phải siết chặt.
 
@@ -118,7 +118,7 @@
 - Lương thực vào thị xã: 0
 - Hộ thiếu ăn: +1
 - Giá gạo: 0
-- Ghi chú: Tịch thu 3kg gạo nếp phúng viếng tang ma.
+- Ghi chú: Tịch thu 3 kg gạo nếp phúng viếng tang ma.
 
 ---
 
@@ -189,7 +189,7 @@
 ### Người đến ô cửa
 - Nhân vật: ong-quynh
 - Biểu cảm: binh-thuong
-- Nhãn: không
+- Nhãn: hop-le-ma-hai
 - Ghi chú vẽ: Cán bộ mặc áo đại cán xám, đầu chải mượt, kẹp cặp da đen bóng.
 
 ### Lời thoại
@@ -300,9 +300,9 @@
 - Lương thực vào thị xã: +1
 - Hộ thiếu ăn: 0
 - Giá gạo: +2
-- Ghi chú: 40kg gạo gom lậu tuồn vào chợ đen thị xã.
+- Ghi chú: 40 kg gạo gom lậu tuồn vào chợ đen thị xã.
 #### GIU_LAI
 - Lương thực vào thị xã: 0
 - Hộ thiếu ăn: -2
 - Giá gạo: 0
-- Ghi chú: Tịch thu 40kg gạo đầu cơ nhập kho nhà nước.
+- Ghi chú: Tịch thu 40 kg gạo đầu cơ nhập kho nhà nước.

@@ -115,12 +115,12 @@
 - Lương thực vào thị xã: +1
 - Hộ thiếu ăn: 0
 - Giá gạo: 0
-- Ghi chú: Sinh viên mang 4kg gạo về ký túc xá ăn học.
+- Ghi chú: Sinh viên mang 4 kg gạo về ký túc xá ăn học.
 #### GIU_LAI
 - Lương thực vào thị xã: 0
 - Hộ thiếu ăn: +1
 - Giá gạo: 0
-- Ghi chú: Tịch thu 4kg gạo của sinh viên.
+- Ghi chú: Tịch thu 4 kg gạo của sinh viên.
 
 ---
 
@@ -177,7 +177,7 @@
 - Lương thực vào thị xã: +1
 - Hộ thiếu ăn: 0
 - Giá gạo: 0
-- Ghi chú: Bà Tư mang 5kg gạo vào thị xã thuận lợi.
+- Ghi chú: Bà Tư mang 5 kg gạo vào thị xã thuận lợi.
 #### GIU_LAI
 - Lương thực vào thị xã: 0
 - Hộ thiếu ăn: +2
@@ -216,7 +216,7 @@
 
 ### Hàng thực mang theo
 - quan-ao | Quần áo cũ | 3 | kg | DO_CA_NHAN
-- thuoc-la | Thuốc lá cuộn | 8 | cay | HANG_TIEU_DUNG | an_giau
+- thuoc-la | Thuốc lá cuốn | 8 | cay | HANG_TIEU_DUNG | an_giau
 
 ### Lỗi cài cắm
 - E6 | GDD | hang_mang_theo | Không khai 8 cây thuốc lá mang theo.

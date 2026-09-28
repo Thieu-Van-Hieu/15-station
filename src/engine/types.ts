@@ -52,7 +52,7 @@ export type Verdict = "CHO_QUA" | "GIU_LAI";
 export type FlagValue = "qua" | "giu" | "lam-ngo" | "qua-kn" | "giu-kn" | "qua-tien" | "lam-ngo-tien";
 export type EndingId = "END-AN-TIEN" | "END-LAM-NGO" | "END-KIEN-NGHI" | "END-GAC-CONG" | "END-SONG-SOT";
 export type Expression = "binh-thuong" | "vui" | "lo-lang" | "buon" | "gian" | "ne-tranh" | "met-moi";
-export type TravelerTag = "huong-dan" | "buon-lau-that" | "luot-trung-tam" | "dung-trinh-bay" | "dong-cam";
+export type TravelerTag = "huong-dan" | "buon-lau-that" | "luot-trung-tam" | "dung-trinh-bay" | "dong-cam" | "hop-le-ma-hai";
 
 // ---------------------------------------------------------------------------
 // Hàng và giấy tờ (03 mục 1.4–1.6)
@@ -187,13 +187,29 @@ export type StatName =
   | "issues_triggered"
   | "hardship"
   | "overtime_days"
-  | "reprimands";
+  | "reprimands"
+  | "doi_chat_count"
+  | "doi_chat_hanh_dong"
+  | "doi_chat_bo_qua";
 export interface StatCondition {
   stat: StatName;
   op: ">=" | "<=" | "==" | ">" | "<";
   value: number;
 }
-export type Condition = FlagCondition | IssueCondition | StatCondition;
+/** Đếm số cờ trong danh sách có giá trị thuộc `in` (ví dụ: bà Tư đã bị giữ mấy lần). */
+export interface FlagCountCondition {
+  flag_count: string[];
+  in: FlagValue[];
+  op: StatCondition["op"];
+  value: number;
+}
+/** So một chỉ số huyện hiện tại. */
+export interface IndicatorCondition {
+  indicator: IndicatorName;
+  op: StatCondition["op"];
+  value: number;
+}
+export type Condition = FlagCondition | IssueCondition | StatCondition | FlagCountCondition | IndicatorCondition;
 
 export interface Line {
   speaker: string;
@@ -225,9 +241,20 @@ export interface Traveler {
   order: number;
   character: string;
   tags: TravelerTag[];
-  portrait: { expression: Expression };
+  portrait: {
+    expression: Expression;
+    /** Bộ chân dung riêng cho lượt này (mặc định là portrait.key của nhân vật). */
+    key?: string;
+    /** Chân dung theo nhánh đời: biến thể đầu tiên có `when` thoả thì thay key/expression. */
+    variants?: { when: Condition[]; key?: string; expression?: Expression }[];
+  };
   dialogue: Line[];
   reactions?: Partial<Record<Action, Line[]>>;
+  /**
+   * Lời khi bị đối chất (V8). `on` là loại lệch người chơi vừa chỉ ra (`name`, `year`, `item`, `other`),
+   * `any` cho mọi loại lệch, `khop` khi người chơi khoanh hai chỗ thực ra khớp nhau.
+   */
+  confront?: { on: "name" | "year" | "item" | "other" | "any" | "khop"; lines: Line[] }[];
   documents: TravelerDocument[];
   cargo: CargoItem[];
   planted: { error: ErrorCode; doc: DocType | null; field: string | null; note: string }[];
@@ -249,6 +276,8 @@ export interface Expense {
   cost: number;
   essential: boolean;
   member?: string;
+  /** Khoản chi chỉ có khi điều kiện thoả. */
+  when?: Condition[];
 }
 
 export interface Day {
@@ -272,6 +301,8 @@ export interface Day {
   interludes: { at: "start" | "end" | TravelerId; lines: Line[]; when?: Condition[] }[];
   family_event: { text: string } | null;
   indicators_start?: Indicators;
+  /** Lượt trạm trưởng đứng sau lưng: làm ngơ vẫn bị ghi sổ. */
+  observed?: TravelerId[];
   savings_start?: number;
 }
 
@@ -288,6 +319,10 @@ export interface Rule {
   day_to: DayId;
   condition: { issue_triggered: IssueId } | null;
   check: CheckName;
+  /** Nhóm hàng chịu quy định. Rỗng: quy định xét giấy tờ con người. */
+  applies_to: Category[];
+  /** Câu hiển thị thay cho danh sách nhóm hàng. */
+  scope_note?: string;
   /** Tham số riêng của từng hàm kiểm tra; mỗi hàm tự đọc phần mình cần. */
   params: Record<string, unknown>;
   emits: ErrorCode[];
@@ -329,6 +364,8 @@ export interface Ending {
   quote: { text: string; chapter: number; section: string };
   character_lines: { character: string; text: string; when?: Condition[] }[];
   closing_question: string | null;
+  /** Một dòng tóm tắt ngắn in trên thẻ kết quả (V7). */
+  card_line: string;
 }
 
 export type Strings = Record<string, string>;

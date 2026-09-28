@@ -16,6 +16,9 @@ const stats = (over: Partial<HiddenStats>): HiddenStats => ({
   hardship: 0,
   overtime_days: 0,
   reprimands: 0,
+  doi_chat_count: 0,
+  doi_chat_hanh_dong: 0,
+  doi_chat_bo_qua: 0,
   ...over,
 });
 

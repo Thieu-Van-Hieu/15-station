@@ -8,14 +8,32 @@
     "day_to": "d5",
     "condition": null,
     "check": "GDD_HOP_LE",
+    "applies_to": [
+      "LUONG_THUC",
+      "THUC_PHAM",
+      "THUOC",
+      "HANG_TIEU_DUNG",
+      "VAT_TU",
+      "HANG_CAM"
+    ],
+    "scope_note": "Mọi hàng hoá mang theo, trừ đồ dùng cá nhân",
     "params": {
       "doc": "GDD",
-      "seal_kinds": ["UBND_XA"],
+      "seal_kinds": [
+        "UBND_XA"
+      ],
       "seal_place_field": "noi_di",
       "declare_field": "hang_mang_theo",
-      "exempt_categories": ["DO_CA_NHAN"]
+      "exempt_categories": [
+        "DO_CA_NHAN"
+      ]
     },
-    "emits": ["E1", "E3", "E5", "E6"],
+    "emits": [
+      "E1",
+      "E3",
+      "E5",
+      "E6"
+    ],
     "reprimand": "Trạm 15 để người không đủ Giấy đi đường hợp lệ qua trạm. Đề nghị đồng chí tổ trưởng kiểm tra kỹ hơn."
   },
   {
@@ -27,8 +45,17 @@
     "day_to": "d5",
     "condition": null,
     "check": "DINH_MUC_LUONG_THUC",
-    "params": { "max_kg": 5, "count_valid_tem_phieu": true },
-    "emits": ["E4"],
+    "applies_to": [
+      "LUONG_THUC"
+    ],
+    "scope_note": "Lương thực: gạo, ngô, sắn, bột mì. Không áp dụng cho vải, đường, hàng tiêu dùng",
+    "params": {
+      "max_kg": 5,
+      "count_valid_tem_phieu": true
+    },
+    "emits": [
+      "E4"
+    ],
     "reprimand": "Trạm 15 để lọt lương thực vượt định mức. Đề nghị đồng chí tổ trưởng chấn chỉnh."
   },
   {
@@ -40,17 +67,44 @@
     "day_to": "d5",
     "condition": null,
     "check": "DON_THUOC",
+    "applies_to": [
+      "THUOC"
+    ],
+    "scope_note": "Thuốc có tên trong danh mục quản lý bên dưới",
     "params": {
       "doc": "DT",
-      "seal_kinds": ["BENH_VIEN"],
+      "seal_kinds": [
+        "BENH_VIEN"
+      ],
       "danh_muc_thuoc": [
-        { "ma": "penicillin", "ten": "Penicillin" },
-        { "ma": "tetracyclin", "ten": "Tetracyclin" },
-        { "ma": "quinin", "ten": "Quinin" },
-        { "ma": "streptomycin", "ten": "Streptomycin" }
+        {
+          "ma": "penicillin",
+          "ten": "Penicillin"
+        },
+        {
+          "ma": "tetracyclin",
+          "ten": "Tetracyclin"
+        },
+        {
+          "ma": "quinin",
+          "ten": "Quinin"
+        },
+        {
+          "ma": "streptomycin",
+          "ten": "Streptomycin"
+        },
+        {
+          "ma": "reserpin",
+          "ten": "Reserpin (thuốc huyết áp)"
+        }
       ]
     },
-    "emits": ["E1", "E3", "E5", "E6"],
+    "emits": [
+      "E1",
+      "E3",
+      "E5",
+      "E6"
+    ],
     "reprimand": "Trạm 15 để lọt thuốc thuộc danh mục quản lý không có đơn hợp lệ.",
     "note": "Danh mục thuốc là hư cấu – mô phỏng. KB có thể đổi, nhưng mã thuốc trong cargo và DT phải dùng đúng mã ở đây."
   },
@@ -63,8 +117,16 @@
     "day_to": "d5",
     "condition": null,
     "check": "KHOP_TEN",
-    "params": { "reference_doc": "SHK", "compare_birth_year": true },
-    "emits": ["E2", "E5"],
+    "applies_to": [],
+    "scope_note": "Mọi người qua trạm: giấy tờ phải khớp sổ hộ khẩu. Không xét hàng hoá",
+    "params": {
+      "reference_doc": "SHK",
+      "compare_birth_year": true
+    },
+    "emits": [
+      "E2",
+      "E5"
+    ],
     "reprimand": "Trạm 15 để người có giấy tờ không khớp hộ khẩu qua trạm."
   },
   {
@@ -76,11 +138,29 @@
     "day_to": "d5",
     "condition": null,
     "check": "CHUNG_TU_HANG_HOA",
+    "applies_to": [
+      "HANG_TIEU_DUNG",
+      "THUC_PHAM",
+      "VAT_TU"
+    ],
+    "scope_note": "Hàng tiêu dùng, thực phẩm, vật tư. Không áp dụng cho lương thực và thuốc",
     "params": {
-      "categories": ["HANG_TIEU_DUNG", "THUC_PHAM", "VAT_TU"],
-      "accepted_docs": ["HDHTX", "GPVC"]
+      "categories": [
+        "HANG_TIEU_DUNG",
+        "THUC_PHAM",
+        "VAT_TU"
+      ],
+      "accepted_docs": [
+        "HDHTX",
+        "GPVC"
+      ]
     },
-    "emits": ["E1", "E3", "E5", "E6"],
+    "emits": [
+      "E1",
+      "E3",
+      "E5",
+      "E6"
+    ],
     "reprimand": "Trạm 15 để lọt hàng hoá không có chứng từ hợp lệ."
   },
   {
@@ -90,12 +170,20 @@
     "page_text": "Lương thực có Giấy xác nhận sản phẩm khoán do hợp tác xã nơi sản xuất cấp, đúng tên người mang, được miễn định mức tại Điều 2 trong phạm vi số lượng ghi trên giấy.",
     "day_from": "d5",
     "day_to": "d5",
-    "condition": { "issue_triggered": "KN-KHOAN" },
+    "condition": {
+      "issue_triggered": "KN-KHOAN"
+    },
     "check": "MIEN_DINH_MUC_KHOAN",
+    "applies_to": [
+      "LUONG_THUC"
+    ],
+    "scope_note": "Lương thực là sản phẩm vượt khoán, có giấy xác nhận",
     "params": {
       "target_rule": "R2-DINH-MUC",
       "doc": "GXNK",
-      "seal_kinds": ["HTX"],
+      "seal_kinds": [
+        "HTX"
+      ],
       "seal_place_field": "xa",
       "require_holder_match": true
     },
@@ -112,12 +200,28 @@
     "day_to": "d6",
     "condition": null,
     "check": "HANG_CAM",
+    "applies_to": [
+      "HANG_CAM"
+    ],
+    "scope_note": "Chỉ các mặt hàng có tên trong danh mục hàng cấm",
     "params": {
       "danh_muc": [
-        { "ma": "thuoc-phien", "ten": "Thuốc phiện" },
-        { "ma": "vu-khi", "ten": "Vũ khí, đạn dược" },
-        { "ma": "chat-no", "ten": "Chất nổ" },
-        { "ma": "hang-nhap-lau", "ten": "Hàng nhập lậu qua biên giới" }
+        {
+          "ma": "thuoc-phien",
+          "ten": "Thuốc phiện"
+        },
+        {
+          "ma": "vu-khi",
+          "ten": "Vũ khí, đạn dược"
+        },
+        {
+          "ma": "chat-no",
+          "ten": "Chất nổ"
+        },
+        {
+          "ma": "hang-nhap-lau",
+          "ten": "Hàng nhập lậu qua biên giới"
+        }
       ]
     },
     "emits": [],

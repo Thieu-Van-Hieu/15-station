@@ -57,7 +57,7 @@ describe("economy — 03 mục 8 (số mặc định ở 8.2)", () => {
 
   it("ECO-09 mức 3: bỏ khoản của từng người, khoản chung còn phần một người", () => {
     const d = day("d6");
-    expect(expensesFor(d, 7)).toBe(d.economy.expenses);
+    expect(expensesFor(d, 7)).toEqual(d.economy.expenses);
     const gone = expensesFor(d, 8);
     expect(gone.every((x) => !x.member)).toBe(true);
     for (const x of gone) {
@@ -71,5 +71,24 @@ describe("economy — 03 mục 8 (số mặc định ở 8.2)", () => {
     const member = d.economy.expenses.find((x) => x.member)!;
     const b = computeBudget(10000, d, "KHA", 0, 0);
     expect(payExpenses(b, d, [member.id], 8)).toBeNull();
+  });
+
+  it("ECO-11 khoản chi có when chỉ hiện khi điều kiện thoả (thuốc cho mẹ theo lượt bác Nga)", () => {
+    const base = day("d5");
+    const d = {
+      ...base,
+      economy: {
+        ...base.economy,
+        expenses: [
+          { id: "thuoc-me", label: "Thuốc (mang hộ)", cost: 0, essential: true, when: [{ flag: "hang-xom.m1", in: ["qua" as const] }] },
+          { id: "thuoc-me-cho-den", label: "Thuốc (chợ đen)", cost: 180, essential: true, when: [{ flag: "hang-xom.m1", in: ["giu" as const] }] },
+        ],
+      },
+    };
+    const cs = (v: "qua" | "giu") => ({ flags: { "hang-xom.m1": v }, issuesTriggered: new Set<never>() });
+    expect(expensesFor(d, 0, cs("qua")).map((x) => x.id)).toEqual(["thuoc-me"]);
+    expect(expensesFor(d, 0, cs("giu")).map((x) => x.id)).toEqual(["thuoc-me-cho-den"]);
+    const b = computeBudget(0, d, "KHA", 0, 0);
+    expect(payExpenses(b, d, ["thuoc-me"], 0, cs("giu"))).toBeNull();
   });
 });

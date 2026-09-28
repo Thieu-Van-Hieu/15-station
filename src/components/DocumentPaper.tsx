@@ -1,8 +1,64 @@
-import { useState, type ReactNode } from "react";
+import { createContext, useContext, useState, type ReactNode } from "react";
 import type { Document as EngineDoc, DocumentDef } from "../engine/types";
 import { content } from "../content";
 import { playSfx } from "../audio";
-import { Modal, PaperClip, SealMark, cx, s } from "./ui";
+import { Modal, PaperClip, SealMark, cx, s, unit } from "./ui";
+import { InkMark, type Ink } from "./stamping";
+
+/** Bút chì đối chất (V8): khi bật, bấm vào dòng trên giấy để khoanh thay vì phóng to giấy. */
+export interface Pencil {
+  active: boolean;
+  selected: readonly string[];
+  onSelect: (factId: string) => void;
+}
+
+const PencilContext = createContext<{ pencil: Pencil | null; docIndex: number }>({ pencil: null, docIndex: 0 });
+
+/** Cho phép khoanh các dòng nằm ngoài giấy tờ (ví dụ hàng thực mang theo). */
+export function PencilScope({ pencil, children }: { pencil: Pencil; children: ReactNode }) {
+  return <PencilContext.Provider value={{ pencil, docIndex: -1 }}>{children}</PencilContext.Provider>;
+}
+
+/** Một chỗ khoanh được. Khi bút chì bật thì bấm để khoanh; chỗ đã khoanh có vòng bút chì đỏ. */
+export function Circlable({ id, children, className }: { id: string; children: ReactNode; className?: string }) {
+  const { pencil } = useContext(PencilContext);
+  const on = pencil?.selected.includes(id) ?? false;
+  if (!pencil?.active) {
+    return <div className={cx("relative", className)}>{children}{on && <PencilRing />}</div>;
+  }
+  return (
+    <div
+      role="button"
+      tabIndex={0}
+      data-fact={id}
+      onClick={(e) => {
+        e.stopPropagation();
+        pencil.onSelect(id);
+      }}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          e.stopPropagation();
+          pencil.onSelect(id);
+        }
+      }}
+      className={cx("relative cursor-crosshair rounded-sm outline-1 outline-dashed outline-transparent hover:outline-son/60 hover:bg-son/5 -mx-1 px-1", className)}
+    >
+      {children}
+      {on && <PencilRing />}
+    </div>
+  );
+}
+
+function PencilRing() {
+  return (
+    <span
+      aria-hidden
+      className="pointer-events-none absolute -inset-x-1.5 -inset-y-1 rounded-[50%] border-2 border-son/80 -rotate-1 animate-truot-vao"
+      style={{ borderTopColor: "rgba(192,57,43,0.55)", borderLeftWidth: 1.5 }}
+    />
+  );
+}
 
 interface DocumentPaperProps {
   doc: EngineDoc;
@@ -11,6 +67,11 @@ interface DocumentPaperProps {
   className?: string;
   style?: React.CSSProperties;
   onFocus?: () => void;
+  /** Vị trí giấy trên bàn, dùng cho mã chỗ khoanh (`d<vị trí>.<trường>`) và vùng nhận dấu. */
+  index?: number;
+  /** Vệt mực đã đóng lên giấy này (V5). */
+  inks?: Ink[];
+  pencil?: Pencil;
 }
 
 type Layout = "giay-doc" | "giay-ngang" | "so" | "phieu-nho" | "the";
@@ -25,7 +86,7 @@ const WIDTH: Record<Layout, string> = {
   the: "w-[270px]",
 };
 
-export function DocumentPaper({ doc, def, tilt = 0, className, style, onFocus }: DocumentPaperProps) {
+export function DocumentPaper({ doc, def, tilt = 0, className, style, onFocus, index = 0, inks, pencil }: DocumentPaperProps) {
   const [zoomed, setZoomed] = useState(false);
   const docDef = def ?? content.documents.find((d) => d.code === doc.type);
 
@@ -33,6 +94,7 @@ export function DocumentPaper({ doc, def, tilt = 0, className, style, onFocus }:
   const layout = (docDef.layout as Layout) in WIDTH ? (docDef.layout as Layout) : "giay-doc";
 
   function toggle() {
+    if (pencil?.active) return;
     playSfx("paper");
     setZoomed((z) => !z);
     onFocus?.();
@@ -45,14 +107,19 @@ export function DocumentPaper({ doc, def, tilt = 0, className, style, onFocus }:
         tabIndex={0}
         onClick={toggle}
         onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && (e.preventDefault(), toggle())}
+        data-stamp-target={`d${index}`}
         className={cx(
-          "cursor-zoom-in select-none transition-transform duration-200 hover:-translate-y-1 hover:z-20 focus-visible:outline-2 focus-visible:outline-ho-phach",
+          "relative select-none transition-transform duration-200 hover:z-20 focus-visible:outline-2 focus-visible:outline-ho-phach",
+          pencil?.active ? "cursor-default" : "cursor-zoom-in hover:-translate-y-1",
           WIDTH[layout],
           className,
         )}
         style={{ transform: `rotate(${tilt}deg)`, ...style }}
       >
-        <Sheet doc={doc} def={docDef} layout={layout} />
+        <PencilContext.Provider value={{ pencil: pencil ?? null, docIndex: index }}>
+          <Sheet doc={doc} def={docDef} layout={layout} />
+        </PencilContext.Provider>
+        {inks?.map((ink, i) => <InkMark key={i} ink={ink} />)}
       </div>
 
       {zoomed && (
@@ -174,6 +241,8 @@ function Sheet({ doc, def, layout, large }: { doc: EngineDoc; def: DocumentDef; 
 }
 
 function Fields({ def, fields, layout }: { def: DocumentDef; fields: Record<string, unknown>; layout: Layout }) {
+  const { docIndex } = useContext(PencilContext);
+  const fid = (key: string, i?: number) => `d${docIndex}.${key}${i === undefined ? "" : `.${i}`}`;
   return (
     <div className="space-y-1.5 leading-snug">
       {def.fields.map((f) => {
@@ -183,19 +252,21 @@ function Fields({ def, fields, layout }: { def: DocumentDef; fields: Record<stri
         if (f.kind === "items" && Array.isArray(val)) {
           return (
             <div key={f.key} className="pt-1">
-              <div className="font-nhan text-[10px] uppercase tracking-wider text-muc-nhat">{f.label}:</div>
-              <table className="w-full mt-1 border-collapse">
-                <tbody>
-                  {(val as ItemLike[]).map((item, idx) => (
-                    <tr key={idx} className="border-b border-dotted border-muc/30">
-                      <td className="py-0.5 pr-2">{item.ten ?? item.ma}</td>
-                      <td className="py-0.5 text-right font-bold whitespace-nowrap">
-                        {item.so_luong} {item.don_vi}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+              <Circlable id={fid(f.key)}>
+                <div className="font-nhan text-[10px] uppercase tracking-wider text-muc-nhat">{f.label}:</div>
+              </Circlable>
+              <div className="mt-1">
+                {(val as ItemLike[]).map((item, idx) => (
+                  <Circlable key={idx} id={fid(f.key, idx)}>
+                    <div className="flex justify-between gap-2 border-b border-dotted border-muc/30 py-0.5">
+                      <span>{item.ten ?? item.ma}</span>
+                      <span className="font-bold whitespace-nowrap">
+                        {item.so_luong} {unit(item.don_vi)}
+                      </span>
+                    </div>
+                  </Circlable>
+                ))}
+              </div>
             </div>
           );
         }
@@ -205,17 +276,19 @@ function Fields({ def, fields, layout }: { def: DocumentDef; fields: Record<stri
           const item = val as ItemLike;
           shown = (
             <>
-              {item.ten ?? item.ma} ({item.so_luong} {item.don_vi})
+              {item.ten ?? item.ma} ({item.so_luong} {unit(item.don_vi)})
             </>
           );
         }
 
         return (
-          <div key={f.key} className={cx("flex items-baseline gap-2", layout === "giay-ngang" && "text-[0.95em]")}>
-            <span className="text-muc-nhat whitespace-nowrap">{f.label}:</span>
-            <span className="flex-1 border-b border-dotted border-muc/40 translate-y-[-3px]" />
-            <span className="font-bold text-right">{shown}</span>
-          </div>
+          <Circlable key={f.key} id={fid(f.key)}>
+            <div className={cx("flex items-baseline gap-2", layout === "giay-ngang" && "text-[0.95em]")}>
+              <span className="text-muc-nhat whitespace-nowrap">{f.label}:</span>
+              <span className="flex-1 border-b border-dotted border-muc/40 translate-y-[-3px]" />
+              <span className="font-bold text-right">{shown}</span>
+            </div>
+          </Circlable>
         );
       })}
     </div>

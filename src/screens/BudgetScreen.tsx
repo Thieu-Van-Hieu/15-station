@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import type { Day, BudgetSummary, Expression } from "../engine/types";
 import { content } from "../content";
 import { expensesFor, familyLevel } from "../engine/economy";
+import type { ConditionState } from "../engine/conditions";
 import { playSfx, setLoop } from "../audio";
 import { AppHeader, Label, Panel, Paper, Portrait, PrimaryButton, Screen, cx, s } from "../components/ui";
 
@@ -10,17 +11,19 @@ interface BudgetScreenProps {
   budget: BudgetSummary;
   /** Hardship cộng dồn trước khi chi hôm nay; quyết định khoản chi nào còn (03 mục 8.4). */
   hardship?: number;
+  /** Trạng thái để xét khoản chi có điều kiện (ví dụ thuốc cho mẹ phụ thuộc lượt bác Nga). */
+  conditions?: ConditionState;
   onSubmitExpenses: (paidExpenseIds: string[]) => void;
 }
 
 const FAMILY = ["me-thanh", "hoa", "be-mai", "be-binh"] as const;
 
-export function BudgetScreen({ day, budget, hardship = 0, onSubmitExpenses }: BudgetScreenProps) {
+export function BudgetScreen({ day, budget, hardship = 0, conditions, onSubmitExpenses }: BudgetScreenProps) {
   // Mặc định chọn các khoản thiết yếu trả được
   const [selectedIds, setSelectedIds] = useState<string[]>(() => {
     let left = budget.available;
     const initial: string[] = [];
-    for (const exp of expensesFor(day, hardship)) {
+    for (const exp of expensesFor(day, hardship, conditions)) {
       if (exp.essential && exp.cost <= left) {
         initial.push(exp.id);
         left -= exp.cost;
@@ -29,7 +32,7 @@ export function BudgetScreen({ day, budget, hardship = 0, onSubmitExpenses }: Bu
     return initial;
   });
 
-  const expenses = expensesFor(day, hardship);
+  const expenses = expensesFor(day, hardship, conditions);
   const level = familyLevel(hardship);
   const familyGone = level >= 3;
   const totalCost = expenses.filter((e) => selectedIds.includes(e.id)).reduce((sum, e) => sum + e.cost, 0);

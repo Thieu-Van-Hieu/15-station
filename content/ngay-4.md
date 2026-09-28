@@ -51,6 +51,13 @@
 - [tram-truong-doi] Từ hôm nay áp dụng Điều 4: Họ tên và năm sinh trên Giấy đi đường, Chứng nhận thương binh phải khớp với Sổ hộ khẩu. Sai một chữ hay lệch một năm cũng không được cho qua.
 ### Tại: end
 - [tram-truong-doi] Nhiều người mượn giấy tờ của nhau đi buôn, phải đối chiếu hộ khẩu thật chặt.
+### Tại: d4-t3
+- [tram-truong-doi] Trẻ con cũng phải đúng sổ. Sổ không có tuổi.
+
+## Trạm trưởng đứng sau lưng
+- d4-t3
+
+Ở lượt này làm ngơ vẫn bị ghi sổ và nhắc nhở như cho qua (03 mục 5.4).
 
 ## Thứ tự lượt khách
 1. d4-t1
@@ -139,7 +146,7 @@
 - Lương thực vào thị xã: 0
 - Hộ thiếu ăn: +3
 - Giá gạo: 0
-- Ghi chú: Tịch thu 15kg gạo của bác Khoan, xã viên hoang mang về chính sách khoán.
+- Ghi chú: Tịch thu 15 kg gạo của bác Khoan, xã viên hoang mang về chính sách khoán.
 
 ---
 
@@ -149,15 +156,16 @@
 - Nhân vật: anh-hung
 - Biểu cảm: binh-thuong
 - Nhãn: dong-cam
-- Ghi chú vẽ: Anh Hùng dựng chiếc xe đạp cũ, bình thản đưa từng tờ giấy qua ô cửa kính.
+- Ghi chú vẽ: Anh Hùng chỉ vào dòng năm sinh trên tấm thẻ thương binh đã sờn mép.
 
 ### Lời thoại
-- [anh-hung] Chào chú Thành. Hôm nay tôi mang 10 cân ngô hạt ra thị xã đổi lấy dầu máy sửa xe.
-- [anh-hung] Hôm nay sổ hộ khẩu, giấy thương binh, giấy đi đường của tôi đều mang theo đầy đủ, tên tuổi năm sinh trùng khít.
+- [anh-hung] Chào chú Thành. Hôm nay tôi mang 5 cân ngô thôi, đúng định mức, ra thị xã đổi lấy dầu máy.
+- [anh-hung] Sổ hộ khẩu, giấy thương binh, giấy đi đường đủ cả. Giấy thương binh thì đơn vị cấp từ hồi ở chiến trường, năm sinh ghi theo lời khai lúc nhập ngũ, chú ạ.
+- [anh-hung] {nếu anh-hung.m2 = giu, giu-kn} Lần trước tôi bị giữ vì cân ngô, nên lần này tôi cân kỹ lắm rồi.
 
 ### Phản ứng
 - [CHO_QUA] Cảm ơn chú Thành luôn có tấm lòng với anh em thương binh.
-- [GIU_LAI] Lại giữ... hoá ra có đủ hộ khẩu cũng không ăn thua à chú?
+- [GIU_LAI] Giấy nhà nước cấp mà vênh nhau thì tôi biết tin tờ nào hả chú...
 
 ### Giấy tờ
 #### GDD
@@ -169,7 +177,7 @@
 - Ngày cấp: 1981-03-21
 - Có giá trị đến: 1981-03-28
 - Hàng mang theo:
-  - ngo | Ngô hạt | 10 | kg
+  - ngo | Ngô hạt | 5 | kg
 - Dấu: UBND_XA | Phú Hoà | rõ
 #### SHK
 - Số sổ: PH-0541
@@ -181,22 +189,22 @@
 - Dấu: CONG_AN | Phú Hoà | rõ
 #### CNTB
 - Họ và tên: Lê Văn Hùng
-- Năm sinh: 1952
+- Năm sinh: 1951
 - Hạng: 2/4
 - Số thẻ: TB-5201
 - Đơn vị cấp: Ty Thương binh - Xã hội
 - Dấu: TB_XH | Thị xã | rõ
 
 ### Hàng thực mang theo
-- ngo | Ngô hạt | 10 | kg | LUONG_THUC
+- ngo | Ngô hạt | 5 | kg | LUONG_THUC
 
 ### Lỗi cài cắm
-- E4 | không | không | 10 kg ngô vượt định mức 5 kg.
+- E2 | CNTB | nam_sinh | Giấy chứng nhận thương binh ghi năm sinh 1951, hộ khẩu và giấy đi đường ghi 1952. Hồ sơ thời chiến ghi lệch; anh Hùng không khai gian.
 
 ### Đáp án mong đợi
 - Phán quyết: GIU_LAI
 - Vi phạm:
-  - R2-DINH-MUC | E4
+  - R4-KHOP-TEN | E2
 
 ### Biên bản kiến nghị
 - Vấn đề: KN-THUONG-BINH
@@ -213,12 +221,12 @@
 - Lương thực vào thị xã: +1
 - Hộ thiếu ăn: 0
 - Giá gạo: 0
-- Ghi chú: Ngô của anh Hùng đổi được dầu máy cho tổ sửa xe.
+- Ghi chú: Anh Hùng đổi được dầu máy cho tổ sửa xe.
 #### GIU_LAI
 - Lương thực vào thị xã: 0
 - Hộ thiếu ăn: +2
 - Giá gạo: 0
-- Ghi chú: Tịch thu 10kg ngô của anh Hùng thương binh.
+- Ghi chú: Anh Hùng bị giữ vì giấy thương binh ghi lệch một năm sinh.
 
 ---
 
@@ -230,9 +238,13 @@
 - Nhãn: dong-cam
 - Ghi chú vẽ: Thằng Tí gầy gò, tay bưng thúng gạo nhỏ, mắt ngước nhìn chú cán bộ đầy hy vọng.
 
+### Chân dung theo nhánh đời
+- {nếu thang-ti.m2 = giu, giu-kn} biểu cảm buon
+
 ### Lời thoại
-- [thang-ti] Chú Thành ơi, hôm nay nhà cháu thu hoạch được phần thóc khoán mảnh ruộng bãi của bố cháu.
-- [thang-ti] Bố cháu bảo cháu mang 10 cân gạo này với giấy khoán của HTX Phú Hoà ra đổi ít than với muối. Chú kiểm tra giúp cháu ạ.
+- [thang-ti] {nếu thang-ti.m2 = qua, qua-kn, lam-ngo, qua-tien, lam-ngo-tien} Chú Thành ơi, bố cháu uống đủ thuốc, cắt được cơn sốt rồi ạ. Hôm nay nhà cháu thu được phần thóc khoán mảnh ruộng bãi.
+- [thang-ti] {nếu thang-ti.m2 = giu, giu-kn} Bố cháu bỏ dở thuốc, sốt lại, giờ nằm một chỗ. Cháu nghỉ học đi làm thay bố rồi chú ạ.
+- [thang-ti] Cháu mang 10 cân gạo này với giấy khoán của HTX Phú Hoà ra đổi ít than với muối. Chú kiểm tra giúp cháu ạ.
 
 ### Phản ứng
 - [CHO_QUA] Cháu cảm ơn chú Thành nhiều lắm ạ!
@@ -259,14 +271,14 @@
 - Địa chỉ: Xã Phú Hoà
 - Dấu: CONG_AN | Phú Hoà | rõ
 #### GXNK
-- Họ và tên: Nguyễn Văn Tí
+- Xã viên: Nguyễn Văn Tí
 - Xã: Phú Hoà
-- Tên HTX: HTX nông nghiệp Phú Hoà
+- Hợp tác xã: HTX nông nghiệp Phú Hoà
 - Sản phẩm: Gạo
 - Mã sản phẩm: gao
-- Số lượng (kg): 6
+- Số lượng vượt khoán (kg): 6
 - Vụ: Vụ mùa 1980
-- Ngày: 1981-03-19
+- Ngày xác nhận: 1981-03-19
 - Dấu: HTX | Phú Hoà | rõ
 
 ### Hàng thực mang theo
@@ -300,7 +312,7 @@
 - Lương thực vào thị xã: 0
 - Hộ thiếu ăn: +2
 - Giá gạo: 0
-- Ghi chú: Tịch thu 10kg gạo của thằng Tí, bếp nhà thợ rèn nguội lạnh.
+- Ghi chú: Tịch thu 10 kg gạo của thằng Tí, bếp nhà thợ rèn nguội lạnh.
 
 ---
 
@@ -309,7 +321,7 @@
 ### Người đến ô cửa
 - Nhân vật: ong-quynh
 - Biểu cảm: binh-thuong
-- Nhãn: không
+- Nhãn: hop-le-ma-hai
 - Ghi chú vẽ: Ông Quỳnh ăn mặc lịch sự, điềm tĩnh xách cặp tài liệu.
 
 ### Lời thoại

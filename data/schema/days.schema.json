@@ -22,7 +22,7 @@
     },
     "travelerId": {
       "type": "string",
-      "pattern": "^d[1-6]-t[1-5]$"
+      "pattern": "^d[1-6]-t[1-6]$"
     },
     "ruleId": {
       "enum": [
@@ -177,6 +177,77 @@
               "type": "boolean"
             }
           }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "flag_count",
+            "in",
+            "op",
+            "value"
+          ],
+          "properties": {
+            "flag_count": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "$ref": "#/$defs/flagKey"
+              }
+            },
+            "in": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "$ref": "#/$defs/flagValue"
+              }
+            },
+            "op": {
+              "enum": [
+                ">=",
+                "<=",
+                "==",
+                ">",
+                "<"
+              ]
+            },
+            "value": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "indicator",
+            "op",
+            "value"
+          ],
+          "properties": {
+            "indicator": {
+              "enum": [
+                "luong_thuc_vao_thi_xa",
+                "ho_thieu_an",
+                "gia_gao_index"
+              ]
+            },
+            "op": {
+              "enum": [
+                ">=",
+                "<=",
+                "==",
+                ">",
+                "<"
+              ]
+            },
+            "value": {
+              "type": "number"
+            }
+          }
         }
       ]
     },
@@ -263,7 +334,7 @@
         "travelers": {
           "type": "array",
           "minItems": 3,
-          "maxItems": 5,
+          "maxItems": 6,
           "uniqueItems": true,
           "items": {
             "$ref": "#/$defs/travelerId"
@@ -357,6 +428,13 @@
                   },
                   "member": {
                     "$ref": "#/$defs/characterId"
+                  },
+                  "when": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "$ref": "#/$defs/condition"
+                    }
                   }
                 }
               }
@@ -446,6 +524,13 @@
         "savings_start": {
           "type": "integer",
           "minimum": 0
+        },
+        "observed": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/travelerId"
+          }
         }
       },
       "allOf": [

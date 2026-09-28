@@ -1,8 +1,10 @@
-import { useState, useEffect } from "react";
+import { useCallback, useState, useEffect } from "react";
+import { CheatPanel } from "./components/CheatPanel";
+import { previewDay, previewEnding, useCheatCode } from "./cheat";
 import { content } from "./content";
 import { newGame, reduce, type GameAction } from "./engine/game";
 import { simulate, followRulebook } from "./engine/simulate";
-import { currentDay, currentTraveler } from "./engine/state";
+import { conditionState, currentDay, currentTraveler } from "./engine/state";
 import { reprimandText } from "./engine/turn";
 import type { Action, GameState, TravelerId } from "./engine/types";
 import { DeskScreen } from "./screens/DeskScreen";
@@ -69,85 +71,113 @@ export default function App() {
     setState(newGame(content));
   }
 
-  // 1. Màn chú thích mở đầu
-  if (state.phase === "INTRO") {
-    return <IntroScreen onStart={() => dispatch({ type: "BAT_DAU_GAME" })} />;
-  }
+  const [cheatOpen, setCheatOpen] = useState(false);
+  useCheatCode(useCallback(() => setCheatOpen(true), []));
 
-  // 2. Màn đầu ngày (thẻ chuyển cảnh và giao ban đầu ngày)
-  if (state.phase === "DAY_START") {
-    return <DayStartScreen
-        day={currentDay(state, content)}
-        hardship={state.hardship}
-        fatigue={state.fatigue ?? 0}
-        onStart={() => dispatch({ type: "BAT_DAU_NGAY" })} />;
-  }
+  return (
+    <>
+      {renderScreen()}
+      {cheatOpen && (
+        <CheatPanel
+          onClose={() => setCheatOpen(false)}
+          onPickEnding={(id) => {
+            setState(previewEnding(content, id));
+            window.scrollTo(0, 0);
+            setCheatOpen(false);
+          }}
+          onPickDay={(i) => {
+            setState(previewDay(content, i));
+            window.scrollTo(0, 0);
+            setCheatOpen(false);
+          }}
+        />
+      )}
+    </>
+  );
 
-  // 3. Màn làm việc (Desk)
-  if (state.phase === "TRAVELER") {
-    const day = currentDay(state, content);
-    const traveler = currentTraveler(state, content);
-    // Lượt trước lập biên bản sai lý do: báo cho người chơi cùng chỗ với giấy nhắc nhở.
-    const last = state.travelerIndex > 0 ? state.log[state.log.length - 1] : undefined;
-    const invalidReport = last?.report && !last.report.valid ? content.strings["report.invalid"] : null;
-    const notices = [state.pendingReprimand ? reprimandText(state.pendingReprimand, content) : null, invalidReport].filter(Boolean);
-    const lastReprimandText = notices.length > 0 ? notices.join("\n\n") : null;
-
-    return (
-      <DeskScreen
-        state={state}
-        day={day}
-        traveler={traveler}
-        currentTravelerOrder={state.travelerIndex + 1}
-        totalTravelersInDay={day.travelers.length}
-        lastReprimandText={lastReprimandText}
-        onDecide={(action: Action, reasonId?: string | null, takeBribe?: boolean) => {
-          if (takeBribe) {
-            dispatch({ type: "NHAN_PHONG_BI" });
-          }
-          dispatch({ type: "QUYET_DINH", action, reasonId: reasonId ?? null });
-        }}
-        onNext={() => {
-          // Lượt đã được chuyển trong reduce(QUYET_DINH)
-        }}
-      />
-    );
-  }
-
-  // 4. Màn báo cáo cuối ngày (DayEnd)
-  if (state.phase === "DAY_END" && state.dayReport) {
-    const day = currentDay(state, content);
-    return (
-      <DayEndScreen
-        day={day}
-        dayReport={state.dayReport}
-        indicatorsStart={state.indicatorsDayStart}
-        indicatorsEnd={state.indicators}
-        onContinue={() => dispatch({ type: "KET_THUC_NGAY" })}
-      />
-    );
-  }
-
-  // 5. Màn chi tiêu gia đình (Budget)
-  if (state.phase === "BUDGET" && state.budget) {
-    const day = currentDay(state, content);
-    return (
-      <BudgetScreen
-        day={day}
-        budget={state.budget}
-        hardship={state.hardship}
-        onSubmitExpenses={(expenseIds: string[]) => dispatch({ type: "TRA_CHI_TIEU", expenseIds })}
-      />
-    );
-  }
-
-  // 6. Màn kết (Ending)
-  if (state.phase === "ENDING" && state.ending) {
-    const ending = content.endings.find((e) => e.id === state.ending);
-    if (ending) {
-      return <EndingScreen ending={ending} state={state} onRestart={handleRestart} />;
+  function renderScreen() {
+    // 1. Màn chú thích mở đầu
+    if (state.phase === "INTRO") {
+      return <IntroScreen onStart={() => dispatch({ type: "BAT_DAU_GAME" })} />;
     }
-  }
 
-  return null;
+    // 2. Màn đầu ngày (thẻ chuyển cảnh và giao ban đầu ngày)
+    if (state.phase === "DAY_START") {
+      return <DayStartScreen
+          day={currentDay(state, content)}
+          hardship={state.hardship}
+          fatigue={state.fatigue ?? 0}
+          onStart={() => dispatch({ type: "BAT_DAU_NGAY" })} />;
+    }
+
+    // 3. Màn làm việc (Desk)
+    if (state.phase === "TRAVELER") {
+      const day = currentDay(state, content);
+      const traveler = currentTraveler(state, content);
+      // Lượt trước lập biên bản sai lý do: báo cho người chơi cùng chỗ với giấy nhắc nhở.
+      const last = state.travelerIndex > 0 ? state.log[state.log.length - 1] : undefined;
+      const invalidReport = last?.report && !last.report.valid ? content.strings["report.invalid"] : null;
+      const notices = [state.pendingReprimand ? reprimandText(state.pendingReprimand, content) : null, invalidReport].filter(Boolean);
+      const lastReprimandText = notices.length > 0 ? notices.join("\n\n") : null;
+
+      return (
+        <DeskScreen
+          state={state}
+          day={day}
+          traveler={traveler}
+          currentTravelerOrder={state.travelerIndex + 1}
+          totalTravelersInDay={day.travelers.length}
+          lastReprimandText={lastReprimandText}
+          onDecide={(action: Action, reasonId?: string | null, takeBribe?: boolean) => {
+            if (takeBribe) {
+              dispatch({ type: "NHAN_PHONG_BI" });
+            }
+            dispatch({ type: "QUYET_DINH", action, reasonId: reasonId ?? null });
+          }}
+          onConfront={(a, b) => dispatch({ type: "DOI_CHAT", a, b })}
+        onNext={() => {
+            // Lượt đã được chuyển trong reduce(QUYET_DINH)
+          }}
+        />
+      );
+    }
+
+    // 4. Màn báo cáo cuối ngày (DayEnd)
+    if (state.phase === "DAY_END" && state.dayReport) {
+      const day = currentDay(state, content);
+      return (
+        <DayEndScreen
+          day={day}
+          dayReport={state.dayReport}
+          indicatorsStart={state.indicatorsDayStart}
+          indicatorsEnd={state.indicators}
+          onContinue={() => dispatch({ type: "KET_THUC_NGAY" })}
+        />
+      );
+    }
+
+    // 5. Màn chi tiêu gia đình (Budget)
+    if (state.phase === "BUDGET" && state.budget) {
+      const day = currentDay(state, content);
+      return (
+        <BudgetScreen
+          day={day}
+          budget={state.budget}
+          hardship={state.hardship}
+          conditions={conditionState(state)}
+          onSubmitExpenses={(expenseIds: string[]) => dispatch({ type: "TRA_CHI_TIEU", expenseIds })}
+        />
+      );
+    }
+
+    // 6. Màn kết (Ending)
+    if (state.phase === "ENDING" && state.ending) {
+      const ending = content.endings.find((e) => e.id === state.ending);
+      if (ending) {
+        return <EndingScreen ending={ending} state={state} onRestart={handleRestart} />;
+      }
+    }
+
+    return null;
+  }
 }

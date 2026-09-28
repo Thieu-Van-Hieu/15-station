@@ -3,7 +3,7 @@
  * Nhiều điều kiện trong một mảng nối bằng VÀ.
  */
 
-import type { Condition, FlagValue, IssueId, StatCondition, StatName } from "./types";
+import type { Condition, FlagValue, Indicators, IssueId, StatCondition, StatName } from "./types";
 
 export type HiddenStats = Record<StatName, number>;
 
@@ -13,6 +13,8 @@ export interface ConditionState {
   issuesTriggered: ReadonlySet<IssueId>;
   /** Chỉ cần cho điều kiện theo chỉ số ẩn (endings.json). */
   stats?: HiddenStats;
+  /** Chỉ số huyện hiện tại, cho điều kiện `indicator`. */
+  indicators?: Indicators;
 }
 
 export function compareStat(actual: number, op: StatCondition["op"], expected: number): boolean {
@@ -36,6 +38,17 @@ export function checkCondition(c: Condition, s: ConditionState): boolean {
     return value !== undefined && c.in.includes(value);
   }
   if ("issue_triggered" in c) return s.issuesTriggered.has(c.issue_triggered) === c.value;
+  if ("flag_count" in c) {
+    const n = c.flag_count.filter((k) => {
+      const v = s.flags[k];
+      return v !== undefined && c.in.includes(v);
+    }).length;
+    return compareStat(n, c.op, c.value);
+  }
+  if ("indicator" in c) {
+    if (s.indicators === undefined) throw new Error(`Điều kiện theo chỉ số huyện "${c.indicator}" cần indicators`);
+    return compareStat(s.indicators[c.indicator], c.op, c.value);
+  }
   if (s.stats === undefined) throw new Error(`Điều kiện theo chỉ số "${c.stat}" cần stats`);
   return compareStat(s.stats[c.stat], c.op, c.value);
 }

@@ -39,7 +39,7 @@
         "order": {
           "type": "integer",
           "minimum": 1,
-          "maximum": 5
+          "maximum": 6
         },
         "character": {
           "$ref": "#/$defs/characterId"
@@ -53,7 +53,8 @@
               "buon-lau-that",
               "luot-trung-tam",
               "dung-trinh-bay",
-              "dong-cam"
+              "dong-cam",
+              "hop-le-ma-hai"
             ]
           }
         },
@@ -74,6 +75,44 @@
                 "ne-tranh",
                 "met-moi"
               ]
+            },
+            "key": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+            },
+            "variants": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "when"
+                ],
+                "properties": {
+                  "when": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "$ref": "#/$defs/condition"
+                    }
+                  },
+                  "key": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+                  },
+                  "expression": {
+                    "enum": [
+                      "binh-thuong",
+                      "vui",
+                      "lo-lang",
+                      "buon",
+                      "gian",
+                      "ne-tranh",
+                      "met-moi"
+                    ]
+                  }
+                }
+              }
             }
           }
         },
@@ -324,6 +363,36 @@
         },
         "art_note": {
           "type": "string"
+        },
+        "confront": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "on",
+              "lines"
+            ],
+            "properties": {
+              "on": {
+                "enum": [
+                  "name",
+                  "year",
+                  "item",
+                  "other",
+                  "any",
+                  "khop"
+                ]
+              },
+              "lines": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "$ref": "#/$defs/line"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -1016,6 +1085,77 @@
               "type": "boolean"
             }
           }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "flag_count",
+            "in",
+            "op",
+            "value"
+          ],
+          "properties": {
+            "flag_count": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "$ref": "#/$defs/flagKey"
+              }
+            },
+            "in": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "$ref": "#/$defs/flagValue"
+              }
+            },
+            "op": {
+              "enum": [
+                ">=",
+                "<=",
+                "==",
+                ">",
+                "<"
+              ]
+            },
+            "value": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "indicator",
+            "op",
+            "value"
+          ],
+          "properties": {
+            "indicator": {
+              "enum": [
+                "luong_thuc_vao_thi_xa",
+                "ho_thieu_an",
+                "gia_gao_index"
+              ]
+            },
+            "op": {
+              "enum": [
+                ">=",
+                "<=",
+                "==",
+                ">",
+                "<"
+              ]
+            },
+            "value": {
+              "type": "number"
+            }
+          }
         }
       ]
     },
@@ -1031,7 +1171,7 @@
     },
     "travelerId": {
       "type": "string",
-      "pattern": "^d[1-6]-t[1-5]$"
+      "pattern": "^d[1-6]-t[1-6]$"
     },
     "characterId": {
       "anyOf": [

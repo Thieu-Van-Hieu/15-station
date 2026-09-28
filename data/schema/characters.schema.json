@@ -34,7 +34,7 @@
     },
     "travelerId": {
       "type": "string",
-      "pattern": "^d[1-6]-t[1-5]$"
+      "pattern": "^d[1-6]-t[1-6]$"
     },
     "expression": {
       "enum": [

@@ -57,6 +57,10 @@ Xưng tôi, gọi Thành là chú hoặc chú Thành. Giọng nói chậm rãi, 
 - Biểu cảm cần vẽ: binh-thuong, vui, lo-lang, buon
 - Mô tả: Phụ nữ nông thôn ngoài 50 tuổi, đội nón lá cũ, áo nâu vá vai, gánh đôi thúng chai.
 
+### Chân dung theo nhánh đời
+- Mã ảnh `ba-tu-khong-non`, biểu cảm `buon`: nhánh **gãy**, dùng ở d5 và d6 khi bà đã bị giữ từ hai lần trở lên. Không đội nón nữa, tóc bạc búi vội, má hóp, nhìn xuống.
+- Nhánh **khá lên** (chưa lần nào bị giữ) dùng biểu cảm `vui` của bộ thường.
+
 ### Dữ liệu cố định trên giấy tờ
 - Họ và tên: Trần Thị Lành
 - Năm sinh: 1929
@@ -90,6 +94,10 @@ Xưng tôi, gọi Thành là chú em hoặc đồng chí. Nói năng đĩnh đ�
 - Mã ảnh: anh-hung
 - Biểu cảm cần vẽ: binh-thuong, lo-lang, gian, vui
 - Mô tả: Nam thanh niên cụt tay phải, mặc áo lính bạc màu cài khuy kín cổ, mắt sáng cương trực.
+
+### Chân dung theo nhánh đời
+- Mã ảnh `anh-hung-gay`, biểu cảm `met-moi`: nhánh **gãy**, dùng ở d5 và d6 khi anh đã bị giữ từ hai lần trở lên. Gầy rộc, râu không cạo, tóc bù, tổ sửa xe đã tan.
+- Nhánh **khá lên** dùng biểu cảm `vui` của bộ thường.
 
 ### Dữ liệu cố định trên giấy tờ
 - Họ và tên: Lê Văn Hùng
@@ -157,6 +165,10 @@ Xưng cháu, gọi chú hoặc chú Thành. Giọng ngây thơ, thật thà như
 - Mã ảnh: thang-ti
 - Biểu cảm cần vẽ: binh-thuong, lo-lang, buồn, vui
 - Mô tả: Cậu bé gầy gò, mắt to sáng, quần đùi đen, áo cộc sờn rách, đi chân đất.
+
+### Chân dung theo nhánh đời
+- Mã ảnh `thang-ti-lon`, biểu cảm `vui` và `ne-tranh`: thằng Tí năm 1987, mười tám tuổi, đi buôn chuyến vải. `ne-tranh` dùng khi năm 1981 thuốc của bố nó bị giữ: nó nhận ra Thành nhưng không nói gì.
+- d4: biểu cảm `buon` nếu thuốc quinin ở d3 bị giữ.
 
 ### Dữ liệu cố định trên giấy tờ
 - Họ và tên: Nguyễn Văn Tí
@@ -438,7 +450,7 @@ Xưng tôi, gọi chú. Giọng nghẹn ngào, khẩn khoản, vội vã.
 - Quê / nơi ở: xã Phú Mỹ
 
 ### Hoàn cảnh
-Chở xe thồ 40kg gạo không có tem phiếu chứng từ hợp lệ nhằm bán ra chợ đen kiếm lời cắt cổ trong lúc thị xã đang khan hiếm lương thực.
+Chở xe thồ 40 kg gạo không có tem phiếu chứng từ hợp lệ nhằm bán ra chợ đen kiếm lời cắt cổ trong lúc thị xã đang khan hiếm lương thực.
 
 ### Giọng nói
 Xưng tôi, gọi cán bộ hoặc anh em. Cợt nhả, nài nỉ, ranh mãnh.
@@ -522,7 +534,7 @@ Xưng tôi, gọi đồng chí cán bộ. Chân chất, khẳng khái, tin tư�
 - Quê / nơi ở: Thị xã
 
 ### Hoàn cảnh
-Đầu mối thu gom hàng tấn lương thực của các xã mang về đầu cơ tại thị xã. Ở Màn 3, hắn chủ động đưa phong bì 120 đồng hối lộ Thành qua khe cửa kính để xe gạo 300kg lọt trạm.
+Đầu mối thu gom hàng tấn lương thực của các xã mang về đầu cơ tại thị xã. Ở Màn 3, hắn chủ động đưa phong bì 120 đồng hối lộ Thành qua khe cửa kính để xe gạo 300 kg lọt trạm. Hắn đi bằng giấy đi đường của em trai (Bùi Văn Lợi), là lượt duy nhất Điều 4 bắt đúng người gian.
 
 ### Giọng nói
 Xưng em, gọi anh Thành hoặc đại ca. Giọng thì thào, mơn trớn, biết Thành đang thiếu tiền chữa bệnh cho con.
@@ -536,7 +548,7 @@ Xưng em, gọi anh Thành hoặc đại ca. Giọng thì thào, mơn trớn, bi
 - - không
 
 ### Các lần xuất hiện
-- d5-t4
+- d5-t5
 
 ---
 
@@ -564,7 +576,7 @@ Xưng em, gọi anh cán bộ. Giọng mộc mạc, tha thiết.
 - - không
 
 ### Các lần xuất hiện
-- d5-t5
+- d5-t6
 
 ---
 
@@ -593,3 +605,31 @@ Xưng tôi, gọi ông bạn. Cố làm ra vẻ bình thản tự nhiên nhưng 
 
 ### Các lần xuất hiện
 - d6-t5
+
+---
+
+## NHÂN VẬT np-hang-xom
+
+### Thông tin
+- Mã: np-hang-xom
+- Tên hiển thị: Bác Nga hàng xóm
+- Vai trò: mot-lan
+- Tuổi: 55
+- Quê / nơi ở: Thị xã
+
+### Hoàn cảnh
+Công nhân về hưu của nhà máy dệt, ở dãy B khu tập thể, cùng dãy với nhà Thành. Hay giúp đỡ mẹ Thành những lúc Thành đi trực. Ở d5 bác mang hộ thuốc huyết áp cho mẹ Thành và hai hộp sữa cho bé Bình, mua ngoài chợ nên không có đơn lẫn hoá đơn. Đây là lượt đầu tiên hai bảng chỉ số và bảng chi tiêu gia đình nói về cùng một việc (V3).
+
+### Giọng nói
+Xởi lởi, nói thẳng, xưng tôi gọi chú.
+
+### Chân dung
+- Mã ảnh: np-hang-xom
+- Biểu cảm cần vẽ: binh-thuong, lo-lang
+- Mô tả: Người đàn bà trạc năm mươi, tóc búi, áo sơ mi công nhân cũ, xách túi lưới.
+
+### Dữ liệu cố định trên giấy tờ
+- - không
+
+### Các lần xuất hiện
+- d5-t4

@@ -75,6 +75,18 @@ if (typeof window !== "undefined") {
   };
   window.addEventListener("pointerdown", markInteraction);
   window.addEventListener("keydown", markInteraction);
+
+  // Dựng AudioContext và nạp trước hiệu ứng lúc trình duyệt rảnh, ngay sau khi trang tải.
+  // Làm việc này ngay trong cú bấm đầu tiên tốn 100–170 ms và làm giao diện khựng lại.
+  // AudioContext tạo trước tương tác sẽ ở trạng thái "suspended"; cú bấm đầu chỉ cần resume().
+  const idle = (fn: () => void) =>
+    "requestIdleCallback" in window ? window.requestIdleCallback(fn, { timeout: 2000 }) : setTimeout(fn, 300);
+  idle(() => {
+    const ac = getCtx();
+    if (!ac) return;
+    noise(ac);
+    for (const name of Object.keys(SOUNDS) as (SfxName | LoopName)[]) if (SOUNDS[name].category === "sfx") void load(ac, name);
+  });
 }
 
 export function isMuted(): boolean {
@@ -290,6 +302,14 @@ function startLoop(name: LoopName) {
 // Âm tổng hợp dự phòng khi chưa có file
 // ---------------------------------------------------------------------------
 
+let sharedNoise: AudioBuffer | null = null;
+
+/** Một đoạn tiếng ồn trắng 2 giây dùng chung; mỗi lần phát lấy một điểm bắt đầu ngẫu nhiên. */
+function noise(ac: AudioContext): AudioBuffer {
+  if (!sharedNoise) sharedNoise = noiseBuffer(ac, 2);
+  return sharedNoise;
+}
+
 function noiseBuffer(ac: AudioContext, seconds: number): AudioBuffer {
   const len = Math.floor(ac.sampleRate * seconds);
   const buf = ac.createBuffer(1, len, ac.sampleRate);
@@ -306,7 +326,7 @@ function noiseBurst(
   opts: { type: BiquadFilterType; freq: number; q?: number; gain: number; attack?: number; freqEnd?: number },
 ) {
   const src = ac.createBufferSource();
-  src.buffer = noiseBuffer(ac, dur + 0.05);
+  src.buffer = noise(ac);
   const filter = ac.createBiquadFilter();
   filter.type = opts.type;
   filter.frequency.setValueAtTime(opts.freq, t);
@@ -317,7 +337,7 @@ function noiseBurst(
   g.gain.exponentialRampToValueAtTime(opts.gain, t + (opts.attack ?? 0.004));
   g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
   src.connect(filter).connect(g).connect(out);
-  src.start(t);
+  src.start(t, Math.random() * Math.max(0, 1.9 - dur));
   src.stop(t + dur + 0.05);
 }
 

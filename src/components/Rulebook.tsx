@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import type { DayId, IssueId } from "../engine/types";
 import { activeRules } from "../engine/active";
 import { content } from "../content";
@@ -7,11 +8,27 @@ interface RulebookProps {
   dayId: DayId;
   issuesActive: ReadonlySet<IssueId>;
   className?: string;
+  /** Điều cần làm sáng (khi người chơi bấm nhãn điều trên dòng hàng). `tick` đổi mỗi lần bấm để bấm lại cùng điều vẫn chạy. */
+  highlight?: { id: string; tick: number } | null;
+  /** Có thì hiện nút ẩn sổ ở đầu trang. */
+  onHide?: () => void;
 }
 
 type Catalog = { ma: string; ten: string }[];
 
-export function Rulebook({ dayId, issuesActive, className }: RulebookProps) {
+export function Rulebook({ dayId, issuesActive, className, highlight, onHide }: RulebookProps) {
+  const articles = useRef(new Map<string, HTMLElement>());
+  const [flash, setFlash] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!highlight) return;
+    const el = articles.current.get(highlight.id);
+    el?.scrollIntoView({ block: "center", behavior: "smooth" });
+    setFlash(highlight.id);
+    const t = setTimeout(() => setFlash(null), 2200);
+    return () => clearTimeout(t);
+  }, [highlight]);
+
   const rules = activeRules(content.rules, dayId, issuesActive);
   const day = content.days.find((d) => d.id === dayId);
   const fresh = new Set<string>(day?.new_rules ?? []);
@@ -25,6 +42,19 @@ export function Rulebook({ dayId, issuesActive, className }: RulebookProps) {
           <Label className="text-chu-ban-phu/60 text-[10px]">{s("rulebook.subtitle")}</Label>
         </div>
         {day && <Label className="ml-auto border border-son/70 text-son-nhat px-2 py-0.5 text-[10px] whitespace-nowrap">{day.game_date}</Label>}
+        {onHide && (
+          <button
+            type="button"
+            onClick={onHide}
+            title={`${s("rulebook.hide")} (${s("rulebook.shortcut")})`}
+            aria-label={s("rulebook.hide")}
+            className="w-7 h-7 grid place-items-center border border-vien text-chu-ban-phu hover:bg-ban-3 hover:text-giay shrink-0"
+          >
+            <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+              <path d="M9 6l6 6-6 6" />
+            </svg>
+          </button>
+        )}
       </div>
 
       <div className="giay-ke-dong flex-1 min-h-0 overflow-y-auto thanh-cuon shadow-giay border border-giay-vien text-muc">
@@ -42,7 +72,18 @@ export function Rulebook({ dayId, issuesActive, className }: RulebookProps) {
                   : null;
 
             return (
-              <article key={rule.id} className={cx("relative", isNew && "animate-truot-vao")}>
+              <article
+                key={rule.id}
+                ref={(el) => {
+                  if (el) articles.current.set(rule.id, el);
+                  else articles.current.delete(rule.id);
+                }}
+                className={cx(
+                  "relative -mx-2 px-2 transition-[background-color,box-shadow] duration-500",
+                  isNew && "animate-truot-vao",
+                  flash === rule.id && "bg-ho-phach/30 shadow-[0_0_0_2px_rgba(217,164,65,0.9)]",
+                )}
+              >
                 <h4 className="font-tieu-de font-bold text-[14px] text-son-dam leading-snug border-b border-muc/60 pb-0.5 mb-1 flex items-baseline gap-2">
                   <span>
                     {rule.article}: {rule.title}
@@ -53,6 +94,9 @@ export function Rulebook({ dayId, issuesActive, className }: RulebookProps) {
                     </span>
                   )}
                 </h4>
+                <p className="font-nhan text-[10px] uppercase tracking-wider text-muc-xanh leading-5 mb-1">
+                  {s("rulebook.applies_to")}: <span className="normal-case tracking-normal font-may-chu text-[11px]">{rule.scope_note ?? rule.applies_to.join(", ")}</span>
+                </p>
                 <p className="whitespace-pre-line">{rule.page_text}</p>
 
                 {catalog && (

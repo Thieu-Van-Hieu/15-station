@@ -58,6 +58,21 @@ Bối cảnh diễn ra tại một huyện bán sơn địa/đồng bằng miề
    - Tên gọi: Nguyễn Văn Tí (sinh 1969, 10–12 tuổi thời kỳ đầu, con trai ông Thược thợ rèn ở Phú Hoà). Quần đùi đen, áo cộc thủng vai, mắt sáng, chân đất.
    - Giọng nói: Xưng *"cháu"*, gọi *"chú"*. Ngây thơ nhưng già dặn trước tuổi do hoàn cảnh nghèo đói và bố đau ốm triền miên.
 
+### 3.2a. Ba nhánh đời của nhân vật chính (V3)
+
+Mỗi lần gặp lại, nhân vật mang hậu quả những lần trước ngay trên mặt. Nhánh suy ra từ số lần họ bị giữ ở các lượt trước (điều kiện `flag_count`, 03 mục 1.10). Cách hiển thị quan trọng hơn lời thoại: nhánh "gãy" nói ít đi, không giải thích gì.
+
+| Nhân vật | Khá lên (chưa bị giữ lần nào) | Cầm cự (bị giữ 1 lần) | Gãy (bị giữ từ 2 lần) |
+|---|---|---|---|
+| Bà Tư | Cười, kể dành dụm lợp được mái bếp. Nón lá mới | Vẫn chào, nhắc lại lần bị giữ ("thằng cháu nằm mất nửa tháng") | Không đội nón, không chào, đặt giấy lên bậu cửa rồi nhìn xuống. Chỉ nói "Giấy đây." Năm 1987 đi qua barie không nhìn vào ô cửa |
+| Anh Hùng | Tổ sửa xe có bốn anh em, có cả hai người cụt chân ngồi gò | Như bình thường | Gầy rộc, râu không cạo. Năm 1987 tổ sửa xe đã tan, anh sửa xe lề đường |
+| Thằng Tí | Bố uống đủ thuốc, cắt cơn sốt. Năm 1987 hai bố con buôn chuyến vải | — | Thuốc quinin năm 1981 bị giữ: bố bỏ dở thuốc, nó nghỉ học đi làm thay. Năm 1987 nó nhận ra Thành, nhìn rất lâu, không nói gì |
+| Ông Quỳnh | Không rẽ nhánh theo cờ. Lời thoại phản ứng theo **giá gạo** (điều kiện `indicator`): giá càng lên, ông càng nói tự nhiên về chuyện tăng giá đường | | |
+
+Nguyên tắc: hậu quả **trễ một màn**. Giữ hàng ở d3 thì tới d4–d5 mới biết chuyện gì đã xảy ra, và khi biết thì không sửa được nữa. Quyết định ở cửa sổ trạm, hậu quả ở nơi người gác không nhìn thấy.
+
+**Bác Nga hàng xóm** (d5-t4) nối gia đình với trạm: bác mang thuốc huyết áp cho mẹ Thành. Cho qua là sai theo sổ nhưng mẹ có thuốc; giữ lại là đúng sổ và tối đó Thành mua chợ đen giá gấp đôi. Cơ chế đẩy người tử tế vào chỗ phải chọn.
+
 ### 3.3. Nhân vật phụ (`phu`)
 - **Trạm trưởng Đối (`tram-truong-doi`)**:
   - Cán bộ trung niên, cấp trên trực tiếp của Thành. Cứng nhắc, lo giữ ghế và sợ chịu trách nhiệm cá nhân trước huyện uỷ.

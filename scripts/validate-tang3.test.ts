@@ -17,6 +17,9 @@ import {
   kiemTraTang3Dieu9,
   kiemTraTang3Dieu10,
   kiemTraTang3Dieu11,
+  kiemTraTang3Dieu12,
+  kiemTraTang3Dieu13,
+  kiemTraTang3Dieu14,
   type TatCaDuLieu,
 } from "./validate-data.js";
 
@@ -233,14 +236,44 @@ describe("Tầng 3 — Logic game (Mutation tests V3-01..V3-15)", () => {
   // V3-15: Một lượt vừa có bribe vừa có kn -> Lỗi điều 11
   it("V3-15: Một lượt vừa có bribe vừa có kn -> Lỗi điều 11", () => {
     const data = structuredClone(realData);
-    // Gán cả kn cho d5-t4 (vốn đã có bribe)
-    const d5t4 = data.travelers.find((t) => t.id === "d5-t4");
+    // Gán cả kn cho d5-t5 (vốn đã có bribe)
+    const d5t4 = data.travelers.find((t) => t.id === "d5-t5");
     expect(d5t4).toBeDefined();
     d5t4.kn = { issue: "KN-KHOAN", note: "Thử vừa có bribe vừa có kn" };
 
     const phatHien = kiemTraTang3Dieu11(data.travelers);
     const loiDieu11 = phatHien.filter((p) => p.muc === "loi" && p.dieu === 11);
     expect(loiDieu11.length).toBeGreaterThan(0);
-    expect(loiDieu11.some((p) => p.noi_dung.includes("d5-t4"))).toBe(true);
+    expect(loiDieu11.some((p) => p.noi_dung.includes("d5-t5"))).toBe(true);
+  });
+
+  // V3-16: Quy định không bắt được ai -> Lỗi điều 12
+  it("V3-16: Bỏ hết vi phạm R4 -> Lỗi điều 12, dữ liệu thật thì đạt", () => {
+    expect(kiemTraTang3Dieu12(realData.rules, realData.travelers)).toEqual([]);
+    const data = structuredClone(realData);
+    for (const t of data.travelers) t.expected.violations = t.expected.violations.filter((v: any) => v.rule !== "R4-KHOP-TEN");
+    const loi = kiemTraTang3Dieu12(data.rules, data.travelers);
+    expect(loi.some((p) => p.dieu === 12 && p.noi_dung.includes("R4-KHOP-TEN"))).toBe(true);
+    expect(loi.some((p) => p.noi_dung.includes("R6-HANG-CAM") || p.noi_dung.includes("R5K-KHOAN"))).toBe(false);
+  });
+
+  // V3-17: Nhãn không khớp đáp án -> Lỗi điều 13
+  it("V3-17: hop-le-ma-hai trên lượt có vi phạm, buon-lau-that không có lỗi -> Lỗi điều 13", () => {
+    expect(kiemTraTang3Dieu13(realData.travelers)).toEqual([]);
+    const data = structuredClone(realData);
+    data.travelers.find((t: any) => t.id === "d5-t5").tags.push("hop-le-ma-hai");
+    const smug = data.travelers.find((t: any) => t.id === "d1-t3");
+    smug.expected = { verdict: "GIU_LAI", violations: [] };
+    const loi = kiemTraTang3Dieu13(data.travelers);
+    expect(loi.some((p) => p.noi_dung.includes("d5-t5"))).toBe(true);
+    expect(loi.some((p) => p.noi_dung.includes("d1-t3"))).toBe(true);
+  });
+
+  // V3-18: applies_to lệch tham số hàm kiểm tra -> Lỗi điều 14
+  it("V3-18: applies_to của R5 lệch params.categories -> Lỗi điều 14", () => {
+    expect(kiemTraTang3Dieu14(realData.rules)).toEqual([]);
+    const data = structuredClone(realData);
+    data.rules.find((r: any) => r.id === "R5-CHUNG-TU").applies_to.push("LUONG_THUC");
+    expect(kiemTraTang3Dieu14(data.rules).some((p) => p.noi_dung.includes("R5-CHUNG-TU"))).toBe(true);
   });
 });

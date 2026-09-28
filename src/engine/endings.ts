@@ -22,6 +22,9 @@ export function hiddenStats(state: GameState): HiddenStats {
     hardship: state.hardship,
     overtime_days: state.overtimeDays,
     reprimands: t.reprimands,
+    doi_chat_count: t.doi_chat ?? 0,
+    doi_chat_hanh_dong: t.doi_chat_hanh_dong ?? 0,
+    doi_chat_bo_qua: t.doi_chat_bo_qua ?? 0,
   };
 }
 

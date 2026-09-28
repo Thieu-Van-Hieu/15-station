@@ -43,6 +43,7 @@ function ending(id: Ending["id"], priority: number, conditions: Ending["conditio
     quote: { text: "…", chapter: 1, section: "2.3" },
     character_lines: [],
     closing_question: null,
+    card_line: `Thẻ của ${id}`,
   };
 }
 

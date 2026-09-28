@@ -6,6 +6,7 @@ import { hiddenStats } from "../engine/endings";
 import { fillText, textVars } from "../engine/text";
 import { content } from "../content";
 import { setLoop } from "../audio";
+import { ResultCard, type CardData } from "../components/ResultCard";
 import { useEffect } from "react";
 import { AppHeader, Label, Panel, Paper, Portrait, PrimaryButton, Screen, cx, s } from "../components/ui";
 
@@ -43,6 +44,29 @@ export function EndingScreen({ ending, state, onRestart }: EndingScreenProps) {
     { label: s("end.stat_reprimands"), value: String(stats.reprimands), good: stats.reprimands <= 2 },
     { label: s("end.stat_hardship"), value: String(stats.hardship), good: stats.hardship === 0 },
   ];
+  const confrontTurns = stats.doi_chat_hanh_dong + stats.doi_chat_bo_qua;
+  if (stats.doi_chat_count > 0) {
+    statRows.push({
+      label: s("end.stat_confront"),
+      value: `${confrontTurns} / ${stats.doi_chat_hanh_dong}`,
+      good: stats.doi_chat_bo_qua === 0,
+    });
+  }
+
+  // V7: thẻ kết quả. Một dòng nhân vật lấy từ số phận đầu tiên hiện được (đã xét cờ).
+  const fate = visibleFates[0];
+  const fateChar = fate && content.characters.find((c) => c.id === fate.character);
+  const card: CardData = {
+    endingId: ending.id,
+    title: ending.title,
+    cardLine: ending.card_line,
+    reported: stats.reported_compliance,
+    actual: stats.true_compliance,
+    reports: stats.valid_reports,
+    confront: stats.doi_chat_count > 0 ? { found: confrontTurns, acted: stats.doi_chat_hanh_dong } : null,
+    character: fate ? { name: fateChar?.name ?? fate.character, text: fillText(fate.text, vars) } : null,
+    quote: ending.quote,
+  };
 
   return (
     <Screen header={<AppHeader center={<Label className="text-ho-phach">{s("ui.period")}</Label>} />} className="px-4 md:px-6 py-8">
@@ -144,6 +168,8 @@ export function EndingScreen({ ending, state, onRestart }: EndingScreenProps) {
             </div>
           )}
         </section>
+
+        <ResultCard data={card} />
 
         {/* Niên biểu */}
         <section className="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-4 border border-vien bg-ban-2/80 p-5">

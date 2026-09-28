@@ -2,6 +2,7 @@
   {
     "id": "END-AN-TIEN",
     "title": "Người ăn tiền",
+    "card_line": "Tám năm giữ cửa, và một chiếc phong bì dày hơn cuốn sổ chỉ thị.",
     "priority": 1,
     "conditions": [
       {
@@ -14,6 +15,31 @@
       {
         "text": "Năm 1987, cơ quan thanh tra vào cuộc làm rõ đường dây đầu cơ gạo và hàng buôn lậu qua các trạm cửa ngõ thị xã. Bạn bị khởi tố vì hành vi nhận hối lộ để hàng lậu lọt trạm. Số tiền {{bribe_total}} đồng nhận được không bù đắp nổi bản án kỷ luật và sự coi thường của đồng nghiệp.",
         "image": "vu-an"
+      },
+      {
+        "text": "Bạn chỉ ra chỗ lệch trên giấy tờ ở {{doi_chat_luot}} lượt. Bạn hành động theo điều mình thấy ở {{doi_chat_hanh_dong}} lượt.",
+        "when": [
+          {
+            "stat": "doi_chat_bo_qua",
+            "op": ">",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "text": "Bạn chỉ ra chỗ lệch trên giấy tờ ở {{doi_chat_luot}} lượt, và lượt nào bạn cũng hành động theo điều mình thấy.",
+        "when": [
+          {
+            "stat": "doi_chat_bo_qua",
+            "op": "==",
+            "value": 0
+          },
+          {
+            "stat": "doi_chat_hanh_dong",
+            "op": ">",
+            "value": 0
+          }
+        ]
       },
       {
         "text": "Cuối năm 1987, trong chiếc hộp thiếc để dưới gầm giường, còn {{tien_con_lai}} đồng."
@@ -39,6 +65,7 @@
   {
     "id": "END-LAM-NGO",
     "title": "Người làm ngơ",
+    "card_line": "Nhắm mắt cho người qua, nên sổ sách không bao giờ kể lại chuyện gì.",
     "priority": 2,
     "conditions": [
       {
@@ -55,6 +82,31 @@
       {
         "text": "Khi Đổi mới đến vào năm 1987, các mặt hàng ấy được lưu thông tự do. Nhưng lòng tốt giấu giếm của bạn không bao giờ trở thành bài học chung cho sự hoàn thiện thể chế.",
         "image": "khong-co-bien-ban"
+      },
+      {
+        "text": "Bạn chỉ ra chỗ lệch trên giấy tờ ở {{doi_chat_luot}} lượt. Bạn hành động theo điều mình thấy ở {{doi_chat_hanh_dong}} lượt.",
+        "when": [
+          {
+            "stat": "doi_chat_bo_qua",
+            "op": ">",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "text": "Bạn chỉ ra chỗ lệch trên giấy tờ ở {{doi_chat_luot}} lượt, và lượt nào bạn cũng hành động theo điều mình thấy.",
+        "when": [
+          {
+            "stat": "doi_chat_bo_qua",
+            "op": "==",
+            "value": 0
+          },
+          {
+            "stat": "doi_chat_hanh_dong",
+            "op": ">",
+            "value": 0
+          }
+        ]
       },
       {
         "text": "Cuối năm 1987, trong chiếc hộp thiếc để dưới gầm giường, còn {{tien_con_lai}} đồng."
@@ -76,6 +128,7 @@
   {
     "id": "END-KIEN-NGHI",
     "title": "Người kiến nghị",
+    "card_line": "Đóng dấu theo sổ, rồi viết biên bản xin sửa chính cuốn sổ ấy.",
     "priority": 3,
     "conditions": [
       {
@@ -109,6 +162,31 @@
         "image": "doi-moi-khoan"
       },
       {
+        "text": "Bạn chỉ ra chỗ lệch trên giấy tờ ở {{doi_chat_luot}} lượt. Bạn hành động theo điều mình thấy ở {{doi_chat_hanh_dong}} lượt.",
+        "when": [
+          {
+            "stat": "doi_chat_bo_qua",
+            "op": ">",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "text": "Bạn chỉ ra chỗ lệch trên giấy tờ ở {{doi_chat_luot}} lượt, và lượt nào bạn cũng hành động theo điều mình thấy.",
+        "when": [
+          {
+            "stat": "doi_chat_bo_qua",
+            "op": "==",
+            "value": 0
+          },
+          {
+            "stat": "doi_chat_hanh_dong",
+            "op": ">",
+            "value": 0
+          }
+        ]
+      },
+      {
         "text": "Cuối năm 1987, trong chiếc hộp thiếc để dưới gầm giường, còn {{tien_con_lai}} đồng."
       }
     ],
@@ -132,6 +210,7 @@
   {
     "id": "END-GAC-CONG",
     "title": "Người gác cổng mẫu mực",
+    "card_line": "Không sai một ly theo sổ. Không một dòng nào gửi lên về những gì đã thấy.",
     "priority": 4,
     "conditions": [
       {
@@ -163,6 +242,31 @@
       {
         "text": "Nhưng trong suốt những năm tháng ấy, bạn không gửi đi một biên bản kiến nghị nào. Bạn đã chứng kiến gánh nặng của người nông dân mang sản phẩm khoán hay vết thương của người thương binh, nhưng đã chọn im lặng để bảo đảm an toàn cho cuốn sổ thi đua.",
         "image": "khong-co-bien-ban"
+      },
+      {
+        "text": "Bạn chỉ ra chỗ lệch trên giấy tờ ở {{doi_chat_luot}} lượt. Bạn hành động theo điều mình thấy ở {{doi_chat_hanh_dong}} lượt.",
+        "when": [
+          {
+            "stat": "doi_chat_bo_qua",
+            "op": ">",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "text": "Bạn chỉ ra chỗ lệch trên giấy tờ ở {{doi_chat_luot}} lượt, và lượt nào bạn cũng hành động theo điều mình thấy.",
+        "when": [
+          {
+            "stat": "doi_chat_bo_qua",
+            "op": "==",
+            "value": 0
+          },
+          {
+            "stat": "doi_chat_hanh_dong",
+            "op": ">",
+            "value": 0
+          }
+        ]
       },
       {
         "text": "Cuối năm 1987, trong chiếc hộp thiếc để dưới gầm giường, còn {{tien_con_lai}} đồng."
@@ -197,6 +301,7 @@
   {
     "id": "END-SONG-SOT",
     "title": "Người sống sót",
+    "card_line": "Đi qua bao cấp như hàng triệu người khác: lúc theo sổ, lúc theo lòng.",
     "priority": 5,
     "conditions": [],
     "scenes": [
@@ -215,6 +320,31 @@
             "stat": "hardship",
             "op": ">",
             "value": 5
+          }
+        ]
+      },
+      {
+        "text": "Bạn chỉ ra chỗ lệch trên giấy tờ ở {{doi_chat_luot}} lượt. Bạn hành động theo điều mình thấy ở {{doi_chat_hanh_dong}} lượt.",
+        "when": [
+          {
+            "stat": "doi_chat_bo_qua",
+            "op": ">",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "text": "Bạn chỉ ra chỗ lệch trên giấy tờ ở {{doi_chat_luot}} lượt, và lượt nào bạn cũng hành động theo điều mình thấy.",
+        "when": [
+          {
+            "stat": "doi_chat_bo_qua",
+            "op": "==",
+            "value": 0
+          },
+          {
+            "stat": "doi_chat_hanh_dong",
+            "op": ">",
+            "value": 0
           }
         ]
       },

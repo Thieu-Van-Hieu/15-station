@@ -4,15 +4,35 @@
     "day": "d1",
     "order": 1,
     "character": "np-sinh-vien",
-    "tags": ["huong-dan"],
-    "portrait": { "expression": "binh-thuong" },
+    "tags": [
+      "huong-dan"
+    ],
+    "portrait": {
+      "expression": "binh-thuong"
+    },
     "dialogue": [
-      { "speaker": "np-sinh-vien", "text": "Dạ chào chú cán bộ, cháu là sinh viên trường Sư phạm được nghỉ phép về thăm nhà ạ." },
-      { "speaker": "np-sinh-vien", "text": "Mẹ cháu đùm cho 4 cân gạo mang lên ký túc xá ăn dần, với ít quần áo cũ. Giấy đi đường của cháu đây ạ." }
+      {
+        "speaker": "np-sinh-vien",
+        "text": "Dạ chào chú cán bộ, cháu là sinh viên trường Sư phạm được nghỉ phép về thăm nhà ạ."
+      },
+      {
+        "speaker": "np-sinh-vien",
+        "text": "Mẹ cháu đùm cho 4 cân gạo mang lên ký túc xá ăn dần, với ít quần áo cũ. Giấy đi đường của cháu đây ạ."
+      }
     ],
     "reactions": {
-      "CHO_QUA": [ { "speaker": "np-sinh-vien", "text": "Cháu cảm ơn chú nhiều ạ!" } ],
-      "GIU_LAI": [ { "speaker": "np-sinh-vien", "text": "Sao lại giữ của cháu... cháu có buôn bán gì đâu..." } ]
+      "CHO_QUA": [
+        {
+          "speaker": "np-sinh-vien",
+          "text": "Cháu cảm ơn chú nhiều ạ!"
+        }
+      ],
+      "GIU_LAI": [
+        {
+          "speaker": "np-sinh-vien",
+          "text": "Sao lại giữ của cháu... cháu có buôn bán gì đâu..."
+        }
+      ]
     },
     "documents": [
       {
@@ -24,17 +44,38 @@
           "noi_den": "Thị xã",
           "ly_do": "Nghỉ phép thăm gia đình",
           "hang_mang_theo": [
-            { "ma": "gao", "ten": "Gạo", "so_luong": 4, "don_vi": "kg" }
+            {
+              "ma": "gao",
+              "ten": "Gạo",
+              "so_luong": 4,
+              "don_vi": "kg"
+            }
           ],
           "ngay_cap": "1979-10-14",
           "co_gia_tri_den": "1979-10-20"
         },
-        "seal": { "kind": "UBND_XA", "place": "Phú Hoà", "legible": true }
+        "seal": {
+          "kind": "UBND_XA",
+          "place": "Phú Hoà",
+          "legible": true
+        }
       }
     ],
     "cargo": [
-      { "ma": "gao", "ten": "Gạo", "so_luong": 4, "don_vi": "kg", "category": "LUONG_THUC" },
-      { "ma": "quan-ao", "ten": "Quần áo cá nhân", "so_luong": 2, "don_vi": "kg", "category": "DO_CA_NHAN" }
+      {
+        "ma": "gao",
+        "ten": "Gạo",
+        "so_luong": 4,
+        "don_vi": "kg",
+        "category": "LUONG_THUC"
+      },
+      {
+        "ma": "quan-ao",
+        "ten": "Quần áo cá nhân",
+        "so_luong": 2,
+        "don_vi": "kg",
+        "category": "DO_CA_NHAN"
+      }
     ],
     "planted": [],
     "expected": {
@@ -45,8 +86,22 @@
     "bribe": null,
     "flag_key": null,
     "outcomes": {
-      "CHO_QUA": { "deltas": { "luong_thuc_vao_thi_xa": 1 }, "notes": ["Sinh viên mang 4kg gạo về ký túc xá ăn học."] },
-      "GIU_LAI": { "deltas": { "ho_thieu_an": 1 }, "notes": ["Tịch thu 4kg gạo của sinh viên."] }
+      "CHO_QUA": {
+        "deltas": {
+          "luong_thuc_vao_thi_xa": 1
+        },
+        "notes": [
+          "Sinh viên mang 4 kg gạo về ký túc xá ăn học."
+        ]
+      },
+      "GIU_LAI": {
+        "deltas": {
+          "ho_thieu_an": 1
+        },
+        "notes": [
+          "Tịch thu 4 kg gạo của sinh viên."
+        ]
+      }
     },
     "art_note": "Cô gái trẻ đeo ba lô vải, rụt rè đẩy tờ giấy đi đường qua khe kính."
   },
@@ -55,16 +110,56 @@
     "day": "d1",
     "order": 2,
     "character": "ba-tu",
-    "tags": ["dong-cam"],
-    "portrait": { "expression": "binh-thuong" },
+    "tags": [
+      "dong-cam"
+    ],
+    "portrait": {
+      "expression": "binh-thuong"
+    },
     "dialogue": [
-      { "speaker": "ba-tu", "text": "Chào chú cán bộ. Tôi là Tư Lành ở đội 2 Phú Hoà." },
-      { "speaker": "ba-tu", "text": "Tôi gánh 5 cân gạo ra thị xã đổi cho đứa cháu manh áo ấm, giấy tờ xã chứng nhận đủ cả đây chú." }
+      {
+        "speaker": "ba-tu",
+        "text": "Chào chú cán bộ. Tôi là Tư Lành ở đội 2 Phú Hoà."
+      },
+      {
+        "speaker": "ba-tu",
+        "text": "Tôi gánh 5 cân gạo ra thị xã đổi cho đứa cháu manh áo ấm, giấy tờ xã chứng nhận đủ cả đây chú."
+      }
     ],
     "reactions": {
-      "CHO_QUA": [ { "speaker": "ba-tu", "text": "Cảm ơn chú cán bộ tốt bụng." } ],
-      "GIU_LAI": [ { "speaker": "ba-tu", "text": "Khổ thân tôi quá chú ơi, gạo nhà làm ra mà..." } ]
+      "CHO_QUA": [
+        {
+          "speaker": "ba-tu",
+          "text": "Cảm ơn chú cán bộ tốt bụng."
+        }
+      ],
+      "GIU_LAI": [
+        {
+          "speaker": "ba-tu",
+          "text": "Khổ thân tôi quá chú ơi, gạo nhà làm ra mà..."
+        }
+      ]
     },
+    "confront": [
+      {
+        "on": "any",
+        "lines": [
+          {
+            "speaker": "ba-tu",
+            "text": "Tôi không biết chữ, chú ạ. Cán bộ xã viết sao thì tôi cầm vậy."
+          }
+        ]
+      },
+      {
+        "on": "khop",
+        "lines": [
+          {
+            "speaker": "ba-tu",
+            "text": "Tôi không biết chữ, chú ạ. Cán bộ xã viết sao thì tôi cầm vậy."
+          }
+        ]
+      }
+    ],
     "documents": [
       {
         "type": "GDD",
@@ -75,16 +170,31 @@
           "noi_den": "Thị xã",
           "ly_do": "Đi thăm người thân",
           "hang_mang_theo": [
-            { "ma": "gao", "ten": "Gạo", "so_luong": 5, "don_vi": "kg" }
+            {
+              "ma": "gao",
+              "ten": "Gạo",
+              "so_luong": 5,
+              "don_vi": "kg"
+            }
           ],
           "ngay_cap": "1979-10-14",
           "co_gia_tri_den": "1979-10-20"
         },
-        "seal": { "kind": "UBND_XA", "place": "Phú Hoà", "legible": true }
+        "seal": {
+          "kind": "UBND_XA",
+          "place": "Phú Hoà",
+          "legible": true
+        }
       }
     ],
     "cargo": [
-      { "ma": "gao", "ten": "Gạo", "so_luong": 5, "don_vi": "kg", "category": "LUONG_THUC" }
+      {
+        "ma": "gao",
+        "ten": "Gạo",
+        "so_luong": 5,
+        "don_vi": "kg",
+        "category": "LUONG_THUC"
+      }
     ],
     "planted": [],
     "expected": {
@@ -95,8 +205,22 @@
     "bribe": null,
     "flag_key": "ba-tu.m1",
     "outcomes": {
-      "CHO_QUA": { "deltas": { "luong_thuc_vao_thi_xa": 1 }, "notes": ["Bà Tư mang 5kg gạo vào thị xã thuận lợi."] },
-      "GIU_LAI": { "deltas": { "ho_thieu_an": 2 }, "notes": ["Bà Tư bị tịch thu gạo, không mua được áo ấm cho cháu."] }
+      "CHO_QUA": {
+        "deltas": {
+          "luong_thuc_vao_thi_xa": 1
+        },
+        "notes": [
+          "Bà Tư mang 5 kg gạo vào thị xã thuận lợi."
+        ]
+      },
+      "GIU_LAI": {
+        "deltas": {
+          "ho_thieu_an": 2
+        },
+        "notes": [
+          "Bà Tư bị tịch thu gạo, không mua được áo ấm cho cháu."
+        ]
+      }
     },
     "art_note": "Bà Tư gánh đôi thúng chai, nón lá cũ rách vành."
   },
@@ -105,16 +229,56 @@
     "day": "d1",
     "order": 3,
     "character": "np-buon-thuoc-la",
-    "tags": ["buon-lau-that"],
-    "portrait": { "expression": "ne-tranh" },
+    "tags": [
+      "buon-lau-that"
+    ],
+    "portrait": {
+      "expression": "ne-tranh"
+    },
     "dialogue": [
-      { "speaker": "np-buon-thuoc-la", "text": "Báo cáo cán bộ, tôi ở Phú Mỹ sang thị xã có việc nhà gấp." },
-      { "speaker": "np-buon-thuoc-la", "text": "Trong bao chỉ có vài bộ quần áo lót thôi, cán bộ xem giấy rồi cho tôi qua nhanh kẻo muộn đò." }
+      {
+        "speaker": "np-buon-thuoc-la",
+        "text": "Báo cáo cán bộ, tôi ở Phú Mỹ sang thị xã có việc nhà gấp."
+      },
+      {
+        "speaker": "np-buon-thuoc-la",
+        "text": "Trong bao chỉ có vài bộ quần áo lót thôi, cán bộ xem giấy rồi cho tôi qua nhanh kẻo muộn đò."
+      }
     ],
     "reactions": {
-      "CHO_QUA": [ { "speaker": "np-buon-thuoc-la", "text": "Cảm ơn cán bộ, may quá..." } ],
-      "GIU_LAI": [ { "speaker": "np-buon-thuoc-la", "text": "Ấy chết... cán bộ đừng lập biên bản..." } ]
+      "CHO_QUA": [
+        {
+          "speaker": "np-buon-thuoc-la",
+          "text": "Cảm ơn cán bộ, may quá..."
+        }
+      ],
+      "GIU_LAI": [
+        {
+          "speaker": "np-buon-thuoc-la",
+          "text": "Ấy chết... cán bộ đừng lập biên bản..."
+        }
+      ]
     },
+    "confront": [
+      {
+        "on": "item",
+        "lines": [
+          {
+            "speaker": "np-buon-thuoc-la",
+            "text": "Cái... cái đấy là hàng người ta gửi, tôi quên khai. Cán bộ thông cảm, lần sau tôi khai đủ."
+          }
+        ]
+      },
+      {
+        "on": "khop",
+        "lines": [
+          {
+            "speaker": "np-buon-thuoc-la",
+            "text": "Có gì đâu cán bộ, giấy với người khớp hết mà."
+          }
+        ]
+      }
+    ],
     "documents": [
       {
         "type": "GDD",
@@ -128,28 +292,67 @@
           "ngay_cap": "1979-10-14",
           "co_gia_tri_den": "1979-10-18"
         },
-        "seal": { "kind": "UBND_XA", "place": "Phú Mỹ", "legible": true }
+        "seal": {
+          "kind": "UBND_XA",
+          "place": "Phú Mỹ",
+          "legible": true
+        }
       }
     ],
     "cargo": [
-      { "ma": "quan-ao", "ten": "Quần áo cũ", "so_luong": 3, "don_vi": "kg", "category": "DO_CA_NHAN" },
-      { "ma": "thuoc-la", "ten": "Thuốc lá cuộn", "so_luong": 8, "don_vi": "cay", "category": "HANG_TIEU_DUNG", "an_giau": true }
+      {
+        "ma": "quan-ao",
+        "ten": "Quần áo cũ",
+        "so_luong": 3,
+        "don_vi": "kg",
+        "category": "DO_CA_NHAN"
+      },
+      {
+        "ma": "thuoc-la",
+        "ten": "Thuốc lá cuốn",
+        "so_luong": 8,
+        "don_vi": "cay",
+        "category": "HANG_TIEU_DUNG",
+        "an_giau": true
+      }
     ],
     "planted": [
-      { "error": "E6", "doc": "GDD", "field": "hang_mang_theo", "note": "Không khai 8 cây thuốc lá mang theo." }
+      {
+        "error": "E6",
+        "doc": "GDD",
+        "field": "hang_mang_theo",
+        "note": "Không khai 8 cây thuốc lá mang theo."
+      }
     ],
     "expected": {
       "verdict": "GIU_LAI",
       "violations": [
-        { "rule": "R1-GDD", "error": "E6" }
+        {
+          "rule": "R1-GDD",
+          "error": "E6"
+        }
       ]
     },
     "kn": null,
     "bribe": null,
     "flag_key": null,
     "outcomes": {
-      "CHO_QUA": { "deltas": { "gia_gao_index": 1 }, "notes": ["8 cây thuốc lá lọt ra thị xã bán chợ đen."] },
-      "GIU_LAI": { "deltas": { "luong_thuc_vao_thi_xa": 0 }, "notes": ["Tịch thu 8 cây thuốc lá buôn lậu không khai báo."] }
+      "CHO_QUA": {
+        "deltas": {
+          "gia_gao_index": 1
+        },
+        "notes": [
+          "8 cây thuốc lá lọt ra thị xã bán chợ đen."
+        ]
+      },
+      "GIU_LAI": {
+        "deltas": {
+          "luong_thuc_vao_thi_xa": 0
+        },
+        "notes": [
+          "Tịch thu 8 cây thuốc lá buôn lậu không khai báo."
+        ]
+      }
     },
     "art_note": "Gã đàn ông mắt lấm lét, dưới đáy bao tải giấu chặt 8 cây thuốc lá."
   },
@@ -158,15 +361,35 @@
     "day": "d2",
     "order": 1,
     "character": "np-nguoi-dua-tang",
-    "tags": ["dong-cam"],
-    "portrait": { "expression": "buon" },
+    "tags": [
+      "dong-cam"
+    ],
+    "portrait": {
+      "expression": "buon"
+    },
     "dialogue": [
-      { "speaker": "np-nguoi-dua-tang", "text": "Thưa đồng chí, chú ruột tôi ở thị xã mới mất đêm qua." },
-      { "speaker": "np-nguoi-dua-tang", "text": "Tôi vội đi viếng tang, chỉ mang 3 cân gạo nếp làm lễ với bó hương. Giấy tờ xã Phú Mỹ ký đây ạ." }
+      {
+        "speaker": "np-nguoi-dua-tang",
+        "text": "Thưa đồng chí, chú ruột tôi ở thị xã mới mất đêm qua."
+      },
+      {
+        "speaker": "np-nguoi-dua-tang",
+        "text": "Tôi vội đi viếng tang, chỉ mang 3 cân gạo nếp làm lễ với bó hương. Giấy tờ xã Phú Mỹ ký đây ạ."
+      }
     ],
     "reactions": {
-      "CHO_QUA": [ { "speaker": "np-nguoi-dua-tang", "text": "Cảm ơn đồng chí nhiều lắm." } ],
-      "GIU_LAI": [ { "speaker": "np-nguoi-dua-tang", "text": "Việc tang ma gia đình mà các đồng chí cũng nỡ giữ lại sao..." } ]
+      "CHO_QUA": [
+        {
+          "speaker": "np-nguoi-dua-tang",
+          "text": "Cảm ơn đồng chí nhiều lắm."
+        }
+      ],
+      "GIU_LAI": [
+        {
+          "speaker": "np-nguoi-dua-tang",
+          "text": "Việc tang ma gia đình mà các đồng chí cũng nỡ giữ lại sao..."
+        }
+      ]
     },
     "documents": [
       {
@@ -178,16 +401,31 @@
           "noi_den": "Thị xã",
           "ly_do": "Viếng tang người thân",
           "hang_mang_theo": [
-            { "ma": "gao", "ten": "Gạo nếp", "so_luong": 3, "don_vi": "kg" }
+            {
+              "ma": "gao",
+              "ten": "Gạo nếp",
+              "so_luong": 3,
+              "don_vi": "kg"
+            }
           ],
           "ngay_cap": "1979-10-21",
           "co_gia_tri_den": "1979-10-25"
         },
-        "seal": { "kind": "UBND_XA", "place": "Phú Mỹ", "legible": true }
+        "seal": {
+          "kind": "UBND_XA",
+          "place": "Phú Mỹ",
+          "legible": true
+        }
       }
     ],
     "cargo": [
-      { "ma": "gao", "ten": "Gạo nếp", "so_luong": 3, "don_vi": "kg", "category": "LUONG_THUC" }
+      {
+        "ma": "gao",
+        "ten": "Gạo nếp",
+        "so_luong": 3,
+        "don_vi": "kg",
+        "category": "LUONG_THUC"
+      }
     ],
     "planted": [],
     "expected": {
@@ -198,8 +436,22 @@
     "bribe": null,
     "flag_key": null,
     "outcomes": {
-      "CHO_QUA": { "deltas": { "luong_thuc_vao_thi_xa": 1 }, "notes": ["Người dân đi viếng tang kịp giờ."] },
-      "GIU_LAI": { "deltas": { "ho_thieu_an": 1 }, "notes": ["Tịch thu 3kg gạo nếp phúng viếng tang ma."] }
+      "CHO_QUA": {
+        "deltas": {
+          "luong_thuc_vao_thi_xa": 1
+        },
+        "notes": [
+          "Người dân đi viếng tang kịp giờ."
+        ]
+      },
+      "GIU_LAI": {
+        "deltas": {
+          "ho_thieu_an": 1
+        },
+        "notes": [
+          "Tịch thu 3 kg gạo nếp phúng viếng tang ma."
+        ]
+      }
     },
     "art_note": "Người đàn ông trung niên đeo băng tang đen, nét mặt hốc hác đau buồn."
   },
@@ -208,15 +460,35 @@
     "day": "d2",
     "order": 2,
     "character": "thang-ti",
-    "tags": ["dong-cam"],
-    "portrait": { "expression": "lo-lang" },
+    "tags": [
+      "dong-cam"
+    ],
+    "portrait": {
+      "expression": "lo-lang"
+    },
     "dialogue": [
-      { "speaker": "thang-ti", "text": "Chú Thành ơi, cháu Tí con bố Thược rèn ở Phú Hoà đây ạ." },
-      { "speaker": "thang-ti", "text": "Bố cháu ốm liệt giường, mẹ bảo cháu mang 2 cân sắn khô ra chợ đổi ít muối với dầu hoả." }
+      {
+        "speaker": "thang-ti",
+        "text": "Chú Thành ơi, cháu Tí con bố Thược rèn ở Phú Hoà đây ạ."
+      },
+      {
+        "speaker": "thang-ti",
+        "text": "Bố cháu ốm liệt giường, mẹ bảo cháu mang 2 cân sắn khô ra chợ đổi ít muối với dầu hoả."
+      }
     ],
     "reactions": {
-      "CHO_QUA": [ { "speaker": "thang-ti", "text": "Cháu cảm ơn chú Thành ạ!" } ],
-      "GIU_LAI": [ { "speaker": "thang-ti", "text": "Chú giữ sắn thì nhà cháu tối nay không có gì ăn mất..." } ]
+      "CHO_QUA": [
+        {
+          "speaker": "thang-ti",
+          "text": "Cháu cảm ơn chú Thành ạ!"
+        }
+      ],
+      "GIU_LAI": [
+        {
+          "speaker": "thang-ti",
+          "text": "Chú giữ sắn thì nhà cháu tối nay không có gì ăn mất..."
+        }
+      ]
     },
     "documents": [
       {
@@ -228,16 +500,31 @@
           "noi_den": "Thị xã",
           "ly_do": "Đi mua muối và dầu hoả",
           "hang_mang_theo": [
-            { "ma": "san", "ten": "Sắn khô", "so_luong": 2, "don_vi": "kg" }
+            {
+              "ma": "san",
+              "ten": "Sắn khô",
+              "so_luong": 2,
+              "don_vi": "kg"
+            }
           ],
           "ngay_cap": "1979-10-21",
           "co_gia_tri_den": "1979-10-25"
         },
-        "seal": { "kind": "UBND_XA", "place": "Phú Hoà", "legible": true }
+        "seal": {
+          "kind": "UBND_XA",
+          "place": "Phú Hoà",
+          "legible": true
+        }
       }
     ],
     "cargo": [
-      { "ma": "san", "ten": "Sắn khô", "so_luong": 2, "don_vi": "kg", "category": "LUONG_THUC" }
+      {
+        "ma": "san",
+        "ten": "Sắn khô",
+        "so_luong": 2,
+        "don_vi": "kg",
+        "category": "LUONG_THUC"
+      }
     ],
     "planted": [],
     "expected": {
@@ -248,8 +535,22 @@
     "bribe": null,
     "flag_key": "thang-ti.m1",
     "outcomes": {
-      "CHO_QUA": { "deltas": { "ho_thieu_an": -1 }, "notes": ["Thằng Tí đổi được sắn lấy muối và dầu mang về cho gia đình."] },
-      "GIU_LAI": { "deltas": { "ho_thieu_an": 2 }, "notes": ["Tịch thu sắn của thằng Tí, gia đình thợ rèn đứt bữa."] }
+      "CHO_QUA": {
+        "deltas": {
+          "ho_thieu_an": -1
+        },
+        "notes": [
+          "Thằng Tí đổi được sắn lấy muối và dầu mang về cho gia đình."
+        ]
+      },
+      "GIU_LAI": {
+        "deltas": {
+          "ho_thieu_an": 2
+        },
+        "notes": [
+          "Tịch thu sắn của thằng Tí, gia đình thợ rèn đứt bữa."
+        ]
+      }
     },
     "art_note": "Cậu bé 10 tuổi chân đất, áo cộc rách vai, ôm túi sắn khô ép vào ngực."
   },
@@ -258,16 +559,47 @@
     "day": "d2",
     "order": 3,
     "character": "ong-quynh",
-    "tags": [],
-    "portrait": { "expression": "binh-thuong" },
+    "tags": [
+      "hop-le-ma-hai"
+    ],
+    "portrait": {
+      "expression": "binh-thuong"
+    },
     "dialogue": [
-      { "speaker": "ong-quynh", "text": "Chào đồng chí Thành. Tôi là Quỳnh, điều độ viên Công ty Thương nghiệp tỉnh." },
-      { "speaker": "ong-quynh", "text": "Tôi về kiểm tra cơ sở dưới xã, có mang tiêu chuẩn 5 cân gạo công tác. Giấy tờ lệnh điều động đây, cậu kiểm tra nhé." }
+      {
+        "speaker": "ong-quynh",
+        "text": "Chào đồng chí Thành. Tôi là Quỳnh, điều độ viên Công ty Thương nghiệp tỉnh."
+      },
+      {
+        "speaker": "ong-quynh",
+        "text": "Tôi về kiểm tra cơ sở dưới xã, có mang tiêu chuẩn 5 cân gạo công tác. Giấy tờ lệnh điều động đây, cậu kiểm tra nhé."
+      }
     ],
     "reactions": {
-      "CHO_QUA": [ { "speaker": "ong-quynh", "text": "Tốt lắm, cảm ơn đồng chí." } ],
-      "GIU_LAI": [ { "speaker": "ong-quynh", "text": "Cậu làm việc máy móc quá đấy đồng chí Thành." } ]
+      "CHO_QUA": [
+        {
+          "speaker": "ong-quynh",
+          "text": "Tốt lắm, cảm ơn đồng chí."
+        }
+      ],
+      "GIU_LAI": [
+        {
+          "speaker": "ong-quynh",
+          "text": "Cậu làm việc máy móc quá đấy đồng chí Thành."
+        }
+      ]
     },
+    "confront": [
+      {
+        "on": "khop",
+        "lines": [
+          {
+            "speaker": "ong-quynh",
+            "text": "Cậu soi kỹ thế. Giấy của tôi thì không có chỗ nào sai đâu."
+          }
+        ]
+      }
+    ],
     "documents": [
       {
         "type": "GDD",
@@ -278,16 +610,31 @@
           "noi_den": "Phú Hoà",
           "ly_do": "Công tác kiểm tra thương nghiệp",
           "hang_mang_theo": [
-            { "ma": "gao", "ten": "Gạo", "so_luong": 5, "don_vi": "kg" }
+            {
+              "ma": "gao",
+              "ten": "Gạo",
+              "so_luong": 5,
+              "don_vi": "kg"
+            }
           ],
           "ngay_cap": "1979-10-20",
           "co_gia_tri_den": "1979-10-28"
         },
-        "seal": { "kind": "UBND_XA", "place": "Thị xã", "legible": true }
+        "seal": {
+          "kind": "UBND_XA",
+          "place": "Thị xã",
+          "legible": true
+        }
       }
     ],
     "cargo": [
-      { "ma": "gao", "ten": "Gạo", "so_luong": 5, "don_vi": "kg", "category": "LUONG_THUC" }
+      {
+        "ma": "gao",
+        "ten": "Gạo",
+        "so_luong": 5,
+        "don_vi": "kg",
+        "category": "LUONG_THUC"
+      }
     ],
     "planted": [],
     "expected": {
@@ -298,8 +645,22 @@
     "bribe": null,
     "flag_key": "ong-quynh.m1",
     "outcomes": {
-      "CHO_QUA": { "deltas": { "luong_thuc_vao_thi_xa": 1 }, "notes": ["Cán bộ thương nghiệp tỉnh qua trạm đúng điều lệ."] },
-      "GIU_LAI": { "deltas": { "ho_thieu_an": 1 }, "notes": ["Giữ tiêu chuẩn gạo công tác của cán bộ tỉnh."] }
+      "CHO_QUA": {
+        "deltas": {
+          "luong_thuc_vao_thi_xa": 1
+        },
+        "notes": [
+          "Cán bộ thương nghiệp tỉnh qua trạm đúng điều lệ."
+        ]
+      },
+      "GIU_LAI": {
+        "deltas": {
+          "ho_thieu_an": 1
+        },
+        "notes": [
+          "Giữ tiêu chuẩn gạo công tác của cán bộ tỉnh."
+        ]
+      }
     },
     "art_note": "Cán bộ mặc áo đại cán xám, đầu chải mượt, kẹp cặp da đen bóng."
   },
@@ -308,16 +669,47 @@
     "day": "d2",
     "order": 4,
     "character": "np-dau-co-gao",
-    "tags": ["buon-lau-that"],
-    "portrait": { "expression": "ne-tranh" },
+    "tags": [
+      "buon-lau-that"
+    ],
+    "portrait": {
+      "expression": "ne-tranh"
+    },
     "dialogue": [
-      { "speaker": "np-dau-co-gao", "text": "Chào thầy kiểm soát! Xe thồ này của tôi chở 40 cân gạo về thị xã cho người nhà làm giỗ chạp." },
-      { "speaker": "np-dau-co-gao", "text": "Giấy đi đường xã đóng dấu đỏ chót đây, thầy cho qua nhanh cái nào." }
+      {
+        "speaker": "np-dau-co-gao",
+        "text": "Chào thầy kiểm soát! Xe thồ này của tôi chở 40 cân gạo về thị xã cho người nhà làm giỗ chạp."
+      },
+      {
+        "speaker": "np-dau-co-gao",
+        "text": "Giấy đi đường xã đóng dấu đỏ chót đây, thầy cho qua nhanh cái nào."
+      }
     ],
     "reactions": {
-      "CHO_QUA": [ { "speaker": "np-dau-co-gao", "text": "Hì hì, cảm ơn thầy nhé!" } ],
-      "GIU_LAI": [ { "speaker": "np-dau-co-gao", "text": "Ối trời ơi giữ hết thế này thì tôi phá sản à!" } ]
+      "CHO_QUA": [
+        {
+          "speaker": "np-dau-co-gao",
+          "text": "Hì hì, cảm ơn thầy nhé!"
+        }
+      ],
+      "GIU_LAI": [
+        {
+          "speaker": "np-dau-co-gao",
+          "text": "Ối trời ơi giữ hết thế này thì tôi phá sản à!"
+        }
+      ]
     },
+    "confront": [
+      {
+        "on": "khop",
+        "lines": [
+          {
+            "speaker": "np-dau-co-gao",
+            "text": "Thầy xem đi, tôi khai đủ cả bốn mươi cân, có giấu đâu!"
+          }
+        ]
+      }
+    ],
     "documents": [
       {
         "type": "GDD",
@@ -328,32 +720,70 @@
           "noi_den": "Thị xã",
           "ly_do": "Chở gạo giỗ chạp",
           "hang_mang_theo": [
-            { "ma": "gao", "ten": "Gạo", "so_luong": 40, "don_vi": "kg" }
+            {
+              "ma": "gao",
+              "ten": "Gạo",
+              "so_luong": 40,
+              "don_vi": "kg"
+            }
           ],
           "ngay_cap": "1979-10-21",
           "co_gia_tri_den": "1979-10-26"
         },
-        "seal": { "kind": "UBND_XA", "place": "Phú Mỹ", "legible": true }
+        "seal": {
+          "kind": "UBND_XA",
+          "place": "Phú Mỹ",
+          "legible": true
+        }
       }
     ],
     "cargo": [
-      { "ma": "gao", "ten": "Gạo", "so_luong": 40, "don_vi": "kg", "category": "LUONG_THUC" }
+      {
+        "ma": "gao",
+        "ten": "Gạo",
+        "so_luong": 40,
+        "don_vi": "kg",
+        "category": "LUONG_THUC"
+      }
     ],
     "planted": [
-      { "error": "E4", "doc": null, "field": null, "note": "40 kg gạo vượt định mức 5 kg mà không có tem phiếu." }
+      {
+        "error": "E4",
+        "doc": null,
+        "field": null,
+        "note": "40 kg gạo vượt định mức 5 kg mà không có tem phiếu."
+      }
     ],
     "expected": {
       "verdict": "GIU_LAI",
       "violations": [
-        { "rule": "R2-DINH-MUC", "error": "E4" }
+        {
+          "rule": "R2-DINH-MUC",
+          "error": "E4"
+        }
       ]
     },
     "kn": null,
     "bribe": null,
     "flag_key": null,
     "outcomes": {
-      "CHO_QUA": { "deltas": { "gia_gao_index": 2, "luong_thuc_vao_thi_xa": 1 }, "notes": ["40kg gạo gom lậu tuồn vào chợ đen thị xã."] },
-      "GIU_LAI": { "deltas": { "ho_thieu_an": -2 }, "notes": ["Tịch thu 40kg gạo đầu cơ nhập kho nhà nước."] }
+      "CHO_QUA": {
+        "deltas": {
+          "gia_gao_index": 2,
+          "luong_thuc_vao_thi_xa": 1
+        },
+        "notes": [
+          "40 kg gạo gom lậu tuồn vào chợ đen thị xã."
+        ]
+      },
+      "GIU_LAI": {
+        "deltas": {
+          "ho_thieu_an": -2
+        },
+        "notes": [
+          "Tịch thu 40 kg gạo đầu cơ nhập kho nhà nước."
+        ]
+      }
     },
     "art_note": "Gã lái buôn to khoẻ đứng bên chiếc xe thồ chất hai bao gạo nặng."
   },
@@ -362,16 +792,61 @@
     "day": "d3",
     "order": 1,
     "character": "thang-ti",
-    "tags": ["dong-cam"],
-    "portrait": { "expression": "lo-lang" },
+    "tags": [
+      "dong-cam",
+      "luot-trung-tam"
+    ],
+    "portrait": {
+      "expression": "lo-lang"
+    },
     "dialogue": [
-      { "speaker": "thang-ti", "text": "Chú Thành! Bố cháu sốt rét mấy hôm nay rồi, trạm xá xã bảo phải lên bệnh viện thị xã mua penicillin." },
-      { "speaker": "thang-ti", "text": "Cháu có đơn thuốc bác sĩ bệnh viện kê đây ạ, đúng 10 viên thuốc." }
+      {
+        "speaker": "thang-ti",
+        "text": "Chú Thành! Bố cháu sốt rét ba hôm nay rồi, rét run cầm cập. Trạm xá xã hết sạch thuốc."
+      },
+      {
+        "speaker": "thang-ti",
+        "text": "Bác sĩ bệnh viện kê cho bố cháu 10 viên quinin. Nhưng bác ấy dặn sốt rét phải uống đủ đợt, bỏ giữa chừng là sốt lại, nặng hơn. Cháu bán con lợn con mua thêm 10 viên ngoài chợ cho đủ đợt."
+      },
+      {
+        "speaker": "thang-ti",
+        "text": "Chú mà giữ thì bố cháu uống dở chừng mất... Cháu xin chú."
+      }
     ],
     "reactions": {
-      "CHO_QUA": [ { "speaker": "thang-ti", "text": "Cháu cảm ơn chú Thành nhiều lắm, cháu chạy về cho bố uống ngay!" } ],
-      "GIU_LAI": [ { "speaker": "thang-ti", "text": "Sao lại giữ thuốc của bố cháu chú ơi..." } ]
+      "CHO_QUA": [
+        {
+          "speaker": "thang-ti",
+          "text": "Cháu cảm ơn chú! Cháu chạy về cho bố uống ngay!"
+        }
+      ],
+      "GIU_LAI": [
+        {
+          "speaker": "thang-ti",
+          "text": "...Thế cháu mang 10 viên có đơn về cũng được ạ? Không ạ? Cả hai mươi viên luôn ạ..."
+        }
+      ]
     },
+    "confront": [
+      {
+        "on": "item",
+        "lines": [
+          {
+            "speaker": "thang-ti",
+            "text": "Cháu biết đơn ghi mười viên... Nhưng bác sĩ dặn phải uống đủ đợt. Mười viên kia là tiền bán con lợn đấy chú."
+          }
+        ]
+      },
+      {
+        "on": "khop",
+        "lines": [
+          {
+            "speaker": "thang-ti",
+            "text": "Chỗ ấy đúng mà chú... đơn thuốc thật đấy chú."
+          }
+        ]
+      }
+    ],
     "documents": [
       {
         "type": "GDD",
@@ -380,61 +855,142 @@
           "nam_sinh": 1969,
           "noi_di": "Phú Hoà",
           "noi_den": "Thị xã",
-          "ly_do": "Đi mua thuốc chữa bệnh cho bố",
+          "ly_do": "Đi mua thuốc chữa sốt rét cho bố",
           "hang_mang_theo": [
-            { "ma": "penicillin", "ten": "Penicillin", "so_luong": 10, "don_vi": "vien" }
+            {
+              "ma": "quinin",
+              "ten": "Quinin",
+              "so_luong": 20,
+              "don_vi": "vien"
+            }
           ],
           "ngay_cap": "1981-03-15",
           "co_gia_tri_den": "1981-03-20"
         },
-        "seal": { "kind": "UBND_XA", "place": "Phú Hoà", "legible": true }
+        "seal": {
+          "kind": "UBND_XA",
+          "place": "Phú Hoà",
+          "legible": true
+        }
       },
       {
         "type": "DT",
         "fields": {
           "benh_nhan": "Nguyễn Văn Thược",
           "thuoc": [
-            { "ma": "penicillin", "ten": "Penicillin", "so_luong": 10, "don_vi": "vien" }
+            {
+              "ma": "quinin",
+              "ten": "Quinin",
+              "so_luong": 10,
+              "don_vi": "vien"
+            }
           ],
           "bac_si": "Trần Văn An",
           "ngay_ke": "1981-03-15",
           "co_gia_tri_den": "1981-03-22"
         },
-        "seal": { "kind": "BENH_VIEN", "place": "Thị xã", "legible": true }
+        "seal": {
+          "kind": "BENH_VIEN",
+          "place": "Thị xã",
+          "legible": true
+        }
       }
     ],
     "cargo": [
-      { "ma": "penicillin", "ten": "Penicillin", "so_luong": 10, "don_vi": "vien", "category": "THUOC" }
+      {
+        "ma": "quinin",
+        "ten": "Quinin",
+        "so_luong": 20,
+        "don_vi": "vien",
+        "category": "THUOC"
+      }
     ],
-    "planted": [],
+    "planted": [
+      {
+        "error": "E6",
+        "doc": "DT",
+        "field": "thuoc",
+        "note": "Mang 20 viên quinin, đơn bệnh viện chỉ kê 10 viên. Phần mua thêm ở chợ không có đơn."
+      }
+    ],
     "expected": {
-      "verdict": "CHO_QUA",
-      "violations": []
+      "verdict": "GIU_LAI",
+      "violations": [
+        {
+          "rule": "R3-DON-THUOC",
+          "error": "E6"
+        }
+      ]
     },
     "kn": null,
     "bribe": null,
     "flag_key": "thang-ti.m2",
     "outcomes": {
-      "CHO_QUA": { "deltas": { "ho_thieu_an": -1 }, "notes": ["Bố thằng Tí có thuốc kháng sinh điều trị kịp thời."] },
-      "GIU_LAI": { "deltas": { "ho_thieu_an": 3 }, "notes": ["Tịch thu thuốc kháng sinh của thằng Tí, bệnh tình người bố trở nặng."] }
+      "CHO_QUA": {
+        "deltas": {
+          "ho_thieu_an": -1
+        },
+        "notes": [
+          "Bố thằng Tí uống đủ đợt quinin, cắt được cơn sốt rét."
+        ]
+      },
+      "GIU_LAI": {
+        "deltas": {
+          "ho_thieu_an": 3
+        },
+        "notes": [
+          "20 viên quinin của thằng Tí nhập kho tịch thu. Bố nó bỏ dở đợt thuốc."
+        ]
+      }
     },
-    "art_note": "Cậu bé mồ hôi nhễ nhại, hai tay giữ chặt gói thuốc penicillin nhỏ."
+    "art_note": "Cậu bé run run, hai tay ôm gói thuốc bọc lá chuối, mắt đỏ hoe."
   },
   {
     "id": "d3-t2",
     "day": "d3",
     "order": 2,
     "character": "anh-hung",
-    "tags": ["dong-cam"],
-    "portrait": { "expression": "lo-lang" },
+    "tags": [
+      "dong-cam"
+    ],
+    "portrait": {
+      "expression": "lo-lang"
+    },
     "dialogue": [
-      { "speaker": "anh-hung", "text": "Chào chú em. Tôi là Lê Văn Hùng, thương binh 2/4 ở xã Phú Hoà." },
-      { "speaker": "anh-hung", "text": "Tôi có 12 cân gạo đem ra thị xã gửi người đồng đội cũ chữa bệnh. Giấy thương binh với giấy đi đường đây chú em." }
+      {
+        "speaker": "anh-hung",
+        "text": "Chào chú em. Tôi là Lê Văn Hùng, thương binh 2/4 ở xã Phú Hoà."
+      },
+      {
+        "speaker": "anh-hung",
+        "text": "Tôi có 12 cân gạo đem ra thị xã gửi người đồng đội cũ chữa bệnh. Giấy thương binh với giấy đi đường đây chú em."
+      }
     ],
     "reactions": {
-      "CHO_QUA": [ { "speaker": "anh-hung", "text": "Cảm ơn chú em đã thấu hiểu cho lính phục viên." } ],
-      "GIU_LAI": [ { "speaker": "anh-hung", "text": "Tôi để lại một cánh tay ở chiến trường, về quê mang mấy cân gạo giúp bạn mà cũng bị coi là buôn lậu sao?" } ]
+      "CHO_QUA": [
+        {
+          "speaker": "anh-hung",
+          "text": "Cảm ơn chú em đã thấu hiểu cho lính phục viên."
+        }
+      ],
+      "GIU_LAI": [
+        {
+          "speaker": "anh-hung",
+          "text": "Tôi để lại một cánh tay ở chiến trường, về quê mang mấy cân gạo giúp bạn mà cũng bị coi là buôn lậu sao?"
+        }
+      ]
     },
+    "confront": [
+      {
+        "on": "khop",
+        "lines": [
+          {
+            "speaker": "anh-hung",
+            "text": "Giấy tôi khớp cả. Cái thiếu là một điều trong sổ cho người như tôi."
+          }
+        ]
+      }
+    ],
     "documents": [
       {
         "type": "GDD",
@@ -445,12 +1001,21 @@
           "noi_den": "Thị xã",
           "ly_do": "Đi thăm đồng đội nằm viện",
           "hang_mang_theo": [
-            { "ma": "gao", "ten": "Gạo", "so_luong": 12, "don_vi": "kg" }
+            {
+              "ma": "gao",
+              "ten": "Gạo",
+              "so_luong": 12,
+              "don_vi": "kg"
+            }
           ],
           "ngay_cap": "1981-03-14",
           "co_gia_tri_den": "1981-03-20"
         },
-        "seal": { "kind": "UBND_XA", "place": "Phú Hoà", "legible": true }
+        "seal": {
+          "kind": "UBND_XA",
+          "place": "Phú Hoà",
+          "legible": true
+        }
       },
       {
         "type": "CNTB",
@@ -461,19 +1026,37 @@
           "so_the": "TB-5201",
           "don_vi_cap": "Ty Thương binh - Xã hội"
         },
-        "seal": { "kind": "TB_XH", "place": "Thị xã", "legible": true }
+        "seal": {
+          "kind": "TB_XH",
+          "place": "Thị xã",
+          "legible": true
+        }
       }
     ],
     "cargo": [
-      { "ma": "gao", "ten": "Gạo", "so_luong": 12, "don_vi": "kg", "category": "LUONG_THUC" }
+      {
+        "ma": "gao",
+        "ten": "Gạo",
+        "so_luong": 12,
+        "don_vi": "kg",
+        "category": "LUONG_THUC"
+      }
     ],
     "planted": [
-      { "error": "E4", "doc": null, "field": null, "note": "12 kg gạo vượt định mức 5 kg. Sổ chỉ thị không có mục miễn trừ định mức cho thương binh." }
+      {
+        "error": "E4",
+        "doc": null,
+        "field": null,
+        "note": "12 kg gạo vượt định mức 5 kg. Sổ chỉ thị không có mục miễn trừ định mức cho thương binh."
+      }
     ],
     "expected": {
       "verdict": "GIU_LAI",
       "violations": [
-        { "rule": "R2-DINH-MUC", "error": "E4" }
+        {
+          "rule": "R2-DINH-MUC",
+          "error": "E4"
+        }
       ]
     },
     "kn": {
@@ -483,8 +1066,22 @@
     "bribe": null,
     "flag_key": "anh-hung.m2",
     "outcomes": {
-      "CHO_QUA": { "deltas": { "luong_thuc_vao_thi_xa": 1 }, "notes": ["Gạo của thương binh đến tay người đồng đội đang nằm viện."] },
-      "GIU_LAI": { "deltas": { "ho_thieu_an": 2 }, "notes": ["Tịch thu 12kg gạo của thương binh Lê Văn Hùng."] }
+      "CHO_QUA": {
+        "deltas": {
+          "luong_thuc_vao_thi_xa": 1
+        },
+        "notes": [
+          "Gạo của thương binh đến tay người đồng đội đang nằm viện."
+        ]
+      },
+      "GIU_LAI": {
+        "deltas": {
+          "ho_thieu_an": 2
+        },
+        "notes": [
+          "Tịch thu 12 kg gạo của thương binh Lê Văn Hùng."
+        ]
+      }
     },
     "art_note": "Người lính thương binh cụt một tay, ngực đeo huân chương, mắt cương nghị."
   },
@@ -493,17 +1090,84 @@
     "day": "d3",
     "order": 3,
     "character": "ba-tu",
-    "tags": ["luot-trung-tam", "dung-trinh-bay", "dong-cam"],
-    "portrait": { "expression": "lo-lang" },
+    "tags": [
+      "luot-trung-tam",
+      "dung-trinh-bay",
+      "dong-cam"
+    ],
+    "portrait": {
+      "expression": "lo-lang"
+    },
     "dialogue": [
-      { "speaker": "ba-tu", "text": "Chú Thành, lại gặp chú. Gạo này là phần vượt khoán nhà tôi được hưởng, hợp tác xã có giấy xác nhận đây." },
-      { "speaker": "ba-tu", "text": "Tôi mang ra thị xã đổi thuốc cho thằng cháu. Nó sốt mấy hôm nay rồi." },
-      { "speaker": "ba-tu", "text": "Lần trước chú cho tôi qua, tôi vẫn nhớ.", "when": [ { "flag": "ba-tu.m1", "in": ["qua", "qua-kn"] } ] }
+      {
+        "speaker": "ba-tu",
+        "text": "Chú Thành, lại gặp chú. Gạo này là phần vượt khoán nhà tôi được hưởng, hợp tác xã có giấy xác nhận đây."
+      },
+      {
+        "speaker": "ba-tu",
+        "text": "Tôi mang ra thị xã đổi thuốc cho thằng cháu. Nó sốt mấy hôm nay rồi."
+      },
+      {
+        "speaker": "ba-tu",
+        "text": "Lần trước chú cho tôi qua, tôi vẫn nhớ.",
+        "when": [
+          {
+            "flag": "ba-tu.m1",
+            "in": [
+              "qua",
+              "qua-kn"
+            ]
+          }
+        ]
+      },
+      {
+        "speaker": "ba-tu",
+        "text": "Lần trước chú giữ gạo, tôi phải bán con gà mái đẻ mới có tiền mua áo cho cháu.",
+        "when": [
+          {
+            "flag": "ba-tu.m1",
+            "in": [
+              "giu",
+              "giu-kn"
+            ]
+          }
+        ]
+      }
     ],
     "reactions": {
-      "CHO_QUA": [ { "speaker": "ba-tu", "text": "Tôi cảm ơn chú." } ],
-      "GIU_LAI": [ { "speaker": "ba-tu", "text": "Giấy hợp tác xã cấp đàng hoàng mà chú..." } ]
+      "CHO_QUA": [
+        {
+          "speaker": "ba-tu",
+          "text": "Tôi cảm ơn chú."
+        }
+      ],
+      "GIU_LAI": [
+        {
+          "speaker": "ba-tu",
+          "text": "Giấy hợp tác xã cấp đàng hoàng mà chú..."
+        }
+      ]
     },
+    "confront": [
+      {
+        "on": "any",
+        "lines": [
+          {
+            "speaker": "ba-tu",
+            "text": "Tôi không biết chữ, chú ạ. Cán bộ xã viết sao thì tôi cầm vậy."
+          }
+        ]
+      },
+      {
+        "on": "khop",
+        "lines": [
+          {
+            "speaker": "ba-tu",
+            "text": "Tôi không biết chữ, chú ạ. Hợp tác xã ghi mười ba cân thì tôi mang đúng phần ấy."
+          }
+        ]
+      }
+    ],
     "documents": [
       {
         "type": "GDD",
@@ -514,12 +1178,21 @@
           "noi_den": "Thị xã",
           "ly_do": "Mang sản phẩm vượt khoán đi đổi thuốc",
           "hang_mang_theo": [
-            { "ma": "gao", "ten": "Gạo", "so_luong": 18, "don_vi": "kg" }
+            {
+              "ma": "gao",
+              "ten": "Gạo",
+              "so_luong": 18,
+              "don_vi": "kg"
+            }
           ],
           "ngay_cap": "1981-03-14",
           "co_gia_tri_den": "1981-03-20"
         },
-        "seal": { "kind": "UBND_XA", "place": "Phú Hoà", "legible": true }
+        "seal": {
+          "kind": "UBND_XA",
+          "place": "Phú Hoà",
+          "legible": true
+        }
       },
       {
         "type": "GXNK",
@@ -533,19 +1206,37 @@
           "vu": "Vụ mùa 1980",
           "ngay": "1981-03-10"
         },
-        "seal": { "kind": "HTX", "place": "Phú Hoà", "legible": true }
+        "seal": {
+          "kind": "HTX",
+          "place": "Phú Hoà",
+          "legible": true
+        }
       }
     ],
     "cargo": [
-      { "ma": "gao", "ten": "Gạo", "so_luong": 18, "don_vi": "kg", "category": "LUONG_THUC" }
+      {
+        "ma": "gao",
+        "ten": "Gạo",
+        "so_luong": 18,
+        "don_vi": "kg",
+        "category": "LUONG_THUC"
+      }
     ],
     "planted": [
-      { "error": "E4", "doc": null, "field": null, "note": "18 kg gạo, vượt định mức 5 kg. Phần vượt đúng bằng 13 kg ghi trên giấy khoán, nhưng sổ chưa có mục nào công nhận giấy khoán." }
+      {
+        "error": "E4",
+        "doc": null,
+        "field": null,
+        "note": "18 kg gạo, vượt định mức 5 kg. Phần vượt đúng bằng 13 kg ghi trên giấy khoán, nhưng sổ chưa có mục nào công nhận giấy khoán."
+      }
     ],
     "expected": {
       "verdict": "GIU_LAI",
       "violations": [
-        { "rule": "R2-DINH-MUC", "error": "E4" }
+        {
+          "rule": "R2-DINH-MUC",
+          "error": "E4"
+        }
       ]
     },
     "kn": {
@@ -555,8 +1246,23 @@
     "bribe": null,
     "flag_key": "ba-tu.m2",
     "outcomes": {
-      "CHO_QUA": { "deltas": { "luong_thuc_vao_thi_xa": 1, "gia_gao_index": -1 }, "notes": ["Gạo khoán của bà Tư đến được chợ thị xã."] },
-      "GIU_LAI": { "deltas": { "ho_thieu_an": 4 }, "notes": ["18 kg gạo bị tịch thu. Bà Tư không đổi được thuốc cho cháu."] }
+      "CHO_QUA": {
+        "deltas": {
+          "luong_thuc_vao_thi_xa": 1,
+          "gia_gao_index": -1
+        },
+        "notes": [
+          "Gạo khoán của bà Tư đến được chợ thị xã."
+        ]
+      },
+      "GIU_LAI": {
+        "deltas": {
+          "ho_thieu_an": 4
+        },
+        "notes": [
+          "18 kg gạo bị tịch thu. Bà Tư không đổi được thuốc cho cháu."
+        ]
+      }
     },
     "art_note": "Bà Tư đội nón, gánh hai thúng gạo. Tay cầm tờ giấy khoán gấp tư."
   },
@@ -565,15 +1271,35 @@
     "day": "d3",
     "order": 4,
     "character": "np-dau-co-vai",
-    "tags": ["buon-lau-that"],
-    "portrait": { "expression": "ne-tranh" },
+    "tags": [
+      "buon-lau-that"
+    ],
+    "portrait": {
+      "expression": "ne-tranh"
+    },
     "dialogue": [
-      { "speaker": "np-dau-co-vai", "text": "Thưa đồng chí cán bộ, tôi chở mấy cây vải về may áo tang cho người nhà." },
-      { "speaker": "np-dau-co-vai", "text": "Giấy tờ huyện cấp hẳn hoi đây. Tôi có gửi đồng chí chút tiền bồi dưỡng uống nước thuốc lá ạ." }
+      {
+        "speaker": "np-dau-co-vai",
+        "text": "Thưa đồng chí cán bộ, tôi chở mấy cây vải về may áo tang cho người nhà."
+      },
+      {
+        "speaker": "np-dau-co-vai",
+        "text": "Giấy tờ huyện cấp hẳn hoi đây. Tôi có gửi đồng chí chút tiền bồi dưỡng uống nước thuốc lá ạ."
+      }
     ],
     "reactions": {
-      "CHO_QUA": [ { "speaker": "np-dau-co-vai", "text": "Biết ơn đồng chí nhiều lắm, em xin phép đi ngay ạ." } ],
-      "GIU_LAI": [ { "speaker": "np-dau-co-vai", "text": "Đồng chí khắt khe với người buôn bán quá..." } ]
+      "CHO_QUA": [
+        {
+          "speaker": "np-dau-co-vai",
+          "text": "Biết ơn đồng chí nhiều lắm, em xin phép đi ngay ạ."
+        }
+      ],
+      "GIU_LAI": [
+        {
+          "speaker": "np-dau-co-vai",
+          "text": "Đồng chí khắt khe với người buôn bán quá..."
+        }
+      ]
     },
     "documents": [
       {
@@ -585,38 +1311,78 @@
           "noi_den": "Phú Hoà",
           "ly_do": "Chở vải may đồ tang lễ",
           "hang_mang_theo": [
-            { "ma": "vai", "ten": "Vải phin trắng", "so_luong": 50, "don_vi": "met" }
+            {
+              "ma": "vai",
+              "ten": "Vải phin trắng",
+              "so_luong": 50,
+              "don_vi": "met"
+            }
           ],
           "ngay_cap": "1981-03-14",
           "co_gia_tri_den": "1981-03-19"
         },
-        "seal": { "kind": "UBND_HUYEN", "place": "Thị xã", "legible": true }
+        "seal": {
+          "kind": "UBND_HUYEN",
+          "place": "Thị xã",
+          "legible": true
+        }
       }
     ],
     "cargo": [
-      { "ma": "vai", "ten": "Vải phin trắng", "so_luong": 50, "don_vi": "met", "category": "HANG_TIEU_DUNG" }
+      {
+        "ma": "vai",
+        "ten": "Vải phin trắng",
+        "so_luong": 50,
+        "don_vi": "met",
+        "category": "HANG_TIEU_DUNG"
+      }
     ],
     "planted": [
-      { "error": "E3", "doc": "GDD", "field": "seal", "note": "GDD đóng dấu UBND_HUYEN thay vì UBND_XA." }
+      {
+        "error": "E3",
+        "doc": "GDD",
+        "field": "seal",
+        "note": "GDD đóng dấu UBND_HUYEN thay vì UBND_XA."
+      }
     ],
     "expected": {
       "verdict": "GIU_LAI",
       "violations": [
-        { "rule": "R1-GDD", "error": "E3" }
+        {
+          "rule": "R1-GDD",
+          "error": "E3"
+        }
       ]
     },
     "kn": null,
     "bribe": {
       "amount": 30,
       "lines": [
-        { "speaker": "np-dau-co-vai", "text": "Chút tiền chè nước gửi anh em trạm, mong cán bộ linh động giúp em chuyến hàng này." }
+        {
+          "speaker": "np-dau-co-vai",
+          "text": "Chút tiền chè nước gửi anh em trạm, mong cán bộ linh động giúp em chuyến hàng này."
+        }
       ],
       "consequence_note": "30 đồng tiền bồi dưỡng nhận của lái buôn vải trốn thuế."
     },
     "flag_key": null,
     "outcomes": {
-      "CHO_QUA": { "deltas": { "gia_gao_index": 1 }, "notes": ["50m vải tuồn trót lọt ra bán chợ tự do."] },
-      "GIU_LAI": { "deltas": { "luong_thuc_vao_thi_xa": 0 }, "notes": ["Tịch thu 50m vải giấy tờ sai quy cách."] }
+      "CHO_QUA": {
+        "deltas": {
+          "gia_gao_index": 1
+        },
+        "notes": [
+          "50 m vải tuồn trót lọt ra bán chợ tự do."
+        ]
+      },
+      "GIU_LAI": {
+        "deltas": {
+          "luong_thuc_vao_thi_xa": 0
+        },
+        "notes": [
+          "Tịch thu 50 m vải giấy tờ sai quy cách."
+        ]
+      }
     },
     "art_note": "Người đàn bà bịt khăn rằn, giấu các súc vải sau sọt hàng sau xe đạp."
   },
@@ -625,15 +1391,35 @@
     "day": "d4",
     "order": 1,
     "character": "np-nong-dan-khoan",
-    "tags": ["dong-cam"],
-    "portrait": { "expression": "binh-thuong" },
+    "tags": [
+      "dong-cam"
+    ],
+    "portrait": {
+      "expression": "binh-thuong"
+    },
     "dialogue": [
-      { "speaker": "np-nong-dan-khoan", "text": "Báo cáo cán bộ, tôi là Khoan ở đội 3 Phú Hoà. Nhà tôi năm nay làm khoán tốt, thóc gạo vượt mức khoán được chia 10 cân." },
-      { "speaker": "np-nong-dan-khoan", "text": "Tôi chở 15 cân gạo cả phần ăn lẫn phần vượt ra thị xã đổi ít phân đạm. Giấy hộ khẩu, giấy đi đường với giấy khoán HTX có đủ cả đây." }
+      {
+        "speaker": "np-nong-dan-khoan",
+        "text": "Báo cáo cán bộ, tôi là Khoan ở đội 3 Phú Hoà. Nhà tôi năm nay làm khoán tốt, thóc gạo vượt mức khoán được chia 10 cân."
+      },
+      {
+        "speaker": "np-nong-dan-khoan",
+        "text": "Tôi chở 15 cân gạo cả phần ăn lẫn phần vượt ra thị xã đổi ít phân đạm. Giấy hộ khẩu, giấy đi đường với giấy khoán HTX có đủ cả đây."
+      }
     ],
     "reactions": {
-      "CHO_QUA": [ { "speaker": "np-nong-dan-khoan", "text": "Hoan hô cán bộ ủng hộ bà con làm khoán!" } ],
-      "GIU_LAI": [ { "speaker": "np-nong-dan-khoan", "text": "Chủ trương khoán của Đảng mà trạm lại bắt giữ là cớ làm sao?" } ]
+      "CHO_QUA": [
+        {
+          "speaker": "np-nong-dan-khoan",
+          "text": "Hoan hô cán bộ ủng hộ bà con làm khoán!"
+        }
+      ],
+      "GIU_LAI": [
+        {
+          "speaker": "np-nong-dan-khoan",
+          "text": "Chủ trương khoán của Đảng mà trạm lại bắt giữ là cớ làm sao?"
+        }
+      ]
     },
     "documents": [
       {
@@ -645,12 +1431,21 @@
           "noi_den": "Thị xã",
           "ly_do": "Chở thóc khoán đi đổi vật tư",
           "hang_mang_theo": [
-            { "ma": "gao", "ten": "Gạo", "so_luong": 15, "don_vi": "kg" }
+            {
+              "ma": "gao",
+              "ten": "Gạo",
+              "so_luong": 15,
+              "don_vi": "kg"
+            }
           ],
           "ngay_cap": "1981-03-21",
           "co_gia_tri_den": "1981-03-28"
         },
-        "seal": { "kind": "UBND_XA", "place": "Phú Hoà", "legible": true }
+        "seal": {
+          "kind": "UBND_XA",
+          "place": "Phú Hoà",
+          "legible": true
+        }
       },
       {
         "type": "SHK",
@@ -662,7 +1457,11 @@
           "quan_he_chu_ho": "Chủ hộ",
           "dia_chi": "Xã Phú Hoà"
         },
-        "seal": { "kind": "CONG_AN", "place": "Phú Hoà", "legible": true }
+        "seal": {
+          "kind": "CONG_AN",
+          "place": "Phú Hoà",
+          "legible": true
+        }
       },
       {
         "type": "GXNK",
@@ -676,19 +1475,37 @@
           "vu": "Vụ mùa 1980",
           "ngay": "1981-03-18"
         },
-        "seal": { "kind": "HTX", "place": "Phú Hoà", "legible": true }
+        "seal": {
+          "kind": "HTX",
+          "place": "Phú Hoà",
+          "legible": true
+        }
       }
     ],
     "cargo": [
-      { "ma": "gao", "ten": "Gạo", "so_luong": 15, "don_vi": "kg", "category": "LUONG_THUC" }
+      {
+        "ma": "gao",
+        "ten": "Gạo",
+        "so_luong": 15,
+        "don_vi": "kg",
+        "category": "LUONG_THUC"
+      }
     ],
     "planted": [
-      { "error": "E4", "doc": null, "field": null, "note": "15 kg gạo vượt định mức 5 kg (giấy khoán chưa có trong sổ)." }
+      {
+        "error": "E4",
+        "doc": null,
+        "field": null,
+        "note": "15 kg gạo vượt định mức 5 kg (giấy khoán chưa có trong sổ)."
+      }
     ],
     "expected": {
       "verdict": "GIU_LAI",
       "violations": [
-        { "rule": "R2-DINH-MUC", "error": "E4" }
+        {
+          "rule": "R2-DINH-MUC",
+          "error": "E4"
+        }
       ]
     },
     "kn": {
@@ -698,8 +1515,23 @@
     "bribe": null,
     "flag_key": null,
     "outcomes": {
-      "CHO_QUA": { "deltas": { "luong_thuc_vao_thi_xa": 1, "gia_gao_index": -1 }, "notes": ["Thóc gạo vượt khoán của bác Khoan đến được thị xã đổi lấy phân bón."] },
-      "GIU_LAI": { "deltas": { "ho_thieu_an": 3 }, "notes": ["Tịch thu 15kg gạo của bác Khoan, xã viên hoang mang về chính sách khoán."] }
+      "CHO_QUA": {
+        "deltas": {
+          "luong_thuc_vao_thi_xa": 1,
+          "gia_gao_index": -1
+        },
+        "notes": [
+          "Thóc gạo vượt khoán của bác Khoan đến được thị xã đổi lấy phân bón."
+        ]
+      },
+      "GIU_LAI": {
+        "deltas": {
+          "ho_thieu_an": 3
+        },
+        "notes": [
+          "Tịch thu 15 kg gạo của bác Khoan, xã viên hoang mang về chính sách khoán."
+        ]
+      }
     },
     "art_note": "Bác nông dân da ngăm đen, tay chìa tờ giấy khoán ép phẳng phiu."
   },
@@ -708,16 +1540,69 @@
     "day": "d4",
     "order": 2,
     "character": "anh-hung",
-    "tags": ["dong-cam"],
-    "portrait": { "expression": "binh-thuong" },
+    "tags": [
+      "dong-cam"
+    ],
+    "portrait": {
+      "expression": "binh-thuong"
+    },
     "dialogue": [
-      { "speaker": "anh-hung", "text": "Chào chú Thành. Hôm nay tôi mang 10 cân ngô hạt ra thị xã đổi lấy dầu máy sửa xe." },
-      { "speaker": "anh-hung", "text": "Hôm nay sổ hộ khẩu, giấy thương binh, giấy đi đường của tôi đều mang theo đầy đủ, tên tuổi năm sinh trùng khít." }
+      {
+        "speaker": "anh-hung",
+        "text": "Chào chú Thành. Hôm nay tôi mang 5 cân ngô thôi, đúng định mức, ra thị xã đổi lấy dầu máy."
+      },
+      {
+        "speaker": "anh-hung",
+        "text": "Sổ hộ khẩu, giấy thương binh, giấy đi đường đủ cả. Giấy thương binh thì đơn vị cấp từ hồi ở chiến trường, năm sinh ghi theo lời khai lúc nhập ngũ, chú ạ."
+      },
+      {
+        "speaker": "anh-hung",
+        "text": "Lần trước tôi bị giữ vì cân ngô, nên lần này tôi cân kỹ lắm rồi.",
+        "when": [
+          {
+            "flag": "anh-hung.m2",
+            "in": [
+              "giu",
+              "giu-kn"
+            ]
+          }
+        ]
+      }
     ],
     "reactions": {
-      "CHO_QUA": [ { "speaker": "anh-hung", "text": "Cảm ơn chú Thành luôn có tấm lòng với anh em thương binh." } ],
-      "GIU_LAI": [ { "speaker": "anh-hung", "text": "Lại giữ... hoá ra có đủ hộ khẩu cũng không ăn thua à chú?" } ]
+      "CHO_QUA": [
+        {
+          "speaker": "anh-hung",
+          "text": "Cảm ơn chú Thành luôn có tấm lòng với anh em thương binh."
+        }
+      ],
+      "GIU_LAI": [
+        {
+          "speaker": "anh-hung",
+          "text": "Giấy nhà nước cấp mà vênh nhau thì tôi biết tin tờ nào hả chú..."
+        }
+      ]
     },
+    "confront": [
+      {
+        "on": "year",
+        "lines": [
+          {
+            "speaker": "anh-hung",
+            "text": "Năm 76 tôi đã lên huyện xin sửa. Người ta bảo hồ sơ thời chiến phải chờ tỉnh xác minh. Chờ đến giờ, chú em ạ."
+          }
+        ]
+      },
+      {
+        "on": "khop",
+        "lines": [
+          {
+            "speaker": "anh-hung",
+            "text": "Chú em soi kỹ thật. Chỗ đấy thì khớp, tôi xin đảm bảo."
+          }
+        ]
+      }
+    ],
     "documents": [
       {
         "type": "GDD",
@@ -728,12 +1613,21 @@
           "noi_den": "Thị xã",
           "ly_do": "Đi mua vật tư sửa chữa",
           "hang_mang_theo": [
-            { "ma": "ngo", "ten": "Ngô hạt", "so_luong": 10, "don_vi": "kg" }
+            {
+              "ma": "ngo",
+              "ten": "Ngô hạt",
+              "so_luong": 5,
+              "don_vi": "kg"
+            }
           ],
           "ngay_cap": "1981-03-21",
           "co_gia_tri_den": "1981-03-28"
         },
-        "seal": { "kind": "UBND_XA", "place": "Phú Hoà", "legible": true }
+        "seal": {
+          "kind": "UBND_XA",
+          "place": "Phú Hoà",
+          "legible": true
+        }
       },
       {
         "type": "SHK",
@@ -745,30 +1639,52 @@
           "quan_he_chu_ho": "Chủ hộ",
           "dia_chi": "Xã Phú Hoà"
         },
-        "seal": { "kind": "CONG_AN", "place": "Phú Hoà", "legible": true }
+        "seal": {
+          "kind": "CONG_AN",
+          "place": "Phú Hoà",
+          "legible": true
+        }
       },
       {
         "type": "CNTB",
         "fields": {
           "ho_ten": "Lê Văn Hùng",
-          "nam_sinh": 1952,
+          "nam_sinh": 1951,
           "hang": "2/4",
           "so_the": "TB-5201",
           "don_vi_cap": "Ty Thương binh - Xã hội"
         },
-        "seal": { "kind": "TB_XH", "place": "Thị xã", "legible": true }
+        "seal": {
+          "kind": "TB_XH",
+          "place": "Thị xã",
+          "legible": true
+        }
       }
     ],
     "cargo": [
-      { "ma": "ngo", "ten": "Ngô hạt", "so_luong": 10, "don_vi": "kg", "category": "LUONG_THUC" }
+      {
+        "ma": "ngo",
+        "ten": "Ngô hạt",
+        "so_luong": 5,
+        "don_vi": "kg",
+        "category": "LUONG_THUC"
+      }
     ],
     "planted": [
-      { "error": "E4", "doc": null, "field": null, "note": "10 kg ngô vượt định mức 5 kg." }
+      {
+        "error": "E2",
+        "doc": "CNTB",
+        "field": "nam_sinh",
+        "note": "Giấy chứng nhận thương binh ghi năm sinh 1951, hộ khẩu và giấy đi đường ghi 1952. Hồ sơ thời chiến ghi lệch; anh Hùng không khai gian."
+      }
     ],
     "expected": {
       "verdict": "GIU_LAI",
       "violations": [
-        { "rule": "R2-DINH-MUC", "error": "E4" }
+        {
+          "rule": "R4-KHOP-TEN",
+          "error": "E2"
+        }
       ]
     },
     "kn": {
@@ -778,26 +1694,110 @@
     "bribe": null,
     "flag_key": "anh-hung.m2b",
     "outcomes": {
-      "CHO_QUA": { "deltas": { "luong_thuc_vao_thi_xa": 1 }, "notes": ["Ngô của anh Hùng đổi được dầu máy cho tổ sửa xe."] },
-      "GIU_LAI": { "deltas": { "ho_thieu_an": 2 }, "notes": ["Tịch thu 10kg ngô của anh Hùng thương binh."] }
+      "CHO_QUA": {
+        "deltas": {
+          "luong_thuc_vao_thi_xa": 1
+        },
+        "notes": [
+          "Anh Hùng đổi được dầu máy cho tổ sửa xe."
+        ]
+      },
+      "GIU_LAI": {
+        "deltas": {
+          "ho_thieu_an": 2
+        },
+        "notes": [
+          "Anh Hùng bị giữ vì giấy thương binh ghi lệch một năm sinh."
+        ]
+      }
     },
-    "art_note": "Anh Hùng dựng chiếc xe đạp cũ, bình thản đưa từng tờ giấy qua ô cửa kính."
+    "art_note": "Anh Hùng chỉ vào dòng năm sinh trên tấm thẻ thương binh đã sờn mép."
   },
   {
     "id": "d4-t3",
     "day": "d4",
     "order": 3,
     "character": "thang-ti",
-    "tags": ["dong-cam"],
-    "portrait": { "expression": "lo-lang" },
+    "tags": [
+      "dong-cam"
+    ],
+    "portrait": {
+      "expression": "lo-lang",
+      "variants": [
+        {
+          "when": [
+            {
+              "flag": "thang-ti.m2",
+              "in": [
+                "giu",
+                "giu-kn"
+              ]
+            }
+          ],
+          "expression": "buon"
+        }
+      ]
+    },
     "dialogue": [
-      { "speaker": "thang-ti", "text": "Chú Thành ơi, hôm nay nhà cháu thu hoạch được phần thóc khoán mảnh ruộng bãi của bố cháu." },
-      { "speaker": "thang-ti", "text": "Bố cháu bảo cháu mang 10 cân gạo này với giấy khoán của HTX Phú Hoà ra đổi ít than với muối. Chú kiểm tra giúp cháu ạ." }
+      {
+        "speaker": "thang-ti",
+        "text": "Chú Thành ơi, bố cháu uống đủ thuốc, cắt được cơn sốt rồi ạ. Hôm nay nhà cháu thu được phần thóc khoán mảnh ruộng bãi.",
+        "when": [
+          {
+            "flag": "thang-ti.m2",
+            "in": [
+              "qua",
+              "qua-kn",
+              "lam-ngo",
+              "qua-tien",
+              "lam-ngo-tien"
+            ]
+          }
+        ]
+      },
+      {
+        "speaker": "thang-ti",
+        "text": "Bố cháu bỏ dở thuốc, sốt lại, giờ nằm một chỗ. Cháu nghỉ học đi làm thay bố rồi chú ạ.",
+        "when": [
+          {
+            "flag": "thang-ti.m2",
+            "in": [
+              "giu",
+              "giu-kn"
+            ]
+          }
+        ]
+      },
+      {
+        "speaker": "thang-ti",
+        "text": "Cháu mang 10 cân gạo này với giấy khoán của HTX Phú Hoà ra đổi ít than với muối. Chú kiểm tra giúp cháu ạ."
+      }
     ],
     "reactions": {
-      "CHO_QUA": [ { "speaker": "thang-ti", "text": "Cháu cảm ơn chú Thành nhiều lắm ạ!" } ],
-      "GIU_LAI": [ { "speaker": "thang-ti", "text": "Giấy khoán của bố cháu cũng không được tính hả chú..." } ]
+      "CHO_QUA": [
+        {
+          "speaker": "thang-ti",
+          "text": "Cháu cảm ơn chú Thành nhiều lắm ạ!"
+        }
+      ],
+      "GIU_LAI": [
+        {
+          "speaker": "thang-ti",
+          "text": "Giấy khoán của bố cháu cũng không được tính hả chú..."
+        }
+      ]
     },
+    "confront": [
+      {
+        "on": "khop",
+        "lines": [
+          {
+            "speaker": "thang-ti",
+            "text": "Cháu không đọc hết được đâu chú... bố cháu dặn cứ đưa chú là được."
+          }
+        ]
+      }
+    ],
     "documents": [
       {
         "type": "GDD",
@@ -808,12 +1808,21 @@
           "noi_den": "Thị xã",
           "ly_do": "Mang gạo khoán đi mua than",
           "hang_mang_theo": [
-            { "ma": "gao", "ten": "Gạo", "so_luong": 10, "don_vi": "kg" }
+            {
+              "ma": "gao",
+              "ten": "Gạo",
+              "so_luong": 10,
+              "don_vi": "kg"
+            }
           ],
           "ngay_cap": "1981-03-21",
           "co_gia_tri_den": "1981-03-27"
         },
-        "seal": { "kind": "UBND_XA", "place": "Phú Hoà", "legible": true }
+        "seal": {
+          "kind": "UBND_XA",
+          "place": "Phú Hoà",
+          "legible": true
+        }
       },
       {
         "type": "SHK",
@@ -825,7 +1834,11 @@
           "quan_he_chu_ho": "Con",
           "dia_chi": "Xã Phú Hoà"
         },
-        "seal": { "kind": "CONG_AN", "place": "Phú Hoà", "legible": true }
+        "seal": {
+          "kind": "CONG_AN",
+          "place": "Phú Hoà",
+          "legible": true
+        }
       },
       {
         "type": "GXNK",
@@ -839,19 +1852,37 @@
           "vu": "Vụ mùa 1980",
           "ngay": "1981-03-19"
         },
-        "seal": { "kind": "HTX", "place": "Phú Hoà", "legible": true }
+        "seal": {
+          "kind": "HTX",
+          "place": "Phú Hoà",
+          "legible": true
+        }
       }
     ],
     "cargo": [
-      { "ma": "gao", "ten": "Gạo", "so_luong": 10, "don_vi": "kg", "category": "LUONG_THUC" }
+      {
+        "ma": "gao",
+        "ten": "Gạo",
+        "so_luong": 10,
+        "don_vi": "kg",
+        "category": "LUONG_THUC"
+      }
     ],
     "planted": [
-      { "error": "E4", "doc": null, "field": null, "note": "10 kg gạo vượt định mức 5 kg (giấy khoán 6 kg chưa có trong sổ)." }
+      {
+        "error": "E4",
+        "doc": null,
+        "field": null,
+        "note": "10 kg gạo vượt định mức 5 kg (giấy khoán 6 kg chưa có trong sổ)."
+      }
     ],
     "expected": {
       "verdict": "GIU_LAI",
       "violations": [
-        { "rule": "R2-DINH-MUC", "error": "E4" }
+        {
+          "rule": "R2-DINH-MUC",
+          "error": "E4"
+        }
       ]
     },
     "kn": {
@@ -861,8 +1892,22 @@
     "bribe": null,
     "flag_key": "thang-ti.m2b",
     "outcomes": {
-      "CHO_QUA": { "deltas": { "ho_thieu_an": -1 }, "notes": ["Thằng Tí đổi được than sưởi cho người bố ốm."] },
-      "GIU_LAI": { "deltas": { "ho_thieu_an": 2 }, "notes": ["Tịch thu 10kg gạo của thằng Tí, bếp nhà thợ rèn nguội lạnh."] }
+      "CHO_QUA": {
+        "deltas": {
+          "ho_thieu_an": -1
+        },
+        "notes": [
+          "Thằng Tí đổi được than sưởi cho người bố ốm."
+        ]
+      },
+      "GIU_LAI": {
+        "deltas": {
+          "ho_thieu_an": 2
+        },
+        "notes": [
+          "Tịch thu 10 kg gạo của thằng Tí, bếp nhà thợ rèn nguội lạnh."
+        ]
+      }
     },
     "art_note": "Thằng Tí gầy gò, tay bưng thúng gạo nhỏ, mắt ngước nhìn chú cán bộ đầy hy vọng."
   },
@@ -871,16 +1916,47 @@
     "day": "d4",
     "order": 4,
     "character": "ong-quynh",
-    "tags": [],
-    "portrait": { "expression": "binh-thuong" },
+    "tags": [
+      "hop-le-ma-hai"
+    ],
+    "portrait": {
+      "expression": "binh-thuong"
+    },
     "dialogue": [
-      { "speaker": "ong-quynh", "text": "Chào đồng chí Thành. Hôm nay tôi về thị xã họp thẩm định cung ứng quý I." },
-      { "speaker": "ong-quynh", "text": "Hộ khẩu thị xã, giấy đi đường công lệnh chuẩn chỉ từng dấu một. Cậu xem qua rồi đóng dấu giúp tôi." }
+      {
+        "speaker": "ong-quynh",
+        "text": "Chào đồng chí Thành. Hôm nay tôi về thị xã họp thẩm định cung ứng quý I."
+      },
+      {
+        "speaker": "ong-quynh",
+        "text": "Hộ khẩu thị xã, giấy đi đường công lệnh chuẩn chỉ từng dấu một. Cậu xem qua rồi đóng dấu giúp tôi."
+      }
     ],
     "reactions": {
-      "CHO_QUA": [ { "speaker": "ong-quynh", "text": "Cảm ơn đồng chí Thành, tác phong rất chuyên nghiệp." } ],
-      "GIU_LAI": [ { "speaker": "ong-quynh", "text": "Đồng chí làm khó cán bộ tỉnh thế này là không ổn đâu nhé." } ]
+      "CHO_QUA": [
+        {
+          "speaker": "ong-quynh",
+          "text": "Cảm ơn đồng chí Thành, tác phong rất chuyên nghiệp."
+        }
+      ],
+      "GIU_LAI": [
+        {
+          "speaker": "ong-quynh",
+          "text": "Đồng chí làm khó cán bộ tỉnh thế này là không ổn đâu nhé."
+        }
+      ]
     },
+    "confront": [
+      {
+        "on": "khop",
+        "lines": [
+          {
+            "speaker": "ong-quynh",
+            "text": "Hộ khẩu, công lệnh, dấu đỏ. Cậu còn định tìm gì nữa?"
+          }
+        ]
+      }
+    ],
     "documents": [
       {
         "type": "GDD",
@@ -891,12 +1967,21 @@
           "noi_den": "Phú Hoà",
           "ly_do": "Họp thẩm định cung ứng thương nghiệp",
           "hang_mang_theo": [
-            { "ma": "gao", "ten": "Gạo", "so_luong": 5, "don_vi": "kg" }
+            {
+              "ma": "gao",
+              "ten": "Gạo",
+              "so_luong": 5,
+              "don_vi": "kg"
+            }
           ],
           "ngay_cap": "1981-03-21",
           "co_gia_tri_den": "1981-03-30"
         },
-        "seal": { "kind": "UBND_XA", "place": "Thị xã", "legible": true }
+        "seal": {
+          "kind": "UBND_XA",
+          "place": "Thị xã",
+          "legible": true
+        }
       },
       {
         "type": "SHK",
@@ -908,11 +1993,21 @@
           "quan_he_chu_ho": "Chủ hộ",
           "dia_chi": "Thị xã"
         },
-        "seal": { "kind": "CONG_AN", "place": "Thị xã", "legible": true }
+        "seal": {
+          "kind": "CONG_AN",
+          "place": "Thị xã",
+          "legible": true
+        }
       }
     ],
     "cargo": [
-      { "ma": "gao", "ten": "Gạo", "so_luong": 5, "don_vi": "kg", "category": "LUONG_THUC" }
+      {
+        "ma": "gao",
+        "ten": "Gạo",
+        "so_luong": 5,
+        "don_vi": "kg",
+        "category": "LUONG_THUC"
+      }
     ],
     "planted": [],
     "expected": {
@@ -923,8 +2018,22 @@
     "bribe": null,
     "flag_key": "ong-quynh.m2",
     "outcomes": {
-      "CHO_QUA": { "deltas": { "luong_thuc_vao_thi_xa": 1 }, "notes": ["Cán bộ Quỳnh thông trạm thuận lợi theo công vụ."] },
-      "GIU_LAI": { "deltas": { "ho_thieu_an": 1 }, "notes": ["Giữ gạo tiêu chuẩn của ông Quỳnh."] }
+      "CHO_QUA": {
+        "deltas": {
+          "luong_thuc_vao_thi_xa": 1
+        },
+        "notes": [
+          "Cán bộ Quỳnh thông trạm thuận lợi theo công vụ."
+        ]
+      },
+      "GIU_LAI": {
+        "deltas": {
+          "ho_thieu_an": 1
+        },
+        "notes": [
+          "Giữ gạo tiêu chuẩn của ông Quỳnh."
+        ]
+      }
     },
     "art_note": "Ông Quỳnh ăn mặc lịch sự, điềm tĩnh xách cặp tài liệu."
   },
@@ -934,14 +2043,32 @@
     "order": 5,
     "character": "chi-thu",
     "tags": [],
-    "portrait": { "expression": "binh-thuong" },
+    "portrait": {
+      "expression": "binh-thuong"
+    },
     "dialogue": [
-      { "speaker": "chi-thu", "text": "Chào đồng chí Thành! Tôi bên Ban Nông nghiệp huyện uỷ vừa đi kiểm tra mô hình khoán ở Phú Hoà về." },
-      { "speaker": "chi-thu", "text": "Giấy tờ công tác với sổ hộ khẩu của tôi đây. Nghe nói trạm ta dạo này bà con mang giấy khoán qua nhiều lắm phải không đồng chí?" }
+      {
+        "speaker": "chi-thu",
+        "text": "Chào đồng chí Thành! Tôi bên Ban Nông nghiệp huyện uỷ vừa đi kiểm tra mô hình khoán ở Phú Hoà về."
+      },
+      {
+        "speaker": "chi-thu",
+        "text": "Giấy tờ công tác với sổ hộ khẩu của tôi đây. Nghe nói trạm ta dạo này bà con mang giấy khoán qua nhiều lắm phải không đồng chí?"
+      }
     ],
     "reactions": {
-      "CHO_QUA": [ { "speaker": "chi-thu", "text": "Cảm ơn đồng chí. Các đồng chí ở cơ sở chịu khó lắng nghe bà con nhé!" } ],
-      "GIU_LAI": [ { "speaker": "chi-thu", "text": "Ủa, giấy tờ tôi có gì sai quy định sao đồng chí?" } ]
+      "CHO_QUA": [
+        {
+          "speaker": "chi-thu",
+          "text": "Cảm ơn đồng chí. Các đồng chí ở cơ sở chịu khó lắng nghe bà con nhé!"
+        }
+      ],
+      "GIU_LAI": [
+        {
+          "speaker": "chi-thu",
+          "text": "Ủa, giấy tờ tôi có gì sai quy định sao đồng chí?"
+        }
+      ]
     },
     "documents": [
       {
@@ -956,7 +2083,11 @@
           "ngay_cap": "1981-03-21",
           "co_gia_tri_den": "1981-03-30"
         },
-        "seal": { "kind": "UBND_XA", "place": "Thị xã", "legible": true }
+        "seal": {
+          "kind": "UBND_XA",
+          "place": "Thị xã",
+          "legible": true
+        }
       },
       {
         "type": "SHK",
@@ -968,11 +2099,21 @@
           "quan_he_chu_ho": "Chủ hộ",
           "dia_chi": "Thị xã"
         },
-        "seal": { "kind": "CONG_AN", "place": "Thị xã", "legible": true }
+        "seal": {
+          "kind": "CONG_AN",
+          "place": "Thị xã",
+          "legible": true
+        }
       }
     ],
     "cargo": [
-      { "ma": "quan-ao", "ten": "Tư trang cán bộ", "so_luong": 2, "don_vi": "kg", "category": "DO_CA_NHAN" }
+      {
+        "ma": "quan-ao",
+        "ten": "Tư trang cán bộ",
+        "so_luong": 2,
+        "don_vi": "kg",
+        "category": "DO_CA_NHAN"
+      }
     ],
     "planted": [],
     "expected": {
@@ -983,8 +2124,22 @@
     "bribe": null,
     "flag_key": "chi-thu.m2",
     "outcomes": {
-      "CHO_QUA": { "deltas": { "luong_thuc_vao_thi_xa": 0 }, "notes": ["Cán bộ nông nghiệp huyện nắm bắt thêm tình hình trạm kiểm soát."] },
-      "GIU_LAI": { "deltas": { "ho_thieu_an": 1 }, "notes": ["Giữ đồ đạc cá nhân của cán bộ huyện."] }
+      "CHO_QUA": {
+        "deltas": {
+          "luong_thuc_vao_thi_xa": 0
+        },
+        "notes": [
+          "Cán bộ nông nghiệp huyện nắm bắt thêm tình hình trạm kiểm soát."
+        ]
+      },
+      "GIU_LAI": {
+        "deltas": {
+          "ho_thieu_an": 1
+        },
+        "notes": [
+          "Giữ đồ đạc cá nhân của cán bộ huyện."
+        ]
+      }
     },
     "art_note": "Chị Thu mặc áo sơ mi bộ đội giản dị, quai túi vải bạt khoác chéo vai."
   },
@@ -993,16 +2148,201 @@
     "day": "d5",
     "order": 1,
     "character": "ba-tu",
-    "tags": ["luot-trung-tam", "dong-cam"],
-    "portrait": { "expression": "lo-lang" },
+    "tags": [
+      "luot-trung-tam",
+      "dong-cam"
+    ],
+    "portrait": {
+      "expression": "lo-lang",
+      "variants": [
+        {
+          "when": [
+            {
+              "flag_count": [
+                "ba-tu.m1",
+                "ba-tu.m2"
+              ],
+              "in": [
+                "giu",
+                "giu-kn"
+              ],
+              "op": ">=",
+              "value": 2
+            }
+          ],
+          "key": "ba-tu-khong-non",
+          "expression": "buon"
+        },
+        {
+          "when": [
+            {
+              "flag_count": [
+                "ba-tu.m1",
+                "ba-tu.m2"
+              ],
+              "in": [
+                "giu",
+                "giu-kn"
+              ],
+              "op": "==",
+              "value": 0
+            }
+          ],
+          "expression": "vui"
+        }
+      ]
+    },
     "dialogue": [
-      { "speaker": "ba-tu", "text": "Chào chú Thành. Mấy năm nay lạm phát ghê quá chú ơi, đồng tiền mới mất giá từng ngày." },
-      { "speaker": "ba-tu", "text": "Vụ xuân này tôi lại được khoán 13 cân gạo, gánh ra thị xã đổi lấy mấy hộp sữa với cân đường cho cháu. Sổ hộ khẩu với giấy khoán đủ cả chú xem giùm." }
+      {
+        "speaker": "ba-tu",
+        "text": "Chào chú Thành. Mấy năm nay lạm phát ghê quá chú ơi, đồng tiền mới mất giá từng ngày.",
+        "when": [
+          {
+            "flag_count": [
+              "ba-tu.m1",
+              "ba-tu.m2"
+            ],
+            "in": [
+              "giu",
+              "giu-kn"
+            ],
+            "op": "<=",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "speaker": "ba-tu",
+        "text": "Năm ấy chú giữ gạo, thằng cháu không có thuốc, nằm mất nửa tháng. Giờ nó đỡ rồi.",
+        "when": [
+          {
+            "flag": "ba-tu.m2",
+            "in": [
+              "giu",
+              "giu-kn"
+            ]
+          },
+          {
+            "flag_count": [
+              "ba-tu.m1",
+              "ba-tu.m2"
+            ],
+            "in": [
+              "giu",
+              "giu-kn"
+            ],
+            "op": "<=",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "speaker": "ba-tu",
+        "text": "Mấy lần chú cho qua, tôi dành dụm lợp lại được mái bếp đấy chú.",
+        "when": [
+          {
+            "flag_count": [
+              "ba-tu.m1",
+              "ba-tu.m2"
+            ],
+            "in": [
+              "giu",
+              "giu-kn"
+            ],
+            "op": "==",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "speaker": "narrator",
+        "text": "Bà Tư không đội nón nữa. Bà không chào, đặt tờ giấy khoán lên bậu cửa rồi nhìn xuống đất.",
+        "when": [
+          {
+            "flag_count": [
+              "ba-tu.m1",
+              "ba-tu.m2"
+            ],
+            "in": [
+              "giu",
+              "giu-kn"
+            ],
+            "op": ">=",
+            "value": 2
+          }
+        ]
+      },
+      {
+        "speaker": "ba-tu",
+        "text": "Vụ xuân này tôi lại được khoán 13 cân gạo, gánh ra thị xã đổi lấy mấy hộp sữa với cân đường cho cháu. Sổ hộ khẩu với giấy khoán đủ cả chú xem giùm.",
+        "when": [
+          {
+            "flag_count": [
+              "ba-tu.m1",
+              "ba-tu.m2"
+            ],
+            "in": [
+              "giu",
+              "giu-kn"
+            ],
+            "op": "<=",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "speaker": "ba-tu",
+        "text": "Giấy đây.",
+        "when": [
+          {
+            "flag_count": [
+              "ba-tu.m1",
+              "ba-tu.m2"
+            ],
+            "in": [
+              "giu",
+              "giu-kn"
+            ],
+            "op": ">=",
+            "value": 2
+          }
+        ]
+      }
     ],
     "reactions": {
-      "CHO_QUA": [ { "speaker": "ba-tu", "text": "Đội ơn chú Thành! Có hạt gạo khoán này gia đình tôi mới sống nổi." } ],
-      "GIU_LAI": [ { "speaker": "ba-tu", "text": "Khổ thân già này... đến bao giờ hạt gạo làm ra mới được tự do lưu thông đây..." } ]
+      "CHO_QUA": [
+        {
+          "speaker": "ba-tu",
+          "text": "Đội ơn chú Thành! Có hạt gạo khoán này gia đình tôi mới sống nổi."
+        }
+      ],
+      "GIU_LAI": [
+        {
+          "speaker": "ba-tu",
+          "text": "Khổ thân già này... đến bao giờ hạt gạo làm ra mới được tự do lưu thông đây..."
+        }
+      ]
     },
+    "confront": [
+      {
+        "on": "any",
+        "lines": [
+          {
+            "speaker": "ba-tu",
+            "text": "Tôi không biết chữ, chú ạ. Cán bộ xã viết sao thì tôi cầm vậy."
+          }
+        ]
+      },
+      {
+        "on": "khop",
+        "lines": [
+          {
+            "speaker": "ba-tu",
+            "text": "Tôi không biết chữ, chú ạ. Cán bộ xã viết sao thì tôi cầm vậy."
+          }
+        ]
+      }
+    ],
     "documents": [
       {
         "type": "GDD",
@@ -1013,12 +2353,21 @@
           "noi_den": "Thị xã",
           "ly_do": "Mang gạo khoán đi đổi nhu yếu phẩm",
           "hang_mang_theo": [
-            { "ma": "gao", "ten": "Gạo", "so_luong": 18, "don_vi": "kg" }
+            {
+              "ma": "gao",
+              "ten": "Gạo",
+              "so_luong": 18,
+              "don_vi": "kg"
+            }
           ],
           "ngay_cap": "1986-04-12",
           "co_gia_tri_den": "1986-04-20"
         },
-        "seal": { "kind": "UBND_XA", "place": "Phú Hoà", "legible": true }
+        "seal": {
+          "kind": "UBND_XA",
+          "place": "Phú Hoà",
+          "legible": true
+        }
       },
       {
         "type": "SHK",
@@ -1030,7 +2379,11 @@
           "quan_he_chu_ho": "Chủ hộ",
           "dia_chi": "Xã Phú Hoà"
         },
-        "seal": { "kind": "CONG_AN", "place": "Phú Hoà", "legible": true }
+        "seal": {
+          "kind": "CONG_AN",
+          "place": "Phú Hoà",
+          "legible": true
+        }
       },
       {
         "type": "GXNK",
@@ -1044,19 +2397,37 @@
           "vu": "Vụ xuân 1986",
           "ngay": "1986-04-10"
         },
-        "seal": { "kind": "HTX", "place": "Phú Hoà", "legible": true }
+        "seal": {
+          "kind": "HTX",
+          "place": "Phú Hoà",
+          "legible": true
+        }
       }
     ],
     "cargo": [
-      { "ma": "gao", "ten": "Gạo", "so_luong": 18, "don_vi": "kg", "category": "LUONG_THUC" }
+      {
+        "ma": "gao",
+        "ten": "Gạo",
+        "so_luong": 18,
+        "don_vi": "kg",
+        "category": "LUONG_THUC"
+      }
     ],
     "planted": [
-      { "error": "E4", "doc": null, "field": null, "note": "18 kg gạo vượt 5 kg nếu chưa có R5K-KHOAN. Khi R5K-KHOAN hiệu lực, 5 + 13 = 18 kg nên được CHO_QUA." }
+      {
+        "error": "E4",
+        "doc": null,
+        "field": null,
+        "note": "18 kg gạo vượt 5 kg nếu chưa có R5K-KHOAN. Khi R5K-KHOAN hiệu lực, 5 + 13 = 18 kg nên được CHO_QUA."
+      }
     ],
     "expected": {
       "verdict": "GIU_LAI",
       "violations": [
-        { "rule": "R2-DINH-MUC", "error": "E4" }
+        {
+          "rule": "R2-DINH-MUC",
+          "error": "E4"
+        }
       ]
     },
     "kn": {
@@ -1066,8 +2437,24 @@
     "bribe": null,
     "flag_key": "ba-tu.m3",
     "outcomes": {
-      "CHO_QUA": { "deltas": { "luong_thuc_vao_thi_xa": 2, "gia_gao_index": -1 }, "notes": ["Gạo khoán của bà Tư giúp giảm bớt cơn sốt giá ở chợ thị xã."] },
-      "GIU_LAI": { "deltas": { "ho_thieu_an": 5, "gia_gao_index": 2 }, "notes": ["Tịch thu 18kg gạo khoán của bà Tư, đẩy giá gạo chợ đen lên cao."] }
+      "CHO_QUA": {
+        "deltas": {
+          "luong_thuc_vao_thi_xa": 2,
+          "gia_gao_index": -1
+        },
+        "notes": [
+          "Gạo khoán của bà Tư giúp giảm bớt cơn sốt giá ở chợ thị xã."
+        ]
+      },
+      "GIU_LAI": {
+        "deltas": {
+          "ho_thieu_an": 5,
+          "gia_gao_index": 2
+        },
+        "notes": [
+          "Tịch thu 18 kg gạo khoán của bà Tư, đẩy giá gạo chợ đen lên cao."
+        ]
+      }
     },
     "art_note": "Bà Tư lưng đã còng hơn, tóc thêm nhiều sợi bạc, đôi quang thúng mòn vẹt."
   },
@@ -1076,16 +2463,58 @@
     "day": "d5",
     "order": 2,
     "character": "ong-quynh",
-    "tags": [],
-    "portrait": { "expression": "binh-thuong" },
+    "tags": [
+      "hop-le-ma-hai"
+    ],
+    "portrait": {
+      "expression": "binh-thuong"
+    },
     "dialogue": [
-      { "speaker": "ong-quynh", "text": "Kìa đồng chí Thành! Chuyến này tôi áp tải 200 cân đường mật của công ty điều phối sang kho thị xã." },
-      { "speaker": "ong-quynh", "text": "Giấy phép vận chuyển của Giám đốc Công ty Thương nghiệp ký duyệt, dấu má chuẩn trăm phần trăm. Cậu kiểm nhanh cho xe qua nhé." }
+      {
+        "speaker": "ong-quynh",
+        "text": "Kìa đồng chí Thành! Chuyến này tôi áp tải 200 cân đường mật của công ty điều phối sang kho thị xã."
+      },
+      {
+        "speaker": "ong-quynh",
+        "text": "Giấy phép vận chuyển của Giám đốc Công ty Thương nghiệp ký duyệt, dấu má chuẩn trăm phần trăm. Cậu kiểm nhanh cho xe qua nhé."
+      },
+      {
+        "speaker": "ong-quynh",
+        "text": "Giá gạo ngoài chợ lên thế này thì đường cũng phải lên theo thôi anh Thành ạ. Người ta đói thì càng thèm ngọt.",
+        "when": [
+          {
+            "indicator": "gia_gao_index",
+            "op": ">=",
+            "value": 105
+          }
+        ]
+      }
     ],
     "reactions": {
-      "CHO_QUA": [ { "speaker": "ong-quynh", "text": "Cảm ơn đồng chí Thành. Cán bộ như cậu huyện nên cất nhắc sớm." } ],
-      "GIU_LAI": [ { "speaker": "ong-quynh", "text": "Cậu làm thế này là làm tắc nghẽn lưu thông của ngành thương nghiệp tỉnh đấy!" } ]
+      "CHO_QUA": [
+        {
+          "speaker": "ong-quynh",
+          "text": "Cảm ơn đồng chí Thành. Cán bộ như cậu huyện nên cất nhắc sớm."
+        }
+      ],
+      "GIU_LAI": [
+        {
+          "speaker": "ong-quynh",
+          "text": "Cậu làm thế này là làm tắc nghẽn lưu thông của ngành thương nghiệp tỉnh đấy!"
+        }
+      ]
     },
+    "confront": [
+      {
+        "on": "khop",
+        "lines": [
+          {
+            "speaker": "ong-quynh",
+            "text": "Công ty ký, tỉnh duyệt. Cậu định so với cái gì nữa?"
+          }
+        ]
+      }
+    ],
     "documents": [
       {
         "type": "GDD",
@@ -1096,12 +2525,21 @@
           "noi_den": "Phú Mỹ",
           "ly_do": "Vận chuyển phân phối đường mật",
           "hang_mang_theo": [
-            { "ma": "duong", "ten": "Đường", "so_luong": 200, "don_vi": "kg" }
+            {
+              "ma": "duong",
+              "ten": "Đường",
+              "so_luong": 200,
+              "don_vi": "kg"
+            }
           ],
           "ngay_cap": "1986-04-12",
           "co_gia_tri_den": "1986-04-25"
         },
-        "seal": { "kind": "UBND_XA", "place": "Thị xã", "legible": true }
+        "seal": {
+          "kind": "UBND_XA",
+          "place": "Thị xã",
+          "legible": true
+        }
       },
       {
         "type": "SHK",
@@ -1113,7 +2551,11 @@
           "quan_he_chu_ho": "Chủ hộ",
           "dia_chi": "Thị xã"
         },
-        "seal": { "kind": "CONG_AN", "place": "Thị xã", "legible": true }
+        "seal": {
+          "kind": "CONG_AN",
+          "place": "Thị xã",
+          "legible": true
+        }
       },
       {
         "type": "GPVC",
@@ -1122,18 +2564,33 @@
           "don_vi_cap": "Công ty Thương nghiệp tỉnh",
           "nguoi_van_chuyen": "Vũ Đình Quỳnh",
           "mat_hang": [
-            { "ma": "duong", "ten": "Đường", "so_luong": 200, "don_vi": "kg" }
+            {
+              "ma": "duong",
+              "ten": "Đường",
+              "so_luong": 200,
+              "don_vi": "kg"
+            }
           ],
           "tu": "Phú Mỹ",
           "den": "Thị xã",
           "ngay_cap": "1986-04-12",
           "co_gia_tri_den": "1986-04-25"
         },
-        "seal": { "kind": "CTY_THUONG_NGHIEP", "place": "Thị xã", "legible": true }
+        "seal": {
+          "kind": "CTY_THUONG_NGHIEP",
+          "place": "Thị xã",
+          "legible": true
+        }
       }
     ],
     "cargo": [
-      { "ma": "duong", "ten": "Đường", "so_luong": 200, "don_vi": "kg", "category": "THUC_PHAM" }
+      {
+        "ma": "duong",
+        "ten": "Đường",
+        "so_luong": 200,
+        "don_vi": "kg",
+        "category": "THUC_PHAM"
+      }
     ],
     "planted": [],
     "expected": {
@@ -1144,8 +2601,23 @@
     "bribe": null,
     "flag_key": "ong-quynh.m3",
     "outcomes": {
-      "CHO_QUA": { "deltas": { "gia_gao_index": 3, "luong_thuc_vao_thi_xa": 0 }, "notes": ["200kg đường của ông Quỳnh lọt qua trạm đầy đủ giấy tờ hợp pháp, sau đó tuồn ra chợ đen làm giá đường tăng vọt."] },
-      "GIU_LAI": { "deltas": { "ho_thieu_an": 2 }, "notes": ["Giữ lô hàng 200kg đường của cán bộ thương nghiệp tỉnh."] }
+      "CHO_QUA": {
+        "deltas": {
+          "gia_gao_index": 3,
+          "luong_thuc_vao_thi_xa": 0
+        },
+        "notes": [
+          "200 kg đường của ông Quỳnh lọt qua trạm đầy đủ giấy tờ hợp pháp, sau đó tuồn ra chợ đen làm giá đường tăng vọt."
+        ]
+      },
+      "GIU_LAI": {
+        "deltas": {
+          "ho_thieu_an": 2
+        },
+        "notes": [
+          "Giữ lô hàng 200 kg đường của cán bộ thương nghiệp tỉnh."
+        ]
+      }
     },
     "art_note": "Ông Quỳnh đứng cạnh chiếc xe tải chở đầy các bao đường có dấu kiểm định."
   },
@@ -1154,16 +2626,138 @@
     "day": "d5",
     "order": 3,
     "character": "anh-hung",
-    "tags": ["dong-cam"],
-    "portrait": { "expression": "lo-lang" },
+    "tags": [
+      "dong-cam"
+    ],
+    "portrait": {
+      "expression": "lo-lang",
+      "variants": [
+        {
+          "when": [
+            {
+              "flag_count": [
+                "anh-hung.m2",
+                "anh-hung.m2b"
+              ],
+              "in": [
+                "giu",
+                "giu-kn"
+              ],
+              "op": ">=",
+              "value": 2
+            }
+          ],
+          "key": "anh-hung-gay",
+          "expression": "met-moi"
+        },
+        {
+          "when": [
+            {
+              "flag_count": [
+                "anh-hung.m2",
+                "anh-hung.m2b"
+              ],
+              "in": [
+                "giu",
+                "giu-kn"
+              ],
+              "op": "==",
+              "value": 0
+            }
+          ],
+          "expression": "vui"
+        }
+      ]
+    },
     "dialogue": [
-      { "speaker": "anh-hung", "text": "Chào chú Thành. Đợt đổi tiền vừa rồi làm tổ thợ sửa xe chúng tôi kiệt quệ quá." },
-      { "speaker": "anh-hung", "text": "Tôi mang 15 cân gạo gia đình tăng gia được ra thị xã đổi phụ tùng với thuốc men. Giấy thương binh với hộ khẩu đây chú em." }
+      {
+        "speaker": "anh-hung",
+        "text": "Chào chú Thành. Đợt đổi tiền vừa rồi làm tổ thợ sửa xe chúng tôi kiệt quệ quá.",
+        "when": [
+          {
+            "flag_count": [
+              "anh-hung.m2",
+              "anh-hung.m2b"
+            ],
+            "in": [
+              "giu",
+              "giu-kn"
+            ],
+            "op": "<=",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "speaker": "anh-hung",
+        "text": "Tổ bây giờ được bốn anh em rồi chú ạ, có cả hai cậu cụt chân ngồi gò. Nhờ mấy lần chú cho qua đấy.",
+        "when": [
+          {
+            "flag_count": [
+              "anh-hung.m2",
+              "anh-hung.m2b"
+            ],
+            "in": [
+              "giu",
+              "giu-kn"
+            ],
+            "op": "==",
+            "value": 0
+          }
+        ]
+      },
+      {
+        "speaker": "narrator",
+        "text": "Anh Hùng gầy rộc. Anh không chào, chỉ đẩy tập giấy qua khe cửa.",
+        "when": [
+          {
+            "flag_count": [
+              "anh-hung.m2",
+              "anh-hung.m2b"
+            ],
+            "in": [
+              "giu",
+              "giu-kn"
+            ],
+            "op": ">=",
+            "value": 2
+          }
+        ]
+      },
+      {
+        "speaker": "anh-hung",
+        "text": "Mười hai cái chắn bùn tổ tự gò, giao cho cửa hàng xe đạp thị xã. Tổ chưa được công nhận là hợp tác xã nên chẳng ai cấp hoá đơn cho."
+      },
+      {
+        "speaker": "anh-hung",
+        "text": "Chú giữ thì tháng này bốn anh em không có gạo."
+      }
     ],
     "reactions": {
-      "CHO_QUA": [ { "speaker": "anh-hung", "text": "Cảm ơn chú Thành nhiều lắm." } ],
-      "GIU_LAI": [ { "speaker": "anh-hung", "text": "Cơm áo gạo tiền đè nặng quá rồi chú ơi..." } ]
+      "CHO_QUA": [
+        {
+          "speaker": "anh-hung",
+          "text": "Cảm ơn chú Thành nhiều lắm."
+        }
+      ],
+      "GIU_LAI": [
+        {
+          "speaker": "anh-hung",
+          "text": "Cơm áo gạo tiền đè nặng quá rồi chú ơi..."
+        }
+      ]
     },
+    "confront": [
+      {
+        "on": "khop",
+        "lines": [
+          {
+            "speaker": "anh-hung",
+            "text": "Giấy tôi khớp cả. Cái tổ chúng tôi thiếu là tư cách hợp tác xã, không phải chữ trên giấy."
+          }
+        ]
+      }
+    ],
     "documents": [
       {
         "type": "GDD",
@@ -1172,14 +2766,23 @@
           "nam_sinh": 1952,
           "noi_di": "Phú Hoà",
           "noi_den": "Thị xã",
-          "ly_do": "Đi mua phụ tùng sửa chữa máy móc",
+          "ly_do": "Giao hàng tổ sửa xe gia công",
           "hang_mang_theo": [
-            { "ma": "gao", "ten": "Gạo", "so_luong": 15, "don_vi": "kg" }
+            {
+              "ma": "chan-bun",
+              "ten": "Chắn bùn xe đạp",
+              "so_luong": 12,
+              "don_vi": "chiec"
+            }
           ],
           "ngay_cap": "1986-04-12",
           "co_gia_tri_den": "1986-04-20"
         },
-        "seal": { "kind": "UBND_XA", "place": "Phú Hoà", "legible": true }
+        "seal": {
+          "kind": "UBND_XA",
+          "place": "Phú Hoà",
+          "legible": true
+        }
       },
       {
         "type": "SHK",
@@ -1191,7 +2794,11 @@
           "quan_he_chu_ho": "Chủ hộ",
           "dia_chi": "Xã Phú Hoà"
         },
-        "seal": { "kind": "CONG_AN", "place": "Phú Hoà", "legible": true }
+        "seal": {
+          "kind": "CONG_AN",
+          "place": "Phú Hoà",
+          "legible": true
+        }
       },
       {
         "type": "CNTB",
@@ -1202,19 +2809,37 @@
           "so_the": "TB-5201",
           "don_vi_cap": "Ty Thương binh - Xã hội"
         },
-        "seal": { "kind": "TB_XH", "place": "Thị xã", "legible": true }
+        "seal": {
+          "kind": "TB_XH",
+          "place": "Thị xã",
+          "legible": true
+        }
       }
     ],
     "cargo": [
-      { "ma": "gao", "ten": "Gạo", "so_luong": 15, "don_vi": "kg", "category": "LUONG_THUC" }
+      {
+        "ma": "chan-bun",
+        "ten": "Chắn bùn xe đạp",
+        "so_luong": 12,
+        "don_vi": "chiec",
+        "category": "VAT_TU"
+      }
     ],
     "planted": [
-      { "error": "E4", "doc": null, "field": null, "note": "15 kg gạo vượt 5 kg." }
+      {
+        "error": "E5",
+        "doc": null,
+        "field": null,
+        "note": "Chắn bùn là vật tư, thuộc phạm vi Điều 5. Tổ thương binh chưa phải hợp tác xã nên không xuất được hoá đơn, cũng không có giấy phép vận chuyển."
+      }
     ],
     "expected": {
       "verdict": "GIU_LAI",
       "violations": [
-        { "rule": "R2-DINH-MUC", "error": "E4" }
+        {
+          "rule": "R5-CHUNG-TU",
+          "error": "E5"
+        }
       ]
     },
     "kn": {
@@ -1224,42 +2849,279 @@
     "bribe": null,
     "flag_key": "anh-hung.m3",
     "outcomes": {
-      "CHO_QUA": { "deltas": { "luong_thuc_vao_thi_xa": 1 }, "notes": ["Gạo của anh Hùng đổi được phụ tùng duy trì xưởng sửa xe."] },
-      "GIU_LAI": { "deltas": { "ho_thieu_an": 2 }, "notes": ["Tịch thu 15kg gạo của anh Hùng, đời sống thương binh cùng cực."] }
+      "CHO_QUA": {
+        "deltas": {
+          "ho_thieu_an": -1
+        },
+        "notes": [
+          "Tổ sửa xe thương binh giao được hàng, bốn gia đình có gạo tháng này."
+        ]
+      },
+      "GIU_LAI": {
+        "deltas": {
+          "ho_thieu_an": 3
+        },
+        "notes": [
+          "12 chiếc chắn bùn của tổ thương binh bị tạm giữ vì không có hoá đơn."
+        ]
+      }
     },
-    "art_note": "Anh Hùng đứng lặng nhìn qua cửa kính, áo lính cũ bạc phếch."
+    "art_note": "Anh Hùng một tay xách bó chắn bùn buộc dây thép."
   },
   {
     "id": "d5-t4",
     "day": "d5",
     "order": 4,
-    "character": "np-buon-chuyen-nghiep",
-    "tags": ["buon-lau-that"],
-    "portrait": { "expression": "ne-tranh" },
+    "character": "np-hang-xom",
+    "tags": [
+      "dong-cam",
+      "luot-trung-tam"
+    ],
+    "portrait": {
+      "expression": "binh-thuong"
+    },
     "dialogue": [
-      { "speaker": "np-buon-chuyen-nghiep", "text": "Anh Thành ơi! Em gom được 300 cân gạo bãi chuyển gấp lên thị xã cho các lò bánh bún." },
-      { "speaker": "np-buon-chuyen-nghiep", "text": "Em biết anh đang kẹt tiền chữa bệnh cho bé Bình sốt cao. Em gửi chiếc phong bì 120 đồng này anh lo thuốc men cho cháu, anh cho xe em qua êm thấm nhé." }
+      {
+        "speaker": "np-hang-xom",
+        "text": "Chú Thành, tôi đây, Nga dãy B khu tập thể dệt đây mà."
+      },
+      {
+        "speaker": "np-hang-xom",
+        "text": "Bà cụ nhà chú hết thuốc huyết áp từ tuần trước, hiệu thuốc quốc doanh không có hàng. Tôi về quê nhờ được người quen mua hộ ba chục viên Reserpin, với hai hộp sữa cho thằng Bình đang ốm."
+      },
+      {
+        "speaker": "np-hang-xom",
+        "text": "Mua ngoài chợ nên làm gì có đơn với hoá đơn hả chú. Chú giữ thì tối nay chú lại phải đi mua chợ đen, giá gấp đôi đấy."
+      }
     ],
     "reactions": {
-      "CHO_QUA": [ { "speaker": "np-buon-chuyen-nghiep", "text": "Cảm ơn anh Thành! Anh em mình hiểu nhau thế là tốt." } ],
-      "GIU_LAI": [ { "speaker": "np-buon-chuyen-nghiep", "text": "Anh không nghĩ đến mạng sống của con anh à..." } ]
+      "CHO_QUA": [
+        {
+          "speaker": "np-hang-xom",
+          "text": "Tối nay tôi mang sang tận nhà cho bà cụ."
+        }
+      ],
+      "GIU_LAI": [
+        {
+          "speaker": "np-hang-xom",
+          "text": "Ừ thì... phép vua. Chú liệu mà lo thuốc cho bà cụ."
+        }
+      ]
     },
+    "confront": [
+      {
+        "on": "khop",
+        "lines": [
+          {
+            "speaker": "np-hang-xom",
+            "text": "Chú soi gì mà kỹ thế, tôi với chú hàng xóm bao năm nay."
+          }
+        ]
+      }
+    ],
     "documents": [
       {
         "type": "GDD",
         "fields": {
-          "ho_ten": "Bùi Văn Thắng",
-          "nam_sinh": 1944,
-          "noi_di": "Thị xã",
-          "noi_den": "Phú Hoà",
-          "ly_do": "Thu mua nông sản",
+          "ho_ten": "Đỗ Thị Nga",
+          "nam_sinh": 1931,
+          "noi_di": "Phú Mỹ",
+          "noi_den": "Thị xã",
+          "ly_do": "Thăm quê về",
           "hang_mang_theo": [
-            { "ma": "gao", "ten": "Gạo", "so_luong": 300, "don_vi": "kg" }
+            {
+              "ma": "reserpin",
+              "ten": "Reserpin (thuốc huyết áp)",
+              "so_luong": 30,
+              "don_vi": "vien"
+            },
+            {
+              "ma": "sua-dac",
+              "ten": "Sữa đặc",
+              "so_luong": 2,
+              "don_vi": "hop"
+            }
           ],
           "ngay_cap": "1986-04-12",
           "co_gia_tri_den": "1986-04-20"
         },
-        "seal": { "kind": "UBND_XA", "place": "Thị xã", "legible": true }
+        "seal": {
+          "kind": "UBND_XA",
+          "place": "Phú Mỹ",
+          "legible": true
+        }
+      },
+      {
+        "type": "SHK",
+        "fields": {
+          "so_so": "TX-1107",
+          "chu_ho": "Đỗ Thị Nga",
+          "ho_ten": "Đỗ Thị Nga",
+          "nam_sinh": 1931,
+          "quan_he_chu_ho": "Chủ hộ",
+          "dia_chi": "Khu tập thể dệt, Thị xã"
+        },
+        "seal": {
+          "kind": "CONG_AN",
+          "place": "Thị xã",
+          "legible": true
+        }
+      }
+    ],
+    "cargo": [
+      {
+        "ma": "reserpin",
+        "ten": "Reserpin (thuốc huyết áp)",
+        "so_luong": 30,
+        "don_vi": "vien",
+        "category": "THUOC"
+      },
+      {
+        "ma": "sua-dac",
+        "ten": "Sữa đặc",
+        "so_luong": 2,
+        "don_vi": "hop",
+        "category": "THUC_PHAM"
+      }
+    ],
+    "planted": [
+      {
+        "error": "E5",
+        "doc": null,
+        "field": null,
+        "note": "Reserpin thuộc danh mục thuốc quản lý nhưng không có đơn (Điều 3)."
+      },
+      {
+        "error": "E5",
+        "doc": null,
+        "field": null,
+        "note": "Sữa đặc là thực phẩm, không có hoá đơn hay giấy phép (Điều 5)."
+      }
+    ],
+    "expected": {
+      "verdict": "GIU_LAI",
+      "violations": [
+        {
+          "rule": "R3-DON-THUOC",
+          "error": "E5"
+        },
+        {
+          "rule": "R5-CHUNG-TU",
+          "error": "E5"
+        }
+      ]
+    },
+    "kn": null,
+    "bribe": null,
+    "flag_key": "hang-xom.m1",
+    "outcomes": {
+      "CHO_QUA": {
+        "deltas": {
+          "ho_thieu_an": -1
+        },
+        "notes": [
+          "Bác Nga mang thuốc huyết áp sang tận nhà cho mẹ Thành."
+        ]
+      },
+      "GIU_LAI": {
+        "deltas": {
+          "ho_thieu_an": 1
+        },
+        "notes": [
+          "Thuốc của mẹ Thành nằm trong kho tịch thu của chính trạm 15."
+        ]
+      }
+    },
+    "art_note": "Người đàn bà trạc năm mươi, tóc búi, túi lưới đựng lọ thuốc và hai hộp sữa."
+  },
+  {
+    "id": "d5-t5",
+    "day": "d5",
+    "order": 5,
+    "character": "np-buon-chuyen-nghiep",
+    "tags": [
+      "buon-lau-that"
+    ],
+    "portrait": {
+      "expression": "ne-tranh"
+    },
+    "dialogue": [
+      {
+        "speaker": "np-buon-chuyen-nghiep",
+        "text": "Anh Thành ơi! Em gom được 300 cân gạo bãi chuyển gấp lên thị xã cho các lò bánh bún."
+      },
+      {
+        "speaker": "np-buon-chuyen-nghiep",
+        "text": "Giấy đi đường là của thằng Lợi, em trai em, nó ốm nên em đi thay. Anh em ruột cả, sổ hộ khẩu em đây."
+      },
+      {
+        "speaker": "np-buon-chuyen-nghiep",
+        "text": "Em biết anh đang kẹt tiền chữa bệnh cho bé Bình sốt cao. Em gửi chiếc phong bì 120 đồng này anh lo thuốc men cho cháu, anh cho xe em qua êm thấm nhé."
+      }
+    ],
+    "reactions": {
+      "CHO_QUA": [
+        {
+          "speaker": "np-buon-chuyen-nghiep",
+          "text": "Cảm ơn anh Thành! Anh em mình hiểu nhau thế là tốt."
+        }
+      ],
+      "GIU_LAI": [
+        {
+          "speaker": "np-buon-chuyen-nghiep",
+          "text": "Anh không nghĩ đến mạng sống của con anh à..."
+        }
+      ]
+    },
+    "confront": [
+      {
+        "on": "name",
+        "lines": [
+          {
+            "speaker": "narrator",
+            "text": "Gã im lặng một lúc lâu, mắt nhìn tờ giấy đi đường."
+          },
+          {
+            "speaker": "np-buon-chuyen-nghiep",
+            "text": "Anh Thành... anh em mình với nhau. Anh coi như không thấy, em biết điều mà."
+          }
+        ]
+      },
+      {
+        "on": "khop",
+        "lines": [
+          {
+            "speaker": "np-buon-chuyen-nghiep",
+            "text": "Anh xem kỹ vậy làm gì, giấy tờ em sạch sẽ cả."
+          }
+        ]
+      }
+    ],
+    "documents": [
+      {
+        "type": "GDD",
+        "fields": {
+          "ho_ten": "Bùi Văn Lợi",
+          "nam_sinh": 1950,
+          "noi_di": "Thị xã",
+          "noi_den": "Phú Hoà",
+          "ly_do": "Thu mua nông sản",
+          "hang_mang_theo": [
+            {
+              "ma": "gao",
+              "ten": "Gạo",
+              "so_luong": 300,
+              "don_vi": "kg"
+            }
+          ],
+          "ngay_cap": "1986-04-12",
+          "co_gia_tri_den": "1986-04-20"
+        },
+        "seal": {
+          "kind": "UBND_XA",
+          "place": "Thị xã",
+          "legible": true
+        }
       },
       {
         "type": "SHK",
@@ -1271,50 +3133,116 @@
           "quan_he_chu_ho": "Chủ hộ",
           "dia_chi": "Thị xã"
         },
-        "seal": { "kind": "CONG_AN", "place": "Thị xã", "legible": true }
+        "seal": {
+          "kind": "CONG_AN",
+          "place": "Thị xã",
+          "legible": true
+        }
       }
     ],
     "cargo": [
-      { "ma": "gao", "ten": "Gạo", "so_luong": 300, "don_vi": "kg", "category": "LUONG_THUC" }
+      {
+        "ma": "gao",
+        "ten": "Gạo",
+        "so_luong": 300,
+        "don_vi": "kg",
+        "category": "LUONG_THUC"
+      }
     ],
     "planted": [
-      { "error": "E4", "doc": null, "field": null, "note": "300 kg gạo vượt định mức 5 kg." }
+      {
+        "error": "E4",
+        "doc": null,
+        "field": null,
+        "note": "300 kg gạo vượt định mức 5 kg."
+      },
+      {
+        "error": "E2",
+        "doc": "GDD",
+        "field": "ho_ten",
+        "note": "Giấy đi đường đứng tên em trai (Bùi Văn Lợi, 1950), hộ khẩu là của Bùi Văn Thắng (1944). Lượt duy nhất Điều 4 bắt đúng người gian."
+      }
     ],
     "expected": {
       "verdict": "GIU_LAI",
       "violations": [
-        { "rule": "R2-DINH-MUC", "error": "E4" }
+        {
+          "rule": "R2-DINH-MUC",
+          "error": "E4"
+        },
+        {
+          "rule": "R4-KHOP-TEN",
+          "error": "E2"
+        }
       ]
     },
     "kn": null,
     "bribe": {
       "amount": 120,
       "lines": [
-        { "speaker": "np-buon-chuyen-nghiep", "text": "Anh Thành cầm lấy 120 đồng này mua thuốc kháng sinh cho cháu Bình. Anh cho xe em qua nhé." }
+        {
+          "speaker": "np-buon-chuyen-nghiep",
+          "text": "Anh Thành cầm lấy 120 đồng này mua thuốc kháng sinh cho cháu Bình. Anh cho xe em qua nhé."
+        }
       ],
-      "consequence_note": "120 đồng nhận hối lộ để cho lọt xe tải chở 300kg gạo."
+      "consequence_note": "120 đồng nhận hối lộ để cho lọt xe tải chở 300 kg gạo."
     },
     "flag_key": null,
     "outcomes": {
-      "CHO_QUA": { "deltas": { "gia_gao_index": 5, "ho_thieu_an": 10 }, "notes": ["300kg gạo gom lậu tuồn vào thị xã làm giá gạo tự do bùng nổ, nhiều hộ nghèo không mua nổi gạo."] },
-      "GIU_LAI": { "deltas": { "ho_thieu_an": -5 }, "notes": ["Chặn đứng vụ đầu cơ 300kg gạo, tịch thu nhập kho quốc doanh."] }
+      "CHO_QUA": {
+        "deltas": {
+          "gia_gao_index": 5,
+          "ho_thieu_an": 10
+        },
+        "notes": [
+          "300 kg gạo gom lậu tuồn vào thị xã làm giá gạo tự do bùng nổ, nhiều hộ nghèo không mua nổi gạo."
+        ]
+      },
+      "GIU_LAI": {
+        "deltas": {
+          "ho_thieu_an": -5
+        },
+        "notes": [
+          "Chặn đứng vụ đầu cơ 300 kg gạo, tịch thu nhập kho quốc doanh."
+        ]
+      }
     },
     "art_note": "Gã buôn gạo ghé sát ô cửa kính, nhét phong bì dày cộp qua khe hẹp."
   },
   {
-    "id": "d5-t5",
+    "id": "d5-t6",
     "day": "d5",
-    "order": 5,
+    "order": 6,
     "character": "np-nong-dan-gao",
-    "tags": ["dong-cam"],
-    "portrait": { "expression": "met-moi" },
+    "tags": [
+      "dong-cam"
+    ],
+    "portrait": {
+      "expression": "met-moi"
+    },
     "dialogue": [
-      { "speaker": "np-nong-dan-gao", "text": "Chào anh cán bộ. Em là Lụa ở Phú Hoà, nhà em làm khoán được 15 cân thóc vượt chỉ tiêu." },
-      { "speaker": "np-nong-dan-gao", "text": "Em gánh 20 cân gạo ra thị xã bán lấy tiền mua vải may quần áo cho các cháu. Giấy khoán với hộ khẩu của em đây ạ." }
+      {
+        "speaker": "np-nong-dan-gao",
+        "text": "Chào anh cán bộ. Em là Lụa ở Phú Hoà, nhà em làm khoán được 15 cân thóc vượt chỉ tiêu."
+      },
+      {
+        "speaker": "np-nong-dan-gao",
+        "text": "Em gánh 20 cân gạo ra thị xã bán lấy tiền mua vải may quần áo cho các cháu. Giấy khoán với hộ khẩu của em đây ạ."
+      }
     ],
     "reactions": {
-      "CHO_QUA": [ { "speaker": "np-nong-dan-gao", "text": "Em đội ơn anh cán bộ nhiều lắm!" } ],
-      "GIU_LAI": [ { "speaker": "np-nong-dan-gao", "text": "Bão giá thế này mà mất gạo thì mẹ con em biết sống sao..." } ]
+      "CHO_QUA": [
+        {
+          "speaker": "np-nong-dan-gao",
+          "text": "Em đội ơn anh cán bộ nhiều lắm!"
+        }
+      ],
+      "GIU_LAI": [
+        {
+          "speaker": "np-nong-dan-gao",
+          "text": "Bão giá thế này mà mất gạo thì mẹ con em biết sống sao..."
+        }
+      ]
     },
     "documents": [
       {
@@ -1326,12 +3254,21 @@
           "noi_den": "Thị xã",
           "ly_do": "Mang gạo khoán đi mua nhu yếu phẩm",
           "hang_mang_theo": [
-            { "ma": "gao", "ten": "Gạo", "so_luong": 20, "don_vi": "kg" }
+            {
+              "ma": "gao",
+              "ten": "Gạo",
+              "so_luong": 20,
+              "don_vi": "kg"
+            }
           ],
           "ngay_cap": "1986-04-12",
           "co_gia_tri_den": "1986-04-18"
         },
-        "seal": { "kind": "UBND_XA", "place": "Phú Hoà", "legible": true }
+        "seal": {
+          "kind": "UBND_XA",
+          "place": "Phú Hoà",
+          "legible": true
+        }
       },
       {
         "type": "SHK",
@@ -1343,7 +3280,11 @@
           "quan_he_chu_ho": "Chủ hộ",
           "dia_chi": "Xã Phú Hoà"
         },
-        "seal": { "kind": "CONG_AN", "place": "Phú Hoà", "legible": true }
+        "seal": {
+          "kind": "CONG_AN",
+          "place": "Phú Hoà",
+          "legible": true
+        }
       },
       {
         "type": "GXNK",
@@ -1357,19 +3298,37 @@
           "vu": "Vụ xuân 1986",
           "ngay": "1986-04-10"
         },
-        "seal": { "kind": "HTX", "place": "Phú Hoà", "legible": true }
+        "seal": {
+          "kind": "HTX",
+          "place": "Phú Hoà",
+          "legible": true
+        }
       }
     ],
     "cargo": [
-      { "ma": "gao", "ten": "Gạo", "so_luong": 20, "don_vi": "kg", "category": "LUONG_THUC" }
+      {
+        "ma": "gao",
+        "ten": "Gạo",
+        "so_luong": 20,
+        "don_vi": "kg",
+        "category": "LUONG_THUC"
+      }
     ],
     "planted": [
-      { "error": "E4", "doc": null, "field": null, "note": "20 kg gạo vượt định mức nếu không có R5K." }
+      {
+        "error": "E4",
+        "doc": null,
+        "field": null,
+        "note": "20 kg gạo vượt định mức nếu không có R5K."
+      }
     ],
     "expected": {
       "verdict": "GIU_LAI",
       "violations": [
-        { "rule": "R2-DINH-MUC", "error": "E4" }
+        {
+          "rule": "R2-DINH-MUC",
+          "error": "E4"
+        }
       ]
     },
     "kn": {
@@ -1379,8 +3338,23 @@
     "bribe": null,
     "flag_key": null,
     "outcomes": {
-      "CHO_QUA": { "deltas": { "luong_thuc_vao_thi_xa": 1, "gia_gao_index": -1 }, "notes": ["Gạo của chị Lụa giúp giảm bớt cơn khát lương thực ở thị xã."] },
-      "GIU_LAI": { "deltas": { "ho_thieu_an": 3 }, "notes": ["Tịch thu 20kg gạo của chị Lụa xã viên làm khoán."] }
+      "CHO_QUA": {
+        "deltas": {
+          "luong_thuc_vao_thi_xa": 1,
+          "gia_gao_index": -1
+        },
+        "notes": [
+          "Gạo của chị Lụa giúp giảm bớt cơn khát lương thực ở thị xã."
+        ]
+      },
+      "GIU_LAI": {
+        "deltas": {
+          "ho_thieu_an": 3
+        },
+        "notes": [
+          "Tịch thu 20 kg gạo của chị Lụa xã viên làm khoán."
+        ]
+      }
     },
     "art_note": "Người mẹ trẻ gầy gò, mắt trũng sâu, gánh đôi thúng gạo nặng nhọc."
   },
@@ -1389,19 +3363,134 @@
     "day": "d6",
     "order": 1,
     "character": "ba-tu",
-    "tags": ["dong-cam"],
-    "portrait": { "expression": "vui" },
+    "tags": [
+      "dong-cam"
+    ],
+    "portrait": {
+      "expression": "vui",
+      "variants": [
+        {
+          "when": [
+            {
+              "flag_count": [
+                "ba-tu.m1",
+                "ba-tu.m2",
+                "ba-tu.m3"
+              ],
+              "in": [
+                "giu",
+                "giu-kn"
+              ],
+              "op": ">=",
+              "value": 2
+            }
+          ],
+          "key": "ba-tu-khong-non",
+          "expression": "buon"
+        }
+      ]
+    },
     "dialogue": [
-      { "speaker": "ba-tu", "text": "Chú Thành ơi! Nghe bảo trên Trung ương ra lệnh xoá bỏ trạm rồi phải không chú?" },
-      { "speaker": "ba-tu", "text": "Nay tôi chở 30 cân gạo ra chợ bán công khai, không cần phải xin giấy đi đường hay giấy khoán gì nữa hả chú?" }
+      {
+        "speaker": "ba-tu",
+        "text": "Chú Thành ơi! Nghe bảo trên Trung ương ra lệnh xoá bỏ trạm rồi phải không chú?",
+        "when": [
+          {
+            "flag_count": [
+              "ba-tu.m1",
+              "ba-tu.m2",
+              "ba-tu.m3"
+            ],
+            "in": [
+              "giu",
+              "giu-kn"
+            ],
+            "op": "<=",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "speaker": "ba-tu",
+        "text": "Nay tôi chở 30 cân gạo ra chợ bán công khai, không cần phải xin giấy đi đường hay giấy khoán gì nữa hả chú?",
+        "when": [
+          {
+            "flag_count": [
+              "ba-tu.m1",
+              "ba-tu.m2",
+              "ba-tu.m3"
+            ],
+            "in": [
+              "giu",
+              "giu-kn"
+            ],
+            "op": "<=",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "speaker": "narrator",
+        "text": "Bà Tư gánh gạo đi qua barie đã mở. Bà dừng lại trước ô cửa, không nhìn vào.",
+        "when": [
+          {
+            "flag_count": [
+              "ba-tu.m1",
+              "ba-tu.m2",
+              "ba-tu.m3"
+            ],
+            "in": [
+              "giu",
+              "giu-kn"
+            ],
+            "op": ">=",
+            "value": 2
+          }
+        ]
+      },
+      {
+        "speaker": "ba-tu",
+        "text": "Giờ thì không cần giấy nữa, phải không chú.",
+        "when": [
+          {
+            "flag_count": [
+              "ba-tu.m1",
+              "ba-tu.m2",
+              "ba-tu.m3"
+            ],
+            "in": [
+              "giu",
+              "giu-kn"
+            ],
+            "op": ">=",
+            "value": 2
+          }
+        ]
+      }
     ],
     "reactions": {
-      "CHO_QUA": [ { "speaker": "ba-tu", "text": "Mừng quá chú ơi! Nông dân chúng tôi chờ ngày này bao năm rồi!" } ],
-      "GIU_LAI": [ { "speaker": "ba-tu", "text": "Ủa... xoá trạm rồi mà chú..." } ]
+      "CHO_QUA": [
+        {
+          "speaker": "ba-tu",
+          "text": "Mừng quá chú ơi! Nông dân chúng tôi chờ ngày này bao năm rồi!"
+        }
+      ],
+      "GIU_LAI": [
+        {
+          "speaker": "ba-tu",
+          "text": "Ủa... xoá trạm rồi mà chú..."
+        }
+      ]
     },
     "documents": [],
     "cargo": [
-      { "ma": "gao", "ten": "Gạo", "so_luong": 30, "don_vi": "kg", "category": "LUONG_THUC" }
+      {
+        "ma": "gao",
+        "ten": "Gạo",
+        "so_luong": 30,
+        "don_vi": "kg",
+        "category": "LUONG_THUC"
+      }
     ],
     "planted": [],
     "expected": {
@@ -1412,8 +3501,24 @@
     "bribe": null,
     "flag_key": "ba-tu.m4",
     "outcomes": {
-      "CHO_QUA": { "deltas": { "luong_thuc_vao_thi_xa": 2, "gia_gao_index": -2, "ho_thieu_an": -2 }, "notes": ["Bà Tư chở gạo bán công khai tại chợ thị xã, hàng hoá lưu thông thuận lợi."] },
-      "GIU_LAI": { "deltas": { "ho_thieu_an": 2 }, "notes": ["Giữ gạo của bà Tư trái quy định xoá bỏ ngăn sông cấm chợ."] }
+      "CHO_QUA": {
+        "deltas": {
+          "luong_thuc_vao_thi_xa": 2,
+          "gia_gao_index": -2,
+          "ho_thieu_an": -2
+        },
+        "notes": [
+          "Bà Tư chở gạo bán công khai tại chợ thị xã, hàng hoá lưu thông thuận lợi."
+        ]
+      },
+      "GIU_LAI": {
+        "deltas": {
+          "ho_thieu_an": 2
+        },
+        "notes": [
+          "Giữ gạo của bà Tư trái quy định xoá bỏ ngăn sông cấm chợ."
+        ]
+      }
     },
     "art_note": "Bà Tư cười rạng rỡ, chiếc nón lá mới tinh, gánh gạo đầy ắp."
   },
@@ -1422,19 +3527,134 @@
     "day": "d6",
     "order": 2,
     "character": "anh-hung",
-    "tags": ["dong-cam"],
-    "portrait": { "expression": "vui" },
+    "tags": [
+      "dong-cam"
+    ],
+    "portrait": {
+      "expression": "vui",
+      "variants": [
+        {
+          "when": [
+            {
+              "flag_count": [
+                "anh-hung.m2",
+                "anh-hung.m2b",
+                "anh-hung.m3"
+              ],
+              "in": [
+                "giu",
+                "giu-kn"
+              ],
+              "op": ">=",
+              "value": 2
+            }
+          ],
+          "key": "anh-hung-gay",
+          "expression": "met-moi"
+        }
+      ]
+    },
     "dialogue": [
-      { "speaker": "anh-hung", "text": "Chào chú em! Trạm sắp tháo barie rồi hả chú em?" },
-      { "speaker": "anh-hung", "text": "Tổ sửa xe của tôi nay tự do lên thị xã mua 10 bộ phụ tùng xích líp về mở rộng xưởng, không còn phải xin xỏ giấy phép phiền hà nữa." }
+      {
+        "speaker": "anh-hung",
+        "text": "Chào chú em! Trạm sắp tháo barie rồi hả chú em?",
+        "when": [
+          {
+            "flag_count": [
+              "anh-hung.m2",
+              "anh-hung.m2b",
+              "anh-hung.m3"
+            ],
+            "in": [
+              "giu",
+              "giu-kn"
+            ],
+            "op": "<=",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "speaker": "anh-hung",
+        "text": "Tổ sửa xe của tôi nay tự do lên thị xã mua 10 bộ phụ tùng xích líp về mở rộng xưởng, không còn phải xin xỏ giấy phép phiền hà nữa.",
+        "when": [
+          {
+            "flag_count": [
+              "anh-hung.m2",
+              "anh-hung.m2b",
+              "anh-hung.m3"
+            ],
+            "in": [
+              "giu",
+              "giu-kn"
+            ],
+            "op": "<=",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "speaker": "narrator",
+        "text": "Anh Hùng đứng xa ô cửa, tay xách mấy bộ xích líp cũ.",
+        "when": [
+          {
+            "flag_count": [
+              "anh-hung.m2",
+              "anh-hung.m2b",
+              "anh-hung.m3"
+            ],
+            "in": [
+              "giu",
+              "giu-kn"
+            ],
+            "op": ">=",
+            "value": 2
+          }
+        ]
+      },
+      {
+        "speaker": "anh-hung",
+        "text": "Tổ sửa xe giải tán từ năm ngoái rồi chú ạ. Tôi đi sửa xe lề đường. Bộ phụ tùng này là của người ta thuê tôi chở.",
+        "when": [
+          {
+            "flag_count": [
+              "anh-hung.m2",
+              "anh-hung.m2b",
+              "anh-hung.m3"
+            ],
+            "in": [
+              "giu",
+              "giu-kn"
+            ],
+            "op": ">=",
+            "value": 2
+          }
+        ]
+      }
     ],
     "reactions": {
-      "CHO_QUA": [ { "speaker": "anh-hung", "text": "Đổi mới thế này thì dân mới có cơ mở mày mở mặt chú em ạ!" } ],
-      "GIU_LAI": [ { "speaker": "anh-hung", "text": "Chú em sao lại giữ phụ tùng của tổ thợ chúng tôi?" } ]
+      "CHO_QUA": [
+        {
+          "speaker": "anh-hung",
+          "text": "Đổi mới thế này thì dân mới có cơ mở mày mở mặt chú em ạ!"
+        }
+      ],
+      "GIU_LAI": [
+        {
+          "speaker": "anh-hung",
+          "text": "Chú em sao lại giữ phụ tùng của tổ thợ chúng tôi?"
+        }
+      ]
     },
     "documents": [],
     "cargo": [
-      { "ma": "phu-tung-xe", "ten": "Phụ tùng xích líp xe đạp", "so_luong": 10, "don_vi": "chiec", "category": "VAT_TU" }
+      {
+        "ma": "phu-tung-xe",
+        "ten": "Phụ tùng xích líp xe đạp",
+        "so_luong": 10,
+        "don_vi": "chiec",
+        "category": "VAT_TU"
+      }
     ],
     "planted": [],
     "expected": {
@@ -1445,8 +3665,22 @@
     "bribe": null,
     "flag_key": "anh-hung.m4",
     "outcomes": {
-      "CHO_QUA": { "deltas": { "luong_thuc_vao_thi_xa": 1 }, "notes": ["Tổ hợp tác sửa chữa xe đạp của thương binh phát triển thuận lợi."] },
-      "GIU_LAI": { "deltas": { "ho_thieu_an": 2 }, "notes": ["Giữ phụ tùng xe đạp trái lệnh xoá trạm."] }
+      "CHO_QUA": {
+        "deltas": {
+          "luong_thuc_vao_thi_xa": 1
+        },
+        "notes": [
+          "Tổ hợp tác sửa chữa xe đạp của thương binh phát triển thuận lợi."
+        ]
+      },
+      "GIU_LAI": {
+        "deltas": {
+          "ho_thieu_an": 2
+        },
+        "notes": [
+          "Giữ phụ tùng xe đạp trái lệnh xoá trạm."
+        ]
+      }
     },
     "art_note": "Anh Hùng mặc áo sơ mi mới, khoẻ khoắn bên chiếc xe đạp chở phụ tùng."
   },
@@ -1455,19 +3689,122 @@
     "day": "d6",
     "order": 3,
     "character": "thang-ti",
-    "tags": ["dong-cam"],
-    "portrait": { "expression": "vui" },
+    "tags": [
+      "dong-cam"
+    ],
+    "portrait": {
+      "expression": "vui",
+      "key": "thang-ti-lon",
+      "variants": [
+        {
+          "when": [
+            {
+              "flag": "thang-ti.m2",
+              "in": [
+                "giu",
+                "giu-kn"
+              ]
+            }
+          ],
+          "key": "thang-ti-lon",
+          "expression": "ne-tranh"
+        }
+      ]
+    },
     "dialogue": [
-      { "speaker": "thang-ti", "text": "Chú Thành ơi! Bố cháu khỏi ốm rồi, hai bố con cháu chở sọt rau bãi 20 cân ra chợ bán đây ạ!" },
-      { "speaker": "thang-ti", "text": "Bố cháu bảo trạm tháo barie rồi nên cháu vào chào chú một câu." }
+      {
+        "speaker": "thang-ti",
+        "text": "Chú Thành! Chú còn nhớ cháu không, thằng Tí con bố Thược rèn đây ạ!",
+        "when": [
+          {
+            "flag": "thang-ti.m2",
+            "in": [
+              "qua",
+              "qua-kn",
+              "lam-ngo",
+              "qua-tien",
+              "lam-ngo-tien"
+            ]
+          }
+        ]
+      },
+      {
+        "speaker": "thang-ti",
+        "text": "Cháu mười tám rồi. Bố cháu vẫn khoẻ, hai bố con giờ buôn chuyến vải lên thị xã. Giấy tờ theo luật mới đủ cả, chú cứ xem.",
+        "when": [
+          {
+            "flag": "thang-ti.m2",
+            "in": [
+              "qua",
+              "qua-kn",
+              "lam-ngo",
+              "qua-tien",
+              "lam-ngo-tien"
+            ]
+          }
+        ]
+      },
+      {
+        "speaker": "narrator",
+        "text": "Một thanh niên gầy, cao lêu nghêu đặt tập giấy lên bậu cửa. Cậu nhìn Thành rất lâu, rồi nhìn đi chỗ khác. Cậu không nói gì cả.",
+        "when": [
+          {
+            "flag": "thang-ti.m2",
+            "in": [
+              "giu",
+              "giu-kn"
+            ]
+          }
+        ]
+      }
     ],
     "reactions": {
-      "CHO_QUA": [ { "speaker": "thang-ti", "text": "Cháu cảm ơn chú Thành suốt mấy năm qua đã thương hai bố con cháu!" } ],
-      "GIU_LAI": [ { "speaker": "thang-ti", "text": "Sao chú lại giữ rau của bố con cháu..." } ]
+      "CHO_QUA": [
+        {
+          "speaker": "thang-ti",
+          "text": "Cháu chào chú. Chú giữ sức khoẻ ạ.",
+          "when": [
+            {
+              "flag": "thang-ti.m2",
+              "in": [
+                "qua",
+                "qua-kn",
+                "lam-ngo",
+                "qua-tien",
+                "lam-ngo-tien"
+              ]
+            }
+          ]
+        }
+      ],
+      "GIU_LAI": [
+        {
+          "speaker": "thang-ti",
+          "text": "Trạm dỡ rồi mà chú vẫn giữ ạ...",
+          "when": [
+            {
+              "flag": "thang-ti.m2",
+              "in": [
+                "qua",
+                "qua-kn",
+                "lam-ngo",
+                "qua-tien",
+                "lam-ngo-tien"
+              ]
+            }
+          ]
+        }
+      ]
     },
     "documents": [],
     "cargo": [
-      { "ma": "rau", "ten": "Rau xanh các loại", "so_luong": 20, "don_vi": "kg", "category": "THUC_PHAM" }
+      {
+        "ma": "vai",
+        "ten": "Vải",
+        "so_luong": 40,
+        "don_vi": "met",
+        "category": "HANG_TIEU_DUNG"
+      }
     ],
     "planted": [],
     "expected": {
@@ -1478,10 +3815,24 @@
     "bribe": null,
     "flag_key": "thang-ti.m4",
     "outcomes": {
-      "CHO_QUA": { "deltas": { "ho_thieu_an": -2 }, "notes": ["Gia đình thằng Tí phấn khởi buôn bán nuôi sống gia đình."] },
-      "GIU_LAI": { "deltas": { "ho_thieu_an": 2 }, "notes": ["Giữ rau củ của thằng Tí."] }
+      "CHO_QUA": {
+        "deltas": {
+          "ho_thieu_an": -2
+        },
+        "notes": [
+          "Chuyến vải của thằng Tí lên chợ thị xã."
+        ]
+      },
+      "GIU_LAI": {
+        "deltas": {
+          "ho_thieu_an": 2
+        },
+        "notes": [
+          "Giữ chuyến vải của thằng Tí dù trạm đã xoá bỏ."
+        ]
+      }
     },
-    "art_note": "Thằng Tí lớn phổng phao, áo lành lặn, nụ cười tươi rói."
+    "art_note": "Thằng Tí năm 1987: mười tám tuổi, áo sơ mi cũ, đeo ba lô, cao hơn cả khung cửa."
   },
   {
     "id": "d6-t4",
@@ -1489,14 +3840,32 @@
     "order": 4,
     "character": "chi-thu",
     "tags": [],
-    "portrait": { "expression": "vui" },
+    "portrait": {
+      "expression": "vui"
+    },
     "dialogue": [
-      { "speaker": "chi-thu", "text": "Chào đồng chí Thành! Tôi thay mặt Ban Nông nghiệp và đoàn thanh tra huyện đến thu hồi sổ chỉ thị cũ của Trạm 15." },
-      { "speaker": "chi-thu", "text": "Huyện uỷ đánh giá rất cao các biên bản kiến nghị phản ánh thực tiễn của trạm trong những năm qua. Nhờ những cơ sở thực tiễn ấy mà chúng ta có thêm niềm tin để kiến nghị lên trên mở cửa thị trường." }
+      {
+        "speaker": "chi-thu",
+        "text": "Chào đồng chí Thành! Tôi thay mặt Ban Nông nghiệp và đoàn thanh tra huyện đến thu hồi sổ chỉ thị cũ của Trạm 15."
+      },
+      {
+        "speaker": "chi-thu",
+        "text": "Huyện uỷ đánh giá rất cao các biên bản kiến nghị phản ánh thực tiễn của trạm trong những năm qua. Nhờ những cơ sở thực tiễn ấy mà chúng ta có thêm niềm tin để kiến nghị lên trên mở cửa thị trường."
+      }
     ],
     "reactions": {
-      "CHO_QUA": [ { "speaker": "chi-thu", "text": "Cảm ơn đồng chí Thành, chúc mừng đồng chí đã hoàn thành xuất sắc nhiệm vụ lịch sử tại trạm." } ],
-      "GIU_LAI": [ { "speaker": "chi-thu", "text": "Đồng chí Thành định giữ đoàn thanh tra lại sao?" } ]
+      "CHO_QUA": [
+        {
+          "speaker": "chi-thu",
+          "text": "Cảm ơn đồng chí Thành, chúc mừng đồng chí đã hoàn thành xuất sắc nhiệm vụ lịch sử tại trạm."
+        }
+      ],
+      "GIU_LAI": [
+        {
+          "speaker": "chi-thu",
+          "text": "Đồng chí Thành định giữ đoàn thanh tra lại sao?"
+        }
+      ]
     },
     "documents": [],
     "cargo": [],
@@ -1509,8 +3878,22 @@
     "bribe": null,
     "flag_key": "chi-thu.m4",
     "outcomes": {
-      "CHO_QUA": { "deltas": { "luong_thuc_vao_thi_xa": 0 }, "notes": ["Thu hồi sổ chỉ thị, trạm 15 hoàn tất sứ mệnh lịch sử."] },
-      "GIU_LAI": { "deltas": { "ho_thieu_an": 0 }, "notes": ["Không thể giữ cán bộ thanh tra."] }
+      "CHO_QUA": {
+        "deltas": {
+          "luong_thuc_vao_thi_xa": 0
+        },
+        "notes": [
+          "Thu hồi sổ chỉ thị, trạm 15 hoàn tất sứ mệnh lịch sử."
+        ]
+      },
+      "GIU_LAI": {
+        "deltas": {
+          "ho_thieu_an": 0
+        },
+        "notes": [
+          "Không thể giữ cán bộ thanh tra."
+        ]
+      }
     },
     "art_note": "Chị Thu tươi cười bắt tay Thành, tay nhận lại cuốn sổ chỉ thị cũ."
   },
@@ -1519,33 +3902,77 @@
     "day": "d6",
     "order": 5,
     "character": "np-buon-thuoc-phien",
-    "tags": ["buon-lau-that"],
-    "portrait": { "expression": "gian" },
+    "tags": [
+      "buon-lau-that"
+    ],
+    "portrait": {
+      "expression": "gian"
+    },
     "dialogue": [
-      { "speaker": "np-buon-thuoc-phien", "text": "Chào ông bạn kiểm soát. Nghe nói xoá trạm rồi, không cần kiểm tra gì nữa đúng không?" },
-      { "speaker": "np-buon-thuoc-phien", "text": "Tôi chỉ có mấy bọc thảo dược thuốc nam mang về xuôi bán thôi, ông bạn để tôi đi nhanh." }
+      {
+        "speaker": "np-buon-thuoc-phien",
+        "text": "Chào ông bạn kiểm soát. Nghe nói xoá trạm rồi, không cần kiểm tra gì nữa đúng không?"
+      },
+      {
+        "speaker": "np-buon-thuoc-phien",
+        "text": "Tôi chỉ có mấy bọc thảo dược thuốc nam mang về xuôi bán thôi, ông bạn để tôi đi nhanh."
+      }
     ],
     "reactions": {
-      "CHO_QUA": [ { "speaker": "np-buon-thuoc-phien", "text": "Hê hê, cảm ơn ông bạn!" } ],
-      "GIU_LAI": [ { "speaker": "np-buon-thuoc-phien", "text": "Mẹ kiếp... tưởng xoá trạm là thả rông hết rồi chứ..." } ]
+      "CHO_QUA": [
+        {
+          "speaker": "np-buon-thuoc-phien",
+          "text": "Hê hê, cảm ơn ông bạn!"
+        }
+      ],
+      "GIU_LAI": [
+        {
+          "speaker": "np-buon-thuoc-phien",
+          "text": "Mẹ kiếp... tưởng xoá trạm là thả rông hết rồi chứ..."
+        }
+      ]
     },
     "documents": [],
     "cargo": [
-      { "ma": "thuoc-phien", "ten": "Thuốc phiện đen", "so_luong": 2, "don_vi": "kg", "category": "HANG_CAM", "an_giau": true }
+      {
+        "ma": "thuoc-phien",
+        "ten": "Thuốc phiện đen",
+        "so_luong": 2,
+        "don_vi": "kg",
+        "category": "HANG_CAM",
+        "an_giau": true
+      }
     ],
     "planted": [],
     "expected": {
       "verdict": "GIU_LAI",
       "violations": [
-        { "rule": "R6-HANG-CAM", "error": null }
+        {
+          "rule": "R6-HANG-CAM",
+          "error": null
+        }
       ]
     },
     "kn": null,
     "bribe": null,
     "flag_key": null,
     "outcomes": {
-      "CHO_QUA": { "deltas": { "ho_thieu_an": 5 }, "notes": ["2kg thuốc phiện lọt vào thị xã đầu độc đời sống nhân dân."] },
-      "GIU_LAI": { "deltas": { "ho_thieu_an": 0 }, "notes": ["Bắt giữ kịp thời 2kg thuốc phiện buôn lậu theo danh mục hàng cấm R6."] }
+      "CHO_QUA": {
+        "deltas": {
+          "ho_thieu_an": 5
+        },
+        "notes": [
+          "2 kg thuốc phiện lọt vào thị xã đầu độc đời sống nhân dân."
+        ]
+      },
+      "GIU_LAI": {
+        "deltas": {
+          "ho_thieu_an": 0
+        },
+        "notes": [
+          "Bắt giữ kịp thời 2 kg thuốc phiện buôn lậu theo danh mục hàng cấm R6."
+        ]
+      }
     },
     "art_note": "Gã đàn ông mặc áo chàm giật thót khi bị yêu cầu mở bọc hàng giấu kín."
   }

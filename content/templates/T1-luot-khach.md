@@ -29,6 +29,8 @@ Khối này được prompt P1 chuyển thành một phần tử của `data/tra
 | Điều kiện theo cờ | `<cờ> = <giá trị>, <giá trị>` | `ba-tu.m2 = giu, giu-kn` |
 | Điều kiện theo kiến nghị | `<vấn đề> đã kích hoạt` hoặc `chưa kích hoạt` | `KN-KHOAN đã kích hoạt` |
 | Nhiều điều kiện | nối bằng ` và ` | `{nếu ba-tu.m2 = giu và KN-KHOAN chưa kích hoạt}` |
+| Đếm cờ (đường đời ba nhánh) | `đếm(<cờ>, <cờ> = <giá trị>, …) <so sánh> <số>` | `{nếu đếm(ba-tu.m1, ba-tu.m2 = giu, giu-kn) >= 2}` |
+| Theo chỉ số huyện | `<chỉ số> <so sánh> <số>` | `{nếu gia_gao_index >= 105}` |
 | Một vi phạm | `<quy định>/<lỗi>` | `R2-DINH-MUC/E4` |
 | Vi phạm R6 | `R6-HANG-CAM/-` | |
 
@@ -112,7 +114,9 @@ Chép nguyên khối dưới đây, rồi điền. Mẫu từng loại giấy n�
 |---|---|
 | Mã lượt | `d<ngày>-t<thứ tự>`. Phải trùng với tiêu đề khối và với danh sách "Thứ tự lượt khách" của ngày |
 | Nhân vật | Mã nhân vật. Nhân vật một lần dùng `np-...` và phải có trong `content/characters.md` |
-| Nhãn | Một hoặc nhiều nhãn, cách nhau bằng dấu phẩy, hoặc `không` |
+| Nhãn | Một hoặc nhiều nhãn, cách nhau bằng dấu phẩy, hoặc `không`. `buon-lau-that` bắt buộc có lỗi cụ thể trong "Lỗi cài cắm". `hop-le-ma-hai` là giấy tờ đủ, đáp án CHO QUA, hậu quả nằm ở chỉ số huyện |
+| Bộ chân dung | Tuỳ chọn. Đổi bộ chân dung riêng cho lượt này, ví dụ `thang-ti-lon` |
+| Chân dung theo nhánh đời | Tuỳ chọn, mục riêng sau "Người đến ô cửa". Mỗi dòng `- {nếu điều kiện} bộ <key>, biểu cảm <biểu cảm>`; dòng đầu tiên có điều kiện đúng được dùng |
 | Biểu cảm | Một biểu cảm, phải nằm trong danh sách biểu cảm của nhân vật ở `characters.md` |
 | Cờ ghi lại | `<mã-nhân-vật>.m<màn>` nếu quyết định ở lượt này cần được nhớ để đổi lời thoại về sau. Nếu không thì `không`. Giá trị cờ do engine tự ghi |
 
@@ -357,7 +361,7 @@ Bà Tư đội nón, gánh hai thúng gạo. Tay cầm tờ giấy khoán gấp 
 |---|---|
 | Nhân vật | `ba-tu`, `anh-hung`, `ong-quynh`, `thang-ti`, `chi-thu`, `tram-truong-doi`, `thanh`, `hoa`, `be-mai`, `be-binh`, `me-thanh`, `np-...` |
 | Người nói đặc biệt | `traveler`, `radio`, `narrator` |
-| Nhãn | `huong-dan`, `buon-lau-that`, `luot-trung-tam`, `dung-trinh-bay`, `dong-cam` |
+| Nhãn | `huong-dan`, `buon-lau-that`, `luot-trung-tam`, `dung-trinh-bay`, `dong-cam`, `hop-le-ma-hai` |
 | Biểu cảm | `binh-thuong`, `vui`, `lo-lang`, `buon`, `gian`, `ne-tranh`, `met-moi` |
 | Loại giấy | `GDD`, `SHK`, `TP`, `HDHTX`, `GPVC`, `DT`, `CNTB`, `GXNK` |
 | Loại dấu | `UBND_XA`, `UBND_HUYEN`, `CONG_AN`, `PHONG_LUONG_THUC`, `HTX`, `CTY_THUONG_NGHIEP`, `BENH_VIEN`, `TRAM_Y_TE`, `TB_XH` |
@@ -367,5 +371,5 @@ Bà Tư đội nón, gánh hai thúng gạo. Tay cầm tờ giấy khoán gấp 
 | Lỗi | `E1` hết hạn, `E2` lệch tên hoặc năm sinh, `E3` dấu không hợp lệ, `E4` vượt định mức, `E5` thiếu giấy, `E6` giấy không khai đủ hàng |
 | Vấn đề kiến nghị | `KN-KHOAN`, `KN-THUONG-BINH` |
 | Giá trị cờ | `qua`, `giu`, `lam-ngo`, `qua-kn`, `giu-kn`, `qua-tien`, `lam-ngo-tien` |
-| Mã thuốc quản lý (R3) | `penicillin`, `tetracyclin`, `quinin`, `streptomycin` |
+| Mã thuốc quản lý (R3) | `penicillin`, `tetracyclin`, `quinin`, `streptomycin`, `reserpin` |
 | Mã hàng cấm (R6) | `thuoc-phien`, `vu-khi`, `chat-no`, `hang-nhap-lau` |
