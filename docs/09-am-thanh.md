@@ -6,6 +6,7 @@ Game đã viết sẵn code phát cho mọi âm dưới đây. Việc của nhó
 
 - Chưa có file thì hiệu ứng dùng âm tổng hợp tạm, còn âm nền và nhạc im lặng. Game vẫn chạy bình thường.
 - **Không cần chỉnh âm lượng.** Khi nạp file, game tự đo độ to rồi đưa mọi file về cùng một mức. Hiệu ứng ở −16 dBFS, âm nền ở −30, nhạc ở −26. Game cũng chặn đỉnh để không vỡ tiếng. File tải từ các nguồn khác nhau, to nhỏ lệch nhau cũng không sao.
+- **Mỗi âm có giới hạn thời lượng** (cột "Phát tối đa"). Game bỏ khoảng lặng ở đầu file, chỉ phát đúng số giây đó kể từ lúc có tiếng, rồi làm nhỏ dần phần đuôi ở chỗ cắt. Âm nền và nhạc dài hơn giới hạn thì được cắt lại và trộn đuôi vào đầu để vẫn lặp liền. Xem mục 6.
 
 ---
 
@@ -32,13 +33,13 @@ Game đã viết sẵn code phát cho mọi âm dưới đây. Việc của nhó
 
 | Tên file | Khi nào phát | Mô tả âm cần tìm | Độ dài | Từ khoá tìm (tiếng Anh) | Người tìm |
 |---|---|---|---|---|---|
-| `sfx_stamp.mp3` | Bấm dấu **CHO QUA** / **GIỮ LẠI**; dấu xếp loại ở báo cáo cuối ngày | Con dấu cao su đập mạnh xuống tờ giấy đặt trên bàn gỗ. Một tiếng "thụp" trầm, chắc, có chút tiếng cạch của cán dấu. Không vang, không có tiếng mực. | 0,2–0,5 s | `rubber stamp`, `stamp paper desk`, `passport stamp` | |
-| `sfx_paper.mp3` | Bấm vào giấy tờ để xem kỹ hoặc đặt lại; mở hộp biên bản | Cầm lên hoặc lật một tờ giấy mỏng, giấy pơ-luya hay giấy đi đường cũ. Tiếng sột soạt ngắn, khô, giòn. | 0,3–0,8 s | `paper rustle`, `paper handle`, `page flip single` | |
+| `sfx_stamp.mp3` | Thả con dấu **CHO QUA** / **GIỮ LẠI** xuống giấy; đối chất trúng chỗ lệch; dấu xếp loại ở báo cáo cuối ngày | Con dấu cao su đập mạnh xuống tờ giấy đặt trên bàn gỗ. Một tiếng "thụp" trầm, chắc, có chút tiếng cạch của cán dấu. Không vang, không có tiếng mực. | 0,2–0,5 s | `rubber stamp`, `stamp paper desk`, `passport stamp` | |
+| `sfx_paper.mp3` | Bấm vào giấy tờ để xem kỹ hoặc đặt lại; mở hộp biên bản; giấy đã đóng dấu trượt khỏi bàn; đối chất nhầm | Cầm lên hoặc lật một tờ giấy mỏng, giấy pơ-luya hay giấy đi đường cũ. Tiếng sột soạt ngắn, khô, giòn. | 0,3–0,8 s | `paper rustle`, `paper handle`, `page flip single` | |
 | `sfx_window.mp3` | Khách mới đến ô cửa | Tấm kính cửa sổ khung gỗ hoặc sắt trượt ngang trên ray, kết thúc bằng tiếng chạm khung nhẹ. Nghe cũ kỹ, hơi rít. | 0,6–1,2 s | `sliding window`, `ticket window open`, `wooden window slide` | |
 | `sfx_bell.mp3` | Ngay sau tiếng cửa, gọi lượt khách | Một tiếng chuông gọi phục vụ trên quầy (loại bấm tay bằng kim loại), ngân ngắn. **Một tiếng thôi**, không "ting ting". | 0,8–1,5 s | `service bell`, `desk bell single`, `counter bell` | |
 | `sfx_coin.mp3` | Bấm **Nhận phong bì** | Vài đồng xu nhôm hoặc kẽm leng keng nhỏ, hoặc tiếng phong bì giấy dày được nhét vào túi áo kèm tiếng xu. Phải kín đáo, không hào nhoáng như tiếng game casino. | 0,4–1 s | `coins pocket`, `envelope money`, `few coins drop` | |
 | `sfx_radio_tune.mp3` | Màn đầu ngày (đài VEF-206) | Dò sóng đài bán dẫn cũ: tiếng rè rè, huýt trượt tần số, rồi bắt được sóng (có thể lẫn vài nốt nhạc hoặc giọng nói **không rõ chữ**). | 1,5–3 s | `radio tuning`, `shortwave tuning`, `old radio static` | |
-| `sfx_pen.mp3` | Đánh dấu một khoản chi tiêu; bấm **Xác nhận gửi biên bản** | Ngòi bút máy hoặc bút chì gạch một nét nhanh trên giấy. | 0,2–0,5 s | `pen scribble`, `pencil tick`, `writing check mark` | |
+| `sfx_pen.mp3` | Đánh dấu một khoản chi tiêu; bấm **Xác nhận gửi biên bản**; khoanh một chỗ bằng bút chì đối chất | Ngòi bút máy hoặc bút chì gạch một nét nhanh trên giấy. | 0,2–0,5 s | `pen scribble`, `pencil tick`, `writing check mark` | |
 | `sfx_typewriter.mp3` | Mở màn báo cáo cuối ngày | Máy chữ cơ gõ một loạt 5–8 phím nhanh, kết thúc bằng tiếng "ting" hết dòng. Có thể thêm tiếng gạt về đầu dòng. | 1–2 s | `typewriter typing bell`, `typewriter carriage return` | |
 | `sfx_click.mp3` | Bấm **LÀM NGƠ** | Tiếng "tách" rất nhỏ và khô: bút bi bấm, hoặc ngón tay gõ lên mặt bàn gỗ. Cố ý nhỏ và vô hồn, vì nhắm mắt cho qua thì không có dấu nào cả. | 0,05–0,2 s | `pen click`, `click soft`, `finger tap wood` | |
 
@@ -69,3 +70,28 @@ Game đã viết sẵn code phát cho mọi âm dưới đây. Việc của nhó
 2. Nếu một âm vẫn to hay nhỏ hơn hẳn các âm khác (thường gặp khi file có đỉnh rất nhọn, hoặc tai người nghe khác với số đo), chỉnh `trimDb` của âm đó trong `SOUNDS` ở `src/audio.ts`. Đơn vị là dB: `+3` to gấp khoảng 1,4 lần, `-6` nhỏ còn một nửa.
 3. Muốn cả nhóm âm nền hoặc nhạc to hay nhỏ hơn thì chỉnh `TARGET_DB` trong cùng file.
 4. Nút loa ở góc phải trên cùng dùng để tắt hoặc bật toàn bộ âm thanh. Trạng thái được nhớ giữa các lần chơi.
+
+---
+
+## 6. Giới hạn thời lượng
+
+Mỗi âm có một con số `maxS` trong `SOUNDS` ở `src/audio.ts`. Khi nạp file, game:
+
+1. Tìm chỗ bắt đầu có tiếng (to hơn −30 dB so với đỉnh của file), lùi lại 10 ms, và bỏ hết phần im lặng trước đó. Nhờ vậy dấu kêu đúng lúc thả, không trễ nửa giây vì file có khoảng lặng ở đầu.
+2. Hiệu ứng chỉ giữ `maxS` giây kể từ đó. Nếu phải cắt thì 30% cuối (tối đa 0,3 s) nhỏ dần về 0 để không nghe tiếng "cụp".
+3. Âm nền và nhạc dài hơn `maxS` thì chỉ giữ `maxS` giây đầu. 2 giây ngay sau chỗ cắt được trộn vào đầu đoạn, nên khi lặp lại nghe như file chạy tiếp.
+4. Độ to được đo trên đúng đoạn sẽ phát, không đo trên cả file.
+
+| Âm | Phát tối đa | | Âm | Phát tối đa |
+|---|---|---|---|---|
+| `stamp` | 0,5 s | | `radio_tune` | 3 s |
+| `paper` | 0,8 s | | `pen` | 0,5 s |
+| `window` | 1,2 s | | `typewriter` | 2 s |
+| `bell` | 1,5 s | | `click` | 0,2 s |
+| `coin` | 1 s | | Âm nền, nhạc | 120 s |
+
+Muốn một âm dài hoặc ngắn hơn thì sửa `maxS` của âm đó.
+
+**File vẫn phải gọn.** Game cắt khi phát nhưng trình duyệt vẫn tải và giải mã trọn file trước đã: một file âm nền 15 phút chiếm hơn 300 MB bộ nhớ khi giải mã. Test `ART-07` (`pnpm test`) báo lỗi nếu một file hiệu ứng dài quá `maxS` + 2 s, hoặc âm nền và nhạc dài quá `maxS` + 10 s. Gặp lỗi đó thì mở file trong Audacity, cắt về đoạn cần dùng, rồi xuất lại.
+
+Ngày 28/9/2026 đã cắt sẵn các file quá dài: `amb_tram_ngay` từ 15 phút xuống 125 s, `mus_menu` từ 199 s xuống 125 s, `sfx_typewriter` từ 79 s xuống 3 s (bỏ 5,4 s im lặng ở đầu), `sfx_pen` từ 22,6 s xuống 1,5 s, `sfx_bell`, `sfx_window`, `sfx_radio_tune` từ 5–6 s xuống 2–4 s. Các file được cắt theo từng khung MP3, không nén lại nên chất lượng giữ nguyên. Tổng dung lượng thư mục giảm từ 36 MB xuống 14 MB.

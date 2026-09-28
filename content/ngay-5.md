@@ -95,6 +95,12 @@
 - [CHO_QUA] Đội ơn chú Thành! Có hạt gạo khoán này gia đình tôi mới sống nổi.
 - [GIU_LAI] Khổ thân già này... đến bao giờ hạt gạo làm ra mới được tự do lưu thông đây...
 
+### Phản ứng khi đối chất
+#### Khi lệch bất kỳ chỗ nào
+- [ba-tu] Tôi không biết chữ, chú ạ. Cán bộ xã viết sao thì tôi cầm vậy.
+#### Khi khoanh nhầm
+- [ba-tu] Tôi không biết chữ, chú ạ. Cán bộ xã viết sao thì tôi cầm vậy.
+
 ### Giấy tờ
 #### GDD
 - Họ và tên: Trần Thị Lành
@@ -177,6 +183,10 @@
 ### Phản ứng
 - [CHO_QUA] Cảm ơn đồng chí Thành. Cán bộ như cậu huyện nên cất nhắc sớm.
 - [GIU_LAI] Cậu làm thế này là làm tắc nghẽn lưu thông của ngành thương nghiệp tỉnh đấy!
+
+### Phản ứng khi đối chất
+#### Khi khoanh nhầm
+- [ong-quynh] Công ty ký, tỉnh duyệt. Cậu định so với cái gì nữa?
 
 ### Giấy tờ
 #### GDD
@@ -266,6 +276,10 @@
 - [CHO_QUA] Cảm ơn chú Thành nhiều lắm.
 - [GIU_LAI] Cơm áo gạo tiền đè nặng quá rồi chú ơi...
 
+### Phản ứng khi đối chất
+#### Khi khoanh nhầm
+- [anh-hung] Giấy tôi khớp cả. Cái tổ chúng tôi thiếu là tư cách hợp tác xã, không phải chữ trên giấy.
+
 ### Giấy tờ
 #### GDD
 - Họ và tên: Lê Văn Hùng
@@ -346,6 +360,10 @@
 - [CHO_QUA] Tối nay tôi mang sang tận nhà cho bà cụ.
 - [GIU_LAI] Ừ thì... phép vua. Chú liệu mà lo thuốc cho bà cụ.
 
+### Phản ứng khi đối chất
+#### Khi khoanh nhầm
+- [np-hang-xom] Chú soi gì mà kỹ thế, tôi với chú hàng xóm bao năm nay.
+
 ### Giấy tờ
 #### GDD
 - Họ và tên: Đỗ Thị Nga
@@ -421,6 +439,13 @@
 ### Phản ứng
 - [CHO_QUA] Cảm ơn anh Thành! Anh em mình hiểu nhau thế là tốt.
 - [GIU_LAI] Anh không nghĩ đến mạng sống của con anh à...
+
+### Phản ứng khi đối chất
+#### Khi lệch tên
+- [narrator] Gã im lặng một lúc lâu, mắt nhìn tờ giấy đi đường.
+- [np-buon-chuyen-nghiep] Anh Thành... anh em mình với nhau. Anh coi như không thấy, em biết điều mà.
+#### Khi khoanh nhầm
+- [np-buon-chuyen-nghiep] Anh xem kỹ vậy làm gì, giấy tờ em sạch sẽ cả.
 
 ### Giấy tờ
 #### GDD

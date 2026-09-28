@@ -200,6 +200,10 @@
 - [CHO_QUA] Tốt lắm, cảm ơn đồng chí.
 - [GIU_LAI] Cậu làm việc máy móc quá đấy đồng chí Thành.
 
+### Phản ứng khi đối chất
+#### Khi khoanh nhầm
+- [ong-quynh] Cậu soi kỹ thế. Giấy của tôi thì không có chỗ nào sai đâu.
+
 ### Giấy tờ
 #### GDD
 - Họ và tên: Vũ Đình Quỳnh
@@ -261,6 +265,10 @@
 ### Phản ứng
 - [CHO_QUA] Hì hì, cảm ơn thầy nhé!
 - [GIU_LAI] Ối trời ơi giữ hết thế này thì tôi phá sản à!
+
+### Phản ứng khi đối chất
+#### Khi khoanh nhầm
+- [np-dau-co-gao] Thầy xem đi, tôi khai đủ cả bốn mươi cân, có giấu đâu!
 
 ### Giấy tờ
 #### GDD

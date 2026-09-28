@@ -84,6 +84,12 @@
 - [CHO_QUA] Cháu cảm ơn chú! Cháu chạy về cho bố uống ngay!
 - [GIU_LAI] ...Thế cháu mang 10 viên có đơn về cũng được ạ? Không ạ? Cả hai mươi viên luôn ạ...
 
+### Phản ứng khi đối chất
+#### Khi lệch hàng
+- [thang-ti] Cháu biết đơn ghi mười viên... Nhưng bác sĩ dặn phải uống đủ đợt. Mười viên kia là tiền bán con lợn đấy chú.
+#### Khi khoanh nhầm
+- [thang-ti] Chỗ ấy đúng mà chú... đơn thuốc thật đấy chú.
+
 ### Giấy tờ
 #### GDD
 - Họ và tên: Nguyễn Văn Tí
@@ -154,6 +160,10 @@
 ### Phản ứng
 - [CHO_QUA] Cảm ơn chú em đã thấu hiểu cho lính phục viên.
 - [GIU_LAI] Tôi để lại một cánh tay ở chiến trường, về quê mang mấy cân gạo giúp bạn mà cũng bị coi là buôn lậu sao?
+
+### Phản ứng khi đối chất
+#### Khi khoanh nhầm
+- [anh-hung] Giấy tôi khớp cả. Cái thiếu là một điều trong sổ cho người như tôi.
 
 ### Giấy tờ
 #### GDD
@@ -227,6 +237,12 @@
 ### Phản ứng
 - [CHO_QUA] Tôi cảm ơn chú.
 - [GIU_LAI] Giấy hợp tác xã cấp đàng hoàng mà chú...
+
+### Phản ứng khi đối chất
+#### Khi lệch bất kỳ chỗ nào
+- [ba-tu] Tôi không biết chữ, chú ạ. Cán bộ xã viết sao thì tôi cầm vậy.
+#### Khi khoanh nhầm
+- [ba-tu] Tôi không biết chữ, chú ạ. Hợp tác xã ghi mười ba cân thì tôi mang đúng phần ấy.
 
 ### Giấy tờ
 #### GDD

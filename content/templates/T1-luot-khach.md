@@ -61,6 +61,9 @@ Chép nguyên khối dưới đây, rồi điền. Mẫu từng loại giấy n�
 #### Khi LÀM NGƠ
 - không
 
+### Phản ứng khi đối chất
+- không
+
 ### Giấy tờ
 - không
 
@@ -127,6 +130,31 @@ Chép nguyên khối dưới đây, rồi điền. Mẫu từng loại giấy n�
 ### Phản ứng
 
 Câu người khách nói sau khi người chơi quyết định. Mục nào không cần thì để `- không`. Nếu cả ba đều `không` thì lượt này không có phản ứng.
+
+### Phản ứng khi đối chất
+
+Câu người khách nói khi người chơi khoanh hai chỗ trên bàn rồi bấm "Đối chiếu" (V8, `03-rules-spec.md` mục 5.5). Đối chất không đổi đáp án; nó chỉ bắt người chơi nhìn vào mặt người mình vừa bắt lỗi. Mỗi tình huống là một tiểu mục `#### Khi …`, chỉ viết tiểu mục cần dùng:
+
+| Tiểu mục | Hiện khi | Gợi ý |
+|---|---|---|
+| `#### Khi lệch tên` | Khoanh hai chỗ ghi tên chủ giấy, và chúng khác nhau | Lượt cài E2 lệch tên |
+| `#### Khi lệch năm sinh` | Khoanh hai năm sinh khác nhau | Lượt cài E2 lệch năm |
+| `#### Khi lệch hàng` | Khoanh một dòng hàng thực mang theo với dòng khai trên giấy, và chúng khác nhau (hoặc giấy không khai) | Lượt cài E6, E4 |
+| `#### Khi lệch chỗ khác` | Hai trường cùng loại khác (nơi đi, ngày…) khác nhau | Hiếm dùng |
+| `#### Khi lệch bất kỳ chỗ nào` | Mọi chỗ lệch thật chưa có tiểu mục riêng ở trên | Câu chung của nhân vật, ví dụ bà Tư không biết chữ |
+| `#### Khi khoanh nhầm` | Hai chỗ khoanh thực ra khớp nhau. Người chơi mất 15 phút ca | Nhân vật phản ứng khi bị nghi oan |
+
+Không có tiểu mục phù hợp thì game hiện một câu chung trong `strings.json`. Không cần viết cho cả 27 lượt: ưu tiên các lượt có nhân vật chính lặp lại và các lượt cài E2. Lượt không cần thì để `- không`.
+
+Ví dụ:
+
+```markdown
+### Phản ứng khi đối chất
+#### Khi lệch năm sinh
+- [anh-hung] Năm 76 tôi đã lên huyện xin sửa. Người ta bảo hồ sơ thời chiến phải chờ tỉnh xác minh. Chờ đến giờ, chú em ạ.
+#### Khi khoanh nhầm
+- [anh-hung] Chú em soi kỹ thật. Chỗ đấy thì khớp, tôi xin đảm bảo.
+```
 
 ### Giấy tờ
 
@@ -372,4 +400,5 @@ Bà Tư đội nón, gánh hai thúng gạo. Tay cầm tờ giấy khoán gấp 
 | Vấn đề kiến nghị | `KN-KHOAN`, `KN-THUONG-BINH` |
 | Giá trị cờ | `qua`, `giu`, `lam-ngo`, `qua-kn`, `giu-kn`, `qua-tien`, `lam-ngo-tien` |
 | Mã thuốc quản lý (R3) | `penicillin`, `tetracyclin`, `quinin`, `streptomycin`, `reserpin` |
+| Tiểu mục đối chất | `Khi lệch tên`, `Khi lệch năm sinh`, `Khi lệch hàng`, `Khi lệch chỗ khác`, `Khi lệch bất kỳ chỗ nào`, `Khi khoanh nhầm` |
 | Mã hàng cấm (R6) | `thuoc-phien`, `vu-khi`, `chat-no`, `hang-nhap-lau` |

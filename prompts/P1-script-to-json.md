@@ -125,6 +125,7 @@ Mỗi khối `## LƯỢT dN-tM` được chuyển thành một phần tử của
 | → Cờ ghi lại | `flag_key` | `không` → `null` |
 | `### Lời thoại` | `dialogue` | |
 | `### Phản ứng` → `#### Khi CHO QUA` / `GIỮ LẠI` / `LÀM NGƠ` | `reactions.CHO_QUA` / `GIU_LAI` / `LAM_NGO` | tiểu mục `- không` → bỏ khoá đó; cả ba `không` → bỏ `reactions` |
+| `### Phản ứng khi đối chất` → mỗi `#### Khi …` | một phần tử `confront`: `{ on, lines }` | `Khi lệch tên` → `"name"`, `Khi lệch năm sinh` → `"year"`, `Khi lệch hàng` → `"item"`, `Khi lệch chỗ khác` → `"other"`, `Khi lệch bất kỳ chỗ nào` → `"any"`, `Khi khoanh nhầm` → `"khop"`; các câu → `lines` như lời thoại; giữ thứ tự tiểu mục; cả mục `- không` → bỏ `confront` |
 | `### Giấy tờ` → mỗi `#### Giấy <MÃ>` | một phần tử `documents` | `"type"` = MÃ; các dòng → `fields` theo bảng trường giấy; `Dấu` → `seal`; `Giấy bị hỏng: có` → `"damaged": true`; `- không` → `[]` |
 | `### Hàng mang theo` (bảng) | `cargo` | mỗi dòng → `{ ma, ten, so_luong, don_vi, category }`; cột Giấu `có` → thêm `"an_giau": true`, `không` → bỏ; bảng trống → `[]` |
 | `### Lỗi cài cắm` (bảng) | `planted` | mỗi dòng → `{ error, doc, field, note }`; cột Trường là **tên trường tiếng Việt**, đổi sang khoá JSON theo bảng trường giấy, `Dấu` → `"seal"`; bảng trống → `[]` |

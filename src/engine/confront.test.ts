@@ -43,6 +43,8 @@ describe("confront — đối chất (V8)", () => {
     const r = confront(t("d4-t2"), content.documents, doc("d4-t2", "CNTB", "nam_sinh"), doc("d4-t2", "SHK", "ho_ten"));
     expect(r.comparable).toBe(false);
     expect(r.found).toBe(false);
+    // Không lấy câu "khoanh nhầm" của nhân vật: giao diện hiện câu chung giải thích cách khoanh.
+    expect(confrontLines(t("d4-t2"), r, cs)).toEqual([]);
   });
 
   it("CFR-07 mọi chỗ khoanh có mã duy nhất", () => {

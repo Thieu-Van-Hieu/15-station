@@ -167,6 +167,12 @@
 - [CHO_QUA] Cảm ơn chú Thành luôn có tấm lòng với anh em thương binh.
 - [GIU_LAI] Giấy nhà nước cấp mà vênh nhau thì tôi biết tin tờ nào hả chú...
 
+### Phản ứng khi đối chất
+#### Khi lệch năm sinh
+- [anh-hung] Năm 76 tôi đã lên huyện xin sửa. Người ta bảo hồ sơ thời chiến phải chờ tỉnh xác minh. Chờ đến giờ, chú em ạ.
+#### Khi khoanh nhầm
+- [anh-hung] Chú em soi kỹ thật. Chỗ đấy thì khớp, tôi xin đảm bảo.
+
 ### Giấy tờ
 #### GDD
 - Họ và tên: Lê Văn Hùng
@@ -250,6 +256,10 @@
 - [CHO_QUA] Cháu cảm ơn chú Thành nhiều lắm ạ!
 - [GIU_LAI] Giấy khoán của bố cháu cũng không được tính hả chú...
 
+### Phản ứng khi đối chất
+#### Khi khoanh nhầm
+- [thang-ti] Cháu không đọc hết được đâu chú... bố cháu dặn cứ đưa chú là được.
+
 ### Giấy tờ
 #### GDD
 - Họ và tên: Nguyễn Văn Tí
@@ -331,6 +341,10 @@
 ### Phản ứng
 - [CHO_QUA] Cảm ơn đồng chí Thành, tác phong rất chuyên nghiệp.
 - [GIU_LAI] Đồng chí làm khó cán bộ tỉnh thế này là không ổn đâu nhé.
+
+### Phản ứng khi đối chất
+#### Khi khoanh nhầm
+- [ong-quynh] Hộ khẩu, công lệnh, dấu đỏ. Cậu còn định tìm gì nữa?
 
 ### Giấy tờ
 #### GDD

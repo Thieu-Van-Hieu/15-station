@@ -12,6 +12,7 @@ Tài liệu này chứa nội dung kịch bản của 5 kết cục trong game "
 - Mã: END-AN-TIEN
 - Tên: Người ăn tiền
 - Thứ tự xét: 1
+- Dòng trên thẻ: Tám năm giữ cửa, và một chiếc phong bì dày hơn cuốn sổ chỉ thị.
 
 ### Điều kiện
 - bribes_accepted >= 2
@@ -22,6 +23,14 @@ Tài liệu này chứa nội dung kịch bản của 5 kết cục trong game "
 - Điều kiện: không
 - Nội dung: Năm 1987, cơ quan thanh tra vào cuộc làm rõ đường dây đầu cơ gạo và hàng buôn lậu qua các trạm cửa ngõ thị xã. Bạn bị khởi tố vì hành vi nhận hối lộ để hàng lậu lọt trạm. Số tiền {{bribe_total}} đồng nhận được không bù đắp nổi bản án kỷ luật và sự coi thường của đồng nghiệp.
 #### Cảnh 2
+- Ảnh: không
+- Điều kiện: doi_chat_bo_qua > 0
+- Nội dung: Bạn chỉ ra chỗ lệch trên giấy tờ ở {{doi_chat_luot}} lượt. Bạn hành động theo điều mình thấy ở {{doi_chat_hanh_dong}} lượt.
+#### Cảnh 3
+- Ảnh: không
+- Điều kiện: doi_chat_bo_qua == 0 và doi_chat_hanh_dong > 0
+- Nội dung: Bạn chỉ ra chỗ lệch trên giấy tờ ở {{doi_chat_luot}} lượt, và lượt nào bạn cũng hành động theo điều mình thấy.
+#### Cảnh 4
 - Ảnh: hop-thiec
 - Điều kiện: không
 - Nội dung: Cuối năm 1987, trong chiếc hộp thiếc để dưới gầm giường, còn {{tien_con_lai}} đồng.
@@ -46,6 +55,7 @@ Tài liệu này chứa nội dung kịch bản của 5 kết cục trong game "
 - Mã: END-LAM-NGO
 - Tên: Người làm ngơ
 - Thứ tự xét: 2
+- Dòng trên thẻ: Nhắm mắt cho người qua, nên sổ sách không bao giờ kể lại chuyện gì.
 
 ### Điều kiện
 - lam_ngo_violations >= 4
@@ -60,6 +70,14 @@ Tài liệu này chứa nội dung kịch bản của 5 kết cục trong game "
 - Điều kiện: không
 - Nội dung: Khi Đổi mới đến vào năm 1987, các mặt hàng ấy được lưu thông tự do. Nhưng lòng tốt giấu giếm của bạn không bao giờ trở thành bài học chung cho sự hoàn thiện thể chế.
 #### Cảnh 3
+- Ảnh: không
+- Điều kiện: doi_chat_bo_qua > 0
+- Nội dung: Bạn chỉ ra chỗ lệch trên giấy tờ ở {{doi_chat_luot}} lượt. Bạn hành động theo điều mình thấy ở {{doi_chat_hanh_dong}} lượt.
+#### Cảnh 4
+- Ảnh: không
+- Điều kiện: doi_chat_bo_qua == 0 và doi_chat_hanh_dong > 0
+- Nội dung: Bạn chỉ ra chỗ lệch trên giấy tờ ở {{doi_chat_luot}} lượt, và lượt nào bạn cũng hành động theo điều mình thấy.
+#### Cảnh 5
 - Ảnh: hop-thiec
 - Điều kiện: không
 - Nội dung: Cuối năm 1987, trong chiếc hộp thiếc để dưới gầm giường, còn {{tien_con_lai}} đồng.
@@ -83,6 +101,7 @@ Tài liệu này chứa nội dung kịch bản của 5 kết cục trong game "
 - Mã: END-KIEN-NGHI
 - Tên: Người kiến nghị
 - Thứ tự xét: 3
+- Dòng trên thẻ: Đóng dấu theo sổ, rồi viết biên bản xin sửa chính cuốn sổ ấy.
 
 ### Điều kiện
 - valid_reports >= 4
@@ -100,6 +119,14 @@ Tài liệu này chứa nội dung kịch bản của 5 kết cục trong game "
 - Điều kiện: không
 - Nội dung: Năm 1987, khi trạm 15 giải thể mở ra thời kỳ lưu thông hàng hoá tự do, bản tổng kết của huyện đã trích dẫn {{valid_reports}} biên bản kiến nghị của trạm như những cứ liệu thực tiễn quý giá từ cơ sở.
 #### Cảnh 3
+- Ảnh: không
+- Điều kiện: doi_chat_bo_qua > 0
+- Nội dung: Bạn chỉ ra chỗ lệch trên giấy tờ ở {{doi_chat_luot}} lượt. Bạn hành động theo điều mình thấy ở {{doi_chat_hanh_dong}} lượt.
+#### Cảnh 4
+- Ảnh: không
+- Điều kiện: doi_chat_bo_qua == 0 và doi_chat_hanh_dong > 0
+- Nội dung: Bạn chỉ ra chỗ lệch trên giấy tờ ở {{doi_chat_luot}} lượt, và lượt nào bạn cũng hành động theo điều mình thấy.
+#### Cảnh 5
 - Ảnh: hop-thiec
 - Điều kiện: không
 - Nội dung: Cuối năm 1987, trong chiếc hộp thiếc để dưới gầm giường, còn {{tien_con_lai}} đồng.
@@ -124,6 +151,7 @@ Tài liệu này chứa nội dung kịch bản của 5 kết cục trong game "
 - Mã: END-GAC-CONG
 - Tên: Người gác cổng mẫu mực
 - Thứ tự xét: 4
+- Dòng trên thẻ: Không sai một ly theo sổ. Không một dòng nào gửi lên về những gì đã thấy.
 
 ### Điều kiện
 - true_compliance >= 0.85
@@ -141,6 +169,14 @@ Tài liệu này chứa nội dung kịch bản của 5 kết cục trong game "
 - Điều kiện: không
 - Nội dung: Nhưng trong suốt những năm tháng ấy, bạn không gửi đi một biên bản kiến nghị nào. Bạn đã chứng kiến gánh nặng của người nông dân mang sản phẩm khoán hay vết thương của người thương binh, nhưng đã chọn im lặng để bảo đảm an toàn cho cuốn sổ thi đua.
 #### Cảnh 3
+- Ảnh: không
+- Điều kiện: doi_chat_bo_qua > 0
+- Nội dung: Bạn chỉ ra chỗ lệch trên giấy tờ ở {{doi_chat_luot}} lượt. Bạn hành động theo điều mình thấy ở {{doi_chat_hanh_dong}} lượt.
+#### Cảnh 4
+- Ảnh: không
+- Điều kiện: doi_chat_bo_qua == 0 và doi_chat_hanh_dong > 0
+- Nội dung: Bạn chỉ ra chỗ lệch trên giấy tờ ở {{doi_chat_luot}} lượt, và lượt nào bạn cũng hành động theo điều mình thấy.
+#### Cảnh 5
 - Ảnh: hop-thiec
 - Điều kiện: không
 - Nội dung: Cuối năm 1987, trong chiếc hộp thiếc để dưới gầm giường, còn {{tien_con_lai}} đồng.
@@ -165,6 +201,7 @@ Tài liệu này chứa nội dung kịch bản của 5 kết cục trong game "
 - Mã: END-SONG-SOT
 - Tên: Người sống sót
 - Thứ tự xét: 5
+- Dòng trên thẻ: Đi qua bao cấp như hàng triệu người khác: lúc theo sổ, lúc theo lòng.
 
 ### Điều kiện
 - không
@@ -183,6 +220,14 @@ Tài liệu này chứa nội dung kịch bản của 5 kết cục trong game "
 - Điều kiện: hardship > 5
 - Nội dung: Còn một điều bạn không ghi vào báo cáo nào: những đêm tờ kê chi tiêu bị gạch bỏ từng dòng. Đến khi Hoà đưa hai đứa nhỏ về quê ngoại, căn nhà tập thể chỉ còn tiếng đài và một người đàn ông mặc đồng phục cỏ úa.
 #### Cảnh 4
+- Ảnh: không
+- Điều kiện: doi_chat_bo_qua > 0
+- Nội dung: Bạn chỉ ra chỗ lệch trên giấy tờ ở {{doi_chat_luot}} lượt. Bạn hành động theo điều mình thấy ở {{doi_chat_hanh_dong}} lượt.
+#### Cảnh 5
+- Ảnh: không
+- Điều kiện: doi_chat_bo_qua == 0 và doi_chat_hanh_dong > 0
+- Nội dung: Bạn chỉ ra chỗ lệch trên giấy tờ ở {{doi_chat_luot}} lượt, và lượt nào bạn cũng hành động theo điều mình thấy.
+#### Cảnh 6
 - Ảnh: hop-thiec
 - Điều kiện: không
 - Nội dung: Cuối năm 1987, trong chiếc hộp thiếc để dưới gầm giường, còn {{tien_con_lai}} đồng.

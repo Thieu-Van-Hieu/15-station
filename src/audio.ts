@@ -6,6 +6,10 @@
  * đạt mức mục tiêu của nhóm (hiệu ứng, âm nền, nhạc), có chặn đỉnh để không bị vỡ tiếng.
  * Nhờ vậy nhóm có thể thả file từ nhiều nguồn khác nhau vào mà không phải tự chỉnh âm lượng.
  *
+ * Mỗi âm có giới hạn thời lượng (`maxS`). Khi nạp, game bỏ khoảng lặng ở đầu file, chỉ giữ đúng `maxS` giây
+ * kể từ lúc có tiếng và làm nhỏ dần phần đuôi ở chỗ cắt. File tải về dài 20 giây thì tiếng bút vẫn chỉ kêu nửa giây.
+ * Âm nền và nhạc dài hơn `maxS` thì cắt lại và trộn đuôi vào đầu để vẫn lặp liền.
+ *
  * File nào chưa có thì hiệu ứng dùng âm tổng hợp bằng Web Audio thay thế, âm nền và nhạc thì im lặng.
  * Chỉ phát sau tương tác đầu tiên của người chơi để tuân thủ autoplay policy của trình duyệt.
  */
@@ -19,23 +23,25 @@ interface SoundDef {
   category: Category;
   /** Chỉnh thêm sau chuẩn hoá, tính bằng dB. Dùng khi một âm cần nổi hoặc chìm hơn các âm cùng nhóm. */
   trimDb?: number;
+  /** Thời lượng tối đa được phát, tính bằng giây, đếm từ lúc có tiếng. Khớp cột "Độ dài" ở docs/09-am-thanh.md. */
+  maxS: number;
 }
 
 /** Danh mục âm. Tên file = khoá, ví dụ `stamp` → public/audio/sfx_stamp.mp3. */
 export const SOUNDS: Record<SfxName | LoopName, SoundDef> = {
-  stamp: { category: "sfx", trimDb: 2 },
-  paper: { category: "sfx", trimDb: -3 },
-  window: { category: "sfx" },
-  bell: { category: "sfx", trimDb: -2 },
-  coin: { category: "sfx", trimDb: -1 },
-  radio_tune: { category: "sfx", trimDb: -4 },
-  pen: { category: "sfx", trimDb: -3 },
-  typewriter: { category: "sfx", trimDb: -2 },
-  click: { category: "sfx", trimDb: -4 },
-  amb_tram_ngay: { category: "amb" },
-  amb_dem_nha: { category: "amb" },
-  mus_menu: { category: "mus" },
-  mus_ket: { category: "mus" },
+  stamp: { category: "sfx", trimDb: 2, maxS: 0.5 },
+  paper: { category: "sfx", trimDb: -3, maxS: 0.8 },
+  window: { category: "sfx", maxS: 1.2 },
+  bell: { category: "sfx", trimDb: -2, maxS: 1.5 },
+  coin: { category: "sfx", trimDb: -1, maxS: 1 },
+  radio_tune: { category: "sfx", trimDb: -4, maxS: 3 },
+  pen: { category: "sfx", trimDb: -3, maxS: 0.5 },
+  typewriter: { category: "sfx", trimDb: -2, maxS: 2 },
+  click: { category: "sfx", trimDb: -4, maxS: 0.2 },
+  amb_tram_ngay: { category: "amb", maxS: 120 },
+  amb_dem_nha: { category: "amb", maxS: 120 },
+  mus_menu: { category: "mus", maxS: 120 },
+  mus_ket: { category: "mus", maxS: 120 },
 };
 
 export function fileBase(name: SfxName | LoopName): string {
@@ -48,6 +54,11 @@ const TARGET_DB: Record<Category, number> = { sfx: -16, amb: -30, mus: -26 };
 const PEAK_CEIL = 0.89;
 const MAX_GAIN = 8;
 const FADE_S = 1.2;
+/** Ngưỡng coi là bắt đầu có tiếng: −30 dB so với đỉnh của file. Lùi lại 10 ms để không mất phần đánh của âm. */
+const ONSET_DB = -30;
+const PREROLL_S = 0.01;
+/** Đoạn trộn đuôi vào đầu khi cắt âm nền hoặc nhạc dài hơn `maxS`. */
+const LOOP_XFADE_S = 2;
 
 const MUTE_KEY = "tram15_mute";
 
@@ -200,14 +211,70 @@ async function fetchFirst(ac: AudioContext, base: string): Promise<AudioBuffer |
   return null;
 }
 
+/** Mẫu đầu tiên có tiếng, tức vượt ngưỡng `ONSET_DB` so với đỉnh, đã lùi `PREROLL_S`. File im lặng hoàn toàn trả 0. */
+export function findOnset(channels: Float32Array[], sampleRate: number): number {
+  const len = channels[0]?.length ?? 0;
+  let peak = 0;
+  for (const ch of channels) for (let i = 0; i < len; i++) peak = Math.max(peak, Math.abs(ch[i]));
+  if (peak === 0) return 0;
+  const threshold = peak * Math.pow(10, ONSET_DB / 20);
+  for (let i = 0; i < len; i++) {
+    for (const ch of channels) {
+      if (Math.abs(ch[i]) >= threshold) return Math.max(0, i - Math.floor(sampleRate * PREROLL_S));
+    }
+  }
+  return 0;
+}
+
+/**
+ * Cắt hiệu ứng về đúng đoạn được phát: bỏ khoảng lặng đầu, giữ tối đa `maxS` giây.
+ * Có cắt đuôi thì làm nhỏ dần 30% cuối (tối đa 0,3 s) để không nghe tiếng "cụp".
+ */
+export function clipSfx(channels: Float32Array[], sampleRate: number, maxS: number): Float32Array[] {
+  const len = channels[0]?.length ?? 0;
+  const start = findOnset(channels, sampleRate);
+  const end = Math.min(len, start + Math.floor(maxS * sampleRate));
+  const fadeIn = start > 0 ? Math.min(end - start, Math.floor(sampleRate * 0.003)) : 0;
+  const fadeOut = end < len ? Math.min(end - start, Math.floor(sampleRate * Math.min(0.3, maxS * 0.3))) : 0;
+  return channels.map((ch) => {
+    const out = ch.slice(start, end);
+    for (let i = 0; i < fadeIn; i++) out[i] *= i / fadeIn;
+    for (let i = 0; i < fadeOut; i++) out[out.length - 1 - i] *= i / fadeOut;
+    return out;
+  });
+}
+
+/**
+ * Cắt âm nền hoặc nhạc về `maxS` giây mà vẫn lặp liền: đoạn `LOOP_XFADE_S` ngay sau điểm cắt được trộn
+ * (công suất không đổi) vào đầu đoạn, nên nối cuối vào đầu nghe như file chạy tiếp. File ngắn hơn thì giữ nguyên.
+ */
+export function clipLoop(channels: Float32Array[], sampleRate: number, maxS: number): Float32Array[] {
+  const len = channels[0]?.length ?? 0;
+  const keep = Math.floor(maxS * sampleRate);
+  if (len <= keep) return channels;
+  const xfade = Math.min(Math.floor(LOOP_XFADE_S * sampleRate), len - keep, keep);
+  return channels.map((ch) => {
+    const out = ch.slice(0, keep);
+    for (let i = 0; i < xfade; i++) {
+      const t = (i + 0.5) / xfade;
+      out[i] = ch[i] * Math.sin((t * Math.PI) / 2) + ch[keep + i] * Math.cos((t * Math.PI) / 2);
+    }
+    return out;
+  });
+}
+
 function load(ac: AudioContext, name: SfxName | LoopName): Promise<Loaded | null> {
   let p = cache.get(name);
   if (!p) {
-    p = fetchFirst(ac, fileBase(name)).then((buffer) => {
-      if (!buffer) return null;
-      const chans = Array.from({ length: buffer.numberOfChannels }, (_, i) => buffer.getChannelData(i));
-      const { rmsDb, peak } = measure(chans, buffer.sampleRate);
+    p = fetchFirst(ac, fileBase(name)).then((decoded) => {
+      if (!decoded) return null;
       const def = SOUNDS[name];
+      const raw = Array.from({ length: decoded.numberOfChannels }, (_, i) => decoded.getChannelData(i));
+      const chans = def.category === "sfx" ? clipSfx(raw, decoded.sampleRate, def.maxS) : clipLoop(raw, decoded.sampleRate, def.maxS);
+      // Chép sang bộ đệm mới đúng độ dài đã cắt, để bộ đệm giải mã đầy đủ (có thể hàng trăm MB) được giải phóng.
+      const buffer = ac.createBuffer(chans.length, Math.max(1, chans[0].length), decoded.sampleRate);
+      chans.forEach((c, i) => buffer.getChannelData(i).set(c));
+      const { rmsDb, peak } = measure(chans, buffer.sampleRate);
       return { buffer, gain: normalizeGain(rmsDb, peak, def.category, def.trimDb) };
     });
     cache.set(name, p);

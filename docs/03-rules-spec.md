@@ -233,7 +233,7 @@ Nhiều điều kiện trong một mảng `when` được nối bằng VÀ.
 | `dong-cam` | Lượt nhằm tạo đồng cảm |
 | `hop-le-ma-hai` | Giấy tờ đủ, đáp án `CHO_QUA`, hậu quả nằm ở bảng chỉ số bên phải. Vai của ông Quỳnh. Khác `buon-lau-that`, vốn bắt buộc có lỗi cụ thể |
 
-**Biến trong chữ**, dùng trong `strings.json` và cảnh kết: `{{bribe_total}}`, `{{valid_reports}}`, `{{hang_tich_thu_kg}}`, `{{day_label}}`, `{{tien_con_lai}}` (tiền cuối cùng của gia đình), `{{kn_remaining:KN-KHOAN}}` (số biên bản còn thiếu để chạm ngưỡng).
+**Biến trong chữ**, dùng trong `strings.json` và cảnh kết: `{{bribe_total}}`, `{{valid_reports}}`, `{{hang_tich_thu_kg}}`, `{{day_label}}`, `{{tien_con_lai}}` (tiền cuối cùng của gia đình), `{{kn_remaining:KN-KHOAN}}` (số biên bản còn thiếu để chạm ngưỡng), `{{doi_chat_luot}}` (số lượt đã chỉ ra chỗ lệch thật), `{{doi_chat_hanh_dong}}`, `{{doi_chat_bo_qua}}` (mục 5.5).
 
 ---
 
@@ -496,6 +496,55 @@ nếu có flag_key: ghi cờ = mã quyết định (mục 1.10)
 
 `LAM_NGO` không ghi sổ nên **cấp trên không biết**: nó không làm giảm `reported_compliance` và không bị nhắc nhở. Nhưng nó vẫn làm giảm `true_compliance`. Khoảng cách giữa hai con số này là một trong những điều kết cục sẽ phơi ra.
 
+### 5.4. Đóng dấu (V5)
+
+Quyết định CHO QUA / GIỮ LẠI là thao tác kéo thả, không phải bấm nút. Engine không phân biệt cách người chơi đóng dấu. Mọi thứ dưới đây nằm ở giao diện (`src/components/stamping.tsx`, `DeskScreen.tsx`):
+
+| Thao tác | Kết quả |
+|---|---|
+| Nhấn giữ con dấu, kéo xuống một tờ giấy hoặc phiếu kiểm soát, thả ra | Dấu ăn. Vệt mực in ở đúng chỗ thả |
+| Thả ngoài giấy | Không ăn, con dấu bật về khay |
+| Bấm con dấu mà không kéo | Không ăn. Hiện lời nhắc: kéo con dấu xuống giấy, hoặc dùng phím 1, 2 |
+| Phím `1` / `2` | CHO QUA / GIỮ LẠI, vệt mực đặt ngẫu nhiên gần giữa tờ giấy đầu tiên |
+
+Mỗi lượt có một **phiếu kiểm soát** luôn nằm trên bàn, nên người không mang giấy nào vẫn có chỗ đóng dấu. Vệt mực nghiêng ngẫu nhiên ±9°, độ đậm từ 0,72 đến 0,95. CHO QUA mực đỏ, GIỮ LẠI mực đen. Khi dấu ăn: tiếng `stamp`, mặt bàn rung một khung (110 ms). Bấm "Tiếp" thì giấy trượt khỏi bàn (380 ms, tiếng `paper`) rồi mới sang lượt kế.
+
+Vệt mực **không** lưu sang thẻ kết quả (V7). Thẻ chỉ in con dấu ĐÃ DUYỆT chung.
+
+### 5.5. Đối chất (V8)
+
+Người chơi cầm bút chì đối chất, khoanh **hai chỗ** trên bàn rồi bấm "Đối chiếu". Chỗ khoanh được là mọi trường có giá trị trên giấy tờ, từng dòng trong danh sách hàng trên giấy, và từng dòng hàng thực mang theo (`src/engine/confront.ts`, `factsOf`).
+
+**So hai chỗ** (`compareFacts`):
+
+| Hai chỗ khoanh | So được khi | Lệch khi | `kind` |
+|---|---|---|---|
+| Tên chủ giấy – tên chủ giấy | Luôn | Khác nhau theo `sameText` (mục 2.2) | `name` |
+| Năm sinh – năm sinh | Luôn | Khác nhau | `year` |
+| Dòng hàng – dòng hàng | Cùng mã hàng | Khác số lượng hoặc đơn vị | `item` |
+| Dòng hàng – danh sách hàng trên giấy | Luôn | Danh sách không có mã đó, hoặc có mà khác số lượng | `item` |
+| Danh sách – danh sách | Luôn | Không cùng tập dòng | `item` |
+| Trường khác – trường khác | Cùng khoá trường | Khác giá trị | `other` |
+| Mọi cặp còn lại | Không so được | | |
+
+**Đối chất đúng** (`found`) khi so được và lệch thật. **Đối chất nhầm** khi hai chỗ khớp nhau hoặc không so được, và nó tốn `CONFRONT_WRONG_MIN` = **15 phút** ca. Đối chất đúng không tốn thời gian.
+
+**Đối chất không đổi đáp án** và không bắt buộc: người chơi vẫn GIỮ LẠI được mà không cần đối chất. Nó chỉ bắt người chơi nhìn vào mặt người mình vừa bắt lỗi. Lời người khách lấy từ `travelers[].confront`: đối chất đúng lấy mục có `on` trùng `kind`, không có thì lấy `on: "any"`; khoanh nhầm (hai chỗ khớp) lấy `on: "khop"`; không so được thì không lấy lời nhân vật mà hiện câu chung `confront.generic_incomparable` giải thích cách khoanh. Không có mục phù hợp thì dùng câu chung trong `strings.json`.
+
+**Đếm** (action `DOI_CHAT`, cập nhật cả `total` lẫn `today`):
+
+```
+doi_chat += 1
+nếu found: doi_chat_dung += 1; đánh dấu lượt này là "đã thấy"
+nếu không found: đồng hồ += 15
+
+khi quyết định lượt (mục 5.3), nếu lượt đã được đánh dấu "đã thấy":
+    GIU_LAI:            doi_chat_hanh_dong += 1   // biết và làm
+    CHO_QUA, LAM_NGO:   doi_chat_bo_qua += 1      // biết mà vẫn đóng dấu
+```
+
+`doi_chat_hanh_dong` và `doi_chat_bo_qua` đếm theo **lượt**, không theo số lần bấm: khoanh ba chỗ lệch trong cùng một lượt vẫn chỉ tính một. Màn kết in dòng "biết mà vẫn làm" từ hai con số này (mục 9.1, `endings.json`).
+
 ---
 
 ## 6. Kiến nghị
@@ -560,7 +609,10 @@ Với `delay = next_act` và ngưỡng 3:
 | Bắt đầu ca | 07:00 |
 | Mỗi lượt | +100 phút |
 | Mỗi biên bản | +60 phút |
+| Mỗi lần đối chất nhầm (mục 5.5) | +15 phút |
 | Hết ca | 17:00 |
+
+Khi người chơi kèm biên bản, đồng hồ trên thanh trên **nhảy trước** 60 phút ngay lúc bấm (có hoạt ảnh), không đợi hết lượt. Hàng người chờ ngoài cửa sổ nhúc nhích cùng lúc (V6). Hàng chờ là thuần hình: số bóng người bằng số lượt còn lại trong ngày; từ 90 phút trước giờ hết ca trời tối dần, quá giờ thì tối hẳn và bóng người co lại vì rét. Nó không đụng đến cơ chế.
 
 Hết lượt cuối mà đồng hồ quá giờ hết ca thì ngày đó **làm ngoài giờ**: `overtime_days += 1` và xếp loại ngày hạ một bậc. Với ngày 5 lượt, lập từ 2 biên bản trở lên là quá giờ. Đây là cái giá của kiến nghị.
 
@@ -694,6 +746,11 @@ Từ mức 3, bảng chi tiêu bỏ mọi khoản có `member`, còn các khoả
 | `hardship` | Số khoản thiết yếu không trả được, cộng dồn cả game |
 | `overtime_days` | Số ngày làm ngoài giờ |
 | `reprimands` | Số giấy nhắc nhở |
+| `doi_chat_count` | Tổng số lần bấm "Đối chiếu", cả đúng lẫn nhầm (mục 5.5) |
+| `doi_chat_hanh_dong` | Số lượt đã chỉ ra chỗ lệch thật rồi GIỮ LẠI: biết và làm |
+| `doi_chat_bo_qua` | Số lượt đã chỉ ra chỗ lệch thật mà vẫn CHO QUA hoặc LÀM NGƠ: biết mà vẫn đóng dấu |
+
+Ba chỉ số đối chất **không** dùng để chọn kết cục. Chúng chỉ quyết định cảnh "biết mà vẫn làm" có hiện hay không, và in lên thẻ kết quả.
 
 ### 9.2. Luật chọn
 

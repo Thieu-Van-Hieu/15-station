@@ -140,6 +140,12 @@
 - [CHO_QUA] Cảm ơn chú cán bộ tốt bụng.
 - [GIU_LAI] Khổ thân tôi quá chú ơi, gạo nhà làm ra mà...
 
+### Phản ứng khi đối chất
+#### Khi lệch bất kỳ chỗ nào
+- [ba-tu] Tôi không biết chữ, chú ạ. Cán bộ xã viết sao thì tôi cầm vậy.
+#### Khi khoanh nhầm
+- [ba-tu] Tôi không biết chữ, chú ạ. Cán bộ xã viết sao thì tôi cầm vậy.
+
 ### Giấy tờ
 #### GDD
 - Họ và tên: Trần Thị Lành
@@ -201,6 +207,12 @@
 ### Phản ứng
 - [CHO_QUA] Cảm ơn cán bộ, may quá...
 - [GIU_LAI] Ấy chết... cán bộ đừng lập biên bản...
+
+### Phản ứng khi đối chất
+#### Khi lệch hàng
+- [np-buon-thuoc-la] Cái... cái đấy là hàng người ta gửi, tôi quên khai. Cán bộ thông cảm, lần sau tôi khai đủ.
+#### Khi khoanh nhầm
+- [np-buon-thuoc-la] Có gì đâu cán bộ, giấy với người khớp hết mà.
 
 ### Giấy tờ
 #### GDD

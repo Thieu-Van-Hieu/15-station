@@ -22,6 +22,7 @@ Luật chọn kết cục nằm ở `docs/03-rules-spec.md` mục 9: engine xét
 - Mã: 
 - Tên: 
 - Thứ tự xét: 
+- Dòng trên thẻ: 
 
 ### Điều kiện
 - không
@@ -58,12 +59,14 @@ Chép đúng từ bảng này, không tự đặt:
 | `END-GAC-CONG` | Người gác cổng mẫu mực | 4 |
 | `END-SONG-SOT` | Người sống sót | 5 |
 
+**Dòng trên thẻ** (`card_line`, V7) là một câu tóm tắt in dưới tên kết cục trên thẻ kết quả cuối game. Người xem thẻ chưa chơi bao giờ, nên câu này phải tự đứng được: không nhắc tên nhân vật, không dùng biến `{{...}}`, tối đa khoảng 90 ký tự để vừa hai dòng trên thẻ.
+
 ### Điều kiện
 
 Mỗi dòng một điều kiện theo chỉ số ẩn, dạng `<chỉ số> <phép so sánh> <giá trị>`. Các dòng nối với nhau bằng VÀ. Chép đúng từ `03-rules-spec.md` mục 9.2.
 
 - Phép so sánh: `>=`, `<=`, `==`, `>`, `<`
-- Chỉ số: `true_compliance`, `reported_compliance`, `valid_reports`, `invalid_reports`, `lam_ngo_violations`, `bribes_accepted`, `bribe_total`, `issues_triggered`, `hardship`, `overtime_days`, `reprimands`
+- Chỉ số: `true_compliance`, `reported_compliance`, `valid_reports`, `invalid_reports`, `lam_ngo_violations`, `bribes_accepted`, `bribe_total`, `issues_triggered`, `hardship`, `overtime_days`, `reprimands`, `doi_chat_count`, `doi_chat_hanh_dong`, `doi_chat_bo_qua`
 
 `END-SONG-SOT` là kết cục mặc định, luôn để `- không`. Mọi kết cục khác phải có ít nhất một điều kiện.
 
@@ -75,7 +78,14 @@ Mỗi cảnh là một màn hình của phần kết, tiểu mục `#### Cảnh 
 |---|---|
 | Ảnh | Mã ảnh nền kebab-case không dấu, hoặc `không` |
 | Điều kiện | Cảnh chỉ hiện khi thoả điều kiện, hoặc `không`. Viết như `{nếu ...}` ở T1 nhưng bỏ ngoặc và chữ "nếu". Được dùng thêm điều kiện chỉ số: `bribe_total > 0` |
-| Nội dung | Chữ trên màn hình. Được dùng biến `{{bribe_total}}`, `{{valid_reports}}`, `{{hang_tich_thu_kg}}`, `{{kn_remaining:KN-KHOAN}}` |
+| Nội dung | Chữ trên màn hình. Được dùng biến `{{bribe_total}}`, `{{valid_reports}}`, `{{hang_tich_thu_kg}}`, `{{kn_remaining:KN-KHOAN}}`, `{{doi_chat_luot}}`, `{{doi_chat_hanh_dong}}`, `{{doi_chat_bo_qua}}` |
+
+**Cảnh "biết mà vẫn làm"** (V8). Mỗi kết cục có hai cảnh đối chất đặt ngay trước cảnh hộp thiếc, chỉ một trong hai hiện:
+
+- `doi_chat_bo_qua > 0`: "Bạn chỉ ra chỗ lệch trên giấy tờ ở {{doi_chat_luot}} lượt. Bạn hành động theo điều mình thấy ở {{doi_chat_hanh_dong}} lượt."
+- `doi_chat_bo_qua == 0 và doi_chat_hanh_dong > 0`: câu ghi nhận lượt nào cũng hành động theo.
+
+Người chơi không đối chất lần nào thì không cảnh nào hiện. Ý nghĩa các chỉ số ở `03-rules-spec.md` mục 5.5.
 
 Nội dung dài nhiều đoạn thì viết tiếp các dòng ngay dưới dòng `- Nội dung:`, thụt vào hai dấu cách.
 

@@ -113,9 +113,11 @@ export function confront(t: Traveler, documents: readonly DocumentDef[], aId: st
 
 /**
  * Lời người khách khi bị đối chất. Đúng thì lấy mục `on` trùng loại lệch (hoặc `any`);
- * sai thì lấy mục `khop`. Không có thì trả mảng rỗng để giao diện dùng câu chung.
+ * hai chỗ khớp nhau thì lấy mục `khop`. Hai chỗ không so được, hoặc không có mục phù hợp,
+ * thì trả mảng rỗng để giao diện dùng câu chung (câu "không so được" dạy người chơi cách khoanh).
  */
 export function confrontLines(t: Traveler, r: ConfrontResult, cs: ConditionState): Line[] {
+  if (!r.comparable) return [];
   const entries = t.confront ?? [];
   const pick = r.found ? entries.find((e) => e.on === r.kind) ?? entries.find((e) => e.on === "any") : entries.find((e) => e.on === "khop");
   return pick ? filterByWhen(pick.lines, cs) : [];

@@ -73,6 +73,64 @@ Chân dung vẽ bằng `scripts/generate-portraits.ts` (`pnpm art`), phác thả
 
 Muốn thêm nhánh thì khai `portrait.variants` trong lượt khách và thêm mô tả vẽ vào `SPECS` của script.
 
+## 4b. Con dấu cầm tay và vệt mực (V5)
+
+Con dấu là vật thể, không phải nút. Tất cả vẽ bằng CSS và SVG trong `src/components/stamping.tsx`, không dùng file ảnh.
+
+**Con dấu trên khay** (nhìn nghiêng, nhỏ, bên trái nhãn nút): núm gỗ tròn `#6b4a2e`, cổ `#5a3d25`, đế `#4a3525`, dải mực ở mặt đế theo màu dấu.
+
+**Con dấu đang cầm** (khi kéo): to hơn, nghiêng −8°, bóng đổ xuống dưới phải. Núm gỗ vân gradient `#5a3d25 → #8a6040 → #5a3d25`, đế rộng 112 px, dải mực 104 px. Điểm thả là mép dưới con dấu, không phải tâm, để người chơi thấy mình "ấn" xuống đâu.
+
+**Vệt mực**, hai mẫu:
+
+| Dấu | Màu | Chữ |
+|---|---|---|
+| CHO QUA | Đỏ son `#b3261e` | CHO QUA (chuỗi `desk.stamp.approve`) |
+| GIỮ LẠI | Đen mực `#1c1712` | GIỮ LẠI (`desk.stamp.reject`) |
+
+Khung chữ nhật 148 × 70, viền đôi (ngoài 4 px, trong 1,6 px), chữ Space Mono đậm, dòng nhỏ "TRẠM 15" bên dưới. Hạt mực loang bằng bộ lọc `feTurbulence` để vệt không đều như dấu cao su thật. Mỗi lần đóng: nghiêng ngẫu nhiên trong ±9°, độ đậm 0,72–0,95, hoà trộn `multiply` để chữ trên giấy vẫn đọc được qua vệt mực. Vệt mực bị kẹp trong 18–82% chiều ngang và 12–88% chiều dọc của tờ giấy để không tràn ra ngoài.
+
+**Phiếu kiểm soát**: tờ giấy nhỏ viền đứt nét, nghiêng 1,5°, luôn nằm trên bàn làm chỗ đóng dấu cho người không mang giấy nào.
+
+## 4c. Hàng người chờ ngoài cửa sổ (V6)
+
+Dải cao 48 px ngay dưới ô cửa (`src/components/QueueStrip.tsx`). Bóng người là SVG một màu, không có mặt, cao 26–31 px, mờ dần về cuối hàng. Tối đa 8 bóng.
+
+Ba dáng xoay vòng:
+
+1. Gánh hàng: đòn gánh ngang vai, hai thúng hai đầu.
+2. Đội nón lá.
+3. Dắt xe đạp.
+
+Hai mức ánh sáng, chuyển trong 1,5 s:
+
+| Lúc | Nền trời | Bóng người |
+|---|---|---|
+| Ban ngày (trước giờ hết ca 90 phút) | Vàng đất `#d9c9a6 → #b89f76` | Nâu sẫm `#2a2119` |
+| Chạng vạng | Nâu `#8f7a60 → #5e4c3a` | Nâu sẫm |
+| Quá giờ hết ca | Xanh đêm `#1d2230 → #2c2a2a` | Đen `#0c0a09`, co lại 12% chiều cao và run nhẹ vì rét |
+
+Khi người chơi kèm biên bản, cả hàng nhúc nhích một lần (hoạt ảnh `nhuc-nhich`), cùng lúc đồng hồ trên thanh trên nhảy 60 phút.
+
+## 4d. Thẻ kết quả (V7)
+
+Ảnh vuông **1200 × 1200** vẽ bằng canvas (`src/components/ResultCard.tsx`), tải về dạng PNG tên `tram15-<mã kết cục>.png`. Chọn vuông vì dễ đăng mạng xã hội. Trên máy tính vẫn đọc được vì chữ to.
+
+Nền giấy cũ: màu `#efe6cf`, vệt ố nâu loang từ mép vào (gradient tròn), 9000 hạt bụi cố định (cùng một hạt giống, nên ai tải thẻ cũng có cùng nền). Khung viền đôi cách mép 44 px.
+
+Bố cục từ trên xuống, lề trái phải 100 px:
+
+1. **Đầu thẻ**: "TRẠM 15" chữ có dấu to giãn cách, bên phải "Hồ sơ kết thúc ca trực · 1979 – 1987", hai vạch kẻ ngang.
+2. **Kết cục**: nhãn đỏ "KẾT CỤC", tên kết cục chữ serif đậm 70 px viết hoa, rồi `card_line` in nghiêng màu nâu xám.
+3. **Ba con số** trong ba ô: chấp hành theo báo cáo, chấp hành thực tế, số biên bản kiến nghị. **Ô "thực tế" viền đỏ, chữ đỏ, và giữa hai ô có dấu ≠ đỏ khi hai tỷ lệ lệch nhau.** Hai tỷ lệ đặt cạnh nhau là chi tiết đắt nhất của thẻ: người xem chưa chơi cũng thấy có gì không khớp.
+4. **Dòng đối chất** (chỉ khi người chơi đã đối chất): "Chỉ ra chỗ lệch ở số lượt: N · hành động theo: M".
+5. **Một dòng nhân vật**: số phận đầu tiên hiện được của kết cục (đã xét cờ), tối đa ba dòng, ký tên nhân vật.
+6. **Câu trích giáo trình** có gạch đứng đỏ bên trái, ghi chương và mục.
+7. **Con dấu ĐÃ DUYỆT** đỏ, tròn, nghiêng, góc dưới phải.
+8. **Chân thẻ**: tên người chơi nếu có ("Tổ trưởng trực ca: …"), rồi "Trạm 15 · Nhóm Trạm 15 · Môn Chủ nghĩa xã hội khoa học".
+
+Tên người chơi **tuỳ chọn** và hỏi ngay ở màn kết, cạnh nút tải, không hỏi ở đầu game. Như vậy không thêm bước nào trước khi vào chơi. Vệt mực của từng lượt không in lên thẻ.
+
 ## 5. Hiệu ứng âm thanh (Audio / SFX)
 
 > Danh sách file âm thanh hiện hành, tên file và mô tả nằm ở `docs/09-am-thanh.md`. Mục dưới đây là định hướng ban đầu.
