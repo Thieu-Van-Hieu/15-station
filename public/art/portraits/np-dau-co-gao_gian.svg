@@ -1,38 +1,67 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 240" width="200" height="240">
   <defs>
-    <radialGradient id="frost" cx="50%" cy="40%" r="60%">
-      <stop offset="0%" stop-color="#E8D8BA" stop-opacity="0.3" />
-      <stop offset="100%" stop-color="#242220" stop-opacity="0.9" />
+    <radialGradient id="kinh" cx="50%" cy="38%" r="70%">
+      <stop offset="0%" stop-color="#f6ecd4" stop-opacity="0.9"/>
+      <stop offset="70%" stop-color="#cdb48c" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#4f3f2e" stop-opacity="0.85"/>
     </radialGradient>
-    <filter id="blurFilter">
-      <feGaussianBlur stdDeviation="1.5" />
+    <filter id="hat" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="95"/>
+      <feColorMatrix values="0 0 0 0 0.11  0 0 0 0 0.09  0 0 0 0 0.07  0 0 0 0.55 -0.12"/>
+      <feComposite in2="SourceGraphic" operator="in"/>
     </filter>
+    <filter id="net" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="3" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="1.6"/>
+    </filter>
+    <radialGradient id="toi" cx="50%" cy="45%" r="75%">
+      <stop offset="60%" stop-color="#1c1712" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#1c1712" stop-opacity="0.45"/>
+    </radialGradient>
   </defs>
-
-  <!-- Nền kính mờ trạm kiểm soát -->
-  <rect width="200" height="200" fill="#1F1E1D" />
-  <rect width="200" height="200" fill="url(#frost)" />
-
-  <!-- Khung cửa sổ kính mờ mờ ảo -->
-  <circle cx="100" cy="100" r="92" fill="#2E2B27" stroke="#4A3525" stroke-width="4" />
-
-  <!-- Thân người (vai áo) -->
-  <path d="M35,190 C45,130 70,120 100,120 C130,120 155,130 165,190 Z" fill="#18181B" />
-
-  <!-- Cổ và đầu (bóng silhouette) -->
-  <rect x="90" y="95" width="20" height="28" fill="#242220" />
-  <ellipse cx="100" cy="68" rx="28" ry="34" fill="#242220" />
-
-  <!-- Mắt silhouette -->
-  <ellipse cx="88" cy="65" rx="3.5" ry="2" fill="#E8D8BA" opacity="0.7" />
-  <ellipse cx="112" cy="65" rx="3.5" ry="2" fill="#E8D8BA" opacity="0.7" />
-
-  <!-- Miệng biểu cảm -->
-  <path d="M88,92 L112,88" stroke="#E8D8BA" stroke-width="2" fill="none" opacity="0.8" stroke-linecap="round" />
-
-  <!-- Phụ kiện đặc trưng -->
-  <path d="M60,42 Q100,25 140,42" stroke="#1F1E1D" stroke-width="6" fill="none" />
-
-  <!-- Hiệu ứng bóng đổ kính mờ -->
-  <rect width="200" height="200" fill="black" opacity="0.12" style="mix-blend-mode: multiply;" />
+  
+  <rect width="200" height="240" fill="#efe3c8"/>
+  <rect width="200" height="240" fill="url(#kinh)"/>
+  <g opacity="0.35" stroke="#7a6247" stroke-width="1">
+    <path d="M0 176 Q60 168 110 172 T200 166" fill="none"/>
+    <path d="M14 176 v-22 M24 176 v-30 M150 170 v-26 M166 169 v-18" />
+    <circle cx="24" cy="140" r="12" fill="#cdb48c" stroke="none"/>
+    <circle cx="150" cy="138" r="14" fill="#cdb48c" stroke="none"/>
+  </g>
+  <g stroke="#4f3f2e" stroke-width="1" opacity="0.18">
+    <line x1="-40" y1="0" x2="40" y2="240"/><line x1="-22" y1="0" x2="58" y2="240"/><line x1="-4" y1="0" x2="76" y2="240"/><line x1="14" y1="0" x2="94" y2="240"/><line x1="32" y1="0" x2="112" y2="240"/><line x1="50" y1="0" x2="130" y2="240"/><line x1="68" y1="0" x2="148" y2="240"/><line x1="86" y1="0" x2="166" y2="240"/><line x1="104" y1="0" x2="184" y2="240"/><line x1="122" y1="0" x2="202" y2="240"/><line x1="140" y1="0" x2="220" y2="240"/><line x1="158" y1="0" x2="238" y2="240"/><line x1="176" y1="0" x2="256" y2="240"/><line x1="194" y1="0" x2="274" y2="240"/><line x1="212" y1="0" x2="292" y2="240"/><line x1="230" y1="0" x2="310" y2="240"/>
+  </g>
+  <g filter="url(#net)"><g transform="translate(0 0) translate(100 222) scale(1.14) translate(-100 -222)"><path d="M88 124 L87 156 L113 156 L112 124 Z" fill="#a88a62" stroke="#1c1712" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M14 240 C18 182 44 156 82 152
+          L118 152 C156 156 182 182 186 240 Z" fill="#bfa27a" stroke="#1c1712" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M110 154 C156 158 180 184 186 240 L130 240 Z" fill="#1c1712" opacity="0.18"/>
+        <path d="M70 156 Q100 192 130 156 L134 240 L66 240 Z" fill="#efe3c8" stroke="#1c1712" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+        <path d="M34 182 q12 -10 24 0 M166 182 q-12 -10 -24 0" fill="none" stroke="#1c1712" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/>
+        <path d="M140 162 q2 6 0 9" stroke="#7a6247" stroke-width="1.4" fill="none"/>
+  <g transform="rotate(0 100 136)">
+    
+    <ellipse cx="71" cy="100" rx="6" ry="9" fill="#bfa27a" stroke="#1c1712" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+    <ellipse cx="129" cy="100" rx="6" ry="9" fill="#bfa27a" stroke="#1c1712" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M71 90 C71 56 129 56 129 90 C129 117.6 114.5 132 100 132 C85.5 132 71 117.6 71 90 Z" fill="#bfa27a" stroke="#1c1712" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M110.15 66 C131 70 131 114 104 131 C120.3 110.4 123.2 86 110.15 66 Z" fill="#a88a62" opacity="0.55"/>
+    <path d="M81.4 84 L95.4 91" fill="none" stroke="#1c1712" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M104.6 91 L118.6 84" fill="none" stroke="#1c1712" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M98 88 v5 M102 88 v5" stroke="#1c1712" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/>
+    <ellipse cx="88.4" cy="98" rx="5" ry="2.64" fill="#efe3c8" stroke="#1c1712" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="88.4" cy="98.8" r="2.3" fill="#1c1712"/>
+    <path d="M82.4 95.96 Q88.4 92.96 94.4 95.96" fill="none" stroke="#1c1712" stroke-width="1.6"/>
+    <ellipse cx="111.6" cy="98" rx="5" ry="2.64" fill="#efe3c8" stroke="#1c1712" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/>
+    <circle cx="111.6" cy="98.8" r="2.3" fill="#1c1712"/>
+    <path d="M105.6 95.96 Q111.6 92.96 117.6 95.96" fill="none" stroke="#1c1712" stroke-width="1.6"/>
+    <path d="M101 102 q-3 8 -5 11 q4 3 8 0" fill="none" stroke="#7a6247" stroke-width="1.6" stroke-linecap="round"/>
+    <path d="M91 122 L109 122" stroke="#1c1712" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M91 122 l-2 2 M109 122 l2 2" stroke="#1c1712" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M125 82 q-4 7 0 10 q4 -3 0 -10 Z" fill="#efe3c8" stroke="#1c1712" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M71 92 C69 54 131 54 129 92 C123 72 77 70 71 92 Z" fill="#2e251c" stroke="#1c1712" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+  </g></g></g>
+  <rect width="200" height="240" fill="url(#toi)"/>
+  <rect width="200" height="240" fill="#000" filter="url(#hat)" opacity="0.5"/>
+  
+  <rect x="3" y="3" width="194" height="234" fill="none" stroke="#2e251c" stroke-width="6"/>
+  <line x1="3" y1="58" x2="197" y2="58" stroke="#2e251c" stroke-width="3" opacity="0.8"/>
+  <rect x="0" y="222" width="200" height="18" fill="#4f3f2e"/>
+  <rect x="0" y="222" width="200" height="3" fill="#7a6247"/>
+  <path d="M0 230 H200 M0 235 H200" stroke="#2e251c" stroke-width="0.8" opacity="0.6"/>
 </svg>

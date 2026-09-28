@@ -53,11 +53,13 @@ export const ENDINGS: Ending[] = [
     { stat: "true_compliance", op: ">=", value: 0.85 },
     { stat: "valid_reports", op: "==", value: 0 },
     { stat: "lam_ngo_violations", op: "==", value: 0 },
+    { stat: "hardship", op: "<=", value: 5 },
   ]),
   ending("END-KIEN-NGHI", 3, [
     { stat: "valid_reports", op: ">=", value: 4 },
     { stat: "issues_triggered", op: ">=", value: 1 },
     { stat: "lam_ngo_violations", op: "<=", value: 1 },
+    { stat: "hardship", op: "<=", value: 5 },
   ]),
   ending("END-LAM-NGO", 2, [{ stat: "lam_ngo_violations", op: ">=", value: 4 }]),
   ending("END-AN-TIEN", 1, [{ stat: "bribes_accepted", op: ">=", value: 2 }]),
@@ -76,7 +78,10 @@ export function gameContent(travelers: Traveler[], strings: Record<string, strin
   };
 }
 
-/** Chơi nhanh qua các ngày trước (không trả khoản chi nào) để đứng ở lượt đầu của `target`. */
+/**
+ * Chơi nhanh qua các ngày trước (không trả khoản chi nào) để đứng ở lượt đầu của `target`.
+ * Xoá hardship và mệt sinh ra từ việc bỏ chi, để các test đồng hồ và kết cục bắt đầu từ trạng thái sạch.
+ */
 export function startAt(content: GameContent, target: DayId): GameState {
   let s = reduce(newGame(content), { type: "BAT_DAU_GAME" }, content);
   while (content.days[s.dayIndex].id !== target) {
@@ -85,5 +90,5 @@ export function startAt(content: GameContent, target: DayId): GameState {
     }
     if (s.phase !== "DAY_START") throw new Error("startAt chỉ đi qua được các ngày không có lượt khách");
   }
-  return reduce(s, { type: "BAT_DAU_NGAY" }, content);
+  return reduce({ ...s, hardship: 0, fatigue: 0 }, { type: "BAT_DAU_NGAY" }, content);
 }

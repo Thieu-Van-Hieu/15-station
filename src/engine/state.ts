@@ -104,6 +104,8 @@ export interface GameState {
   bribeTaken: boolean;
   pendingReprimand: Reprimand | null;
   hardship: number;
+  /** Số khoản thiết yếu bỏ lỡ ở lần chi tiêu gần nhất. Làm mỗi lượt hôm nay chậm hơn (03 mục 8.3). */
+  fatigue: number;
   overtimeDays: number;
   log: TurnRecord[];
   dayReport: DayReport | null;

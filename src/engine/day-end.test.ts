@@ -14,9 +14,9 @@ const quyet = (action: "CHO_QUA" | "GIU_LAI" | "LAM_NGO", reasonId: string | nul
 const fiveD5 = (): Traveler[] =>
   [1, 2, 3, 4, 5].map((i) => traveler({ id: `d5-t${i}` as Traveler["id"], day: "d5", order: i }));
 
-function playD5(reports: number) {
+function playD5(reports: number, fatigue = 0) {
   const content = gameContent(fiveD5());
-  let s = startAt(content, "d5");
+  let s = { ...startAt(content, "d5"), fatigue };
   for (let i = 0; i < 5; i += 1) s = reduce(s, quyet("GIU_LAI", i < reports ? "LD-KHOAN" : null), content);
   return s;
 }
@@ -34,6 +34,28 @@ describe("day-end — 03 mục 7", () => {
     expect(formatClock(s.dayReport!.clockEnd)).toBe("17:20");
     expect(s.dayReport!.overtime).toBe(true);
     expect(s.overtimeDays).toBe(1);
+  });
+
+  it("DAY-10 mỗi điểm mệt làm mỗi lượt chậm 10 phút: mệt 2, 1 biên bản thì ngoài giờ", () => {
+    const s = playD5(1, 2);
+    expect(formatClock(s.dayReport!.clockEnd)).toBe("18:00");
+    expect(s.dayReport!.overtime).toBe(true);
+  });
+
+  it("DAY-11 mệt 2, không biên bản: vừa kịp hết ca", () => {
+    const s = playD5(0, 2);
+    expect(formatClock(s.dayReport!.clockEnd)).toBe("17:00");
+    expect(s.dayReport!.overtime).toBe(false);
+  });
+
+  it("DAY-12 mệt lấy từ số khoản thiết yếu bỏ lỡ ở lần chi tiêu gần nhất", () => {
+    const content = gameContent(fiveD5());
+    let s = startAt(content, "d5");
+    for (let i = 0; i < 5; i += 1) s = reduce(s, quyet("GIU_LAI"), content);
+    s = reduce(s, { type: "KET_THUC_NGAY" }, content);
+    const essentials = content.days[s.dayIndex].economy.expenses.filter((x) => x.essential).length;
+    s = reduce(s, { type: "TRA_CHI_TIEU", expenseIds: [] }, content);
+    expect(s.fatigue).toBe(essentials);
   });
 
   it.each([

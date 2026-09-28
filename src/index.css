@@ -1,16 +1,193 @@
 @import "tailwindcss";
 
 /*
- * Bảng màu TẠM theo art direction ở docs/00-idea.md mục 8:
- * nâu đất, xám xi măng, vàng giấy ố, đỏ dấu. Thay mã hex khi docs/05-art-brief.md chốt.
+ * Hệ thiết kế "Bureaucracy 1980" — tham khảo stitch-design/DESIGN.md.
+ * Mặt bàn gỗ sẫm, giấy hành chính ố vàng, mực đỏ son và xanh sổ bộ.
+ *
+ * Font: DESIGN.md dùng Domine và Courier Prime nhưng hai font này không có bộ chữ tiếng Việt,
+ * nên thay bằng Noto Serif (tiêu đề) và IBM Plex Mono (thân chữ máy chữ). Space Mono giữ nguyên cho nhãn.
+ * Tất cả tự host qua @fontsource (import trong src/main.tsx), không gọi CDN.
  */
 @theme {
-  --color-nau: #6b4f36;
-  --color-xi-mang: #8a8a85;
-  --color-giay: #efe3c2;
-  --color-dau-do: #b3261e;
-  --color-muc: #2b2a28;
+  /* Mặt bàn */
+  --color-ban: #17130f;
+  --color-ban-1: #1f1b17;
+  --color-ban-2: #231f1b;
+  --color-ban-3: #2e2925;
+  --color-ban-4: #39342f;
+  --color-vien: #59413d;
+  --color-vien-sang: #a88a85;
+  --color-chu-ban: #ebe1da;
+  --color-chu-ban-phu: #d4c5a9;
 
-  /* Font máy chữ sẽ tự host trong public/fonts/ ở P7. Tạm dùng font monospace của hệ thống. */
-  --font-may-chu: "Courier New", Courier, ui-monospace, monospace;
+  /* Giấy */
+  --color-bia: #d4c5a9;
+  --color-bia-dam: #c7b696;
+  --color-giay: #f0ead6;
+  --color-giay-than: #e2d7c3;
+  --color-giay-vien: #c2b59d;
+  --color-ke: #a89a84;
+  --color-muc: #181513;
+  --color-muc-nhat: #4a423a;
+
+  /* Mực và dấu */
+  --color-son: #c0392b;
+  --color-son-nhat: #ffb4a9;
+  --color-son-dam: #8b2626;
+  --color-xanh-so: #27ae60;
+  --color-xanh-so-nhat: #61de8a;
+  --color-xanh-so-dam: #1b6b3c;
+  --color-muc-xanh: #2f4f86;
+  --color-muc-xanh-nhat: #9fb6e0;
+  --color-ho-phach: #d9a441;
+  --color-kep: #7f8c8d;
+
+  --font-tieu-de: "Noto Serif", "Times New Roman", serif;
+  --font-may-chu: "IBM Plex Mono", "Courier New", ui-monospace, monospace;
+  --font-nhan: "Space Mono", "IBM Plex Mono", ui-monospace, monospace;
+
+  --shadow-bia: 2px 3px 0 rgba(0, 0, 0, 0.45);
+  --shadow-giay: 3px 5px 0 rgba(18, 15, 13, 0.35);
+  --shadow-noi: 6px 10px 0 rgba(10, 8, 7, 0.5);
+  --shadow-kep: 1px 2px 1px rgba(0, 0, 0, 0.6);
+
+  --animate-dong-dau: dong-dau 260ms cubic-bezier(0.2, 0.9, 0.3, 1.2);
+  --animate-truot-vao: truot-vao 320ms ease-out;
+  --animate-nhap-nhay: nhap-nhay 1.6s ease-in-out infinite;
+}
+
+@keyframes dong-dau {
+  0% {
+    transform: scale(1.35) rotate(var(--xoay, -3deg));
+    opacity: 0;
+  }
+  60% {
+    transform: scale(0.96) rotate(var(--xoay, -3deg));
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(var(--xoay, -3deg));
+    opacity: 1;
+  }
+}
+
+@keyframes truot-vao {
+  from {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes nhap-nhay {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-ban);
+  color: var(--color-chu-ban);
+  font-family: var(--font-may-chu);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Mặt bàn gỗ: vân gỗ dọc mờ + vignette. */
+.mat-ban {
+  background-color: var(--color-ban);
+  background-image:
+    radial-gradient(ellipse at 50% 30%, rgba(80, 60, 45, 0.28), transparent 70%),
+    repeating-linear-gradient(
+      92deg,
+      rgba(255, 235, 210, 0.018) 0 2px,
+      transparent 2px 7px,
+      rgba(0, 0, 0, 0.05) 7px 9px,
+      transparent 9px 16px
+    ),
+    linear-gradient(180deg, #1c1714, #120f0c);
+}
+
+/* Mặt bàn làm việc ở giữa: chấm tròn như dạ phủ bàn. */
+.mat-ban-cham {
+  background-color: #241e19;
+  background-image:
+    radial-gradient(rgba(0, 0, 0, 0.35) 1.4px, transparent 1.6px),
+    radial-gradient(ellipse at 50% 40%, rgba(120, 90, 60, 0.18), transparent 75%);
+  background-size:
+    22px 22px,
+    100% 100%;
+}
+
+/* Giấy có hạt và vệt ố. */
+.giay-hat {
+  background-color: var(--color-giay);
+  background-image:
+    radial-gradient(ellipse at 15% 10%, rgba(160, 120, 60, 0.1), transparent 45%),
+    radial-gradient(ellipse at 90% 95%, rgba(140, 100, 50, 0.12), transparent 50%),
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.012) 0 1px, transparent 1px 3px);
+}
+
+.giay-than-hat {
+  background-color: var(--color-giay-than);
+  background-image:
+    radial-gradient(ellipse at 80% 5%, rgba(150, 110, 60, 0.12), transparent 50%),
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.014) 0 1px, transparent 1px 3px);
+}
+
+/* Giấy kẻ dòng có lề đỏ (sổ chỉ thị). */
+.giay-ke-dong {
+  background-color: #efe6cf;
+  background-image:
+    linear-gradient(90deg, transparent 30px, rgba(192, 57, 43, 0.45) 30px 31px, transparent 31px),
+    repeating-linear-gradient(180deg, transparent 0 25px, rgba(47, 79, 134, 0.14) 25px 26px);
+}
+
+/* Góc cắt 45° cho thẻ hồ sơ. */
+.goc-cat {
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
+}
+
+/* Lớp nhiễu màn hình CRT rất nhẹ phủ toàn trang. */
+.lop-nhieu::after {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background-image: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.06) 0 1px, transparent 1px 3px);
+  mix-blend-mode: multiply;
+}
+
+.thanh-cuon::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.thanh-cuon::-webkit-scrollbar-thumb {
+  background: rgba(168, 138, 133, 0.35);
+}
+.thanh-cuon::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    transition-duration: 1ms !important;
+  }
 }

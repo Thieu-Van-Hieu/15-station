@@ -1,92 +1,236 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import type { Document as EngineDoc, DocumentDef } from "../engine/types";
 import { content } from "../content";
 import { playSfx } from "../audio";
+import { Modal, PaperClip, SealMark, cx, s } from "./ui";
 
 interface DocumentPaperProps {
   doc: EngineDoc;
   def?: DocumentDef;
+  tilt?: number;
+  className?: string;
+  style?: React.CSSProperties;
+  onFocus?: () => void;
 }
 
-export function DocumentPaper({ doc, def }: DocumentPaperProps) {
+type Layout = "giay-doc" | "giay-ngang" | "so" | "phieu-nho" | "the";
+
+type ItemLike = { ma?: string; ten?: string; so_luong: number; don_vi: string };
+
+const WIDTH: Record<Layout, string> = {
+  "giay-doc": "w-[290px]",
+  "giay-ngang": "w-[350px]",
+  so: "w-[290px]",
+  "phieu-nho": "w-[230px]",
+  the: "w-[270px]",
+};
+
+export function DocumentPaper({ doc, def, tilt = 0, className, style, onFocus }: DocumentPaperProps) {
   const [zoomed, setZoomed] = useState(false);
   const docDef = def ?? content.documents.find((d) => d.code === doc.type);
 
-  if (!docDef) {
-    return null;
+  if (!docDef) return null;
+  const layout = (docDef.layout as Layout) in WIDTH ? (docDef.layout as Layout) : "giay-doc";
+
+  function toggle() {
+    playSfx("paper");
+    setZoomed((z) => !z);
+    onFocus?.();
   }
 
-  const fields = doc.fields as Record<string, any>;
-
   return (
-    <div
-      onClick={() => {
-        playSfx("paper_rustle");
-        setZoomed(!zoomed);
-      }}
-      className={`cursor-pointer transition-all duration-200 border-2 border-nau bg-giay text-muc shadow-md select-none ${
-        zoomed
-          ? "fixed inset-8 z-50 overflow-y-auto p-8 max-w-2xl mx-auto shadow-2xl ring-4 ring-nau/40"
-          : "relative p-4 w-72 min-h-64 hover:shadow-xl hover:-translate-y-1"
-      }`}
-    >
-      <div className="border-b border-nau/40 pb-2 mb-3 text-center">
-        <h3 className="font-bold text-base tracking-wide text-dau-do">{docDef.name}</h3>
-        <p className="text-xs text-muc/70 italic">{docDef.code}</p>
+    <>
+      <div
+        role="button"
+        tabIndex={0}
+        onClick={toggle}
+        onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && (e.preventDefault(), toggle())}
+        className={cx(
+          "cursor-zoom-in select-none transition-transform duration-200 hover:-translate-y-1 hover:z-20 focus-visible:outline-2 focus-visible:outline-ho-phach",
+          WIDTH[layout],
+          className,
+        )}
+        style={{ transform: `rotate(${tilt}deg)`, ...style }}
+      >
+        <Sheet doc={doc} def={docDef} layout={layout} />
       </div>
 
-      <div className="space-y-2 text-xs leading-relaxed">
-        {docDef.fields.map((f) => {
-          const val = fields[f.key];
-          if (val === undefined || val === null) return null;
+      {zoomed && (
+        <Modal onClose={toggle} className="cursor-zoom-out">
+          <div className="w-full max-w-[520px] animate-truot-vao text-[15px]" style={{ transform: "rotate(-0.6deg)" }}>
+            <Sheet doc={doc} def={docDef} layout={layout} large />
+          </div>
+        </Modal>
+      )}
+    </>
+  );
+}
 
-          if (f.kind === "items" && Array.isArray(val)) {
-            return (
-              <div key={f.key} className="pt-1">
-                <span className="font-semibold text-nau">{f.label}:</span>
-                <ul className="list-disc list-inside mt-1 pl-1 space-y-0.5">
-                  {val.map((item, idx) => (
-                    <li key={idx} className="text-xs">
-                      {item.ten ?? item.ma}: {item.so_luong} {item.don_vi}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            );
-          }
+// ---------------------------------------------------------------------------
+// Tờ giấy theo từng kiểu trình bày
+// ---------------------------------------------------------------------------
 
-          if (f.kind === "item" && typeof val === "object") {
-            return (
-              <div key={f.key} className="flex justify-between border-b border-dashed border-nau/20 pb-0.5">
-                <span className="font-semibold text-nau">{f.label}:</span>
-                <span>
-                  {val.ten ?? val.ma} ({val.so_luong} {val.don_vi})
-                </span>
-              </div>
-            );
-          }
+function Sheet({ doc, def, layout, large }: { doc: EngineDoc; def: DocumentDef; layout: Layout; large?: boolean }) {
+  const fields = doc.fields as Record<string, unknown>;
+  const rows = <Fields def={def} fields={fields} layout={layout} />;
+  const seal = doc.seal && <SealMark seal={doc.seal} className={large ? "w-28 h-28" : undefined} />;
+  const damage = doc.damaged && <Damage />;
+  const textSize = large ? "text-sm" : "text-[11px]";
 
+  switch (layout) {
+    case "so":
+      return (
+        <div className={cx("relative shadow-giay border border-[#2f3a2a]", textSize)}>
+          <div className="bg-[#3b4632] text-bia px-4 py-3 text-center border-b-4 border-double border-bia/40">
+            <div className="font-nhan text-[9px] tracking-[0.2em] uppercase opacity-80">{s("doc.nation")}</div>
+            <div className="font-tieu-de font-bold text-lg tracking-wide uppercase mt-1">{def.name}</div>
+            <div className="font-nhan text-[10px] tracking-widest opacity-70">{def.code}</div>
+          </div>
+          <div className="giay-hat p-4 text-muc">
+            {rows}
+            {seal && <div className="flex justify-end -mt-2">{seal}</div>}
+          </div>
+          {damage}
+        </div>
+      );
+
+    case "the":
+      return (
+        <div className={cx("relative shadow-giay border-2 border-son-dam bg-[#7a1f1c] p-2", textSize)}>
+          <div className="flex items-center gap-2 px-2 pb-2 text-ho-phach">
+            <span className="text-lg leading-none">★</span>
+            <div>
+              <div className="font-tieu-de font-bold uppercase tracking-wide text-sm leading-tight">{def.name}</div>
+              <div className="font-nhan text-[10px] tracking-widest opacity-80">{def.code}</div>
+            </div>
+          </div>
+          <div className="giay-hat p-3 text-muc flex gap-3">
+            <div className="w-14 h-[72px] shrink-0 border border-muc/40 bg-giay-than grid place-items-center text-muc/30 text-2xl">
+              ☺
+            </div>
+            <div className="flex-1 min-w-0">{rows}</div>
+          </div>
+          {seal && <div className="flex justify-end -mt-8 -mb-3 mr-1 scale-75 origin-bottom-right">{seal}</div>}
+          {damage}
+        </div>
+      );
+
+    case "phieu-nho":
+      return (
+        <div
+          className={cx(
+            "relative shadow-giay p-3 text-muc border-2 border-dashed border-ke outline outline-1 outline-giay-vien -outline-offset-[5px]",
+            doc.type === "DT" ? "bg-[#f7f3e8]" : "giay-than-hat",
+            textSize,
+          )}
+        >
+          <div className="text-center border-b border-muc/30 pb-1.5 mb-2">
+            <div className="font-tieu-de font-bold uppercase tracking-wide text-son text-sm">{def.name}</div>
+            <div className="font-nhan text-[10px] tracking-widest text-muc-nhat">{def.code}</div>
+          </div>
+          {rows}
+          {seal && <div className="flex justify-end -mb-2 -mr-1 scale-90 origin-bottom-right">{seal}</div>}
+          {damage}
+        </div>
+      );
+
+    case "giay-ngang":
+      return (
+        <div className={cx("relative shadow-giay border border-giay-vien p-4 text-muc bg-[#dcd6c6]", textSize)}>
+          <div className="absolute inset-0 opacity-40 pointer-events-none bg-[repeating-linear-gradient(0deg,rgba(0,0,0,0.05)_0_1px,transparent_1px_4px)]" />
+          <div className="relative flex items-start justify-between gap-3 border-b-2 border-muc/50 pb-2 mb-3">
+            <div>
+              <div className="font-tieu-de font-bold uppercase tracking-wide text-[15px] leading-tight">{def.name}</div>
+              <div className="font-nhan text-[10px] tracking-widest text-muc-nhat">{def.code}</div>
+            </div>
+            <div className="font-nhan text-[9px] text-right text-muc-nhat leading-tight max-w-[45%]">
+              {s("doc.nation")}
+            </div>
+          </div>
+          <div className="relative">{rows}</div>
+          {seal && <div className="relative flex justify-end -mt-3">{seal}</div>}
+          {damage}
+        </div>
+      );
+
+    default:
+      return (
+        <div className={cx("relative giay-hat shadow-giay border border-giay-vien px-4 pt-3 pb-4 text-muc", textSize)}>
+          <PaperClip className="-top-4 -left-1.5" />
+          <div className="text-center leading-tight">
+            <div className="font-nhan font-bold text-[9px] tracking-[0.12em]">{s("doc.nation")}</div>
+            <div className="text-[10px] italic underline underline-offset-2">{s("doc.motto")}</div>
+          </div>
+          <div className="text-center mt-2.5 mb-3">
+            <div className="font-tieu-de font-bold uppercase text-son text-base tracking-wide">{def.name}</div>
+            <div className="font-nhan text-[10px] tracking-widest text-muc-nhat">{def.code}</div>
+          </div>
+          {rows}
+          {seal && <div className="flex justify-end -mt-1">{seal}</div>}
+          {damage}
+        </div>
+      );
+  }
+}
+
+function Fields({ def, fields, layout }: { def: DocumentDef; fields: Record<string, unknown>; layout: Layout }) {
+  return (
+    <div className="space-y-1.5 leading-snug">
+      {def.fields.map((f) => {
+        const val = fields[f.key];
+        if (val === undefined || val === null) return null;
+
+        if (f.kind === "items" && Array.isArray(val)) {
           return (
-            <div key={f.key} className="flex justify-between border-b border-dashed border-nau/20 pb-0.5">
-              <span className="font-semibold text-nau">{f.label}:</span>
-              <span className="font-mono text-right">{String(val)}</span>
+            <div key={f.key} className="pt-1">
+              <div className="font-nhan text-[10px] uppercase tracking-wider text-muc-nhat">{f.label}:</div>
+              <table className="w-full mt-1 border-collapse">
+                <tbody>
+                  {(val as ItemLike[]).map((item, idx) => (
+                    <tr key={idx} className="border-b border-dotted border-muc/30">
+                      <td className="py-0.5 pr-2">{item.ten ?? item.ma}</td>
+                      <td className="py-0.5 text-right font-bold whitespace-nowrap">
+                        {item.so_luong} {item.don_vi}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           );
-        })}
-      </div>
+        }
 
-      {doc.seal && (
-        <div className="mt-4 pt-2 border-t border-nau/30 flex justify-end">
-          <div
-            className={`border-2 border-dau-do rounded-full p-2 text-center text-[10px] uppercase font-bold text-dau-do transform -rotate-6 ${
-              doc.seal.legible ? "opacity-90" : "opacity-40 filter blur-[0.5px]"
-            }`}
-          >
-            <div>{doc.seal.kind}</div>
-            <div className="text-[9px] font-normal">{doc.seal.place}</div>
+        let shown: ReactNode = String(val);
+        if (f.kind === "item" && typeof val === "object") {
+          const item = val as ItemLike;
+          shown = (
+            <>
+              {item.ten ?? item.ma} ({item.so_luong} {item.don_vi})
+            </>
+          );
+        }
+
+        return (
+          <div key={f.key} className={cx("flex items-baseline gap-2", layout === "giay-ngang" && "text-[0.95em]")}>
+            <span className="text-muc-nhat whitespace-nowrap">{f.label}:</span>
+            <span className="flex-1 border-b border-dotted border-muc/40 translate-y-[-3px]" />
+            <span className="font-bold text-right">{shown}</span>
           </div>
-        </div>
-      )}
+        );
+      })}
     </div>
+  );
+}
+
+function Damage() {
+  return (
+    <>
+      <div className="pointer-events-none absolute right-6 top-10 w-20 h-14 rounded-[50%] bg-[#6b4a22]/25 blur-[2px]" />
+      <div
+        className="pointer-events-none absolute -right-px bottom-10 w-5 h-16 bg-ban/90"
+        style={{ clipPath: "polygon(100% 0, 30% 20%, 80% 40%, 10% 60%, 70% 80%, 100% 100%)" }}
+      />
+      <div className="absolute left-2 bottom-2 font-nhan text-[9px] uppercase tracking-wider text-son-dam">{s("desk.damaged")}</div>
+    </>
   );
 }

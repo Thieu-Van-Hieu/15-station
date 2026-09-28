@@ -21,6 +21,10 @@ Tài liệu này chứa nội dung kịch bản của 5 kết cục trong game "
 - Ảnh: vu-an
 - Điều kiện: không
 - Nội dung: Năm 1987, cơ quan thanh tra vào cuộc làm rõ đường dây đầu cơ gạo và hàng buôn lậu qua các trạm cửa ngõ thị xã. Bạn bị khởi tố vì hành vi nhận hối lộ để hàng lậu lọt trạm. Số tiền {{bribe_total}} đồng nhận được không bù đắp nổi bản án kỷ luật và sự coi thường của đồng nghiệp.
+#### Cảnh 2
+- Ảnh: hop-thiec
+- Điều kiện: không
+- Nội dung: Cuối năm 1987, trong chiếc hộp thiếc để dưới gầm giường, còn {{tien_con_lai}} đồng.
 
 ### Câu trích
 - Nội dung: đẩy mạnh đấu tranh phòng, chống tham nhũng, lãng phí, quan liêu
@@ -55,6 +59,10 @@ Tài liệu này chứa nội dung kịch bản của 5 kết cục trong game "
 - Ảnh: khong-co-bien-ban
 - Điều kiện: không
 - Nội dung: Khi Đổi mới đến vào năm 1987, các mặt hàng ấy được lưu thông tự do. Nhưng lòng tốt giấu giếm của bạn không bao giờ trở thành bài học chung cho sự hoàn thiện thể chế.
+#### Cảnh 3
+- Ảnh: hop-thiec
+- Điều kiện: không
+- Nội dung: Cuối năm 1987, trong chiếc hộp thiếc để dưới gầm giường, còn {{tien_con_lai}} đồng.
 
 ### Câu trích
 - Nội dung: Dân chủ gắn liền với kỷ luật, kỷ cương và phải được thể chế hóa bằng pháp luật
@@ -80,6 +88,7 @@ Tài liệu này chứa nội dung kịch bản của 5 kết cục trong game "
 - valid_reports >= 4
 - issues_triggered >= 1
 - lam_ngo_violations <= 1
+- hardship <= 5
 
 ### Cảnh
 #### Cảnh 1
@@ -90,6 +99,10 @@ Tài liệu này chứa nội dung kịch bản của 5 kết cục trong game "
 - Ảnh: doi-moi-khoan
 - Điều kiện: không
 - Nội dung: Năm 1987, khi trạm 15 giải thể mở ra thời kỳ lưu thông hàng hoá tự do, bản tổng kết của huyện đã trích dẫn {{valid_reports}} biên bản kiến nghị của trạm như những cứ liệu thực tiễn quý giá từ cơ sở.
+#### Cảnh 3
+- Ảnh: hop-thiec
+- Điều kiện: không
+- Nội dung: Cuối năm 1987, trong chiếc hộp thiếc để dưới gầm giường, còn {{tien_con_lai}} đồng.
 
 ### Câu trích
 - Nội dung: tôn trọng quy luật khách quan, xuất phát từ thực tiễn, bám sát thực tiễn, coi trọng tổng kết thực tiễn
@@ -116,6 +129,7 @@ Tài liệu này chứa nội dung kịch bản của 5 kết cục trong game "
 - true_compliance >= 0.85
 - valid_reports == 0
 - lam_ngo_violations == 0
+- hardship <= 5
 
 ### Cảnh
 #### Cảnh 1
@@ -126,6 +140,10 @@ Tài liệu này chứa nội dung kịch bản của 5 kết cục trong game "
 - Ảnh: khong-co-bien-ban
 - Điều kiện: không
 - Nội dung: Nhưng trong suốt những năm tháng ấy, bạn không gửi đi một biên bản kiến nghị nào. Bạn đã chứng kiến gánh nặng của người nông dân mang sản phẩm khoán hay vết thương của người thương binh, nhưng đã chọn im lặng để bảo đảm an toàn cho cuốn sổ thi đua.
+#### Cảnh 3
+- Ảnh: hop-thiec
+- Điều kiện: không
+- Nội dung: Cuối năm 1987, trong chiếc hộp thiếc để dưới gầm giường, còn {{tien_con_lai}} đồng.
 
 ### Câu trích
 - Nội dung: nhìn thẳng vào sự thật, đánh giá đúng sự thật, nói rõ sự thật
@@ -160,6 +178,14 @@ Tài liệu này chứa nội dung kịch bản của 5 kết cục trong game "
 - Ảnh: cho-thoi-doi-moi
 - Điều kiện: không
 - Nội dung: Năm 1987, khi trạm 15 hạ barie và thu hồi sổ chỉ thị, cuộc sống phía trước vẫn còn bộn bề thử thách, nhưng cánh cửa lưu thông đã mở toang đón nhận luồng sinh khí mới của Đổi mới.
+#### Cảnh 3
+- Ảnh: nha-trong
+- Điều kiện: hardship > 5
+- Nội dung: Còn một điều bạn không ghi vào báo cáo nào: những đêm tờ kê chi tiêu bị gạch bỏ từng dòng. Đến khi Hoà đưa hai đứa nhỏ về quê ngoại, căn nhà tập thể chỉ còn tiếng đài và một người đàn ông mặc đồng phục cỏ úa.
+#### Cảnh 4
+- Ảnh: hop-thiec
+- Điều kiện: không
+- Nội dung: Cuối năm 1987, trong chiếc hộp thiếc để dưới gầm giường, còn {{tien_con_lai}} đồng.
 
 ### Câu trích
 - Nội dung: đổi mới phải luôn luôn quán triệt quan điểm 'dân là gốc'

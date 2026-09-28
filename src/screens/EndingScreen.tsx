@@ -2,7 +2,12 @@ import type { Ending } from "../engine/types";
 import type { GameState } from "../engine/state";
 import { filterByWhen } from "../engine/conditions";
 import { conditionState } from "../engine/state";
+import { hiddenStats } from "../engine/endings";
+import { fillText, textVars } from "../engine/text";
 import { content } from "../content";
+import { setLoop } from "../audio";
+import { useEffect } from "react";
+import { AppHeader, Label, Panel, Paper, Portrait, PrimaryButton, Screen, cx, s } from "../components/ui";
 
 interface EndingScreenProps {
   ending: Ending;
@@ -11,85 +16,160 @@ interface EndingScreenProps {
 }
 
 export function EndingScreen({ ending, state, onRestart }: EndingScreenProps) {
+  useEffect(() => setLoop("mus_ket"), []);
+
   const cState = conditionState(state);
   const visibleScenes = filterByWhen(ending.scenes ?? [], cState);
   const visibleFates = filterByWhen(ending.character_lines ?? [], cState);
+  const stats = hiddenStats(state);
+  const vars = textVars(state, content);
+  const index = [...content.endings].sort((a, b) => a.priority - b.priority).findIndex((e) => e.id === ending.id) + 1;
+
+  // "1988: ... 1989: ..." → từng mốc
+  const timeline = s("end.history_card")
+    .split(/(?=\b\d{4}:)/)
+    .map((part) => part.trim())
+    .filter(Boolean)
+    .map((part) => {
+      const m = part.match(/^(\d{4}):\s*(.*)$/s);
+      return m ? { year: m[1], text: m[2] } : { year: "", text: part };
+    });
+
+  const statRows: { label: string; value: string; pct?: number; good?: boolean }[] = [
+    { label: s("end.stat_compliance"), value: `${Math.round(stats.true_compliance * 100)}%`, pct: stats.true_compliance, good: stats.true_compliance >= 0.8 },
+    { label: s("end.stat_reports"), value: String(stats.valid_reports), good: stats.valid_reports > 0 },
+    { label: s("end.stat_lam_ngo"), value: String(stats.lam_ngo_violations), good: stats.lam_ngo_violations === 0 },
+    { label: s("end.stat_bribes"), value: `${stats.bribe_total} ${s("ui.money_unit")}`, good: stats.bribe_total === 0 },
+    { label: s("end.stat_reprimands"), value: String(stats.reprimands), good: stats.reprimands <= 2 },
+    { label: s("end.stat_hardship"), value: String(stats.hardship), good: stats.hardship === 0 },
+  ];
 
   return (
-    <div className="min-h-screen bg-xi-mang text-muc font-may-chu p-6 flex flex-col items-center justify-center">
-      <div className="max-w-2xl w-full border-4 border-nau bg-giay p-8 rounded shadow-2xl space-y-6">
-        <header className="border-b-2 border-nau/40 pb-3 text-center">
-          <span className="text-xs uppercase font-bold text-dau-do tracking-widest">
-            {content.strings["end.title"]}
+    <Screen header={<AppHeader center={<Label className="text-ho-phach">{s("ui.period")}</Label>} />} className="px-4 md:px-6 py-8">
+      <div className="w-full max-w-6xl mx-auto space-y-8">
+        {/* Tiêu đề */}
+        <div className="text-center">
+          <span className="inline-block bg-son-dam/60 border border-son/60 px-4 py-1.5 -rotate-1">
+            <Label className="text-giay tracking-[0.2em]">{s("end.kicker")}</Label>
           </span>
-          <h2 className="text-2xl font-bold text-muc mt-1 uppercase tracking-wide">
-            {ending.title}
-          </h2>
-        </header>
-
-        {/* Cảnh kết / Đoạn văn */}
-        <div className="italic text-xs leading-relaxed text-muc/90 border-l-4 border-nau pl-4 space-y-2">
-          {visibleScenes.map((scene, idx) => (
-            <p key={idx}>{scene.text}</p>
-          ))}
+          <div className="mt-6">
+            <Label className="text-ho-phach tracking-[0.3em]">
+              {s("end.title")} {index} / {content.endings.length}
+            </Label>
+          </div>
+          <h1 className="font-tieu-de font-bold text-4xl md:text-5xl text-giay mt-3 uppercase tracking-wide">{ending.title}</h1>
         </div>
 
-        {/* Số phận nhân vật */}
-        {visibleFates.length > 0 && (
-          <div className="space-y-2 border-t border-nau/20 pt-4">
-            <h4 className="font-bold text-xs uppercase text-dau-do">
-              {content.strings["end.fates_title"]}
-            </h4>
-            <div className="space-y-2 text-xs leading-relaxed">
-              {visibleFates.map((fate, idx) => (
-                <div key={idx} className="p-2 bg-nau/10 border border-nau/20 rounded">
-                  <span className="font-bold text-nau mr-2">{fate.character}:</span>
-                  <span>{fate.text}</span>
+        <div className="grid grid-cols-1 lg:grid-cols-[320px_minmax(0,1fr)] gap-6 items-start">
+          {/* Bảng kê công tác */}
+          <Panel title={s("end.stats_title")}>
+            <div className="space-y-3">
+              {statRows.map((r) => (
+                <div key={r.label} className="border border-vien/70 bg-ban-1 px-3 py-2.5">
+                  <div className="flex items-baseline justify-between gap-2">
+                    <span className="text-[12px] text-chu-ban-phu">{r.label}</span>
+                    <span className={cx("font-nhan font-bold text-[14px]", r.good ? "text-xanh-so-nhat" : "text-son-nhat")}>{r.value}</span>
+                  </div>
+                  {r.pct !== undefined && (
+                    <div className="h-1.5 bg-ban-4 mt-2">
+                      <div className={cx("h-full", r.good ? "bg-xanh-so" : "bg-ho-phach")} style={{ width: `${Math.round(r.pct * 100)}%` }} />
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
+          </Panel>
+
+          {/* Nhật ký hậu truyện */}
+          <div className="space-y-4">
+            <Paper tone="giay" className="px-6 py-5">
+              <Label className="text-son-dam">{s("end.scenes_title")}</Label>
+              <div className="mt-3 space-y-3 text-[14px] leading-relaxed">
+                {visibleScenes.map((scene, idx) => (
+                  <p key={idx} className={idx === 0 ? "first-letter:font-tieu-de first-letter:text-3xl first-letter:font-bold first-letter:float-left first-letter:mr-1.5 first-letter:leading-none" : undefined}>
+                    {fillText(scene.text, vars)}
+                  </p>
+                ))}
+              </div>
+            </Paper>
+
+            {visibleFates.length > 0 && (
+              <div>
+                <Label className="text-chu-ban-phu/70">{s("end.fates_title")}</Label>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2">
+                  {visibleFates.map((fate, idx) => {
+                    const c = content.characters.find((x) => x.id === fate.character);
+                    return (
+                      <div key={idx} className="flex gap-3 border border-vien bg-ban-2/80 p-3">
+                        {c && (
+                          <Portrait
+                            charKey={c.portrait.key}
+                            expression={c.portrait.expressions[0]}
+                            alt={c.name}
+                            className="w-16 h-20 shrink-0 border border-ban-4"
+                          />
+                        )}
+                        <div className="min-w-0">
+                          <h3 className="font-tieu-de font-bold text-giay">{c?.name ?? fate.character}</h3>
+                          <p className="text-[12.5px] leading-relaxed text-chu-ban mt-1">{fillText(fate.text, vars)}</p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </div>
-        )}
+        </div>
 
         {/* Trích dẫn giáo trình */}
-        <div className="border-t border-nau/20 pt-4 text-center space-y-1">
-          <span className="text-[10px] uppercase font-bold text-dau-do tracking-wider">
-            {content.strings["end.quote_title"]}
-          </span>
-          <blockquote className="italic text-xs font-semibold text-muc/95 mt-1 px-4">
-            "{ending.quote.text}"
-          </blockquote>
-          <p className="text-[11px] text-neutral-600 font-mono">
-            — {content.strings["end.chapter_prefix"] ?? "Chương"} {ending.quote.chapter} ({ending.quote.section})
-          </p>
-        </div>
-
-        {/* Câu hỏi suy ngẫm */}
-        {ending.closing_question && (
-          <div className="p-3 bg-dau-do/10 border border-dau-do/30 rounded text-center">
-            <span className="text-[10px] font-bold uppercase text-dau-do block mb-1">
-              {content.strings["end.reflection_title"]}
-            </span>
-            <p className="text-xs italic text-dau-do">{ending.closing_question}</p>
+        <section className="border border-ho-phach/40 bg-gradient-to-b from-[#3a2f22] to-ban-2 px-6 md:px-10 py-8 shadow-noi">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <Label className="text-ho-phach">{s("end.quote_title")}</Label>
+            <Label className="border border-ho-phach/40 px-2 py-0.5 text-[10px] text-chu-ban-phu">
+              {s("end.chapter_prefix")} {ending.quote.chapter} • {ending.quote.section}
+            </Label>
           </div>
-        )}
+          <blockquote className="mt-5 flex gap-4">
+            <span className="font-tieu-de text-6xl leading-none text-ho-phach/70 -mt-2" aria-hidden>
+              &ldquo;
+            </span>
+            <p className="font-tieu-de text-xl md:text-2xl leading-snug text-giay">{ending.quote.text}</p>
+          </blockquote>
 
-        {/* Thẻ lịch sử */}
-        <div className="border-t border-nau/30 pt-3 text-center text-xs text-neutral-600 italic">
-          <p>{content.strings["end.history_card"]}</p>
-        </div>
+          {ending.closing_question && (
+            <div className="mt-6 border border-vien bg-ban/60 px-5 py-4">
+              <Label className="text-son-nhat text-[10px]">{s("end.reflection_title")}</Label>
+              <p className="text-[14px] italic leading-relaxed text-chu-ban mt-1">{fillText(ending.closing_question, vars)}</p>
+            </div>
+          )}
+        </section>
 
-        {/* Nút chơi lại */}
-        <div className="flex justify-center pt-2">
-          <button
-            type="button"
-            onClick={onRestart}
-            className="px-8 py-3 bg-nau hover:bg-nau/90 text-giay font-bold text-sm tracking-widest uppercase rounded shadow-lg border-2 border-giay transition-colors active:scale-95"
-          >
-            {content.strings["end.restart"]}
-          </button>
+        {/* Niên biểu */}
+        <section className="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-4 border border-vien bg-ban-2/80 p-5">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 border border-vien grid place-items-center text-ho-phach" aria-hidden>
+              ↗
+            </div>
+            <h2 className="font-tieu-de font-bold text-lg text-giay uppercase">{s("end.timeline_title")}</h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {timeline.map((t, i) => (
+              <div key={i} className="flex gap-3 border border-vien/70 bg-ban-1 p-3">
+                {t.year && <span className="font-nhan font-bold text-ho-phach bg-ban px-2 py-1 h-fit">{t.year}</span>}
+                <p className="text-[12.5px] leading-relaxed text-chu-ban">{t.text}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <div className="flex flex-wrap items-center justify-between gap-4 pb-6">
+          <p className="text-[11px] text-chu-ban-phu/50 font-nhan">{s("ui.footer")}</p>
+          <PrimaryButton onClick={onRestart} className="w-full sm:w-auto sm:min-w-[300px]">
+            {s("end.restart")}
+          </PrimaryButton>
         </div>
       </div>
-    </div>
+    </Screen>
   );
 }

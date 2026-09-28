@@ -44,6 +44,7 @@ export function newGame(content: GameContent): GameState {
       bribeTaken: false,
       pendingReprimand: null,
       hardship: 0,
+      fatigue: 0,
       overtimeDays: 0,
       log: [],
       dayReport: null,
@@ -105,10 +106,15 @@ export function reduce(state: GameState, action: GameAction, content: GameConten
 
     case "TRA_CHI_TIEU": {
       if (state.phase !== "BUDGET" || state.budget === null) return state;
-      const paid = payExpenses(state.budget, currentDay(state, content), action.expenseIds);
+      const paid = payExpenses(state.budget, currentDay(state, content), action.expenseIds, state.hardship);
       if (paid === null) return state;
 
-      const after: GameState = { ...state, money: paid.money, hardship: state.hardship + paid.hardship };
+      const after: GameState = {
+        ...state,
+        money: paid.money,
+        hardship: state.hardship + paid.hardship,
+        fatigue: paid.hardship,
+      };
       const nextIndex = state.dayIndex + 1;
       if (nextIndex < content.days.length) return { ...enterDay(after, content, nextIndex), phase: "DAY_START" };
 

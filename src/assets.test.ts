@@ -2,12 +2,11 @@ import { describe, expect, it } from "vitest";
 import fs from "node:fs";
 import path from "node:path";
 import { content } from "./content";
+import { SOUNDS, fileBase } from "./audio";
 import { botTheoSo, botKienNghi, botLamNgo, botAnTien } from "../scripts/bots";
 
 const ROOT = path.resolve(__dirname, "..");
 const PORTRAITS_DIR = path.join(ROOT, "public", "art", "portraits");
-const SFX_DIR = path.join(ROOT, "public", "sfx");
-const FONTS_DIR = path.join(ROOT, "public", "fonts");
 
 describe("Asset tests (P7: ART-01 to ART-06)", () => {
   // ART-01: Kiểm tra đủ file chân dung cho mọi portrait.key và biểu cảm trong characters.json và travelers.json
@@ -40,24 +39,23 @@ describe("Asset tests (P7: ART-01 to ART-06)", () => {
     }
   });
 
-  // ART-02: Kiểm tra 4 file âm thanh và file font
-  it("ART-02 đủ 4 file âm thanh và file font trong public/", () => {
-    const sfxList = [
-      "sfx_window_slide.mp3",
-      "sfx_paper_rustle.mp3",
-      "sfx_stamp_down.mp3",
-      "sfx_radio_tune.mp3",
-    ];
-
-    for (const sfx of sfxList) {
-      const p = path.join(SFX_DIR, sfx);
-      expect(fs.existsSync(p), `Thiếu file âm thanh ${sfx}`).toBe(true);
-      expect(fs.statSync(p).size).toBeGreaterThan(10);
+  // ART-02: Mọi âm trong danh mục đều có âm tổng hợp dự phòng hoặc là âm nền; font tự host có bộ chữ tiếng Việt
+  it("ART-02 danh mục âm thanh đầy đủ và font tự host có tiếng Việt", () => {
+    const audioSrc = fs.readFileSync(path.join(ROOT, "src", "audio.ts"), "utf-8");
+    const doc = fs.readFileSync(path.join(ROOT, "docs", "09-am-thanh.md"), "utf-8");
+    for (const name of Object.keys(SOUNDS) as (keyof typeof SOUNDS)[]) {
+      if (SOUNDS[name].category === "sfx") {
+        expect(audioSrc, `Thiếu âm tổng hợp dự phòng cho ${name}`).toMatch(new RegExp(`\\n  ${name}\\(ac, out, t\\)`));
+      }
+      expect(doc, `docs/09-am-thanh.md chưa mô tả file ${fileBase(name)}`).toContain(fileBase(name));
     }
 
-    const fontPath = path.join(FONTS_DIR, "typewriter.woff2");
-    expect(fs.existsSync(fontPath), "Thiếu file font typewriter.woff2").toBe(true);
-    expect(fs.statSync(fontPath).size).toBeGreaterThan(10);
+    const mainSrc = fs.readFileSync(path.join(ROOT, "src", "main.tsx"), "utf-8");
+    for (const font of ["noto-serif", "ibm-plex-mono", "space-mono"]) {
+      expect(mainSrc).toContain(`@fontsource/${font}/`);
+      const css = fs.readFileSync(path.join(ROOT, "node_modules", "@fontsource", font, "400.css"), "utf-8");
+      expect(css, `Font ${font} thiếu bộ chữ tiếng Việt`).toContain("vietnamese");
+    }
   });
 
   // ART-03: Kiểm tra không gọi CDN ngoài (Google Fonts, unpkg, v.v.)

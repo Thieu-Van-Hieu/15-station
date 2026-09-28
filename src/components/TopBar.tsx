@@ -1,6 +1,6 @@
 import type { Day, GameState } from "../engine/types";
 import { formatClock } from "../engine/day-end";
-import { content } from "../content";
+import { AppHeader, Chip, Label, s } from "./ui";
 
 interface TopBarProps {
   state: GameState;
@@ -10,29 +10,33 @@ interface TopBarProps {
 }
 
 export function TopBar({ state, day, currentTravelerOrder, totalTravelersInDay }: TopBarProps) {
+  const late = state.clockMin > toMin(day.clock.end);
   return (
-    <header className="bg-nau text-giay border-b-2 border-nau/80 px-4 py-2 flex flex-wrap items-center justify-between text-xs font-mono shadow-md">
-      <div className="flex items-center space-x-4">
-        <span className="font-bold text-sm text-giay tracking-wide">{day.label}</span>
-        <span className="text-giay/80">({day.game_date})</span>
-      </div>
-
-      <div className="flex items-center space-x-6">
-        <div>
-          <span className="text-giay/70 mr-1">{content.strings["desk.clock"]}:</span>
-          <span className="font-bold text-giay">{formatClock(state.clockMin)}</span>
+    <AppHeader
+      center={
+        <div className="flex flex-wrap items-center justify-center gap-2">
+          <div className="border border-vien bg-ban-1 px-3 py-1 leading-tight text-center">
+            <Label className="block text-ho-phach text-[10px]">{day.label}</Label>
+            <span className="font-nhan text-[11px] text-chu-ban-phu/70">{day.game_date}</span>
+          </div>
+          <Chip label={s("desk.clock")} value={formatClock(state.clockMin)} tone={late ? "son" : "xanh"} />
+          <Chip label={s("ui.traveler_count")} value={`${String(currentTravelerOrder).padStart(2, "0")} / ${String(totalTravelersInDay).padStart(2, "0")}`} />
         </div>
-
-        <div>
-          <span className="font-bold text-giay">
-            {currentTravelerOrder} / {totalTravelersInDay}
-          </span>
+      }
+      right={
+        <div className="hidden md:flex items-center gap-3">
+          <div className="text-right leading-tight">
+            <Label className="block text-chu-ban-phu/50 text-[9px]">{s("ui.officer_label")}</Label>
+            <span className="text-[12px] text-giay">{s("ui.officer_name")}</span>
+          </div>
+          <Chip label={s("ui.money")} value={`${state.money} ${s("ui.money_unit")}`} tone="ho-phach" />
         </div>
-
-        <div className="bg-giay text-muc px-2.5 py-0.5 rounded font-bold border border-nau">
-          <span>{state.money}</span>
-        </div>
-      </div>
-    </header>
+      }
+    />
   );
+}
+
+function toMin(hhmm: string): number {
+  const [h, m] = hhmm.split(":").map(Number);
+  return h * 60 + m;
 }

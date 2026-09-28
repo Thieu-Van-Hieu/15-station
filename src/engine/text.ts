@@ -1,6 +1,6 @@
 /**
  * Biến trong chữ — 03 mục 1.13.
- * `{{bribe_total}}`, `{{valid_reports}}`, `{{hang_tich_thu_kg}}`, `{{day_label}}`, `{{kn_remaining:KN-KHOAN}}`.
+ * `{{bribe_total}}`, `{{valid_reports}}`, `{{hang_tich_thu_kg}}`, `{{day_label}}`, `{{tien_con_lai}}`, `{{kn_remaining:KN-KHOAN}}`.
  */
 
 import { currentDay, type GameState } from "./state";
@@ -24,6 +24,7 @@ export function textVars(state: GameState, content: GameContent): Record<string,
     valid_reports: state.total.valid_reports,
     hang_tich_thu_kg: state.total.hang_tich_thu_kg,
     day_label: currentDay(state, content).label,
+    tien_con_lai: state.money,
   };
   for (const issue of content.reports) {
     const count = state.issues[issue.id]?.count ?? 0;

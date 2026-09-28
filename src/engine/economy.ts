@@ -3,7 +3,7 @@
  */
 
 import type { Grade } from "./day-end";
-import type { Day } from "./types";
+import type { Day, Expense } from "./types";
 
 export interface Budget {
   /** Tiền cuối ngày trước. */
@@ -28,15 +28,45 @@ export function computeBudget(carried: number, day: Day, grade: Grade, reprimand
   return { carried, afterReform, income: e.income, bonus, fines, bribes: bribesToday, available };
 }
 
+/** Mỗi điểm mệt làm mỗi lượt khách hôm sau chậm thêm chừng này phút (03 mục 8.3). */
+export const FATIGUE_MIN_PER_POINT = 10;
+
+/** Ngưỡng hardship của ba mức leo thang gia đình (03 mục 8.4). */
+export const FAMILY_THRESHOLDS = [2, 5, 8] as const;
+
+/** Mức leo thang gia đình 0–3 theo hardship cộng dồn. */
+export function familyLevel(hardship: number): 0 | 1 | 2 | 3 {
+  return FAMILY_THRESHOLDS.filter((t) => hardship >= t).length as 0 | 1 | 2 | 3;
+}
+
+/** Số người trong nhà trước khi Hoà đưa con về quê: Thành, Hoà, mẹ, Mai, Bình. */
+const HOUSEHOLD_SIZE = 5;
+
+/**
+ * Các khoản chi thực tế của ngày. Từ mức 3 cả nhà đã về quê: bỏ các khoản của từng người,
+ * khoản chung (gạo, chất đốt) chỉ còn phần của một mình Thành.
+ */
+export function expensesFor(day: Day, hardship: number): Expense[] {
+  if (familyLevel(hardship) < 3) return day.economy.expenses;
+  return day.economy.expenses
+    .filter((x) => x.member === undefined || x.member === null)
+    .map((x) => ({ ...x, cost: Math.ceil(x.cost / HOUSEHOLD_SIZE) }));
+}
+
 /**
  * Trả các khoản đã chọn. Null nếu có mã khoản lạ, chọn trùng, hoặc tổng vượt số có thể chi.
  * Mỗi khoản thiết yếu không trả làm hardship tăng 1.
  */
-export function payExpenses(budget: Budget, day: Day, ids: readonly string[]): { money: number; hardship: number } | null {
+export function payExpenses(
+  budget: Budget,
+  day: Day,
+  ids: readonly string[],
+  hardshipSoFar = 0,
+): { money: number; hardship: number } | null {
   const chosen = new Set(ids);
   if (chosen.size !== ids.length) return null;
 
-  const expenses = day.economy.expenses;
+  const expenses = expensesFor(day, hardshipSoFar);
   if (ids.some((id) => !expenses.some((x) => x.id === id))) return null;
 
   const spent = expenses.filter((x) => chosen.has(x.id)).reduce((sum, x) => sum + x.cost, 0);

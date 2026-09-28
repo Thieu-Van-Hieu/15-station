@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { day, gdd, traveler } from "./__fixtures__";
 import { gameContent, startAt } from "./__fixtures__/game";
-import { computeBudget, payExpenses } from "./economy";
+import { computeBudget, expensesFor, familyLevel, payExpenses } from "./economy";
 import { reduce } from "./game";
 import type { Traveler } from "./types";
 
@@ -49,5 +49,27 @@ describe("economy — 03 mục 8 (số mặc định ở 8.2)", () => {
     const b = computeBudget(0, day("d5"), "KHA", 0, 120);
     expect(b.bribes).toBe(120);
     expect(b.available).toBe(420 + 120);
+  });
+
+  it("ECO-08 mức gia đình theo hardship cộng dồn: 2, 5, 8", () => {
+    expect([0, 1, 2, 4, 5, 7, 8, 20].map(familyLevel)).toEqual([0, 0, 1, 1, 2, 2, 3, 3]);
+  });
+
+  it("ECO-09 mức 3: bỏ khoản của từng người, khoản chung còn phần một người", () => {
+    const d = day("d6");
+    expect(expensesFor(d, 7)).toBe(d.economy.expenses);
+    const gone = expensesFor(d, 8);
+    expect(gone.every((x) => !x.member)).toBe(true);
+    for (const x of gone) {
+      const full = d.economy.expenses.find((y) => y.id === x.id)!;
+      expect(x.cost).toBe(Math.ceil(full.cost / 5));
+    }
+  });
+
+  it("ECO-10 trả chi tiêu theo bảng đã lọc: khoản của người đã về quê không còn chọn được", () => {
+    const d = day("d6");
+    const member = d.economy.expenses.find((x) => x.member)!;
+    const b = computeBudget(10000, d, "KHA", 0, 0);
+    expect(payExpenses(b, d, [member.id], 8)).toBeNull();
   });
 });

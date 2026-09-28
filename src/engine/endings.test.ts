@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { ENDINGS } from "./__fixtures__/game";
 import { type HiddenStats, filterByWhen } from "./conditions";
 import { pickEnding } from "./endings";
+import { content } from "../content";
 
 const stats = (over: Partial<HiddenStats>): HiddenStats => ({
   true_compliance: 1,
@@ -43,6 +44,21 @@ describe("endings — 03 mục 9", () => {
 
   it("END-06 chấp hành 84% thì là người sống sót", () => {
     expect(pick({ true_compliance: 0.84 })).toBe("END-SONG-SOT");
+  });
+
+  it("END-08 bỏ đói gia đình quá 5 khoản thì không còn là người gác cổng hay người kiến nghị", () => {
+    expect(pick({ true_compliance: 1, hardship: 5 })).toBe("END-GAC-CONG");
+    expect(pick({ true_compliance: 1, hardship: 6 })).toBe("END-SONG-SOT");
+    expect(pick({ valid_reports: 4, issues_triggered: 1, hardship: 6 })).toBe("END-SONG-SOT");
+  });
+
+  it("END-09 endings.json khớp 9.2: hai kết cục tốt có hardship <= 5, sống sót có cảnh riêng khi hardship > 5", () => {
+    const has = (id: string) => content.endings.find((e) => e.id === id)!;
+    for (const id of ["END-KIEN-NGHI", "END-GAC-CONG"]) {
+      expect(has(id).conditions).toContainEqual({ stat: "hardship", op: "<=", value: 5 });
+    }
+    expect(has("END-SONG-SOT").scenes.some((sc) => sc.when?.some((w) => "stat" in w && w.stat === "hardship"))).toBe(true);
+    for (const e of content.endings) expect(e.scenes.some((sc) => sc.text.includes("{{tien_con_lai}}"))).toBe(true);
   });
 
   it("END-07 cảnh có when không thoả thì không hiện", () => {

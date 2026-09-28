@@ -212,7 +212,7 @@ Nhiều điều kiện trong một mảng `when` được nối bằng VÀ.
 | `dung-trinh-bay` | Điểm dừng khi trình bày trước lớp |
 | `dong-cam` | Lượt nhằm tạo đồng cảm |
 
-**Biến trong chữ**, dùng trong `strings.json` và cảnh kết: `{{bribe_total}}`, `{{valid_reports}}`, `{{hang_tich_thu_kg}}`, `{{day_label}}`, `{{kn_remaining:KN-KHOAN}}` (số biên bản còn thiếu để chạm ngưỡng).
+**Biến trong chữ**, dùng trong `strings.json` và cảnh kết: `{{bribe_total}}`, `{{valid_reports}}`, `{{hang_tich_thu_kg}}`, `{{day_label}}`, `{{tien_con_lai}}` (tiền cuối cùng của gia đình), `{{kn_remaining:KN-KHOAN}}` (số biên bản còn thiếu để chạm ngưỡng).
 
 ---
 
@@ -612,6 +612,29 @@ Bảng chi tiêu hiện riêng tiền phong bì thành một dòng, để ngư�
 
 `currency_reform_divisor = 10` đặt ở d5: đổi tiền tháng 9/1985, 10 đồng cũ ăn 1 đồng mới.
 
+### 8.3. Mệt: hậu quả ngay ngày hôm sau
+
+Nếu bỏ chi không có hậu quả thì không chi đồng nào là lối chơi tối ưu, phong bì mất sức cám dỗ và `END-AN-TIEN` mất sức nặng. Vì vậy `hardship` có hậu quả cơ chế ngay hôm sau:
+
+```
+fatigue = số khoản thiết yếu không trả ở lần chi tiêu gần nhất
+mỗi lượt khách hôm nay tốn: per_traveler_min + 10 × fatigue
+```
+
+Người bỏ đói nhà mình thì hôm sau làm chậm, và làm chậm nghĩa là không còn thời gian lập biên bản kiến nghị. Ngày 5 lượt với `fatigue = 2`: 5 × 120 = 600 phút, vừa hết ca 17:00, lập thêm một biên bản là ngoài giờ. Màn đầu ngày báo cho người chơi số phút bị chậm.
+
+### 8.4. Leo thang gia đình
+
+`hardship` cộng dồn cả game. Ba mức hiện ở màn đầu ngày và màn chi tiêu (`strings.json`: `family.level_1..3`):
+
+| Mức | Ngưỡng | Nội dung |
+|---|---|---|
+| 1 | `hardship ≥ 2` | Hoà hỏi tháng này có chuyện gì ở trạm không. |
+| 2 | `hardship ≥ 5` | Bé Mai nghỉ học, mẹ sang ở nhờ nhà bác. |
+| 3 | `hardship ≥ 8` | Hoà đưa hai đứa về quê ngoại. |
+
+Từ mức 3, bảng chi tiêu bỏ mọi khoản có `member`, còn các khoản chung (gạo, chất đốt) tính cho một người: `làm tròn lên(cost / 5)`. Mức 3 tự đóng vòng lặp: cả nhà đã đi thì không còn ai để bỏ mặc, game không nhắc đi nhắc lại một trạng thái đứng yên. Engine lọc bằng `expensesFor(day, hardship)`; `days.json` không cần sửa.
+
 ### 8.2. Số mặc định đề xuất (mô phỏng, KB chỉnh trong `days.json`)
 
 | Ngày | Thu | Phạt mỗi lỗi | Thưởng | Gạo | Than | Thuốc mẹ | Thuốc Bình | Học phí Mai | Tổng chi thiết yếu |
@@ -639,7 +662,7 @@ Bảng chi tiêu hiện riêng tiền phong bì thành một dòng, để ngư�
 | `bribes_accepted` | Số phong bì đã nhận |
 | `bribe_total` | Tổng tiền phong bì |
 | `issues_triggered` | Số vấn đề kiến nghị đã chạm ngưỡng |
-| `hardship` | Số khoản thiết yếu không trả được |
+| `hardship` | Số khoản thiết yếu không trả được, cộng dồn cả game |
 | `overtime_days` | Số ngày làm ngoài giờ |
 | `reprimands` | Số giấy nhắc nhở |
 
@@ -651,11 +674,15 @@ Xét `endings.json` theo `priority` tăng dần. Chọn kết cục **đầu ti�
 |---|---|---|
 | 1 | `END-AN-TIEN` | `bribes_accepted ≥ 2` |
 | 2 | `END-LAM-NGO` | `lam_ngo_violations ≥ 4` |
-| 3 | `END-KIEN-NGHI` | `valid_reports ≥ 4`, `issues_triggered ≥ 1`, `lam_ngo_violations ≤ 1` |
-| 4 | `END-GAC-CONG` | `true_compliance ≥ 0.85`, `valid_reports = 0`, `lam_ngo_violations = 0` |
+| 3 | `END-KIEN-NGHI` | `valid_reports ≥ 4`, `issues_triggered ≥ 1`, `lam_ngo_violations ≤ 1`, `hardship ≤ 5` |
+| 4 | `END-GAC-CONG` | `true_compliance ≥ 0.85`, `valid_reports = 0`, `lam_ngo_violations = 0`, `hardship ≤ 5` |
 | 5 | `END-SONG-SOT` | — |
 
 **Vì sao thứ tự này:** hành vi sai về đạo đức được xét trước, nên người vừa kiến nghị vừa nhận tiền vẫn là người ăn tiền. Người kiến nghị **không bị đòi hỏi chấp hành cao**, vì cho bà Tư qua kèm biên bản là sai theo sổ nhưng vẫn là con đường game khuyến khích. Điều bị chặn là làm ngơ: quá 1 lần thì không còn là người kiến nghị.
+
+**Vì sao `hardship ≤ 5` ở hai kết cục tốt:** người bỏ đói nhà mình suốt tám năm không phải "người gác cổng mẫu mực", cũng không phải "người kiến nghị". Họ rơi xuống `END-SONG-SOT`, ở đó có thêm một cảnh với `when: hardship > 5`. Ngưỡng 5 cố ý rộng: người chơi bình thường thiếu vài khoản ở màn 3 (lương không đủ trả hết) vẫn không chạm ngưỡng, nên game không nói rằng ai nghèo thì không thể sống đúng; chỉ người cố tình không trả gì suốt mới rơi xuống.
+
+Mọi kết cục kết thúc bằng một cảnh chung: "Cuối năm 1987, trong chiếc hộp thiếc để dưới gầm giường, còn `{{tien_con_lai}}` đồng." Với người tích trữ, con số đó hiện ngay cạnh cảnh Hoà đưa con về quê.
 
 ### 9.3. Tính khả thi của từng kết cục
 

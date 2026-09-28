@@ -1215,7 +1215,7 @@ export function kiemTraTang3Dieu11(travelers: any[]): PhatHien[] {
 /** Kiểm tra biến {{…}} trong strings.json và endings.json (TXT-04). */
 export function kiemTraBienChu(strings: Record<string, string>, endings: any, reports: any[]): PhatHien[] {
   const phatHien: PhatHien[] = [];
-  const validVars = new Set<string>(["bribe_total", "valid_reports", "hang_tich_thu_kg", "day_label"]);
+  const validVars = new Set<string>(["bribe_total", "valid_reports", "hang_tich_thu_kg", "day_label", "tien_con_lai"]);
 
   for (const r of reports) {
     validVars.add(`kn_remaining:${r.id}`);

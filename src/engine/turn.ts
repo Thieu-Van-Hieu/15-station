@@ -2,6 +2,7 @@
  * Chấm và cập nhật sau mỗi lượt — 03 mục 5.
  */
 
+import { FATIGUE_MIN_PER_POINT } from "./economy";
 import { finishDay, addDeltas } from "./day-end";
 import { evaluate } from "./evaluate";
 import { fileReport, reasonsOn } from "./reports";
@@ -135,7 +136,11 @@ export function decide(state: GameState, content: GameContent, { action, reasonI
     today: bump(state.today),
     issues,
     indicators: addDeltas(state.indicators, outcome.deltas),
-    clockMin: state.clockMin + day.clock.per_traveler_min + (report === null ? 0 : day.clock.per_report_min),
+    clockMin:
+      state.clockMin +
+      day.clock.per_traveler_min +
+      FATIGUE_MIN_PER_POINT * (state.fatigue ?? 0) +
+      (report === null ? 0 : day.clock.per_report_min),
     bribeTaken: false,
     pendingReprimand,
     log: [...state.log, record],

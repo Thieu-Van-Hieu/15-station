@@ -10,6 +10,7 @@ import { DayEndScreen } from "./screens/DayEndScreen";
 import { BudgetScreen } from "./screens/BudgetScreen";
 import { EndingScreen } from "./screens/EndingScreen";
 import { IntroScreen } from "./screens/IntroScreen";
+import { DayStartScreen } from "./screens/DayStartScreen";
 
 const STORAGE_KEY = "tram15_state";
 
@@ -73,62 +74,24 @@ export default function App() {
     return <IntroScreen onStart={() => dispatch({ type: "BAT_DAU_GAME" })} />;
   }
 
-  // 2. Màn đầu ngày (thẻ chuyển cảnh hoặc đài truyền thanh đầu ngày)
+  // 2. Màn đầu ngày (thẻ chuyển cảnh và giao ban đầu ngày)
   if (state.phase === "DAY_START") {
-    const day = currentDay(state, content);
-    const startInterlude = day.interludes?.find((i) => i.at === "start");
-
-    return (
-      <div className="min-h-screen bg-xi-mang text-muc font-may-chu p-6 flex flex-col items-center justify-center">
-        <div className="max-w-xl w-full border-4 border-nau bg-giay p-8 rounded shadow-2xl space-y-6 text-center">
-          <header className="border-b-2 border-nau/40 pb-3">
-            <span className="text-xs uppercase font-bold text-dau-do tracking-widest">
-              {content.strings["desk.transition_title"]}
-            </span>
-            <h2 className="text-2xl font-bold text-muc mt-1 uppercase tracking-wide">{day.label}</h2>
-            <p className="text-xs text-neutral-600 font-mono mt-0.5">{day.game_date}</p>
-          </header>
-
-          {day.transition_card && (
-            <div className="space-y-3 text-xs leading-relaxed text-justify italic bg-nau/10 p-4 border-l-4 border-nau rounded">
-              {day.transition_card.lines.map((line, idx) => (
-                <p key={idx}>{line}</p>
-              ))}
-            </div>
-          )}
-
-          {startInterlude && (
-            <div className="space-y-2 text-xs leading-relaxed text-left bg-neutral-800 text-giay p-4 rounded border-2 border-neutral-700">
-              {startInterlude.lines.map((line, idx) => (
-                <p key={idx}>
-                  <span className="text-dau-do font-bold mr-2">[{line.speaker}]:</span>
-                  <span>{line.text}</span>
-                </p>
-              ))}
-            </div>
-          )}
-
-          <div className="pt-2">
-            <button
-              type="button"
-              onClick={() => dispatch({ type: "BAT_DAU_NGAY" })}
-              className="w-full py-3 bg-nau hover:bg-nau/90 text-giay font-bold text-sm tracking-widest uppercase rounded shadow-lg border-2 border-giay transition-colors active:scale-95"
-            >
-              {content.strings["desk.start_day"]} →
-            </button>
-          </div>
-        </div>
-      </div>
-    );
+    return <DayStartScreen
+        day={currentDay(state, content)}
+        hardship={state.hardship}
+        fatigue={state.fatigue ?? 0}
+        onStart={() => dispatch({ type: "BAT_DAU_NGAY" })} />;
   }
 
   // 3. Màn làm việc (Desk)
   if (state.phase === "TRAVELER") {
     const day = currentDay(state, content);
     const traveler = currentTraveler(state, content);
-    const lastReprimandText = state.pendingReprimand
-      ? reprimandText(state.pendingReprimand, content)
-      : null;
+    // Lượt trước lập biên bản sai lý do: báo cho người chơi cùng chỗ với giấy nhắc nhở.
+    const last = state.travelerIndex > 0 ? state.log[state.log.length - 1] : undefined;
+    const invalidReport = last?.report && !last.report.valid ? content.strings["report.invalid"] : null;
+    const notices = [state.pendingReprimand ? reprimandText(state.pendingReprimand, content) : null, invalidReport].filter(Boolean);
+    const lastReprimandText = notices.length > 0 ? notices.join("\n\n") : null;
 
     return (
       <DeskScreen
@@ -172,6 +135,7 @@ export default function App() {
       <BudgetScreen
         day={day}
         budget={state.budget}
+        hardship={state.hardship}
         onSubmitExpenses={(expenseIds: string[]) => dispatch({ type: "TRA_CHI_TIEU", expenseIds })}
       />
     );
