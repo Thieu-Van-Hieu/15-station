@@ -12,6 +12,8 @@ import { BudgetScreen } from "./screens/BudgetScreen";
 import { EndingScreen } from "./screens/EndingScreen";
 import { IntroScreen } from "./screens/IntroScreen";
 import { DayStartScreen } from "./screens/DayStartScreen";
+import { VoteScreen } from "./screens/VoteScreen";
+import { HostScreen } from "./screens/HostScreen";
 
 const STORAGE_KEY = "tram15_state";
 
@@ -52,6 +54,15 @@ function getInitialState(): GameState {
 }
 
 export default function App() {
+  if (typeof window !== "undefined") {
+    if (window.location.pathname.startsWith("/vote")) {
+      return <VoteScreen />;
+    }
+    if (window.location.pathname.startsWith("/host")) {
+      return <HostScreen />;
+    }
+  }
+
   const [state, setState] = useState<GameState>(getInitialState);
 
   // Lưu tiến trình vào localStorage

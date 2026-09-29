@@ -9,6 +9,7 @@ import { CONFRONT_WRONG_MIN, confront, confrontLines, factsOf } from "../engine/
 import { parseClock } from "../engine/day-end";
 import { Rulebook } from "../components/Rulebook";
 import { ActionControls } from "../components/ActionControls";
+import { ClassroomVotingPanel } from "../components/ClassroomVotingPanel";
 import { Label, Panel, cx, s, unit } from "../components/ui";
 import { conditionState, issuesActiveOn } from "../engine/state";
 import { activeRules } from "../engine/active";
@@ -30,6 +31,11 @@ interface DeskScreenProps {
 }
 
 const RULEBOOK_KEY = "tram15_rulebook";
+const HOST_MODE_KEY = "tram15_host_mode";
+const HOST_ROOM_KEY = "tram15_host_room";
+const HOST_TOKEN_KEY = "tram15_host_token";
+const DEFAULT_HOST_TOKEN = "tram15-host-secret";
+const DEFAULT_ROOM = "T15";
 
 function readRulebookOpen(): boolean {
   try {
@@ -77,6 +83,74 @@ export function DeskScreen({
   const [pencilOn, setPencilOn] = useState(false);
   const [selected, setSelected] = useState<string[]>([]);
   const [confrontView, setConfrontView] = useState<ConfrontView | null>(null);
+
+  // P4: Chế độ Host & Bỏ phiếu lớp học
+  const isPresentationStop = Boolean(traveler.tags?.includes("dung-trinh-bay"));
+
+  const [isHostMode, setIsHostMode] = useState<boolean>(() => {
+    try {
+      if (typeof window !== "undefined") {
+        const p = new URLSearchParams(window.location.search);
+        if (p.get("host") === "1" || p.get("room")) return true;
+      }
+      return localStorage.getItem(HOST_MODE_KEY) === "1";
+    } catch {
+      return false;
+    }
+  });
+
+  const [hostRoom] = useState<string>(() => {
+    try {
+      if (typeof window !== "undefined") {
+        const p = new URLSearchParams(window.location.search);
+        const r = p.get("room");
+        if (r && r.trim().length > 0) return r.trim().toUpperCase();
+      }
+      return localStorage.getItem(HOST_ROOM_KEY) || DEFAULT_ROOM;
+    } catch {
+      return DEFAULT_ROOM;
+    }
+  });
+
+  const [hostToken] = useState<string>(() => {
+    try {
+      return localStorage.getItem(HOST_TOKEN_KEY) || DEFAULT_HOST_TOKEN;
+    } catch {
+      return DEFAULT_HOST_TOKEN;
+    }
+  });
+
+  const [showVotingPanel, setShowVotingPanel] = useState<boolean>(
+    () => isPresentationStop && isHostMode
+  );
+
+  useEffect(() => {
+    setShowVotingPanel(isPresentationStop && isHostMode);
+  }, [traveler.id, isPresentationStop, isHostMode]);
+
+  function toggleHostMode() {
+    setIsHostMode((prev) => {
+      const next = !prev;
+      try {
+        localStorage.setItem(HOST_MODE_KEY, next ? "1" : "0");
+      } catch {
+        // Bỏ qua lỗi localStorage
+      }
+      if (next && isPresentationStop) {
+        setShowVotingPanel(true);
+      }
+      return next;
+    });
+  }
+
+  function handleMajorityDecide(verdict: Verdict) {
+    onStampDrop(verdict, null, null);
+    handleDecide(verdict, reportId);
+  }
+
+  function handleManualTie() {
+    // Khi hoà phiếu: không tự động đóng dấu, cho phép Host tự bấm
+  }
 
   function toggleRulebook(open: boolean) {
     setRulebookOpen(open);
@@ -164,10 +238,12 @@ export function DeskScreen({
     }
     setInks((list) => [...list, ink!]);
     playSfx("stamp");
-    mainRef.current?.animate(
-      [{ transform: "translate(0,0)" }, { transform: "translate(1.5px,2px)" }, { transform: "translate(-1px,-1px)" }, { transform: "translate(0,0)" }],
-      { duration: 110 },
-    );
+    if (typeof mainRef.current?.animate === "function") {
+      mainRef.current.animate(
+        [{ transform: "translate(0,0)" }, { transform: "translate(1.5px,2px)" }, { transform: "translate(-1px,-1px)" }, { transform: "translate(0,0)" }],
+        { duration: 110 },
+      );
+    }
     return true;
   }
 
@@ -241,6 +317,9 @@ export function DeskScreen({
         currentTravelerOrder={currentTravelerOrder}
         totalTravelersInDay={totalTravelersInDay}
         clockMin={clockShown}
+        isHostMode={isHostMode}
+        hostRoom={hostRoom}
+        onToggleHostMode={toggleHostMode}
       />
 
       <main
@@ -343,6 +422,50 @@ export function DeskScreen({
 
         {/* Khu 2: Mặt bàn với giấy tờ */}
         <section className="mat-ban-cham min-h-[420px] lg:min-h-0 overflow-auto thanh-cuon relative flex flex-col">
+          {/* Bảng bỏ phiếu lớp học nếu là lượt dung-trinh-bay */}
+          {isPresentationStop && showVotingPanel && (
+            <div className="px-6 pt-4">
+              <ClassroomVotingPanel
+                room={hostRoom}
+                hostToken={hostToken}
+                turnId={traveler.id}
+                question={
+                  traveler.id === "d3-t3"
+                    ? s("host.default_question_d3t3")
+                    : `${character?.name ?? traveler.character} (${traveler.id}) - ${s("vote.stamp_approve")} / ${s("vote.stamp_reject")}?`
+                }
+                onMajorityDecide={handleMajorityDecide}
+                onManualTie={handleManualTie}
+                onDismiss={() => setShowVotingPanel(false)}
+              />
+            </div>
+          )}
+
+          {/* Gợi ý bật Host nếu là lượt dung-trinh-bay nhưng host đang tắt */}
+          {isPresentationStop && !showVotingPanel && !chosenAction && (
+            <div className="mx-6 mt-4 p-3 bg-amber-950/40 border border-amber-500/50 rounded flex flex-wrap items-center justify-between gap-2 text-xs">
+              <div className="flex items-center gap-2 text-amber-300">
+                <span className="w-2 h-2 rounded-full bg-amber-400" />
+                <span className="font-semibold">{s("host.present_stop")}</span>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setIsHostMode(true);
+                  setShowVotingPanel(true);
+                  try {
+                    localStorage.setItem(HOST_MODE_KEY, "1");
+                  } catch {
+                    // Bỏ qua lỗi localStorage
+                  }
+                }}
+                className="px-2.5 py-1 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded text-xs transition"
+              >
+                {s("host.enable_now")}
+              </button>
+            </div>
+          )}
+
           <div className="flex items-center justify-between px-5 pt-4">
             <Label className="text-chu-ban-phu/70">{s("desk.documents_title")}</Label>
             <Label className="text-chu-ban-phu/40 text-[10px]">{traveler.documents.length}</Label>
@@ -476,6 +599,7 @@ export function DeskScreen({
         chosenAction={chosenAction}
         chosenReasonId={chosenReasonId}
         travelerOrder={currentTravelerOrder}
+        isHostVoting={isHostMode && isPresentationStop && showVotingPanel && !chosenAction}
         onDecide={handleDecide}
         onNext={handleNext}
         onStampDrop={onStampDrop}
