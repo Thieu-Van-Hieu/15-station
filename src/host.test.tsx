@@ -3,14 +3,15 @@ import { describe, expect, it, beforeEach, afterEach, vi } from "vitest";
 import { render, screen, fireEvent, waitFor, cleanup } from "@testing-library/react";
 import { HostScreen } from "./screens/HostScreen";
 import { content } from "./content";
+import { fakeClassroomApi } from "./test/fakeClassroomApi";
 
-describe("HostScreen (Projector host display & manual fallback - Step 3)", () => {
+const t = content.strings;
+
+describe("Màn máy chiếu /host (P4)", { timeout: 15000 }, () => {
   beforeEach(() => {
     localStorage.clear();
-    // Không còn token mặc định trong bundle: người chủ trì nhập token một lần, lưu ở localStorage.
     localStorage.setItem("tram15_host_token", "test-host-token");
     window.history.pushState({}, "", "/host?room=TEST1");
-    vi.restoreAllMocks();
   });
 
   afterEach(() => {
@@ -19,201 +20,82 @@ describe("HostScreen (Projector host display & manual fallback - Step 3)", () =>
     vi.restoreAllMocks();
   });
 
-  it("1. Hiển thị tiêu đề máy chiếu, mã phòng và nút về game", async () => {
-    globalThis.fetch = vi.fn().mockResolvedValue({
-      ok: true,
-      json: async () => ({
-        round: 0,
-        open: false,
-        counts: { CHO_QUA: 0, GIU_LAI: 0 },
-        total: 0,
-      }),
-    } as any);
-
+  it("H-01 phòng chờ: mã phòng to, đường dẫn ngắn, mã QR phóng to được, nút về game", async () => {
+    globalThis.fetch = fakeClassroomApi({ joined: 7 }).fetch as never;
     render(<HostScreen />);
 
-    expect(screen.getByText(content.strings["host.title"])).toBeDefined();
-    expect(screen.getByText(content.strings["host.back_game"])).toBeDefined();
-    expect(screen.getAllByText(new RegExp("TEST1")).length).toBeGreaterThan(0);
+    expect(screen.getAllByText("TEST1").length).toBeGreaterThan(0);
+    expect(screen.getByText(`${window.location.host}/vote`)).toBeDefined();
+    expect(screen.getByRole("link", { name: t["host.back_game"] }).getAttribute("href")).toBe("/");
+    await waitFor(() => expect(screen.getByText("7")).toBeDefined());
+
+    fireEvent.click(screen.getByTitle(t["class.qr_zoom"]));
+    expect(screen.getByTitle(t["class.qr_close"])).toBeDefined();
   });
 
-  it("2. Hiển thị liên kết bỏ phiếu và hỗ trợ sao chép liên kết", async () => {
-    globalThis.fetch = vi.fn().mockResolvedValue({
-      ok: true,
-      json: async () => ({
-        round: 0,
-        open: false,
-        counts: { CHO_QUA: 0, GIU_LAI: 0 },
-        total: 0,
-      }),
-    } as any);
-
-    // Mock clipboard
-    Object.assign(navigator, {
-      clipboard: {
-        writeText: vi.fn().mockResolvedValue(undefined),
-      },
-    });
-
+  it("H-02 đổi lượt thì hồ sơ và câu hỏi tự đổi theo, không phải gõ tay", () => {
+    globalThis.fetch = fakeClassroomApi().fetch as never;
     render(<HostScreen />);
 
-    const copyBtn = screen.getByRole("button", { name: content.strings["host.copy_link"] });
-    expect(copyBtn).toBeDefined();
-
-    fireEvent.click(copyBtn);
-
-    await waitFor(() => {
-      expect(navigator.clipboard.writeText).toHaveBeenCalledWith(
-        expect.stringContaining("/vote?room=TEST1")
-      );
-    });
+    expect(screen.getByText(t["class.case.d3_t3.question"])).toBeDefined();
+    fireEvent.change(screen.getByLabelText(t["host.turn_label"]), { target: { value: "d5-t4" } });
+    expect(screen.getByText(t["class.case.d5_t4.question"])).toBeDefined();
   });
 
-  it("3. Cập nhật kết quả bình chọn theo thời gian thực từ /api/tally", async () => {
-    globalThis.fetch = vi.fn().mockResolvedValue({
-      ok: true,
-      json: async () => ({
-        round: 1,
-        open: true,
-        turnId: "d3-t3",
-        question: "Cả lớp quyết định cho bà Tư?",
-        counts: {
-          CHO_QUA: 30,
-          GIU_LAI: 10,
-        },
-        total: 40,
-      }),
-    } as any);
-
+  it("H-03 mở vòng, đếm phiếu, chốt và công bố tỉ lệ", async () => {
+    const api = fakeClassroomApi();
+    globalThis.fetch = api.fetch as never;
     render(<HostScreen />);
 
+    fireEvent.click(screen.getByRole("button", { name: t["class.start"] }));
+    await screen.findByRole("button", { name: t["class.close_now"] });
+    expect(api.bodies.find((b) => b.url === "/api/round")!.body).toMatchObject({ room: "TEST1", action: "open", turnId: "d3-t3", seconds: 45 });
+
+    api.vote("CHO_QUA", 3);
+    api.vote("GIU_LAI", 1);
+    fireEvent.click(screen.getByRole("button", { name: t["class.close_now"] }));
+
     await waitFor(() => {
-      // 30 / 40 = 75%
       expect(screen.getByText("75%")).toBeDefined();
-      // 10 / 40 = 25%
       expect(screen.getByText("25%")).toBeDefined();
-      expect(screen.getByText(content.strings["host.result_approve_wins"])).toBeDefined();
-    });
+      expect(screen.getByText(t["class.verdict"])).toBeDefined();
+    }, { timeout: 3000 });
+    // Trang /host không đóng dấu, chỉ cho mở lại phòng chờ.
+    expect(screen.queryByRole("button", { name: new RegExp(t["class.apply"]) })).toBeNull();
+    fireEvent.click(screen.getByRole("button", { name: t["class.again"] }));
+    expect(screen.getByRole("button", { name: t["class.start"] })).toBeDefined();
   });
 
-  it("4. Gọi API mở vòng bỏ phiếu khi bấm Mở bỏ phiếu", async () => {
-    let currentRound = 0;
-    let isOpen = false;
-
-    globalThis.fetch = vi.fn().mockImplementation((url, init) => {
-      const urlStr = String(url);
-      if (urlStr.includes("/api/tally")) {
-        return Promise.resolve({
-          ok: true,
-          json: async () => ({
-            round: currentRound,
-            open: isOpen,
-            counts: { CHO_QUA: 0, GIU_LAI: 0 },
-            total: 0,
-          }),
-        });
-      }
-      if (urlStr.includes("/api/round")) {
-        const body = JSON.parse(init.body);
-        if (body.action === "open") {
-          currentRound = 1;
-          isOpen = true;
-          return Promise.resolve({
-            ok: true,
-            json: async () => ({ success: true, round: 1, open: true }),
-          });
-        }
-      }
-      return Promise.reject(new Error("Unknown URL"));
-    });
-
+  it("H-04 bàn game mở vòng cho lượt khác thì màn chiếu tự chuyển theo", async () => {
+    const api = fakeClassroomApi();
+    Object.assign(api.room, { round: 4, open: true, turnId: "d5-t1", endsAt: Date.now() + 30000 });
+    globalThis.fetch = api.fetch as never;
     render(<HostScreen />);
 
-    const openBtn = screen.getByRole("button", { name: content.strings["host.open_round"] });
-    fireEvent.click(openBtn);
-
-    await waitFor(() => {
-      expect(globalThis.fetch).toHaveBeenCalledWith(
-        "/api/round",
-        expect.objectContaining({
-          method: "POST",
-          body: expect.stringContaining('"action":"open"'),
-        })
-      );
-    });
+    await screen.findByText(t["class.case.d5_t1.question"]);
+    await screen.findByRole("button", { name: t["class.close_now"] });
   });
 
-  it("5. Gọi API chốt vòng khi bấm Chốt kết quả", async () => {
-    globalThis.fetch = vi.fn().mockImplementation((url, init) => {
-      const urlStr = String(url);
-      if (urlStr.includes("/api/tally")) {
-        return Promise.resolve({
-          ok: true,
-          json: async () => ({
-            round: 2,
-            open: true,
-            counts: { CHO_QUA: 15, GIU_LAI: 15 },
-            total: 30,
-          }),
-        });
-      }
-      if (urlStr.includes("/api/round")) {
-        return Promise.resolve({
-          ok: true,
-          json: async () => ({ success: true, round: 2, open: false }),
-        });
-      }
-      return Promise.reject(new Error("Unknown URL"));
-    });
-
+  it("H-05 đường lui nhập tay: mất mạng vẫn công bố ngay", async () => {
+    globalThis.fetch = vi.fn().mockRejectedValue(new Error("Network failed")) as never;
     render(<HostScreen />);
 
-    // Đợi round mở hiển thị nút Chốt
-    const closeBtn = await screen.findByRole("button", { name: content.strings["host.close_round"] });
-    fireEvent.click(closeBtn);
+    const [approve, reject] = screen.getAllByRole("spinbutton");
+    fireEvent.change(approve, { target: { value: "40" } });
+    fireEvent.change(reject, { target: { value: "10" } });
+    fireEvent.click(screen.getByRole("button", { name: t["host.manual_apply"] }));
 
-    await waitFor(() => {
-      expect(globalThis.fetch).toHaveBeenCalledWith(
-        "/api/round",
-        expect.objectContaining({
-          method: "POST",
-          body: expect.stringContaining('"action":"close"'),
-        })
-      );
-    });
-  });
-
-  it("6. Đường lui nhập tay (Khẩn cấp): Bỏ qua mạng, lập tức tính tỷ lệ và công bố đa số trong <10s", async () => {
-    // Giả lập mạng bị đơ hoặc API lỗi
-    globalThis.fetch = vi.fn().mockRejectedValue(new Error("Network failed"));
-
-    render(<HostScreen />);
-
-    // Nhập số tay: CHO QUA = 40, GIỮ LẠI = 10
-    const approveInputs = screen.getAllByRole("spinbutton");
-    const approveInput = approveInputs[0];
-    const rejectInput = approveInputs[1];
-
-    fireEvent.change(approveInput, { target: { value: "40" } });
-    fireEvent.change(rejectInput, { target: { value: "10" } });
-
-    const applyManualBtn = screen.getByRole("button", { name: content.strings["host.manual_apply"] });
-    fireEvent.click(applyManualBtn);
-
-    // Kiểm tra ngay kết quả lập tức được cập nhật: 40/50 = 80%, 10/50 = 20%
+    expect(screen.getByText(t["class.manual_note"])).toBeDefined();
     await waitFor(() => {
       expect(screen.getByText("80%")).toBeDefined();
       expect(screen.getByText("20%")).toBeDefined();
-      expect(screen.getByText(content.strings["host.manual_applied"])).toBeDefined();
-      expect(screen.getByText(content.strings["host.result_approve_wins"])).toBeDefined();
-    });
+    }, { timeout: 3000 });
+  });
 
-    // Có thể quay lại trực tuyến khi cần
-    const resetManualBtn = screen.getByRole("button", { name: content.strings["host.manual_reset"] });
-    fireEvent.click(resetManualBtn);
-
-    await waitFor(() => {
-      expect(screen.queryByText(content.strings["host.manual_applied"])).toBeNull();
-    });
+  it("H-06 sai token: hiện ô nhập token thay cho nút bắt đầu", async () => {
+    globalThis.fetch = vi.fn().mockResolvedValue({ ok: false, status: 401, json: async () => ({}) }) as never;
+    render(<HostScreen />);
+    await screen.findByText(t["class.token_title"]);
+    expect(screen.queryByRole("button", { name: t["class.start"] })).toBeNull();
   });
 });

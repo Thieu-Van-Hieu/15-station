@@ -4,17 +4,19 @@ import { render, screen, fireEvent, waitFor, cleanup } from "@testing-library/re
 import { DeskScreen } from "./screens/DeskScreen";
 import { content } from "./content";
 import { newGame } from "./engine/game";
+import { fakeClassroomApi } from "./test/fakeClassroomApi";
 
-describe("Game Loop Host Voting Integration (Step 4)", () => {
+const t = content.strings;
+
+describe("Hội đồng lớp học tại bàn game (P4)", { timeout: 15000 }, () => {
   const d3 = content.days.find((d) => d.id === "d3")!;
-  const d3t3Traveler = content.travelers.find((t) => t.id === "d3-t3")!; // dung-trinh-bay
+  const d3t3 = content.travelers.find((x) => x.id === "d3-t3")!; // lượt dung-trinh-bay
 
   beforeEach(() => {
     localStorage.clear();
-    // Không còn token mặc định trong bundle: người chủ trì nhập token một lần, lưu ở localStorage.
+    // Không có token mặc định trong bundle: người chủ trì nhập một lần, lưu ở localStorage.
     localStorage.setItem("tram15_host_token", "test-host-token");
     window.history.pushState({}, "", "/");
-    vi.restoreAllMocks();
   });
 
   afterEach(() => {
@@ -23,266 +25,160 @@ describe("Game Loop Host Voting Integration (Step 4)", () => {
     vi.restoreAllMocks();
   });
 
-  it("1. Chế độ đơn (không bật host): game chạy bình thường, có nút tuỳ chọn bật host ở lượt dung-trinh-bay", () => {
-    const gameState = newGame(content);
+  function renderDesk() {
     const onDecide = vi.fn();
     const onNext = vi.fn();
-
     render(
-      <DeskScreen
-        state={gameState}
-        day={d3}
-        traveler={d3t3Traveler}
-        currentTravelerOrder={3}
-        totalTravelersInDay={4}
-        onDecide={onDecide}
-        onNext={onNext}
-      />
+      <DeskScreen state={newGame(content)} day={d3} traveler={d3t3} currentTravelerOrder={3} totalTravelersInDay={4} onDecide={onDecide} onNext={onNext} />,
     );
+    return { onDecide, onNext };
+  }
 
-    // Ở chế độ đơn, hiện banner thông báo điểm dừng kèm nút bật host
-    expect(screen.getByText(content.strings["host.present_stop"])).toBeDefined();
-    expect(screen.getByRole("button", { name: content.strings["host.enable_now"] })).toBeDefined();
+  const stampApprove = () => screen.getByRole("button", { name: new RegExp(t["desk.stamp.approve"]) }) as HTMLButtonElement;
 
-    // Các nút đóng dấu thông thường vẫn hoạt động bình thường
-    const approveBtn = screen.getByRole("button", { name: new RegExp(content.strings["desk.stamp.approve"]) });
-    expect(approveBtn).toBeDefined();
-    expect((approveBtn as HTMLButtonElement).disabled).toBe(false);
+  /** Lớp phủ đóng lại, dấu nằm trên bàn; bấm "lượt kế tiếp" thì quyết định được ghi. */
+  async function commit(onDecide: ReturnType<typeof vi.fn>, verdict: string) {
+    await waitFor(() => expect(screen.queryByRole("dialog", { name: t["class.title"] })).toBeNull());
+    fireEvent.click(await screen.findByRole("button", { name: t["desk.next_traveler"] }));
+    await waitFor(() => expect(onDecide).toHaveBeenCalledWith(verdict, null, false));
+  }
+
+  async function startVoting() {
+    fireEvent.click(await screen.findByRole("button", { name: t["class.start"] }));
+    await screen.findByRole("button", { name: t["class.close_now"] });
+  }
+
+  it("HG-01 chế độ đơn: không có lớp phủ, có nút bật hội đồng, dấu thường vẫn dùng được", () => {
+    renderDesk();
+    expect(screen.getByText(t["host.present_stop"])).toBeDefined();
+    expect(screen.getByRole("button", { name: t["host.enable_now"] })).toBeDefined();
+    expect(screen.queryByRole("dialog", { name: t["class.title"] })).toBeNull();
+    expect(stampApprove().disabled).toBe(false);
   });
 
-  it("2. Khi bật Host qua URL (?host=1): tự động mở vòng bỏ phiếu cho lượt dung-trinh-bay và khoá nút đóng dấu thường", async () => {
+  it("HG-02 bật host: phòng chờ có mã phòng, số người đã vào, hồ sơ và câu hỏi tự điền; chưa mở vòng khi chưa bấm", async () => {
     window.history.pushState({}, "", "/?host=1&room=T15");
+    const api = fakeClassroomApi({ joined: 12 });
+    globalThis.fetch = api.fetch as never;
+    renderDesk();
 
-    globalThis.fetch = vi.fn().mockImplementation((url) => {
-      const urlStr = String(url);
-      if (urlStr.includes("/api/round")) {
-        return Promise.resolve({
-          ok: true,
-          json: async () => ({ success: true, round: 1, open: true }),
-        });
-      }
-      if (urlStr.includes("/api/tally")) {
-        return Promise.resolve({
-          ok: true,
-          json: async () => ({
-            round: 1,
-            open: true,
-            counts: { CHO_QUA: 0, GIU_LAI: 0 },
-            total: 0,
-          }),
-        });
-      }
-      return Promise.reject(new Error("Unknown URL"));
-    });
-
-    const gameState = newGame(content);
-    const onDecide = vi.fn();
-    const onNext = vi.fn();
-
-    render(
-      <DeskScreen
-        state={gameState}
-        day={d3}
-        traveler={d3t3Traveler}
-        currentTravelerOrder={3}
-        totalTravelersInDay={4}
-        onDecide={onDecide}
-        onNext={onNext}
-      />
-    );
-
-    // Mở vòng bỏ phiếu qua API
-    await waitFor(() => {
-      expect(globalThis.fetch).toHaveBeenCalledWith(
-        "/api/round",
-        expect.objectContaining({
-          method: "POST",
-          body: expect.stringContaining('"action":"open"'),
-        })
-      );
-    });
-
-    // Màn hình hiện bảng bỏ phiếu lớp học
-    expect(screen.getByText(content.strings["host.waiting_class"])).toBeDefined();
-    expect(screen.getByRole("button", { name: content.strings["host.close_round"] })).toBeDefined();
-
-    // Trong khi cả lớp đang bỏ phiếu, nút đóng dấu thường bị vô hiệu hoá
-    const approveBtn = screen.getByRole("button", { name: new RegExp(content.strings["desk.stamp.approve"]) });
-    expect((approveBtn as HTMLButtonElement).disabled).toBe(true);
+    expect(screen.getByRole("dialog", { name: t["class.title"] })).toBeDefined();
+    expect(screen.getByText(t["class.case.d3_t3.question"])).toBeDefined();
+    expect(screen.getByText(t["class.case.d3_t3.fact2"])).toBeDefined();
+    await waitFor(() => expect(screen.getByText("12")).toBeDefined());
+    expect(api.bodies.some((b) => b.url === "/api/round")).toBe(false);
+    // Lúc lớp đang quyết, dấu thường bị khoá
+    expect(stampApprove().disabled).toBe(true);
   });
 
-  it("3. Tự động đóng dấu theo đa số khi chốt kết quả (CHO QUA thắng)", async () => {
+  it("HG-03 bắt đầu: mở vòng kèm thời gian và câu hỏi của hồ sơ, hiện đồng hồ và số phiếu, giấu tỉ lệ", async () => {
     window.history.pushState({}, "", "/?host=1&room=T15");
+    const api = fakeClassroomApi({ joined: 3 });
+    globalThis.fetch = api.fetch as never;
+    renderDesk();
 
-    let isRoundOpen = true;
+    fireEvent.click(screen.getByRole("button", { name: "60s" }));
+    await startVoting();
 
-    globalThis.fetch = vi.fn().mockImplementation((url, init) => {
-      const urlStr = String(url);
-      if (urlStr.includes("/api/round")) {
-        const body = JSON.parse(init.body);
-        if (body.action === "close") {
-          isRoundOpen = false;
-        }
-        return Promise.resolve({
-          ok: true,
-          json: async () => ({ success: true, round: 1, open: isRoundOpen }),
-        });
-      }
-      if (urlStr.includes("/api/tally")) {
-        return Promise.resolve({
-          ok: true,
-          json: async () => ({
-            round: 1,
-            open: isRoundOpen,
-            counts: { CHO_QUA: 25, GIU_LAI: 5 },
-            total: 30,
-          }),
-        });
-      }
-      return Promise.reject(new Error("Unknown URL"));
-    });
+    const open = api.bodies.find((b) => b.url === "/api/round")!.body;
+    expect(open).toMatchObject({ room: "T15", action: "open", turnId: "d3-t3", seconds: 60, question: t["class.case.d3_t3.question"] });
+    expect(screen.getByText(t["class.hidden"])).toBeDefined();
 
-    const gameState = newGame(content);
-    const onDecide = vi.fn();
-    const onNext = vi.fn();
-
-    render(
-      <DeskScreen
-        state={gameState}
-        day={d3}
-        traveler={d3t3Traveler}
-        currentTravelerOrder={3}
-        totalTravelersInDay={4}
-        onDecide={onDecide}
-        onNext={onNext}
-      />
-    );
-
-    // Chờ bảng bỏ phiếu tải xong và bấm chốt
-    const closeBtn = await screen.findByRole("button", { name: content.strings["host.close_round"] });
-    fireEvent.click(closeBtn);
-
-    // Đa số CHO_QUA -> tự động hiển thị đã đóng dấu CHO_QUA
-    await waitFor(() => {
-      expect(screen.getByText(content.strings["host.auto_stamped_approve"])).toBeDefined();
-    });
-
-    // Nút Lượt kế tiếp hiển thị để tiếp tục ván chơi
-    const nextBtn = screen.getByRole("button", { name: content.strings["desk.next_traveler"] });
-    expect(nextBtn).toBeDefined();
-    fireEvent.click(nextBtn);
-
-    await waitFor(() => {
-      expect(onDecide).toHaveBeenCalledWith("CHO_QUA", null, false);
-      expect(onNext).toHaveBeenCalled();
-    });
+    api.vote("CHO_QUA", 2);
+    await waitFor(() => expect(screen.getByText("2")).toBeDefined());
+    expect(screen.queryByText("100%")).toBeNull();
   });
 
-  it("4. Đường lui nhập tay ngay tại bàn: Tính nhanh đa số và tự động đóng dấu trong <10s", async () => {
+  it("HG-04 chốt sớm: công bố kết quả rồi đóng dấu theo lớp khi người trình bày bấm", async () => {
     window.history.pushState({}, "", "/?host=1&room=T15");
+    const api = fakeClassroomApi();
+    globalThis.fetch = api.fetch as never;
+    const { onDecide } = renderDesk();
 
-    // Giả lập mạng bị ngắt
-    globalThis.fetch = vi.fn().mockRejectedValue(new Error("Network offline"));
+    await startVoting();
+    api.vote("CHO_QUA", 3);
+    api.vote("GIU_LAI", 1);
+    fireEvent.click(screen.getByRole("button", { name: t["class.close_now"] }));
 
-    const gameState = newGame(content);
-    const onDecide = vi.fn();
-    const onNext = vi.fn();
-
-    render(
-      <DeskScreen
-        state={gameState}
-        day={d3}
-        traveler={d3t3Traveler}
-        currentTravelerOrder={3}
-        totalTravelersInDay={4}
-        onDecide={onDecide}
-        onNext={onNext}
-      />
-    );
-
-    // Mở phần đường lui nhập tay bằng predicate tìm text chính xác
-    const summary = await screen.findByText((text) =>
-      text.includes(content.strings["host.manual_title"])
-    );
-    fireEvent.click(summary);
-
-    // Nhập số tay: CHO QUA = 5, GIỮ LẠI = 30
-    const inputs = screen.getAllByRole("spinbutton");
-    fireEvent.change(inputs[0], { target: { value: "5" } });
-    fireEvent.change(inputs[1], { target: { value: "30" } });
-
-    // Bấm dùng số nhập tay
-    const applyBtn = screen.getByRole("button", { name: content.strings["host.manual_apply"] });
-    fireEvent.click(applyBtn);
-
-    // Ngay lập tức tự động đóng dấu GIU_LAI
-    await waitFor(() => {
-      expect(screen.getByText(content.strings["host.auto_stamped_reject"])).toBeDefined();
-    });
-
-    const nextBtn = screen.getByRole("button", { name: content.strings["desk.next_traveler"] });
-    fireEvent.click(nextBtn);
-
-    await waitFor(() => {
-      expect(onDecide).toHaveBeenCalledWith("GIU_LAI", null, false);
-      expect(onNext).toHaveBeenCalled();
-    });
+    const apply = await screen.findByRole("button", { name: new RegExp(t["class.apply"]) }, { timeout: 3000 });
+    expect(screen.getByText(t["class.case.d3_t3.history"])).toBeDefined();
+    expect(screen.getByText(t["class.case.d3_t3.discuss"])).toBeDefined();
+    fireEvent.click(apply);
+    await commit(onDecide, "CHO_QUA");
   });
 
-  it("5. Hoà phiếu: Hiện thông báo và trao quyền quyết định lại cho Host", async () => {
+  it("HG-05 hết giờ thì tự chốt", async () => {
     window.history.pushState({}, "", "/?host=1&room=T15");
+    const api = fakeClassroomApi();
+    globalThis.fetch = api.fetch as never;
+    renderDesk();
 
-    let isRoundOpen = true;
+    await startVoting();
+    api.vote("GIU_LAI", 2);
+    // Đẩy giờ kết thúc về quá khứ: đồng hồ về 0 và phiên tự đóng vòng.
+    api.room.endsAt = Date.now() - 1;
+    await waitFor(() => expect(api.bodies.some((b) => b.url === "/api/round" && b.body.action === "close")).toBe(true), { timeout: 3000 });
+  });
 
-    globalThis.fetch = vi.fn().mockImplementation((url, init) => {
-      const urlStr = String(url);
-      if (urlStr.includes("/api/round")) {
-        const body = JSON.parse(init.body);
-        if (body.action === "close") {
-          isRoundOpen = false;
-        }
-        return Promise.resolve({
-          ok: true,
-          json: async () => ({ success: true, round: 1, open: isRoundOpen }),
-        });
-      }
-      if (urlStr.includes("/api/tally")) {
-        return Promise.resolve({
-          ok: true,
-          json: async () => ({
-            round: 1,
-            open: isRoundOpen,
-            counts: { CHO_QUA: 15, GIU_LAI: 15 },
-            total: 30,
-          }),
-        });
-      }
-      return Promise.reject(new Error("Unknown URL"));
-    });
+  it("HG-06 đường lui nhập tay: không cần mạng vẫn công bố và đóng dấu", async () => {
+    window.history.pushState({}, "", "/?host=1&room=T15");
+    globalThis.fetch = vi.fn().mockRejectedValue(new Error("Network failed")) as never;
+    const { onDecide } = renderDesk();
 
-    const gameState = newGame(content);
-    const onDecide = vi.fn();
-    const onNext = vi.fn();
+    const [approve, reject] = screen.getAllByRole("spinbutton");
+    fireEvent.change(approve, { target: { value: "10" } });
+    fireEvent.change(reject, { target: { value: "30" } });
+    fireEvent.click(screen.getByRole("button", { name: t["host.manual_apply"] }));
 
-    render(
-      <DeskScreen
-        state={gameState}
-        day={d3}
-        traveler={d3t3Traveler}
-        currentTravelerOrder={3}
-        totalTravelersInDay={4}
-        onDecide={onDecide}
-        onNext={onNext}
-      />
-    );
+    expect(screen.getByText(t["class.manual_note"])).toBeDefined();
+    fireEvent.click(await screen.findByRole("button", { name: new RegExp(t["class.apply"]) }, { timeout: 3000 }));
+    await commit(onDecide, "GIU_LAI");
+  });
 
-    const closeBtn = await screen.findByRole("button", { name: content.strings["host.close_round"] });
-    fireEvent.click(closeBtn);
+  it("HG-07 hoà phiếu: người trực tự chọn dấu trong lớp phủ", async () => {
+    window.history.pushState({}, "", "/?host=1&room=T15");
+    const api = fakeClassroomApi();
+    globalThis.fetch = api.fetch as never;
+    const { onDecide } = renderDesk();
 
-    // Hiện thông báo hoà phiếu
-    await waitFor(() => {
-      expect(screen.getByText(content.strings["host.tie_decide_hint"])).toBeDefined();
-    });
+    await startVoting();
+    api.vote("CHO_QUA", 2);
+    api.vote("GIU_LAI", 2);
+    fireEvent.click(screen.getByRole("button", { name: t["class.close_now"] }));
+
+    await screen.findByText(t["class.tie_hint"], undefined, { timeout: 3000 });
     expect(onDecide).not.toHaveBeenCalled();
+    const dialog = screen.getByRole("dialog", { name: t["class.title"] });
+    const reject = Array.from(dialog.querySelectorAll("button")).find((b) => b.textContent === t["vote.stamp_reject"])!;
+    fireEvent.click(reject);
+    await commit(onDecide, "GIU_LAI");
+  });
+
+  it("HG-08 chưa có token: hiện ô nhập token ngay trong lớp phủ, lưu xong thì bấm được bắt đầu", async () => {
+    localStorage.removeItem("tram15_host_token");
+    window.history.pushState({}, "", "/?host=1&room=T15");
+    globalThis.fetch = fakeClassroomApi().fetch as never;
+    renderDesk();
+
+    expect(screen.queryByRole("button", { name: t["class.start"] })).toBeNull();
+    fireEvent.change(screen.getByLabelText(t["class.token_title"]), { target: { value: "abc" } });
+    fireEvent.click(screen.getByRole("button", { name: t["host.token_save"] }));
+    expect(localStorage.getItem("tram15_host_token")).toBe("abc");
+    await screen.findByRole("button", { name: t["class.start"] });
+  });
+
+  it("HG-09 thu nhỏ để xem giấy tờ rồi mở lại; bỏ qua thì mở khoá dấu thường", async () => {
+    window.history.pushState({}, "", "/?host=1&room=T15");
+    globalThis.fetch = fakeClassroomApi().fetch as never;
+    renderDesk();
+
+    fireEvent.click(screen.getByRole("button", { name: t["class.minimize"] }));
+    expect(screen.queryByRole("dialog", { name: t["class.title"] })).toBeNull();
+    fireEvent.click(screen.getByRole("button", { name: t["class.restore"] }));
+    expect(screen.getByRole("dialog", { name: t["class.title"] })).toBeDefined();
+
+    fireEvent.click(screen.getByRole("button", { name: t["class.skip"] }));
+    expect(screen.queryByRole("dialog", { name: t["class.title"] })).toBeNull();
+    expect(stampApprove().disabled).toBe(false);
   });
 });

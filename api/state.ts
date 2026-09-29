@@ -2,7 +2,7 @@
  * GET /api/state?room=<mã>
  * Client gọi để lấy trạng thái vòng bỏ phiếu hiện tại.
  * Header: Cache-Control: s-maxage=1, stale-while-revalidate=2 để CDN Vercel gộp request.
- * Tuyệt đối không trả về số phiếu!
+ * Tuyệt đối không trả về số phiếu khi vòng đang mở! Vòng đã đóng thì trả `result` để điện thoại xem kết quả.
  */
 
 import type { ApiRequest, ApiResponse } from "./_lib.js";
@@ -44,6 +44,8 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
         turnId: state.turnId ?? "",
         question: state.question ?? "",
         options: state.options ?? ["CHO_QUA", "GIU_LAI"],
+        ...(state.endsAt ? { endsAt: state.endsAt, openedAt: state.openedAt } : {}),
+        ...(!state.open && state.result ? { result: state.result } : {}),
       },
       headers,
     );

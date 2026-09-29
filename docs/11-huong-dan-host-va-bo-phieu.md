@@ -49,48 +49,39 @@ HOST_TOKEN="<chuỗi ngẫu nhiên của bạn>"
 
 ## 3. CÁC ĐƯỜNG DẪN TRONG HỆ THỐNG
 
-| Đường dẫn | Thiết bị mục tiêu | Mục đích |
+| Đường dẫn | Thiết bị | Mục đích |
 |---|---|---|
-| `/` hoặc `/?host=1` | Máy tính người chơi / Máy chiếu | Trò chơi chính. Ở lượt khách có nhãn `dung-trinh-bay` (như Bà Tư `d3-t3`), game dừng lại mở bỏ phiếu, sau đó tự đóng dấu theo đa số. |
-| `/host?room=<mã>` | Màn hình máy chiếu lớp học | Chữ to, hiển thị mã phòng, mã QR cỡ lớn cho lớp quét, biểu đồ bình chọn chạy mượt, nút mở/chốt vòng, và **đường lui nhập tay**. |
-| `/vote?room=<mã>` | Điện thoại di động sinh viên | Giao diện tối giản, nút bấm to: CHO QUA / GIỮ LẠI, ghi nhận phiếu tức thì, thông báo trạng thái mạng. |
+| `/?host=1&room=<mã>` | Máy tính nối máy chiếu | Trò chơi chính. Tới lượt có nhãn `dung-trinh-bay` (Bà Tư `d3-t3`), màn **Hội đồng lớp học** phủ kín bàn game. Chỉ cần một tab này là đủ cho buổi trình bày. |
+| `/host?room=<mã>` | Máy chiếu (tuỳ chọn) | Mở hội đồng cho một lượt trung tâm bất kỳ (`d3-t3`, `d3-t1`, `d5-t1`, `d5-t4`) mà không cần chơi tới lượt đó. Nếu bàn game mở vòng, màn này tự chuyển theo. |
+| `/vote?room=<mã>` | Điện thoại sinh viên | Phòng chờ, hồ sơ nhân vật, đồng hồ, hai con dấu to, rồi kết quả của lớp. |
 
 ---
 
-## 4. QUY TRÌNH THỰC HIỆN TRONG BUỔI BÁO CÁO
+## 4. QUY TRÌNH TRONG BUỔI BÁO CÁO
 
-### Bước 1: Khởi động hệ thống
-1. Chạy dev server hỗ trợ truy cập mạng nội bộ (LAN / WiFi phòng học):
-   ```bash
-   pnpm dev --host
-   ```
-   *Lưu ý địa chỉ IP hiển thị trên terminal (ví dụ: `http://192.168.1.15:5173`).*
+### Bước 1: Chuẩn bị
+- Dùng bản trên Vercel: https://15-station.vercel.app/ (đã cấu hình biến ở mục 2). Hoặc chạy `pnpm dev --host` trong mạng LAN của lớp.
+- Mở `/?host=1&room=T15`. Muốn vào thẳng lượt Bà Tư: `/?host=1&room=T15&tu=d3-t3`.
 
-2. Hoặc dùng bản đã triển khai: push lên nhánh `main`, Vercel tự build và deploy tại https://15-station.vercel.app/ (nhớ cấu hình biến ở mục 2).
+### Bước 2: Phòng chờ
+Tới lượt Bà Tư, màn **HỘI ĐỒNG LỚP HỌC** hiện ra:
+- **Mã QR cỡ lớn** (bấm vào để phóng to gần kín màn), kèm đường dẫn ngắn `…/vote` và **mã phòng** chữ to để ai không quét được thì gõ tay.
+- **Số người đã vào phòng** tăng dần khi điện thoại quét mã.
+- Bên phải là **hồ sơ lượt khách** dựng sẵn từ dữ liệu game: chân dung, sự việc, câu hỏi, lý lẽ hai phía. Không phải gõ hay chép câu hỏi nữa.
+- Nếu máy chưa có `HOST_TOKEN`, ô nhập token hiện ngay tại đây.
+- Nút **Xem giấy tờ** thu nhỏ hội đồng xuống góc để chiếu giấy tờ trên bàn cho lớp xem, bấm **Mở lại hội đồng** để quay lại. Nút **Tự xử lượt này** bỏ qua bỏ phiếu.
 
-### Bước 2: Thiết lập máy chiếu
-1. Trên máy tính nối máy chiếu, mở trình duyệt vào:
-   `http://<IP-hoặc-domain>/host?room=T15`
-2. Chiếu tab này lên máy chiếu để sinh viên trong lớp thấy mã QR và đường link `.../vote?room=T15`.
-3. Sinh viên dùng camera điện thoại quét mã QR hoặc gõ link để vào phòng chờ.
+### Bước 3: Bỏ phiếu
+- Chọn thời gian (30/45/60/90 giây) và bấm **Bắt đầu bỏ phiếu** (có tiếng chuông).
+- Máy chiếu hiện **đồng hồ đếm ngược** và **số phiếu đã bỏ / số người trong phòng**. Tỉ lệ được **giữ kín** tới khi hết giờ để lớp không hùa theo nhau.
+- Điện thoại hiện hồ sơ, câu hỏi, lý lẽ hai phía (bấm để mở), thanh thời gian và hai con dấu. Được đổi ý tới khi hết giờ.
+- Hết giờ thì tự chốt. Muốn chốt sớm thì bấm **Chốt sớm**.
 
-### Bước 3: Vận hành trong trò chơi
-1. Trong tab trò chơi chính (`/?host=1&room=T15`):
-   - Chơi qua các lượt bình thường.
-   - Có thể nhảy nhanh trực tiếp đến lượt Bà Tư để demo:
-     `http://<IP-hoặc-domain>/?host=1&room=T15&tu=d3-t3`
-2. Khi đến lượt **Bà Tư (d3-t3)** mang 18 kg gạo:
-   - Trò chơi tự động dừng lại, hiển thị khung **BỎ PHIẾU LỚP HỌC**.
-   - Vòng bỏ phiếu tự động mở (`round 1`).
-   - Màn hình điện thoại của sinh viên tự động hiện câu hỏi và 2 nút lựa chọn: **CHO QUA** và **GIỮ LẠI**.
-   - Màn hình máy chiếu `/host` hiển thị thanh tiến trình và tỷ lệ phần trăm chạy trực quan theo thời gian thực.
-3. Chốt kết quả:
-   - Giáo viên hoặc sinh viên thuyết trình bấm nút **"Chốt kết quả"** (có thể bấm ngay tại bàn game hoặc trên màn hình máy chiếu `/host`).
-   - Trò chơi tự động đối chiếu số phiếu:
-     - Nếu **CHO QUA** chiếm đa số: Game tự động hạ con dấu `CHO_QUA` lên phiếu kiểm soát, hiện thông báo *"Cả lớp đã chọn CHO QUA"*.
-     - Nếu **GIỮ LẠI** chiếm đa số: Game tự động hạ con dấu `GIU_LAI`, hiện thông báo *"Cả lớp đã chọn GIỮ LẠI"*.
-     - Nếu **Hoà phiếu**: Game hiện thông báo hoà và trao quyền quyết định cuối cùng cho người chủ trì.
-   - Bấm nút **"Lượt kế tiếp"** (hoặc phím Enter) để tiếp tục trò chơi.
+### Bước 4: Công bố
+- Hai thanh kết quả chạy lên, rồi **con dấu của lớp** đập xuống (có tiếng dấu).
+- Hồ sơ đổi sang **Bối cảnh lịch sử** (Chỉ thị 100-CT/TW) và **câu hỏi thảo luận** để người trình bày dẫn tiếp.
+- Điện thoại mỗi người thấy tỉ lệ và biết mình thuộc **phe đa số hay thiểu số**, gợi ý phe thiểu số chuẩn bị lý lẽ tranh luận.
+- Bấm **Đóng dấu theo lớp**: dấu được đặt lên bàn game, rồi bấm **Lượt kế tiếp** như bình thường. Hoà phiếu (hoặc không ai bầu) thì người trực chọn một trong hai dấu. **Mở lại phòng chờ** để cho lớp bầu lại.
 
 ---
 
@@ -98,14 +89,14 @@ HOST_TOKEN="<chuỗi ngẫu nhiên của bạn>"
 
 Wifi phòng học, sóng 4G chập chờn, hoặc Upstash hết quota là những rủi ro không thể lường trước. Hệ thống đã tích hợp sẵn cơ chế **Đường lui nhập tay**:
 
-- Cả màn hình `/host` và bảng điều khiển tại bàn game đều có mục:
-  **"Đường lui nhập tay (Khẩn cấp)"**
+- Cả màn hội đồng tại bàn game và trang `/host` đều có mục gập
+  **"Đường lui nhập tay (Khẩn cấp)"** ở cuối cột trái
 - Gồm 2 ô nhập số cho **CHO QUA** và **GIỮ LẠI**, cùng nút bấm **"Dùng số nhập tay"**.
 - Khi mạng gặp sự cố:
   1. Người trình bày hô nhanh: *"Ai chọn Cho qua giơ tay? (đếm ~20), Ai Giữ lại? (đếm ~15)"*.
   2. Gõ nhanh 2 con số vào 2 ô (ví dụ: `20` và `15`).
   3. Bấm **"Dùng số nhập tay"**.
-  4. Hệ thống lập tức bỏ qua toàn bộ mạng, cập nhật biểu đồ và tự động đóng dấu theo số vừa nhập trong **dưới 10 giây**.
+  4. Hệ thống bỏ qua mạng và công bố ngay theo số vừa nhập (có ghi chú "Kết quả nhập tay"), rồi bấm **Đóng dấu theo lớp** như thường.
 
 ---
 
@@ -116,7 +107,7 @@ Wifi phòng học, sóng 4G chập chờn, hoặc Upstash hết quota là nhữn
 ### Kịch bản 1: Kiểm thử đồng thời trên 5+ thiết bị thật
 1. Mở máy tính làm Host (`/host?room=T15`).
 2. Dùng 5 điện thoại thật (cả iOS và Android) quét mã QR vào `/vote?room=T15`.
-3. Bấm "Mở bỏ phiếu" trên Host.
+3. Bấm "Bắt đầu bỏ phiếu" trên Host.
 4. Cả 5 điện thoại cùng bấm chọn trong khoảng 5–10 giây.
 5. **Kỳ vọng:** Màn hình Host cập nhật tổng số 5 phiếu, thanh tỷ lệ % dịch chuyển chính xác và mượt mà.
 

@@ -14,6 +14,10 @@ export interface RoomState {
   question?: string;
   options?: ("CHO_QUA" | "GIU_LAI")[];
   openedAt?: number;
+  /** Mốc hết giờ bỏ phiếu (ms). Sau mốc này phiếu mới bị từ chối. */
+  endsAt?: number;
+  /** Số phiếu chốt lúc đóng vòng. Chỉ có khi vòng đã đóng, để điện thoại xem kết quả mà không lộ số phiếu lúc đang bầu. */
+  result?: { CHO_QUA: number; GIU_LAI: number };
 }
 
 export type VoteChoice = "CHO_QUA" | "GIU_LAI";
@@ -24,6 +28,16 @@ const TTL_SECONDS = 6 * 3600; // 6 giờ
 class MemoryStore {
   private states = new Map<string, RoomState>();
   private votes = new Map<string, Map<string, VoteChoice>>();
+  private members = new Map<string, Set<string>>();
+
+  async addMember(room: string, voterId: string): Promise<void> {
+    if (!this.members.has(room)) this.members.set(room, new Set());
+    this.members.get(room)!.add(voterId);
+  }
+
+  async countMembers(room: string): Promise<number> {
+    return this.members.get(room)?.size ?? 0;
+  }
 
   async getState(room: string): Promise<RoomState | null> {
     return this.states.get(room) ?? null;
@@ -151,6 +165,41 @@ export async function clearRoomVotes(room: string, round: number): Promise<void>
   }
 
   await memoryStore.clearVotes(normalized, round);
+}
+
+/** Ghi nhận một điện thoại đã vào phòng (mỗi máy gọi một lần), để màn chiếu đếm "đã vào phòng". */
+export async function addRoomMember(room: string, voterId: string): Promise<void> {
+  const normalized = room.trim().toUpperCase();
+  const redis = getRedisClient();
+
+  if (redis) {
+    const key = `t15:${normalized}:members`;
+    await redis.sadd(key, voterId);
+    await redis.expire(key, TTL_SECONDS);
+    return;
+  }
+
+  await memoryStore.addMember(normalized, voterId);
+}
+
+export async function countRoomMembers(room: string): Promise<number> {
+  const normalized = room.trim().toUpperCase();
+  const redis = getRedisClient();
+
+  if (redis) {
+    return await redis.scard(`t15:${normalized}:members`);
+  }
+
+  return await memoryStore.countMembers(normalized);
+}
+
+/** Đếm phiếu của một vòng. */
+export function countVotes(votes: Record<string, VoteChoice>): { CHO_QUA: number; GIU_LAI: number } {
+  const counts = { CHO_QUA: 0, GIU_LAI: 0 };
+  for (const choice of Object.values(votes)) {
+    if (choice === "CHO_QUA" || choice === "GIU_LAI") counts[choice]++;
+  }
+  return counts;
 }
 
 /**

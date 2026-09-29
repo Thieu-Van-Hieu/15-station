@@ -9,7 +9,7 @@ import { CONFRONT_WRONG_MIN, confront, confrontLines, factsOf } from "../engine/
 import { parseClock } from "../engine/day-end";
 import { Rulebook } from "../components/Rulebook";
 import { ActionControls } from "../components/ActionControls";
-import { ClassroomVotingPanel } from "../components/ClassroomVotingPanel";
+import { ClassroomSession } from "../components/ClassroomSession";
 import { Label, Panel, cx, s, unit } from "../components/ui";
 import { conditionState, issuesActiveOn } from "../engine/state";
 import { activeRules } from "../engine/active";
@@ -33,7 +33,6 @@ interface DeskScreenProps {
 const RULEBOOK_KEY = "tram15_rulebook";
 const HOST_MODE_KEY = "tram15_host_mode";
 const HOST_ROOM_KEY = "tram15_host_room";
-const HOST_TOKEN_KEY = "tram15_host_token";
 const DEFAULT_ROOM = "T15";
 
 function readRulebookOpen(): boolean {
@@ -111,14 +110,6 @@ export function DeskScreen({
     }
   });
 
-  const [hostToken] = useState<string>(() => {
-    try {
-      // Token nhập một lần ở màn /host (cùng trình duyệt), không có giá trị mặc định trong bundle.
-      return localStorage.getItem(HOST_TOKEN_KEY) ?? "";
-    } catch {
-      return "";
-    }
-  });
 
   const [showVotingPanel, setShowVotingPanel] = useState<boolean>(
     () => isPresentationStop && isHostMode
@@ -146,10 +137,6 @@ export function DeskScreen({
   function handleMajorityDecide(verdict: Verdict) {
     onStampDrop(verdict, null, null);
     handleDecide(verdict, reportId);
-  }
-
-  function handleManualTie() {
-    // Khi hoà phiếu: không tự động đóng dấu, cho phép Host tự bấm
   }
 
   function toggleRulebook(open: boolean) {
@@ -422,30 +409,21 @@ export function DeskScreen({
 
         {/* Khu 2: Mặt bàn với giấy tờ */}
         <section className="mat-ban-cham min-h-[420px] lg:min-h-0 overflow-auto thanh-cuon relative flex flex-col">
-          {/* Bảng bỏ phiếu lớp học nếu là lượt dung-trinh-bay */}
-          {isPresentationStop && showVotingPanel && (
-            <div className="px-6 pt-4">
-              <ClassroomVotingPanel
-                room={hostRoom}
-                hostToken={hostToken}
-                turnId={traveler.id}
-                question={
-                  traveler.id === "d3-t3"
-                    ? s("host.default_question_d3t3")
-                    : `${character?.name ?? traveler.character} (${traveler.id}) - ${s("vote.stamp_approve")} / ${s("vote.stamp_reject")}?`
-                }
-                onMajorityDecide={handleMajorityDecide}
-                onManualTie={handleManualTie}
-                onDismiss={() => setShowVotingPanel(false)}
-              />
-            </div>
+          {/* Gợi ý bật Host nếu là lượt dung-trinh-bay nhưng host đang tắt */}
+          {isPresentationStop && showVotingPanel && !chosenAction && (
+            <ClassroomSession
+              variant="overlay"
+              room={hostRoom}
+              turnId={traveler.id}
+              onVerdict={handleMajorityDecide}
+              onSkip={() => setShowVotingPanel(false)}
+            />
           )}
 
-          {/* Gợi ý bật Host nếu là lượt dung-trinh-bay nhưng host đang tắt */}
           {isPresentationStop && !showVotingPanel && !chosenAction && (
-            <div className="mx-6 mt-4 p-3 bg-amber-950/40 border border-amber-500/50 rounded flex flex-wrap items-center justify-between gap-2 text-xs">
-              <div className="flex items-center gap-2 text-amber-300">
-                <span className="w-2 h-2 rounded-full bg-amber-400" />
+            <div className="mx-6 mt-4 p-3 bg-ban-1/80 border border-ho-phach/60 flex flex-wrap items-center justify-between gap-2 text-xs max-sm:mx-3">
+              <div className="flex items-center gap-2 text-ho-phach">
+                <span className="w-2 h-2 rounded-full bg-ho-phach animate-nhap-nhay" />
                 <span className="font-semibold">{s("host.present_stop")}</span>
               </div>
               <button
@@ -459,7 +437,7 @@ export function DeskScreen({
                     // Bỏ qua lỗi localStorage
                   }
                 }}
-                className="px-2.5 py-1 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded text-xs transition"
+                className="px-3 py-1.5 border border-ho-phach bg-ho-phach text-muc font-nhan font-bold uppercase tracking-wider text-[11px] hover:bg-ho-phach/85 transition"
               >
                 {s("host.enable_now")}
               </button>

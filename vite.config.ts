@@ -27,6 +27,10 @@ function apiDevPlugin(): Plugin {
           const mod = await server.ssrLoadModule("/api/round.ts");
           return mod.default(req, res);
         }
+        if (url.startsWith("/api/join")) {
+          const mod = await server.ssrLoadModule("/api/join.ts");
+          return mod.default(req, res);
+        }
         next();
       });
     },

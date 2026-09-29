@@ -43,7 +43,9 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
     const state = await getRoomState(room);
 
     // Kiểm tra vòng bỏ phiếu có đang mở và đúng round hay không
-    if (!state.open || state.round !== round) {
+    // Cho trễ 2 giây vì đồng hồ máy chiếu và mạng lớp học không khớp tuyệt đối.
+    const expired = typeof state.endsAt === "number" && Date.now() > state.endsAt + 2000;
+    if (!state.open || state.round !== round || expired) {
       sendJson(res, 200, { ok: false, reason: "closed" }, { "Cache-Control": "no-store" });
       return;
     }

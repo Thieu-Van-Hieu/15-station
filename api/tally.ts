@@ -6,7 +6,7 @@
 
 import type { ApiRequest, ApiResponse } from "./_lib.js";
 import { ConfigError, hostTokenFrom, parseQueryParams, sendJson } from "./_lib.js";
-import { getRoomState, getRoomVotes, verifyHostToken } from "./_redis.js";
+import { countRoomMembers, countVotes, getRoomState, getRoomVotes, verifyHostToken } from "./_redis.js";
 
 export default async function handler(req: ApiRequest, res: ApiResponse) {
   try {
@@ -29,7 +29,7 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
       return;
     }
 
-    const state = await getRoomState(room);
+    const [state, joined] = await Promise.all([getRoomState(room), countRoomMembers(room)]);
 
     if (!state || state.round === 0) {
       sendJson(
@@ -41,20 +41,14 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
           turnId: "",
           counts: { CHO_QUA: 0, GIU_LAI: 0 },
           total: 0,
+          joined,
         },
         { "Cache-Control": "no-store" },
       );
       return;
     }
 
-    const votes = await getRoomVotes(room, state.round);
-    let choQuaCount = 0;
-    let giuLaiCount = 0;
-
-    for (const choice of Object.values(votes)) {
-      if (choice === "CHO_QUA") choQuaCount++;
-      else if (choice === "GIU_LAI") giuLaiCount++;
-    }
+    const counts = countVotes(await getRoomVotes(room, state.round));
 
     sendJson(
       res,
@@ -63,11 +57,10 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
         round: state.round,
         open: state.open,
         turnId: state.turnId ?? "",
-        counts: {
-          CHO_QUA: choQuaCount,
-          GIU_LAI: giuLaiCount,
-        },
-        total: choQuaCount + giuLaiCount,
+        counts,
+        total: counts.CHO_QUA + counts.GIU_LAI,
+        joined,
+        ...(state.endsAt ? { endsAt: state.endsAt } : {}),
       },
       { "Cache-Control": "no-store" },
     );

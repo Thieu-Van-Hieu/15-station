@@ -3,6 +3,7 @@ import stateHandler from "./state.js";
 import voteHandler from "./vote.js";
 import tallyHandler from "./tally.js";
 import roundHandler from "./round.js";
+import joinHandler from "./join.js";
 import type { ApiRequest, ApiResponse } from "./_lib.js";
 
 function createMockReqRes(options: {
@@ -303,3 +304,69 @@ describe("API — sửa lỗi P4: token qua header, thiếu cấu hình trên Ve
   });
 });
 
+describe("API — phiên hội đồng: đồng hồ, kết quả sau khi chốt, đếm người vào phòng", () => {
+  const room = "CLS1";
+  const token = "tok-cls";
+  const saved = { ...process.env };
+
+  beforeEach(() => {
+    process.env = { ...saved, HOST_TOKEN: token };
+    delete process.env.VERCEL;
+  });
+
+  afterAll(() => {
+    process.env = saved;
+  });
+
+  async function call(handler: (req: ApiRequest, res: ApiResponse) => Promise<void>, opts: Parameters<typeof createMockReqRes>[0]) {
+    const r = createMockReqRes(opts);
+    await handler(r.req, r.res);
+    return r;
+  }
+  const auth = { authorization: `Bearer ${token}` };
+
+  it("CLS-01 mở vòng có seconds thì trả endsAt, kẹp trong 10–300 giây", async () => {
+    const before = Date.now();
+    const r = await call(roundHandler, { method: "POST", headers: auth, body: { room, action: "open", turnId: "d3-t3", seconds: 5 } });
+    const endsAt = r.getData().endsAt;
+    expect(endsAt).toBeGreaterThanOrEqual(before + 10_000);
+    expect(endsAt).toBeLessThan(before + 11_000);
+  });
+
+  it("CLS-02 /api/join đếm mỗi điện thoại một lần, tally trả joined", async () => {
+    await call(joinHandler, { method: "POST", body: { room, voterId: "a" } });
+    await call(joinHandler, { method: "POST", body: { room, voterId: "a" } });
+    await call(joinHandler, { method: "POST", body: { room, voterId: "b" } });
+    const bad = await call(joinHandler, { method: "POST", body: { room } });
+    expect(bad.getStatusCode()).toBe(400);
+    const tally = await call(tallyHandler, { method: "GET", query: { room }, headers: auth });
+    expect(tally.getData().joined).toBe(2);
+  });
+
+  it("CLS-03 state giấu số phiếu khi đang mở, chốt xong thì trả result", async () => {
+    await call(voteHandler, { method: "POST", body: { room, round: 1, voterId: "a", choice: "CHO_QUA" } });
+    await call(voteHandler, { method: "POST", body: { room, round: 1, voterId: "b", choice: "GIU_LAI" } });
+    await call(voteHandler, { method: "POST", body: { room, round: 1, voterId: "c", choice: "CHO_QUA" } });
+    const open = await call(stateHandler, { method: "GET", query: { room } });
+    expect(open.getData().result).toBeUndefined();
+    expect(open.getData().endsAt).toBeDefined();
+
+    const close = await call(roundHandler, { method: "POST", headers: auth, body: { room, action: "close" } });
+    expect(close.getData().counts).toEqual({ CHO_QUA: 2, GIU_LAI: 1 });
+    const closed = await call(stateHandler, { method: "GET", query: { room } });
+    expect(closed.getData().result).toEqual({ CHO_QUA: 2, GIU_LAI: 1 });
+  });
+
+  it("CLS-04 hết giờ thì phiếu mới bị từ chối", async () => {
+    const r = await call(roundHandler, { method: "POST", headers: auth, body: { room, action: "open", turnId: "d3-t3", seconds: 10 } });
+    const round = r.getData().round;
+    const realNow = Date.now;
+    Date.now = () => realNow() + 13_000;
+    try {
+      const v = await call(voteHandler, { method: "POST", body: { room, round, voterId: "z", choice: "CHO_QUA" } });
+      expect(v.getData()).toEqual({ ok: false, reason: "closed" });
+    } finally {
+      Date.now = realNow;
+    }
+  });
+});
