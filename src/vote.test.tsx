@@ -221,7 +221,7 @@ describe("VoteScreen (Smartphone voting - Step 2)", () => {
     localStorage.setItem("tram15_vote_PHONG1_3", "GIU_LAI");
     globalThis.fetch = vi.fn().mockImplementation((url: string) =>
       url.startsWith("/api/state")
-        ? Promise.resolve({ ok: true, json: async () => ({ round: 3, open: false, turnId: "d3-t3", result: { CHO_QUA: 6, GIU_LAI: 2 } }) })
+        ? Promise.resolve({ ok: true, json: async () => ({ round: 3, open: false, turnId: "d3-t3", result: { CHO_QUA: 6, GIU_LAI: 2 }, closedAt: Date.now() - 5000 }) })
         : Promise.resolve({ ok: true, json: async () => ({ ok: true }) }),
     ) as any;
 
@@ -248,5 +248,19 @@ describe("VoteScreen (Smartphone voting - Step 2)", () => {
     await waitFor(() => expect(screen.getByText(content.strings["vote.time_up"])).toBeDefined());
     const btn = screen.getByRole("button", { name: new RegExp(content.strings["vote.stamp_approve"]) }) as HTMLButtonElement;
     expect(btn.disabled).toBe(true);
+  });
+
+  it("10. Kết quả của buổi trước (chốt quá 10 phút) không hiện cho người mới vào: thấy phòng chờ", async () => {
+    window.history.pushState({}, "", "/vote?room=PHONG1");
+    globalThis.fetch = vi.fn().mockImplementation((url: string) =>
+      url.startsWith("/api/state")
+        ? Promise.resolve({ ok: true, json: async () => ({ round: 10, open: false, turnId: "d3-t3", result: { CHO_QUA: 1, GIU_LAI: 0 }, closedAt: Date.now() - 3 * 3600_000 }) })
+        : Promise.resolve({ ok: true, json: async () => ({ ok: true }) }),
+    ) as any;
+
+    render(<VoteScreen />);
+
+    await waitFor(() => expect(screen.getByText(content.strings["vote.waiting"])).toBeDefined());
+    expect(screen.queryByText(content.strings["vote.result_title"])).toBeNull();
   });
 });

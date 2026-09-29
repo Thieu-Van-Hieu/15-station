@@ -45,7 +45,7 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
         question: state.question ?? "",
         options: state.options ?? ["CHO_QUA", "GIU_LAI"],
         ...(state.endsAt ? { endsAt: state.endsAt, openedAt: state.openedAt } : {}),
-        ...(!state.open && state.result ? { result: state.result } : {}),
+        ...(!state.open && state.result ? { result: state.result, closedAt: state.closedAt } : {}),
       },
       headers,
     );

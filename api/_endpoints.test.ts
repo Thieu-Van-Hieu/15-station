@@ -355,6 +355,7 @@ describe("API — phiên hội đồng: đồng hồ, kết quả sau khi chốt
     expect(close.getData().counts).toEqual({ CHO_QUA: 2, GIU_LAI: 1 });
     const closed = await call(stateHandler, { method: "GET", query: { room } });
     expect(closed.getData().result).toEqual({ CHO_QUA: 2, GIU_LAI: 1 });
+    expect(closed.getData().closedAt).toBeGreaterThan(Date.now() - 5000);
   });
 
   it("CLS-04 hết giờ thì phiếu mới bị từ chối", async () => {

@@ -30,7 +30,11 @@ interface VoteStateResponse {
   endsAt?: number;
   /** Chỉ có khi vòng đã đóng. */
   result?: Counts;
+  closedAt?: number;
 }
+
+/** Kết quả cũ hơn mốc này là của buổi trước: người mới vào phòng thấy phòng chờ thay vì kết quả cũ. */
+const RESULT_FRESH_MS = 10 * 60 * 1000;
 
 const str = content.strings;
 
@@ -233,7 +237,8 @@ export function VoteScreen() {
 
   const dossier = voteState?.turnId ? caseFor(voteState.turnId) : null;
   const question = dossier?.question ?? voteState?.question;
-  const result = !isRoundOpen && voteState?.result ? voteState.result : null;
+  const result =
+    !isRoundOpen && voteState?.result && voteState.closedAt && now - voteState.closedAt < RESULT_FRESH_MS ? voteState.result : null;
   const delegateNo = voterId.replace(/[^a-z0-9]/gi, "").slice(-4).toUpperCase();
 
   return (

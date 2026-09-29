@@ -32,6 +32,7 @@ interface ClassroomSessionProps {
 }
 
 const EMPTY: Counts = { CHO_QUA: 0, GIU_LAI: 0 };
+const STALE_MS = 60 * 1000;
 
 export function ClassroomSession({ room, turnId, variant, onVerdict, onSkip, onRemoteTurn, lobbyExtra }: ClassroomSessionProps) {
   const dossier = caseFor(turnId);
@@ -93,7 +94,9 @@ export function ClassroomSession({ room, turnId, variant, onVerdict, onSkip, onR
         if (!alive) return;
         setProblem((m) => (m !== null && isHostSetupMessage(m) ? null : m));
         setTally(data);
-        if (data.open && phaseRef.current === "lobby") {
+        // Vòng còn mở nhưng đã quá giờ từ lâu là vòng bị bỏ dở của buổi trước: ở lại phòng chờ, bấm bắt đầu sẽ mở vòng mới.
+        const stale = typeof data.endsAt === "number" && Date.now() > data.endsAt + STALE_MS;
+        if (data.open && phaseRef.current === "lobby" && !stale) {
           if (data.turnId && data.turnId !== turnId) {
             onRemoteTurn?.(data.turnId);
             return;

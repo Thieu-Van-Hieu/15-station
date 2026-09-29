@@ -98,4 +98,16 @@ describe("Màn máy chiếu /host (P4)", { timeout: 15000 }, () => {
     await screen.findByText(t["class.token_title"]);
     expect(screen.queryByRole("button", { name: t["class.start"] })).toBeNull();
   });
+
+  it("H-07 vòng bị bỏ dở từ buổi trước (quá giờ lâu) không kéo màn chiếu vào bỏ phiếu", async () => {
+    const api = fakeClassroomApi();
+    Object.assign(api.room, { round: 9, open: true, turnId: "d3-t3", endsAt: Date.now() - 3600_000 });
+    globalThis.fetch = api.fetch as never;
+    render(<HostScreen />);
+
+    await waitFor(() => expect(api.bodies.some((b) => b.url.startsWith("/api/tally"))).toBe(true));
+    await new Promise((r) => setTimeout(r, 1200));
+    expect(screen.getByRole("button", { name: t["class.start"] })).toBeDefined();
+    expect(api.bodies.some((b) => b.url === "/api/round")).toBe(false);
+  });
 });

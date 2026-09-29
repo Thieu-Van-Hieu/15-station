@@ -91,6 +91,7 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
       ...currentState,
       open: false,
       result: counts,
+      closedAt: currentState.open || !currentState.closedAt ? Date.now() : currentState.closedAt,
     };
 
     await setRoomState(room, closedState);

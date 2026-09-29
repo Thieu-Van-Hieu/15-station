@@ -18,6 +18,8 @@ export interface RoomState {
   endsAt?: number;
   /** Số phiếu chốt lúc đóng vòng. Chỉ có khi vòng đã đóng, để điện thoại xem kết quả mà không lộ số phiếu lúc đang bầu. */
   result?: { CHO_QUA: number; GIU_LAI: number };
+  /** Lúc chốt vòng (ms). Điện thoại chỉ hiện kết quả của vòng vừa chốt, không hiện kết quả của buổi trước. */
+  closedAt?: number;
 }
 
 export type VoteChoice = "CHO_QUA" | "GIU_LAI";

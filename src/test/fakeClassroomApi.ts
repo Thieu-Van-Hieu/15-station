@@ -42,7 +42,7 @@ export function fakeClassroomApi(opts: { joined?: number; failRound?: boolean } 
       return reply({ ok: true, round: room.round, open: false, counts: { ...room.counts }, total });
     }
     if (url.startsWith("/api/state")) {
-      return reply({ round: room.round, open: room.open, turnId: room.turnId, endsAt: room.endsAt, ...(room.open ? {} : { result: room.counts }) });
+      return reply({ round: room.round, open: room.open, turnId: room.turnId, endsAt: room.endsAt, ...(room.open ? {} : { result: room.counts, closedAt: Date.now() }) });
     }
     if (url.startsWith("/api/join")) return reply({ ok: true });
     return Promise.reject(new Error(`Unknown URL ${url}`));
