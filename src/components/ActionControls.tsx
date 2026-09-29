@@ -12,6 +12,7 @@ interface ActionControlsProps {
   chosenAction?: Action | null;
   chosenReasonId?: string | null;
   travelerOrder?: number;
+  isHostVoting?: boolean;
   onDecide: (action: Action, reasonId?: string | null) => void;
   onNext: () => void;
   /**
@@ -55,6 +56,7 @@ export function ActionControls({
   chosenAction,
   chosenReasonId,
   travelerOrder,
+  isHostVoting,
   onDecide,
   onNext,
   onStampDrop,
@@ -72,10 +74,10 @@ export function ActionControls({
   // UI-03: Biên bản disabled ở d1, d2, d6 (!day.kn_enabled)
   // UI-04: Chọn làm ngơ -> Nút Biên bản không bấm được
   // UI-05: Nhận phong bì -> Dấu Giữ lại và nút Biên bản không bấm được
-  const isReportDisabled = !day.kn_enabled || bribeAccepted || chosenAction === "LAM_NGO" || !!chosenAction;
-  const isRejectDisabled = bribeAccepted || !!chosenAction;
-  const isApproveDisabled = !!chosenAction;
-  const isIgnoreDisabled = !!chosenAction;
+  const isReportDisabled = !day.kn_enabled || bribeAccepted || chosenAction === "LAM_NGO" || !!chosenAction || !!isHostVoting;
+  const isRejectDisabled = bribeAccepted || !!chosenAction || !!isHostVoting;
+  const isApproveDisabled = !!chosenAction || !!isHostVoting;
+  const isIgnoreDisabled = !!chosenAction || !!isHostVoting;
 
   function handleOpenReport() {
     if (isReportDisabled) return;

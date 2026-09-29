@@ -135,3 +135,13 @@ Bắt đầu ngay sau buổi họp.
 - [x] Hỗ trợ chế độ nhảy lượt `?tu=d3-t3` để demo 4 phút cho buổi thuyết trình
 - [x] Hỗ trợ chơi offline hoàn toàn qua `pnpm preview` không cần mạng
 
+## P4 (Mở rộng) — Chế độ Host và bỏ phiếu lớp học
+
+- [x] Cài `@upstash/redis`, viết bốn API endpoint (`/api/state`, `/api/vote`, `/api/tally`, `/api/round`) kèm bộ nhớ tạm in-memory cho local dev
+- [x] Trang bỏ phiếu điện thoại `/vote` (giao diện tối ưu cảm ứng, tự sinh voterId, ẩn danh, cho phép đổi ý trước khi chốt)
+- [x] Màn hình máy chiếu `/host` (typography cỡ lớn cho giảng đường, tạo QR code, biểu đồ thanh trực quan thời gian thực, mở/chốt vòng)
+- [x] Nối vào vòng lặp trò chơi tại lượt `dung-trinh-bay` (Bà Tư `d3-t3`), tự động đóng dấu theo đa số phiếu, xử lý hoà phiếu
+- [x] Tích hợp cơ chế đường lui nhập tay khẩn cấp (<10s) cả trên màn `/host` lẫn tại bàn chơi khi mất mạng
+- [x] Tài liệu hướng dẫn vận hành & kiểm thử đa thiết bị trong `docs/11-huong-dan-host-va-bo-phieu.md`
+- [x] Bộ kiểm thử tự động: `api/endpoints.test.ts`, `src/vote.test.tsx`, `src/host.test.tsx`, `src/game-host.test.tsx` (289/289 tests đạt 100%)
+

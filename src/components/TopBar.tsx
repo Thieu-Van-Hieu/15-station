@@ -10,9 +10,21 @@ interface TopBarProps {
   totalTravelersInDay: number;
   /** Giờ hiển thị, mặc định là `state.clockMin`. Bàn làm việc cộng trước 60 phút khi người chơi kèm biên bản (V6). */
   clockMin?: number;
+  isHostMode?: boolean;
+  hostRoom?: string;
+  onToggleHostMode?: () => void;
 }
 
-export function TopBar({ state, day, currentTravelerOrder, totalTravelersInDay, clockMin }: TopBarProps) {
+export function TopBar({
+  state,
+  day,
+  currentTravelerOrder,
+  totalTravelersInDay,
+  clockMin,
+  isHostMode,
+  hostRoom,
+  onToggleHostMode,
+}: TopBarProps) {
   const target = clockMin ?? state.clockMin;
   const { shown, jumping } = useTweenedClock(target);
   const late = shown > toMin(day.clock.end);
@@ -36,6 +48,22 @@ export function TopBar({ state, day, currentTravelerOrder, totalTravelersInDay, 
       }
       right={
         <div className="hidden md:flex items-center gap-3">
+          {onToggleHostMode && (
+            <button
+              type="button"
+              onClick={onToggleHostMode}
+              className={cx(
+                "px-2 py-1 border text-[10px] font-mono font-bold tracking-wider rounded transition flex items-center gap-1.5",
+                isHostMode
+                  ? "bg-amber-500/20 border-amber-500 text-amber-300"
+                  : "bg-ban-1/60 border-vien/60 text-chu-ban-phu/70 hover:text-giay"
+              )}
+              title={s("host.mode_label")}
+            >
+              <span className={cx("w-2 h-2 rounded-full", isHostMode ? "bg-amber-400 animate-pulse" : "bg-slate-500")} />
+              <span>{isHostMode ? `${s("host.mode_on")} (${hostRoom ?? "T15"})` : s("host.mode_off")}</span>
+            </button>
+          )}
           <div className="text-right leading-tight">
             <Label className="block text-chu-ban-phu/50 text-[9px]">{s("ui.officer_label")}</Label>
             <span className="text-[12px] text-giay">{s("ui.officer_name")}</span>
