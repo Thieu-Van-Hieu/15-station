@@ -34,7 +34,6 @@ const RULEBOOK_KEY = "tram15_rulebook";
 const HOST_MODE_KEY = "tram15_host_mode";
 const HOST_ROOM_KEY = "tram15_host_room";
 const HOST_TOKEN_KEY = "tram15_host_token";
-const DEFAULT_HOST_TOKEN = "tram15-host-secret";
 const DEFAULT_ROOM = "T15";
 
 function readRulebookOpen(): boolean {
@@ -114,9 +113,10 @@ export function DeskScreen({
 
   const [hostToken] = useState<string>(() => {
     try {
-      return localStorage.getItem(HOST_TOKEN_KEY) || DEFAULT_HOST_TOKEN;
+      // Token nhập một lần ở màn /host (cùng trình duyệt), không có giá trị mặc định trong bundle.
+      return localStorage.getItem(HOST_TOKEN_KEY) ?? "";
     } catch {
-      return DEFAULT_HOST_TOKEN;
+      return "";
     }
   });
 

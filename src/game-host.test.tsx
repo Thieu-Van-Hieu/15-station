@@ -11,6 +11,8 @@ describe("Game Loop Host Voting Integration (Step 4)", () => {
 
   beforeEach(() => {
     localStorage.clear();
+    // Không còn token mặc định trong bundle: người chủ trì nhập token một lần, lưu ở localStorage.
+    localStorage.setItem("tram15_host_token", "test-host-token");
     window.history.pushState({}, "", "/");
     vi.restoreAllMocks();
   });
@@ -65,7 +67,7 @@ describe("Game Loop Host Voting Integration (Step 4)", () => {
           json: async () => ({
             round: 1,
             open: true,
-            votes: { CHO_QUA: 0, GIU_LAI: 0 },
+            counts: { CHO_QUA: 0, GIU_LAI: 0 },
             total: 0,
           }),
         });
@@ -132,7 +134,7 @@ describe("Game Loop Host Voting Integration (Step 4)", () => {
           json: async () => ({
             round: 1,
             open: isRoundOpen,
-            votes: { CHO_QUA: 25, GIU_LAI: 5 },
+            counts: { CHO_QUA: 25, GIU_LAI: 5 },
             total: 30,
           }),
         });
@@ -250,7 +252,7 @@ describe("Game Loop Host Voting Integration (Step 4)", () => {
           json: async () => ({
             round: 1,
             open: isRoundOpen,
-            votes: { CHO_QUA: 15, GIU_LAI: 15 },
+            counts: { CHO_QUA: 15, GIU_LAI: 15 },
             total: 30,
           }),
         });

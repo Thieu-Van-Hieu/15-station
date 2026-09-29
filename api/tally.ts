@@ -4,9 +4,9 @@
  * Sai token trả 401. Không cache.
  */
 
-import type { ApiRequest, ApiResponse } from "./_lib";
-import { parseQueryParams, sendJson } from "./_lib";
-import { getRoomState, getRoomVotes, verifyHostToken } from "./_redis";
+import type { ApiRequest, ApiResponse } from "./_lib.js";
+import { ConfigError, hostTokenFrom, parseQueryParams, sendJson } from "./_lib.js";
+import { getRoomState, getRoomVotes, verifyHostToken } from "./_redis.js";
 
 export default async function handler(req: ApiRequest, res: ApiResponse) {
   try {
@@ -17,7 +17,7 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
 
     const params = parseQueryParams(req);
     const room = params.get("room");
-    const hostToken = params.get("host");
+    const hostToken = hostTokenFrom(req, params.get("host"));
 
     if (!room || room.trim().length === 0) {
       sendJson(res, 400, { error: "Thiếu mã phòng" });
@@ -72,6 +72,10 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
       { "Cache-Control": "no-store" },
     );
   } catch (error) {
+    if (error instanceof ConfigError) {
+      sendJson(res, 503, { ok: false, error: error.message }, { "Cache-Control": "no-store" });
+      return;
+    }
     sendJson(res, 500, { error: "Đã xảy ra lỗi máy chủ khi thống kê phiếu bầu" });
   }
 }

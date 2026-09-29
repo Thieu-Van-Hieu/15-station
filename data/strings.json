@@ -335,5 +335,12 @@
   "host.tie_decide_hint": "Hoà phiếu — Mời người chủ trì quyết định đóng dấu.",
   "host.open_projector": "Mở màn hình máy chiếu",
   "host.present_stop": "ĐIỂM DỪNG THẢO LUẬN LỚP HỌC",
-  "host.enable_now": "Bật bỏ phiếu lớp học cho lượt này"
+  "host.enable_now": "Bật bỏ phiếu lớp học cho lượt này",
+  "host.token_missing": "Chưa nhập HOST_TOKEN. Nhập token ở ô cuối trang rồi bấm OK.",
+  "host.token_invalid": "Sai HOST_TOKEN: máy chủ từ chối. Kiểm tra lại token ở ô cuối trang.",
+  "host.server_config": "Máy chủ chưa cấu hình xong",
+  "host.use_manual": "Dùng đường lui nhập tay trong lúc chờ.",
+  "vote.turn_prefix": "Lượt",
+  "vote.situation": "Tình huống xem xét",
+  "vote.footer_secret": "Phiếu kín, được đổi ý trước khi chốt"
 }

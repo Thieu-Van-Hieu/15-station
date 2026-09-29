@@ -7,6 +7,8 @@ import { content } from "./content";
 describe("HostScreen (Projector host display & manual fallback - Step 3)", () => {
   beforeEach(() => {
     localStorage.clear();
+    // Không còn token mặc định trong bundle: người chủ trì nhập token một lần, lưu ở localStorage.
+    localStorage.setItem("tram15_host_token", "test-host-token");
     window.history.pushState({}, "", "/host?room=TEST1");
     vi.restoreAllMocks();
   });
@@ -23,7 +25,7 @@ describe("HostScreen (Projector host display & manual fallback - Step 3)", () =>
       json: async () => ({
         round: 0,
         open: false,
-        votes: { CHO_QUA: 0, GIU_LAI: 0 },
+        counts: { CHO_QUA: 0, GIU_LAI: 0 },
         total: 0,
       }),
     } as any);
@@ -41,7 +43,7 @@ describe("HostScreen (Projector host display & manual fallback - Step 3)", () =>
       json: async () => ({
         round: 0,
         open: false,
-        votes: { CHO_QUA: 0, GIU_LAI: 0 },
+        counts: { CHO_QUA: 0, GIU_LAI: 0 },
         total: 0,
       }),
     } as any);
@@ -75,7 +77,7 @@ describe("HostScreen (Projector host display & manual fallback - Step 3)", () =>
         open: true,
         turnId: "d3-t3",
         question: "Cả lớp quyết định cho bà Tư?",
-        votes: {
+        counts: {
           CHO_QUA: 30,
           GIU_LAI: 10,
         },
@@ -106,7 +108,7 @@ describe("HostScreen (Projector host display & manual fallback - Step 3)", () =>
           json: async () => ({
             round: currentRound,
             open: isOpen,
-            votes: { CHO_QUA: 0, GIU_LAI: 0 },
+            counts: { CHO_QUA: 0, GIU_LAI: 0 },
             total: 0,
           }),
         });
@@ -150,7 +152,7 @@ describe("HostScreen (Projector host display & manual fallback - Step 3)", () =>
           json: async () => ({
             round: 2,
             open: true,
-            votes: { CHO_QUA: 15, GIU_LAI: 15 },
+            counts: { CHO_QUA: 15, GIU_LAI: 15 },
             total: 30,
           }),
         });

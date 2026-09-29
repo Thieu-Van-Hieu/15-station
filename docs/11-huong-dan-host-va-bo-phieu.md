@@ -20,20 +20,30 @@ Hệ thống được thiết kế tối ưu cho mô hình lớp học 40–50 s
 
 ---
 
-## 2. CẤU HÌNH BIẾN MÔI TRƯỜNG (`.env`)
+## 2. CẤU HÌNH BIẾN MÔI TRƯỜNG
 
-Tạo hoặc cập nhật file `.env` tại thư mục gốc của dự án:
+Cần ba biến:
+
+| Biến | Lấy ở đâu |
+|---|---|
+| `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN` | Vercel → Project → **Storage** → thêm **Upstash for Redis** (Marketplace, gói free). Vercel tự gắn hai biến này vào project. |
+| `HOST_TOKEN` | Tự đặt một chuỗi ngẫu nhiên, ví dụ chạy `openssl rand -hex 12`. Không dùng chuỗi mẫu, không đưa vào mã nguồn. |
+
+**Trên Vercel:** Project → Settings → Environment Variables → thêm `HOST_TOKEN` (môi trường Production). Sau khi thêm biến phải **Redeploy** thì function mới nhận.
+
+**Chạy local:** tạo file `.env` ở thư mục gốc (đã nằm trong `.gitignore`):
 
 ```env
-# URL và Token kết nối Upstash Redis (REST API)
-UPSTASH_REDIS_REST_URL="https://your-upstash-instance.upstash.io"
-UPSTASH_REDIS_REST_TOKEN="your-upstash-token"
-
-# Mã bí mật dành cho Host điều khiển vòng và xem số phiếu
-HOST_TOKEN="tram15-host-secret"
+UPSTASH_REDIS_REST_URL="https://<instance>.upstash.io"
+UPSTASH_REDIS_REST_TOKEN="<token>"
+HOST_TOKEN="<chuỗi ngẫu nhiên của bạn>"
 ```
 
-> **Lưu ý:** Nếu chạy local và chưa cấu hình Upstash Redis, hệ thống sẽ **tự động kích hoạt InMemoryStorage** tích hợp sẵn. Nhờ đó, bạn có thể chạy thử nghiệm và kiểm thử ngay lập tức mà không gặp bất kỳ lỗi nào.
+> **Local không có Upstash:** hệ thống dùng bộ nhớ trong tiến trình, đủ để chạy thử. Nếu chưa đặt `HOST_TOKEN` thì ở local mọi token không rỗng đều được chấp nhận.
+>
+> **Trên Vercel thiếu biến:** các endpoint trả **503** kèm thông điệp nói rõ thiếu biến nào (không lặng lẽ dùng bộ nhớ trong, vì mỗi instance serverless giữ một bản riêng và phiếu sẽ bị lạc). Màn host hiện thông báo này và gợi ý chuyển sang **đường lui nhập tay**.
+>
+> **Token:** nhập `HOST_TOKEN` một lần ở ô cuối trang `/host`; trình duyệt lưu lại và bàn game dùng chung. Token gửi qua header `Authorization: Bearer`, không nằm trên URL và không bị nhúng vào bundle.
 
 ---
 
@@ -52,14 +62,11 @@ HOST_TOKEN="tram15-host-secret"
 ### Bước 1: Khởi động hệ thống
 1. Chạy dev server hỗ trợ truy cập mạng nội bộ (LAN / WiFi phòng học):
    ```bash
-   rtk pnpm dev --host
+   pnpm dev --host
    ```
    *Lưu ý địa chỉ IP hiển thị trên terminal (ví dụ: `http://192.168.1.15:5173`).*
 
-2. Hoặc triển khai lên Vercel:
-   ```bash
-   rtk pnpm build
-   ```
+2. Hoặc dùng bản đã triển khai: push lên nhánh `main`, Vercel tự build và deploy tại https://15-station.vercel.app/ (nhớ cấu hình biến ở mục 2).
 
 ### Bước 2: Thiết lập máy chiếu
 1. Trên máy tính nối máy chiếu, mở trình duyệt vào:

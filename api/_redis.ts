@@ -3,7 +3,9 @@
  * Hỗ trợ Upstash Redis qua REST API (@upstash/redis) và memory fallback khi chạy local/test không có credentials.
  */
 
+import { timingSafeEqual } from "node:crypto";
 import { Redis } from "@upstash/redis";
+import { ConfigError } from "./_lib.js";
 
 export interface RoomState {
   round: number;
@@ -58,12 +60,23 @@ class MemoryStore {
 
 const memoryStore = new MemoryStore();
 
+/** Đang chạy trên Vercel (production hoặc preview). Ở đó mỗi request có thể rơi vào một instance khác. */
+function onVercel(): boolean {
+  return Boolean(process.env.VERCEL);
+}
+
+let client: Redis | null = null;
+
 function getRedisClient(): Redis | null {
   const url = process.env.UPSTASH_REDIS_REST_URL;
   const token = process.env.UPSTASH_REDIS_REST_TOKEN;
   if (url && token) {
-    return new Redis({ url, token });
+    client ??= new Redis({ url, token });
+    return client;
   }
+  // Trên Vercel, bộ nhớ trong không sống giữa các request: dùng nó thì phiếu của lớp rơi vào các instance khác nhau
+  // và host không bao giờ thấy. Báo lỗi rõ để màn host chuyển sang đường lui nhập tay, thay vì âm thầm sai.
+  if (onVercel()) throw new ConfigError("Máy chủ chưa cấu hình Upstash Redis (UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN).");
   return null;
 }
 
@@ -140,11 +153,18 @@ export async function clearRoomVotes(room: string, round: number): Promise<void>
   await memoryStore.clearVotes(normalized, round);
 }
 
+/**
+ * Kiểm tra token host. Chỉ khi chạy ở máy (không phải Vercel) mà chưa đặt HOST_TOKEN thì mới nhận mọi token không rỗng,
+ * cho tiện thử. Trên Vercel thiếu HOST_TOKEN là lỗi cấu hình: không cho ai điều khiển vòng bỏ phiếu.
+ */
 export function verifyHostToken(providedToken?: string | null): boolean {
   const expectedToken = process.env.HOST_TOKEN;
   if (!expectedToken) {
-    // Nếu chưa cấu hình HOST_TOKEN trên môi trường, chấp nhận bất kỳ token không rỗng nào
+    if (onVercel()) throw new ConfigError("Máy chủ chưa cấu hình HOST_TOKEN.");
     return typeof providedToken === "string" && providedToken.trim().length > 0;
   }
-  return providedToken === expectedToken;
+  if (typeof providedToken !== "string") return false;
+  const a = Buffer.from(providedToken);
+  const b = Buffer.from(expectedToken);
+  return a.length === b.length && timingSafeEqual(a, b);
 }

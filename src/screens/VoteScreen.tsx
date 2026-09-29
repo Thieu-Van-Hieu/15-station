@@ -95,9 +95,7 @@ export function VoteScreen() {
           setVoteState(data);
           setIsConnectionError(false);
           // Nếu vòng đã đóng, xoá thông báo lỗi gửi trước đó
-          if (!data.open && errorMessage) {
-            setErrorMessage(null);
-          }
+          if (!data.open) setErrorMessage(null);
         }
       } catch {
         if (isMounted) {
@@ -113,7 +111,7 @@ export function VoteScreen() {
       isMounted = false;
       clearInterval(timer);
     };
-  }, [room, errorMessage]);
+  }, [room]);
 
   // Gửi phiếu bầu
   async function handleVote(choice: "CHO_QUA" | "GIU_LAI") {
@@ -159,20 +157,20 @@ export function VoteScreen() {
   // 1. Màn hình nhập mã phòng (khi không có ?room= trên URL)
   if (!room) {
     return (
-      <main className="min-h-screen bg-xi-mang text-muc font-may-chu p-4 flex flex-col items-center justify-center">
-        <div className="max-w-md w-full border-4 border-nau bg-giay p-6 rounded shadow-2xl space-y-6 text-center">
-          <header className="border-b-2 border-nau/40 pb-3">
-            <h1 className="text-xl font-bold text-dau-do tracking-wider">
+      <main className="min-h-screen mat-ban lop-nhieu text-muc font-may-chu p-4 flex flex-col items-center justify-center">
+        <div className="max-w-md w-full border border-giay-vien giay-hat shadow-noi p-6 rounded shadow-2xl space-y-6 text-center">
+          <header className="border-b-2 border-muc/30 pb-3">
+            <h1 className="text-xl font-bold text-son tracking-wider">
               {content.strings["vote.title"]}
             </h1>
             <p className="text-xs text-neutral-600 font-mono mt-1">
-              {content.strings["ui.brand_sub"] ?? "Trạm kiểm soát liên huyện số 15"}
+              {content.strings["ui.brand_sub"]}
             </p>
           </header>
 
           <form onSubmit={handleJoinRoom} className="space-y-4 text-left">
             <div>
-              <label htmlFor="room-input" className="block text-xs font-bold uppercase text-nau mb-1">
+              <label htmlFor="room-input" className="block text-xs font-bold uppercase text-muc-nhat mb-1">
                 {content.strings["vote.room_label"]}
               </label>
               <input
@@ -183,14 +181,14 @@ export function VoteScreen() {
                 placeholder={content.strings["vote.room_placeholder"]}
                 value={roomInput}
                 onChange={(e) => setRoomInput(e.target.value)}
-                className="w-full p-3 border-2 border-nau rounded bg-white text-muc font-mono text-center text-lg font-bold tracking-widest focus:outline-none focus:ring-2 focus:ring-dau-do"
+                className="w-full p-3 border-2 border-muc rounded bg-white text-muc font-mono text-center text-lg font-bold tracking-widest focus:outline-none focus:ring-2 focus:ring-son"
               />
             </div>
 
             <button
               type="submit"
               disabled={!roomInput.trim()}
-              className="w-full py-3 bg-nau hover:bg-nau/90 text-giay font-bold text-sm tracking-widest uppercase rounded shadow border-2 border-giay disabled:opacity-50 disabled:cursor-not-allowed transition-all active:scale-95"
+              className="w-full py-3 bg-son hover:bg-son-dam text-giay font-bold text-sm tracking-widest uppercase rounded shadow border-2 border-giay disabled:opacity-50 disabled:cursor-not-allowed transition-all active:scale-95"
             >
               {content.strings["vote.room_submit"]}
             </button>
@@ -203,12 +201,12 @@ export function VoteScreen() {
   const isRoundOpen = Boolean(voteState && voteState.open && voteState.round > 0);
 
   return (
-    <main className="min-h-screen bg-xi-mang text-muc font-may-chu p-4 flex flex-col items-center justify-center">
-      <div className="max-w-md w-full border-4 border-nau bg-giay p-6 rounded shadow-2xl space-y-6">
+    <main className="min-h-screen mat-ban lop-nhieu text-muc font-may-chu p-4 flex flex-col items-center justify-center">
+      <div className="max-w-md w-full border border-giay-vien giay-hat shadow-noi p-6 rounded shadow-2xl space-y-6">
         {/* Header phòng và vòng */}
-        <header className="border-b-2 border-nau/40 pb-3 flex items-center justify-between text-xs">
+        <header className="border-b-2 border-muc/30 pb-3 flex items-center justify-between text-xs">
           <div>
-            <span className="font-bold text-dau-do uppercase tracking-wider block">
+            <span className="font-bold text-son uppercase tracking-wider block">
               {content.strings["vote.title"]}
             </span>
             <span className="font-mono text-neutral-600">
@@ -216,11 +214,11 @@ export function VoteScreen() {
             </span>
           </div>
           {voteState && voteState.round > 0 && (
-            <div className="bg-nau/10 border border-nau/30 px-2 py-1 rounded text-right font-mono">
+            <div className="bg-bia/60 border border-muc/25 px-2 py-1 rounded text-right font-mono">
               <span className="text-[10px] text-neutral-600 block leading-tight">
                 {content.strings["vote.round_label"]}
               </span>
-              <strong className="text-dau-do text-sm font-bold">#{voteState.round}</strong>
+              <strong className="text-son text-sm font-bold">#{voteState.round}</strong>
             </div>
           )}
         </header>
@@ -242,10 +240,10 @@ export function VoteScreen() {
         {/* Trạng thái 1: Chưa mở vòng hoặc vòng đã đóng */}
         {!isRoundOpen ? (
           <div className="py-8 text-center space-y-4">
-            <div className="w-16 h-16 mx-auto rounded-full border-4 border-dashed border-nau/50 flex items-center justify-center text-nau text-2xl font-bold animate-spin">
+            <div className="w-16 h-16 mx-auto rounded-full border-4 border-dashed border-muc/40 flex items-center justify-center text-muc-nhat text-2xl font-bold animate-spin">
               ⏳
             </div>
-            <h2 className="text-lg font-bold text-nau uppercase tracking-wide">
+            <h2 className="text-lg font-bold text-muc-nhat uppercase tracking-wide">
               {content.strings["vote.waiting"]}
             </h2>
             <p className="text-xs text-neutral-600 leading-relaxed max-w-xs mx-auto italic">
@@ -256,9 +254,9 @@ export function VoteScreen() {
           /* Trạng thái 2: Đang mở vòng bỏ phiếu */
           <div className="space-y-6">
             {/* Câu hỏi / Tình huống */}
-            <div className="p-4 bg-nau/5 border-2 border-dashed border-nau/40 rounded space-y-2">
-              <h2 className="text-xs uppercase font-bold text-dau-do tracking-wider">
-                {voteState?.turnId ? `Lượt: ${voteState.turnId}` : "Tình huống xem xét:"}
+            <div className="p-4 bg-bia/40 border-2 border-dashed border-muc/30 rounded space-y-2">
+              <h2 className="text-xs uppercase font-bold text-son tracking-wider">
+                {voteState?.turnId ? `${content.strings["vote.turn_prefix"]}: ${voteState.turnId}` : `${content.strings["vote.situation"]}:`}
               </h2>
               <p className="text-sm font-serif leading-relaxed text-muc font-semibold">
                 {voteState?.question}
@@ -306,8 +304,8 @@ export function VoteScreen() {
                 onClick={() => handleVote("GIU_LAI")}
                 className={`py-4 px-6 border-4 font-bold text-lg tracking-widest uppercase rounded shadow-lg transition-transform active:scale-95 flex items-center justify-center space-x-2 ${
                   myChoice === "GIU_LAI"
-                    ? "bg-dau-do text-white border-red-950 ring-4 ring-red-600/40"
-                    : "border-dau-do text-dau-do bg-red-100 hover:bg-red-200"
+                    ? "bg-son text-white border-red-950 ring-4 ring-red-600/40"
+                    : "border-son text-son bg-red-100 hover:bg-red-200"
                 }`}
               >
                 <span>{content.strings["vote.stamp_reject"]}</span>
@@ -318,8 +316,8 @@ export function VoteScreen() {
         )}
 
         {/* Footer ghi chú bảo mật cử tri */}
-        <footer className="border-t border-nau/30 pt-3 text-center text-[10px] text-neutral-500 font-mono">
-          ID: {voterId.slice(0, 8)}... • Phiếu kín & tự do
+        <footer className="border-t border-muc/25 pt-3 text-center text-[10px] text-neutral-500 font-mono">
+          ID: {voterId.slice(0, 8)}… · {content.strings["vote.footer_secret"]}
         </footer>
       </div>
     </main>

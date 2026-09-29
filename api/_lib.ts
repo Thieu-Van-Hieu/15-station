@@ -80,10 +80,29 @@ export function sendJson(res: ApiResponse, statusCode: number, data: any, header
   res.setHeader("Content-Type", "application/json; charset=utf-8");
 
   if (typeof res.status === "function" && typeof res.json === "function") {
-    res.status(statusCode).json(data);
+    const withStatus = res.status(statusCode);
+    withStatus.json?.(data);
     return;
   }
 
   res.statusCode = statusCode;
   res.end(JSON.stringify(data));
 }
+
+/**
+ * Token host của request: ưu tiên header `Authorization: Bearer <token>` (màn host và bàn game gửi kiểu này,
+ * để token không nằm trên URL và lịch sử trình duyệt), sau đó mới tới `host` trong query hoặc body.
+ */
+export function hostTokenFrom(req: ApiRequest, fallback?: unknown): string | null {
+  const auth = req.headers?.authorization;
+  const header = Array.isArray(auth) ? auth[0] : auth;
+  if (typeof header === "string" && /^Bearer\s+/i.test(header)) {
+    const token = header.replace(/^Bearer\s+/i, "").trim();
+    if (token) return token;
+  }
+  return typeof fallback === "string" && fallback.trim() ? fallback.trim() : null;
+}
+
+/** Lỗi cấu hình máy chủ (thiếu biến môi trường). Endpoint trả 503 kèm thông điệp này. */
+export class ConfigError extends Error {}
+

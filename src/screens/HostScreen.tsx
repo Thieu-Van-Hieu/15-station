@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef, useId } from "react";
 import QRCode from "qrcode";
 import { content } from "../content";
+import { explainHostError, isHostSetupMessage } from "../hostApi";
 
 const HOST_TOKEN_KEY = "tram15_host_token";
 const HOST_ROOM_KEY = "tram15_host_room";
-const DEFAULT_HOST_TOKEN = "tram15-host-secret";
 const DEFAULT_ROOM = "T15";
 const TURN_PRESET_IDS = ["d3-t3", "d1-t1", "d3-t1", "d5-t1", "d5-t4"] as const;
 
@@ -13,7 +13,8 @@ interface TallyData {
   open: boolean;
   turnId?: string;
   question?: string;
-  votes: {
+  /** Tên trường theo hợp đồng API `/api/tally`. */
+  counts: {
     CHO_QUA: number;
     GIU_LAI: number;
   };
@@ -23,9 +24,10 @@ interface TallyData {
 export function HostScreen() {
   const [hostToken, setHostToken] = useState<string>(() => {
     try {
-      return localStorage.getItem(HOST_TOKEN_KEY) || DEFAULT_HOST_TOKEN;
+      // Không có token mặc định: token chỉ nằm ở máy chủ và trong trình duyệt của người chủ trì, không nằm trong bundle.
+      return localStorage.getItem(HOST_TOKEN_KEY) ?? "";
     } catch {
-      return DEFAULT_HOST_TOKEN;
+      return "";
     }
   });
 
@@ -120,6 +122,10 @@ export function HostScreen() {
     let timer: ReturnType<typeof setInterval> | null = null;
 
     async function fetchTally() {
+      if (!hostToken) {
+        setStatusMessage(content.strings["host.token_missing"]);
+        return;
+      }
       try {
         const res = await fetch(`/api/tally?room=${encodeURIComponent(room)}`, {
           headers: {
@@ -128,9 +134,14 @@ export function HostScreen() {
           },
         });
 
+        if (!res.ok && isMounted) {
+          setStatusMessage(await explainHostError(res));
+          return;
+        }
         if (res.ok) {
           const data: TallyData = await res.json();
           if (isMounted) {
+            setStatusMessage((m) => (m !== null && isHostSetupMessage(m) ? null : m));
             setTally(data);
             if (prevRoundRef.current !== data.round) {
               prevRoundRef.current = data.round;
@@ -173,10 +184,8 @@ export function HostScreen() {
         }),
       });
 
+      if (!res.ok) throw new Error(await explainHostError(res));
       const data = await res.json();
-      if (!res.ok) {
-        throw new Error(data.error || "Failed to open round");
-      }
 
       setManualTally(null);
       setTally({
@@ -184,7 +193,7 @@ export function HostScreen() {
         open: true,
         turnId: selectedTurnId,
         question: customQuestion,
-        votes: { CHO_QUA: 0, GIU_LAI: 0 },
+        counts: { CHO_QUA: 0, GIU_LAI: 0 },
         total: 0,
       });
     } catch (err) {
@@ -211,10 +220,7 @@ export function HostScreen() {
         }),
       });
 
-      const data = await res.json();
-      if (!res.ok) {
-        throw new Error(data.error || "Failed to close round");
-      }
+      if (!res.ok) throw new Error(await explainHostError(res));
 
       setTally((prev) => (prev ? { ...prev, open: false } : null));
     } catch (err) {
@@ -279,8 +285,8 @@ export function HostScreen() {
   }
 
   // Tính toán số liệu hiển thị (kết quả online hoặc kết quả thủ công nếu đã bật)
-  const currentApprove = manualTally ? manualTally.approve : tally?.votes?.CHO_QUA ?? 0;
-  const currentReject = manualTally ? manualTally.reject : tally?.votes?.GIU_LAI ?? 0;
+  const currentApprove = manualTally ? manualTally.approve : tally?.counts?.CHO_QUA ?? 0;
+  const currentReject = manualTally ? manualTally.reject : tally?.counts?.GIU_LAI ?? 0;
   const currentTotal = manualTally ? manualTally.approve + manualTally.reject : tally?.total ?? 0;
 
   const approvePercent = currentTotal > 0 ? Math.round((currentApprove / currentTotal) * 100) : 0;

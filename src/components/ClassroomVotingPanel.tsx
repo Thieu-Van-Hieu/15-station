@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useId } from "react";
 import type { Verdict } from "../engine/types";
 import { content } from "../content";
+import { explainHostError } from "../hostApi";
 
 interface ClassroomVotingPanelProps {
   room: string;
@@ -17,7 +18,8 @@ interface TallyData {
   open: boolean;
   turnId?: string;
   question?: string;
-  votes: {
+  /** Tên trường theo hợp đồng API `/api/tally`. */
+  counts: {
     CHO_QUA: number;
     GIU_LAI: number;
   };
@@ -38,6 +40,8 @@ export function ClassroomVotingPanel({
   const [roundOpened, setRoundOpened] = useState<boolean>(false);
   const [decidedVerdict, setDecidedVerdict] = useState<Verdict | null>(null);
   const [isTie, setIsTie] = useState<boolean>(false);
+  /** Lý do mở vòng hoặc lấy kết quả thất bại (sai token, máy chủ chưa cấu hình, mất mạng). */
+  const [problem, setProblem] = useState<string | null>(null);
 
   const [manualApproveInput, setManualApproveInput] = useState<string>("0");
   const [manualRejectInput, setManualRejectInput] = useState<string>("0");
@@ -72,6 +76,9 @@ export function ClassroomVotingPanel({
         if (res.ok && isMounted) {
           setRoundOpened(true);
           prevOpenRef.current = true;
+          setProblem(null);
+        } else if (!res.ok && isMounted) {
+          setProblem(hostToken ? await explainHostError(res) : content.strings["host.token_missing"]);
         }
       } catch {
         // Nếu lỗi mạng, vẫn giữ giao diện để host có thể dùng đường lui nhập tay
@@ -103,14 +110,19 @@ export function ClassroomVotingPanel({
           },
         });
 
+        if (!res.ok) {
+          if (isMounted) setProblem(hostToken ? await explainHostError(res) : content.strings["host.token_missing"]);
+          return;
+        }
         if (res.ok) {
           const data: TallyData = await res.json();
           if (!isMounted) return;
+          setProblem(null);
           setTally(data);
 
           // Phát hiện vòng vừa được chốt (từ mở -> đóng)
           if (prevOpenRef.current && !data.open) {
-            handleResolveVotes(data.votes.CHO_QUA, data.votes.GIU_LAI);
+            handleResolveVotes(data.counts.CHO_QUA, data.counts.GIU_LAI);
           }
           prevOpenRef.current = data.open;
         }
@@ -159,14 +171,14 @@ export function ClassroomVotingPanel({
       });
 
       if (res.ok) {
-        const approve = tally?.votes?.CHO_QUA ?? 0;
-        const reject = tally?.votes?.GIU_LAI ?? 0;
+        const approve = tally?.counts?.CHO_QUA ?? 0;
+        const reject = tally?.counts?.GIU_LAI ?? 0;
         handleResolveVotes(approve, reject);
       }
     } catch {
       // Fallback lấy tally hiện tại nếu mạng ngắt
-      const approve = tally?.votes?.CHO_QUA ?? 0;
-      const reject = tally?.votes?.GIU_LAI ?? 0;
+      const approve = tally?.counts?.CHO_QUA ?? 0;
+      const reject = tally?.counts?.GIU_LAI ?? 0;
       handleResolveVotes(approve, reject);
     } finally {
       setIsLoading(false);
@@ -181,8 +193,8 @@ export function ClassroomVotingPanel({
     handleResolveVotes(approve, reject);
   }
 
-  const approveCount = tally?.votes?.CHO_QUA ?? 0;
-  const rejectCount = tally?.votes?.GIU_LAI ?? 0;
+  const approveCount = tally?.counts?.CHO_QUA ?? 0;
+  const rejectCount = tally?.counts?.GIU_LAI ?? 0;
   const totalCount = tally?.total ?? (approveCount + rejectCount);
   const approvePct = totalCount > 0 ? Math.round((approveCount / totalCount) * 100) : 0;
   const rejectPct = totalCount > 0 ? Math.round((rejectCount / totalCount) * 100) : 0;
@@ -223,6 +235,12 @@ export function ClassroomVotingPanel({
           )}
         </div>
       </div>
+
+      {problem && (
+        <p role="alert" className="border border-rose-600/70 bg-rose-950/60 text-rose-100 text-xs px-3 py-2 rounded">
+          {problem} {content.strings["host.use_manual"]}
+        </p>
+      )}
 
       {/* Câu hỏi thảo luận */}
       <div className="bg-slate-950 p-3 rounded-lg border border-slate-800 text-sm leading-relaxed text-slate-200 font-medium">

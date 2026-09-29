@@ -5,9 +5,9 @@
  * Tuyệt đối không trả về số phiếu!
  */
 
-import type { ApiRequest, ApiResponse } from "./_lib";
-import { parseQueryParams, sendJson } from "./_lib";
-import { getRoomState } from "./_redis";
+import type { ApiRequest, ApiResponse } from "./_lib.js";
+import { ConfigError, parseQueryParams, sendJson } from "./_lib.js";
+import { getRoomState } from "./_redis.js";
 
 export default async function handler(req: ApiRequest, res: ApiResponse) {
   try {
@@ -48,6 +48,10 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
       headers,
     );
   } catch (error) {
+    if (error instanceof ConfigError) {
+      sendJson(res, 503, { ok: false, error: error.message }, { "Cache-Control": "no-store" });
+      return;
+    }
     sendJson(res, 500, { error: "Đã xảy ra lỗi máy chủ khi lấy trạng thái phòng" });
   }
 }

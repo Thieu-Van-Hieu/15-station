@@ -1,15 +1,16 @@
-import { describe, expect, it, beforeEach } from "vitest";
-import stateHandler from "./state";
-import voteHandler from "./vote";
-import tallyHandler from "./tally";
-import roundHandler from "./round";
-import type { ApiRequest, ApiResponse } from "./_lib";
+import { afterAll, describe, expect, it, beforeEach } from "vitest";
+import stateHandler from "./state.js";
+import voteHandler from "./vote.js";
+import tallyHandler from "./tally.js";
+import roundHandler from "./round.js";
+import type { ApiRequest, ApiResponse } from "./_lib.js";
 
 function createMockReqRes(options: {
   method?: string;
   url?: string;
   query?: Record<string, string>;
   body?: any;
+  headers?: Record<string, string>;
 }) {
   const headersSent: Record<string, string> = {};
   let statusCode = 200;
@@ -20,7 +21,7 @@ function createMockReqRes(options: {
     url: options.url ?? "/",
     query: options.query,
     body: options.body,
-    headers: {},
+    headers: options.headers ?? {},
   } as any;
 
   const res: ApiResponse = {
@@ -232,3 +233,73 @@ describe("API Endpoints (Host & Voting - Step 1)", () => {
     expect(getData()).toEqual({ ok: false, reason: "closed" });
   });
 });
+
+describe("API — sửa lỗi P4: token qua header, thiếu cấu hình trên Vercel", () => {
+  const room = "HDR1";
+  const token = "tok-123";
+  const saved = { ...process.env };
+
+  beforeEach(() => {
+    process.env = { ...saved, HOST_TOKEN: token };
+    delete process.env.VERCEL;
+    delete process.env.UPSTASH_REDIS_REST_URL;
+    delete process.env.UPSTASH_REDIS_REST_TOKEN;
+  });
+
+  afterAll(() => {
+    process.env = saved;
+  });
+
+  it("P4-FIX-01 màn host gửi token bằng header Authorization: Bearer — round và tally chấp nhận", async () => {
+    const open = createMockReqRes({
+      method: "POST",
+      url: "/api/round",
+      headers: { authorization: `Bearer ${token}` },
+      body: { room, action: "open", turnId: "d3-t3", question: "q" },
+    });
+    await roundHandler(open.req, open.res);
+    expect(open.getStatusCode()).toBe(200);
+
+    const tally = createMockReqRes({
+      method: "GET",
+      url: `/api/tally?room=${room}`,
+      query: { room },
+      headers: { authorization: `Bearer ${token}` },
+    });
+    await tallyHandler(tally.req, tally.res);
+    expect(tally.getStatusCode()).toBe(200);
+    // Hợp đồng API: số phiếu nằm trong `counts` (màn host và bàn game đọc đúng trường này).
+    expect(tally.getData().counts).toEqual({ CHO_QUA: 0, GIU_LAI: 0 });
+  });
+
+  it("P4-FIX-02 header sai token thì 401", async () => {
+    const r = createMockReqRes({
+      method: "GET",
+      url: `/api/tally?room=${room}`,
+      query: { room },
+      headers: { authorization: "Bearer sai" },
+    });
+    await tallyHandler(r.req, r.res);
+    expect(r.getStatusCode()).toBe(401);
+  });
+
+  it("P4-FIX-03 trên Vercel thiếu HOST_TOKEN thì 503, không nhận bừa mọi token", async () => {
+    process.env.VERCEL = "1";
+    process.env.UPSTASH_REDIS_REST_URL = "https://example.invalid";
+    process.env.UPSTASH_REDIS_REST_TOKEN = "x";
+    delete process.env.HOST_TOKEN;
+    const r = createMockReqRes({ method: "POST", url: "/api/round", body: { room, host: "bat-ky", action: "close" } });
+    await roundHandler(r.req, r.res);
+    expect(r.getStatusCode()).toBe(503);
+    expect(r.getData().error).toContain("HOST_TOKEN");
+  });
+
+  it("P4-FIX-04 trên Vercel thiếu Upstash thì 503, không dùng bộ nhớ trong (mỗi instance một bản)", async () => {
+    process.env.VERCEL = "1";
+    const r = createMockReqRes({ method: "GET", url: `/api/state?room=${room}`, query: { room } });
+    await stateHandler(r.req, r.res);
+    expect(r.getStatusCode()).toBe(503);
+    expect(r.getData().error).toContain("Upstash");
+  });
+});
+
