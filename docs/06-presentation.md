@@ -1,6 +1,6 @@
 # Kịch bản trình bày
 
-> Trạng thái: SẴN SÀNG — cập nhật 29/9/2026 theo bản game đã hoàn thiện (27 lượt, 5 kết cục, đóng dấu kéo thả, đối chất, thẻ kết quả, chế độ Host và bỏ phiếu lớp học qua điện thoại).
+> Trạng thái: SẴN SÀNG — cập nhật 30/9/2026 (viết lại kịch bản 10 phút) theo bản game đã hoàn thiện (27 lượt, 5 kết cục, đóng dấu kéo thả, đối chất, thẻ kết quả, chế độ Host và bỏ phiếu lớp học qua điện thoại).
 
 Tài liệu cho nhóm khi lên lớp: chuẩn bị gì, mở màn nào, nói gì, trả lời câu hỏi thế nào. Thời lượng chính **10 phút**, cộng **5 phút hỏi đáp**.
 
@@ -153,71 +153,176 @@ Chiếu **Người làm ngơ** khi nói về thẻ kết quả: hai tỷ lệ 80
 
 ## 4. Kịch bản 10 phút
 
-Lời trong ngoặc kép là gợi ý cho người dẫn, không cần đọc nguyên văn.
+Kịch bản đi theo một mạch: **mở bằng một câu hỏi, để cả lớp tự trả lời bằng con dấu, rồi quay lại đúng câu hỏi đó khi chốt.** Mỗi đoạn có hai phần:
 
-### 0:00 – 1:00 · Đặt vấn đề (tab 1)
+- **Làm**: việc của người cầm máy. Người cầm máy không nói, chỉ làm theo hiệu của người dẫn.
+- **Nói**: lời gợi ý cho người dẫn. Nói bằng giọng của mình, nhìn lớp chứ đừng nhìn màn hình, **không đọc nguyên văn**. Chỗ ghi *(dừng)* là để im 2–3 giây cho lớp kịp nghĩ; đừng lấp chỗ im đó.
 
-- Chiếu màn mở đầu, dừng ở khung **Thông báo về tính mô phỏng và hư cấu**.
-- "Nhóm em làm một game mô phỏng, lấy cảm hứng từ *Papers, Please*. Người chơi là tổ trưởng một trạm kiểm soát liên huyện giai đoạn 1979–1987, thời ngăn sông cấm chợ. Nhân vật, địa danh, số liệu là hư cấu. Các chủ trương, văn kiện là có thật và có ghi nguồn."
-- Câu hỏi mở cho lớp: "Nếu cuốn sổ quy định đi sau đời sống, người cầm con dấu nên làm gì?"
+Ba nguyên tắc giữ suốt buổi:
 
-### 1:00 – 2:00 · Dạy thao tác trong 60 giây (tab 1, bấm *Bắt đầu ca trực*)
+1. **Kể chuyện trước, nói lý thuyết sau.** Lớp phải thấy bà Tư, anh Hùng, thằng Tí trước, rồi mới nghe tới giáo trình.
+2. **Để game tự nói.** Tiếng dấu, câu thoại của nhân vật, con số 80% và 44% đều mạnh hơn lời giải thích. Chiếu xong thì dừng một nhịp.
+3. **Mỗi đoạn chỉ gắn một ý giáo trình**, nói gọn một câu, có số chương. Bảng đầy đủ để dành cho lúc chốt.
 
-- Qua màn đài VEF-206 ngày 1 (tiếng đài, lời giao ban của trạm trưởng Đối).
-- Lượt cô sinh viên: chỉ nhanh ba khu — ô cửa bên trái, giấy tờ ở giữa, sổ chỉ thị bên phải.
-- **Kéo con dấu CHO QUA xuống giấy đi đường.** Để lớp nghe tiếng dấu và thấy vệt mực. Bấm *Lượt kế tiếp*.
+### 0:00 – 1:00 · Mở bằng một câu hỏi (tab 1)
 
-### 2:00 – 5:00 · Lượt bà Tư — lớp biểu quyết bằng điện thoại (tab 2 và tab 3)
+**Làm:** Chiếu màn mở đầu, dừng ở khung **Thông báo về tính mô phỏng và hư cấu**.
 
-- "Năm 1981. Tháng 1, Ban Bí thư ra Chỉ thị 100 về khoán sản phẩm. Đây là bà Tư Lành, đã qua trạm này hai năm trước."
-- **Tới lượt bà Tư, màn Hội đồng lớp học tự hiện trên bàn game (tab 3):**
-  - Mã QR cỡ lớn và mã phòng **T15** ở giữa màn (bấm vào mã QR để phóng to thêm). "Mời cả lớp lấy điện thoại quét mã, hoặc vào `15-station.vercel.app/vote` và gõ T15."
-  - Chờ con số *người đã vào phòng* lên đủ, trong lúc đó đọc hồ sơ bên phải: ba sự việc và câu hỏi đã dựng sẵn.
-- Bấm **Xem giấy tờ** để thu hội đồng xuống góc, chỉ lần lượt giấy tờ và hàng: 18 kg gạo trên dòng hàng, nhãn **Điều 2** (bấm để sổ mở đúng Điều 2: tối đa 5 kg lương thực); **giấy xác nhận sản phẩm khoán 13 kg**; và dải đỏ *Trạm trưởng đứng sau lưng* — lượt này làm ngơ cũng bị ghi sổ. Bấm **Mở lại hội đồng**.
-- "5 kg định mức cộng 13 kg khoán vừa đúng 18 kg. Nhưng sổ chưa có điều nào công nhận giấy khoán."
-- **Bỏ phiếu (45 giây):**
-  - Bấm **Bắt đầu bỏ phiếu**. Máy chiếu hiện đồng hồ đếm ngược và số phiếu đã bỏ; tỉ lệ được giữ kín tới khi hết giờ.
-  - Điện thoại hiện hồ sơ bà Tư, lý lẽ hai phía và hai con dấu **CHO QUA** / **GIỮ LẠI**; được đổi ý tới khi hết giờ.
-  - Trong lúc chờ, người dẫn đọc to hai lý lẽ để lớp cân nhắc.
-- **Công bố:**
-  - Hết giờ thì tự chốt (hoặc bấm **Chốt sớm**). Hai thanh kết quả chạy lên, con dấu của lớp đập xuống.
-  - Mỗi điện thoại biết mình thuộc phe đa số hay thiểu số. Mời một bạn phe thiểu số nói lý lẽ của mình.
-  - Bấm **Đóng dấu theo lớp** (hoà phiếu thì người dẫn tự chọn một trong hai dấu), rồi **Lượt kế tiếp**.
-- **Phân tích chiều sâu:**
-  - "Tại sao nhiều bạn chọn Cho qua? Vì thấy hợp lý, vì thương dân. Nhưng đứng ở góc độ người thừa hành, cuốn sổ chưa cho phép. Nếu muốn lên tiếng hợp thức hoá, người kiểm soát viên phải **kèm biên bản kiến nghị** lý do *Giấy xác nhận sản phẩm khoán của HTX chưa có trong sổ chỉ thị*."
-  - Chỉ lên đồng hồ ở thanh trên: **nó nhảy 60 phút** và hàng người ngoài cửa sổ nhúc nhích — cái giá của việc lên tiếng.
-  - "Đủ ba biên bản hợp lệ về chuyện khoán thì sang năm 1986 sổ mới có thêm *Điều 2 (bổ sung)*. Sửa được, nhưng chậm."
-- *(Dự phòng: Nếu wifi phòng học chập chờn, mở mục **Đường lui nhập tay** ở cuối cột trái của hội đồng — đếm nhanh giơ tay, gõ số, bấm 'Dùng số nhập tay' là công bố ngay).*
+**Nói:**
 
-### 5:00 – 6:00 · Đối chất: nhìn vào mặt người mình bắt lỗi (tab 4, `?tu=d4-t2`)
+> "Các bạn thử hình dung. Năm 1981, bạn ngồi sau ô cửa một trạm kiểm soát trên tỉnh lộ. Trên bàn có một cuốn sổ chỉ thị. Làm đúng sổ thì được khen, làm sai thì bị nhắc nhở.
+>
+> Một buổi sáng, một bà cụ đẩy qua ô cửa 18 cân gạo, kèm một tờ giấy mà cuốn sổ của bạn chưa nhắc tới bao giờ.
+>
+> Bạn đóng dấu gì? *(dừng)*
+>
+> Mười phút tới, cả lớp sẽ cùng trả lời câu đó, bằng chính điện thoại của mình. Các bạn cứ lấy điện thoại ra sẵn."
 
-- "Từ ngày 4 có Điều 4: tên và năm sinh trên mọi giấy phải khớp sổ hộ khẩu."
-- Bật **Bút chì đối chất**, khoanh *Năm sinh* trên giấy chứng nhận thương binh (1951) và trên sổ hộ khẩu (1952), bấm **Đối chiếu**.
-- Để lớp đọc câu trả lời của anh Hùng: *"Năm 76 tôi đã lên huyện xin sửa. Người ta bảo hồ sơ thời chiến phải chờ tỉnh xác minh. Chờ đến giờ, chú em ạ."*
-- "Theo sổ thì phải giữ. Điều 4 trong game bắt một người vô tội như anh Hùng, và chỉ một người thật sự gian — gã đầu cơ dùng giấy đi đường của em trai."
-- "Đối chất không đổi đáp án. Game chỉ đếm: bạn đã **thấy** chỗ sai bao nhiêu lần, và **làm theo** điều mình thấy bao nhiêu lần."
+> "Đây là **Trạm 15**, game mô phỏng nhóm em làm, lấy cảm hứng từ *Papers, Please*. Bạn vào vai anh Thành, tổ trưởng một trạm kiểm soát liên huyện từ 1979 đến 1987, thời ngăn sông cấm chợ. Nhân vật, địa danh và số liệu là hư cấu. Còn các chủ trương, văn kiện là có thật, và đều ghi nguồn."
 
-### 6:00 – 7:30 · Cuối ngày: hai bảng và gia đình
+### 1:00 – 2:00 · Học chơi trong một phút (tab 1, bấm *Bắt đầu ca trực*)
 
-- Đóng dấu cho xong lượt anh Hùng, bấm tiếp tới **Báo cáo tổng kết cuối ngày**.
-- Chỉ hai bảng đặt cạnh nhau: bên trái tỷ lệ chấp hành và con dấu xếp loại; bên phải *Tình hình huyện*. "Chấp hành càng tốt, lương thực vào thị xã càng ít, hộ thiếu ăn càng tăng."
-- Chỉ vào dòng **Yếu tố khách quan**: "Không phải cái gì cũng do trạm. Game cố ý không để người chơi đổ hết lỗi cho một nơi."
-- Sang **Chi tiêu gia đình**: lương không đủ cho gạo, than, thuốc của mẹ. "Thành cũng là người trong cơ chế ấy."
-- Nếu còn thời gian: kể ngắn về lượt **bác Nga hàng xóm** ngày 5 — mang thuốc huyết áp cho chính mẹ Thành, giấy tờ thiếu; giữ lại đúng sổ thì tối đó Thành phải mua thuốc chợ đen giá gấp đôi.
+**Làm:** Qua màn đài VEF-206 và lời giao ban của trạm trưởng Đối. Tới lượt cô sinh viên, lần lượt rê chuột qua ô cửa, giấy tờ, sổ chỉ thị.
 
-### 7:30 – 9:00 · Năm 1987 và kết cục (tab 5, hoặc video dự phòng)
+**Nói:**
 
-- Gõ `Mr.NoBody`, chọn nút **D6 · 1987** (nhảy tới đầu ngày 6) để chiếu thẻ chuyển cảnh: Đại hội VI, *"Nhìn thẳng vào sự thật, đánh giá đúng sự thật, nói rõ sự thật"*; Hội nghị Trung ương 2 khoá VI xoá bỏ ngăn sông cấm chợ.
-- Kể về **thằng Tí năm 1987**: nếu năm 1981 thuốc quinin của bố nó bị giữ, nó quay lại trạm, nhận ra Thành, nhìn rất lâu rồi không nói gì.
-- Gõ `Mr.NoBody` lần nữa, chọn **Người làm ngơ**. Cuộn xuống **thẻ kết quả**:
-  - "Chấp hành theo báo cáo **80%**. Chấp hành thực tế **44%**. Người xem ảnh chưa chơi cũng thấy có gì đó không khớp — đó là câu hỏi game muốn các bạn hỏi."
-  - Bấm **Tải thẻ kết quả**, mời lớp chơi và gửi thẻ của mình cho nhóm.
+> "Cách chơi chỉ có ba thứ: người đứng ở ô cửa, giấy tờ trên bàn, và cuốn sổ bên phải. Việc của anh Thành là đặt ba thứ đó cạnh nhau xem có khớp không."
 
-### 9:00 – 10:00 · Chốt
+**Làm:** Kéo con dấu **CHO QUA** xuống giấy đi đường.
 
-- Chiếu mục 5 (ba dòng in đậm là đủ).
-- "Cuốn sổ không sai vì có quản lý. Nó sai vì cập nhật chậm hơn đời sống. Đổi mới bắt đầu khi có người ở cơ sở dám nhìn thẳng vào sự thật và nói ra — và khi cấp trên chịu nghe."
-- Kết bằng câu hỏi suy ngẫm của kết cục Người kiến nghị: *"Đổi mới bắt đầu từ đâu nếu không phải từ lòng dũng cảm nhìn thẳng vào sự thật ở chính cấp cơ sở?"*
+**Nói:**
+
+> "Các bạn nhớ tiếng này. *(dừng một nhịp sau tiếng dấu)* Cả game xoay quanh nó. Năm 1979 mọi thứ còn đơn giản: giấy đủ thì cho qua, thiếu thì giữ lại, và anh Thành thấy mình đang làm một việc đúng."
+
+**Làm:** Bấm *Lượt kế tiếp*, chuyển sang tab 3.
+
+### 2:00 – 5:00 · Bà Tư và 18 cân gạo: cả lớp đóng dấu (tab 3, tab 2 để dự phòng)
+
+**Nói** (lúc màn chuyển sang năm 1981):
+
+> "Hai năm sau, tháng 1 năm 1981, Ban Bí thư ra **Chỉ thị 100** về khoán sản phẩm. Làm vượt khoán thì phần vượt là của người nông dân. Chủ trương ở trên đã đổi. Còn cuốn sổ trên bàn anh Thành thì chưa đổi chữ nào."
+
+**Làm:** Màn **Hội đồng lớp học** tự hiện, có mã QR và mã phòng **T15**.
+
+**Nói:**
+
+> "Mời cả lớp quét mã, hoặc vào `15-station.vercel.app/vote` rồi gõ T15. Trong lúc chờ, mình gặp bà Tư."
+
+**Làm:** Bấm **Xem giấy tờ** để thu hội đồng xuống góc. Chỉ lần lượt: dòng 18 kg gạo, nhãn **Điều 2** (bấm để sổ mở đúng dòng *tối đa 5 kg lương thực*), **giấy xác nhận sản phẩm khoán 13 kg**, và dải đỏ *Trạm trưởng đứng sau lưng*.
+
+**Nói** (đọc chậm câu của bà Tư):
+
+> "Bà Tư nói: *'Gạo này là phần vượt khoán nhà tôi được hưởng, hợp tác xã có giấy xác nhận đây.'* Bà mang ra thị xã đổi thuốc cho thằng cháu đang sốt.
+>
+> Các bạn cộng giúp em: 5 cân định mức cộng 13 cân khoán, vừa đúng 18. Chủ trương nói số gạo đó là của bà. Nhưng sổ của trạm chưa có dòng nào công nhận tờ giấy khoán.
+>
+> Và lần này trạm trưởng đang đứng ngay sau lưng anh Thành, nên có làm ngơ thì cũng bị ghi sổ."
+
+**Làm:** Bấm **Mở lại hội đồng**, đợi số người vào phòng gần đủ, bấm **Bắt đầu bỏ phiếu** (45 giây).
+
+**Nói** (trong lúc lớp bỏ phiếu, đọc to hai lý lẽ, mỗi bên một câu):
+
+> "Một bên nói: *sổ là sổ, hôm nay tôi linh động thì mai người khác cũng linh động, và trạm này mất ý nghĩa.* Bên kia nói: *chủ trương đã ra, giữ gạo của bà là làm trái chính cái Trung ương vừa cho phép.* Các bạn được đổi ý tới khi hết giờ."
+
+**Làm:** Hết giờ, hội đồng tự chốt (hoặc bấm **Chốt sớm**). Để hai thanh kết quả chạy lên và con dấu của lớp đập xuống. **Không nói gì trong 2 giây đó.**
+
+**Nói:**
+
+> "Lớp mình đã đóng dấu. *(đọc kết quả)* Em mời một bạn bên ít phiếu hơn nói lý do. Chỉ một câu thôi."
+
+**Làm:** Bấm **Đóng dấu theo lớp** (nếu hoà phiếu thì người dẫn chọn một dấu), chưa bấm lượt kế tiếp.
+
+**Nói:**
+
+> "Theo nhóm em, cả hai con dấu đều có lý. Nhưng có một việc chắc chắn đúng mà chưa ai bấm: **ghi lại mâu thuẫn này và báo lên huyện.** Trong game, đó là **biên bản kiến nghị**."
+
+**Làm:** Chỉ lên đồng hồ ở thanh trên và hàng người ngoài cửa sổ.
+
+**Nói:**
+
+> "Viết biên bản tốn 60 phút ca, hàng người ngoài kia cứ dài thêm, trạm trưởng thì không ưa. Nhưng phải đủ ba biên bản về chuyện giấy khoán thì năm 1986 sổ mới có thêm *Điều 2 (bổ sung)*. Sửa được, dù chậm.
+>
+> 18 cân gạo của bà Tư chính là cái giáo trình Chương 3 gọi là *nền kinh tế nhiều thành phần*, một thứ **tất yếu tồn tại** trong thời kỳ quá độ. Cuốn sổ chưa theo kịp điều đó."
+
+*(Dự phòng: nếu wifi yếu, mở **Đường lui nhập tay** ở cuối cột trái hội đồng, cho cả lớp giơ tay, đếm rồi gõ số, bấm **Dùng số nhập tay**.)*
+
+### 5:00 – 6:00 · Anh Hùng: nhìn vào mặt người mình bắt lỗi (tab 4)
+
+**Nói:**
+
+> "Tìm lỗi thì dễ. Nhìn thẳng vào người mình vừa bắt lỗi thì khó hơn nhiều.
+>
+> Ngay hôm sau, sổ có thêm Điều 4: tên và năm sinh trên mọi giấy phải khớp với sổ hộ khẩu. Đây là anh Hùng, thương binh."
+
+**Làm:** Bật **Bút chì đối chất**, khoanh *Năm sinh* trên giấy thương binh (1951) và trên sổ hộ khẩu (1952), bấm **Đối chiếu**.
+
+**Nói:** Đừng đọc hộ câu trả lời của anh Hùng. Để cả lớp tự đọc trên màn hình, *(dừng)*, rồi mới nói:
+
+> "*'Năm 76 tôi đã lên huyện xin sửa. Người ta bảo hồ sơ thời chiến phải chờ tỉnh xác minh. Chờ đến giờ, chú em ạ.'*
+>
+> Theo sổ thì phải giữ. Điều 4 trong game bắt được đúng một kẻ gian thật, là gã đầu cơ đi bằng giấy của em trai. Nhưng nó cũng giữ lại hai người vô tội, và anh Hùng là một trong hai người đó.
+>
+> Đối chất không làm đổi đáp án. Game chỉ đếm hai con số: bạn **thấy** chỗ sai bao nhiêu lần, và bạn **làm theo** điều mình thấy bao nhiêu lần."
+
+### 6:00 – 7:30 · Cuối ngày: hai bảng, một gia đình
+
+**Làm:** Đóng dấu xong lượt anh Hùng, bấm tới **Báo cáo tổng kết cuối ngày**.
+
+**Nói:**
+
+> "Đây là phần nhóm em thấy đáng suy nghĩ nhất. Hai bảng đặt cạnh nhau. Bên trái là bảng gửi cấp trên: tỷ lệ chấp hành, con dấu xếp loại. Bên phải là tình hình huyện: gạo vào thị xã, số hộ thiếu ăn.
+>
+> Chấp hành càng đẹp thì gạo vào thị xã càng ít, và số hộ thiếu ăn càng tăng. *(dừng)*"
+
+**Làm:** Chỉ vào dòng **Yếu tố khách quan**.
+
+**Nói:**
+
+> "Nhưng game cố ý không cho người chơi đổ hết lỗi cho trạm. Dòng này nhắc rằng còn rét đậm, lũ sớm, hàng Trung ương phân phối về chậm. Giáo trình dặn *'không phiến diện, cực đoan, duy ý chí'* (Chương 3). Một game phê phán duy ý chí thì không được tự mắc lỗi phiến diện."
+
+**Làm:** Sang **Chi tiêu gia đình**.
+
+**Nói:**
+
+> "Tối về, anh Thành cũng chỉ là một ông bố cầm đồng lương mất giá: gạo, than, thuốc huyết áp cho mẹ, học phí cho bé Mai. Anh ấy cũng là một người sống trong chính cơ chế đó."
+
+*(Nếu còn thời gian)* Kể thêm về bác Nga hàng xóm năm 1986. Bác mang thuốc huyết áp cho chính mẹ Thành, giấy tờ thiếu. Bác nói: *"Chú giữ thì tối nay chú lại phải đi mua chợ đen, giá gấp đôi đấy."*
+
+### 7:30 – 9:00 · Năm 1987 (tab 5, hoặc video dự phòng)
+
+**Làm:** Gõ `Mr.NoBody`, bấm **D6 · 1987**. Để thẻ chuyển cảnh và tiếng đài tự chạy. **Người dẫn im lặng.**
+
+**Nói** (sau khi dòng chữ Đại hội VI hiện hết):
+
+> "Tháng 12 năm 1986, Đại hội VI: *'Nhìn thẳng vào sự thật, đánh giá đúng sự thật, nói rõ sự thật.'* Tháng 4 năm 1987, Hội nghị Trung ương 2 yêu cầu xoá bỏ ngăn sông cấm chợ. Trạm trưởng Đối mang văn bản tới, thu lại cuốn sổ dày cộp, đưa một trang duy nhất: danh sách hàng cấm lưu thông.
+>
+> Những người cũ quay lại. Bà Tư chở gạo ra chợ bán công khai. Còn thằng Tí, cậu bé năm 1981 mang 20 viên quinin cho bố bị sốt rét, giờ đã mười tám tuổi."
+
+> "Nếu năm ấy anh Thành cho thuốc qua, Tí sẽ gọi to: *'Chú Thành! Chú còn nhớ cháu không?'* Nếu năm ấy thuốc bị giữ, cậu chỉ nhìn anh Thành rất lâu, rồi nhìn đi chỗ khác, và không nói gì cả. *(dừng)*"
+
+**Làm:** Gõ `Mr.NoBody` lần nữa, chọn **Người làm ngơ**, cuộn xuống **thẻ kết quả**.
+
+**Nói:**
+
+> "Đây là kết cục của người chơi hiền nhất: thấy vi phạm là làm ngơ cho qua. Báo cáo gửi lên ghi chấp hành **80%**, thực tế là **44%**. *(dừng)*
+>
+> Người làm ngơ tưởng mình đang tốt với dân. Nhưng lòng tốt không được ghi lại thì không ai sửa được cuốn sổ, và năm sau người khác ngồi sau ô cửa vẫn gặp đúng cuốn sổ ấy. Giáo trình Chương 4 viết: dân chủ phải *'gắn liền với kỷ luật, kỷ cương và phải được thể chế hóa bằng pháp luật'*. Vì vậy kết cục tốt nhất của game không dành cho người làm ngơ. Nó dành cho **người kiến nghị**."
+
+### 9:00 – 10:00 · Chốt: trở lại câu hỏi ban đầu
+
+**Làm:** Chiếu mục 5, chỉ cần ba dòng in đậm.
+
+**Nói:**
+
+> "Mười phút trước em hỏi: một bà cụ đẩy 18 cân gạo qua ô cửa, bạn đóng dấu gì?
+>
+> Câu trả lời của nhóm em là: đóng dấu nào cũng được, miễn là **đừng im lặng**.
+>
+> Cuốn sổ không sai vì có quản lý; game vẫn có những kẻ buôn lậu thật mà giữ lại là đúng. Nó sai vì chậm hơn đời sống. Giáo trình Chương 1 gọi tên cái sai đó: *giáo điều, chủ quan duy ý chí, bảo thủ*. Cũng câu đó khẳng định nguyên nhân **không phải do chủ nghĩa xã hội**. Và Đổi mới chính là lúc Đảng làm đúng điều giáo trình rút ra: *xuất phát từ thực tiễn, coi trọng tổng kết thực tiễn*.
+>
+> Nhóm em xin để lại câu hỏi cuối của game: *Đổi mới bắt đầu từ đâu, nếu không phải từ lòng dũng cảm nhìn thẳng vào sự thật ở chính cấp cơ sở?*
+>
+> Em cảm ơn thầy cô và các bạn. Link game ở trên màn hình. Các bạn chơi thử, rồi gửi thẻ kết quả của mình cho nhóm, xem ai là người kiến nghị."
 
 ---
 
