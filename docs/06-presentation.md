@@ -1,6 +1,6 @@
 # Kịch bản trình bày
 
-> Trạng thái: SẴN SÀNG — cập nhật 30/9/2026 (viết lại kịch bản 10 phút) theo bản game đã hoàn thiện (27 lượt, 5 kết cục, đóng dấu kéo thả, đối chất, thẻ kết quả, chế độ Host và bỏ phiếu lớp học qua điện thoại).
+> Trạng thái: SẴN SÀNG — cập nhật 3/10/2026 (bỏ chế độ Host, lớp biểu quyết bằng giơ tay; viết rõ đoạn chốt) theo bản game đã hoàn thiện (27 lượt, 5 kết cục, đóng dấu kéo thả, đối chất, thẻ kết quả).
 
 Tài liệu cho nhóm khi lên lớp: chuẩn bị gì, mở màn nào, nói gì, trả lời câu hỏi thế nào. Thời lượng chính **10 phút**, cộng **5 phút hỏi đáp**.
 
@@ -23,30 +23,30 @@ Tài liệu cho nhóm khi lên lớp: chuẩn bị gì, mở màn nào, nói gì
 
 | Vai | Việc |
 |---|---|
-| **Người dẫn** | Nói theo kịch bản mục 4, giữ đồng hồ, điều phối phần biểu quyết trên điện thoại của lớp |
-| **Người cầm máy** | Mở đúng tab (game và màn Host `/host`), mở/chốt bình chọn theo hiệu của người dẫn, sẵn sàng đường lui nhập tay |
-| **Người đỡ câu hỏi** | Đọc trước mục 6, trả lời phần hỏi đáp, giữ `04-sources.md` mở sẵn để tra nguồn |
+| **Người dẫn** | Nói theo kịch bản mục 4, giữ đồng hồ, điều phối phần giơ tay biểu quyết của lớp |
+| **Người cầm máy** | Mở đúng tab, chỉ chuột vào đúng chỗ người dẫn đang nói, đóng dấu theo kết quả biểu quyết của lớp |
+| **Người đỡ câu hỏi** | Đếm tay khi lớp biểu quyết, đọc trước mục 6, trả lời phần hỏi đáp, giữ `04-sources.md` mở sẵn để tra nguồn |
 
 ### Máy và âm thanh
 
 - Chơi trên **máy tính**, trình duyệt Chrome hoặc Edge bản mới. Máy chiếu để độ phân giải 1280×720 trở lên (dưới 1024 px ngang game chuyển sang bố cục điện thoại).
 - **Bật loa.** Tiếng dấu, tiếng giấy, chuông gọi khách, tiếng đài là một nửa cảm giác của game. Thử âm lượng trước giờ vào lớp. Nút loa ở góc phải trên cùng để tắt/bật nhanh.
 - Trình duyệt chỉ cho phát âm sau cú bấm đầu tiên, nên mở game xong **bấm một lần vào trang** trước khi lên trình bày.
-- **Nhắc nhở lớp:** Chuẩn bị sẵn điện thoại thông minh có kết nối mạng (wifi trường hoặc 4G) để quét mã QR tham gia biểu quyết trực tiếp.
 
-### Mở sẵn năm tab
+### Mở sẵn bốn tab
 
 Link game: **https://15-station.vercel.app/** (chạy offline/LAN thì thay bằng `http://localhost:5173` hoặc IP máy, xem bên dưới).
 
 | Tab | Địa chỉ | Dùng lúc |
 |---|---|---|
 | 1 | `https://15-station.vercel.app/` | Mở đầu: màn chú thích hư cấu và tiêu đề |
-| 2 | `https://15-station.vercel.app/host?room=T15` | **Màn Host (tuỳ chọn)**: mở hội đồng lớp học cho bất kỳ lượt trung tâm nào mà không cần chơi tới; cũng dùng để nhập `HOST_TOKEN` lần đầu |
-| 3 | `https://15-station.vercel.app/?host=1&room=T15&tu=d3-t3` | Lượt bà Tư mang 18 kg gạo khoán — **điểm dừng trình bày chính (tích hợp bỏ phiếu lớp học)** |
-| 4 | `https://15-station.vercel.app/?tu=d4-t2` | Lượt anh Hùng — đối chất năm sinh lệch |
-| 5 | `https://15-station.vercel.app/` rồi gõ `Mr.NoBody` → *Người làm ngơ* | Màn kết cục và thẻ kết quả |
+| 2 | `https://15-station.vercel.app/?tu=d3-t3` | Lượt bà Tư mang 18 kg gạo khoán — **điểm dừng chính, cả lớp giơ tay chọn con dấu** |
+| 3 | `https://15-station.vercel.app/?tu=d4-t2` | Lượt anh Hùng — đối chất năm sinh lệch |
+| 4 | `https://15-station.vercel.app/` rồi gõ `Mr.NoBody` → *Người làm ngơ* | Màn kết cục và thẻ kết quả |
 
 Mỗi tab mở bằng `?tu=` bắt đầu **một ván mới** chơi sẵn theo sổ tới đúng lượt đó, không phụ thuộc ván đang lưu.
+
+Mở xong tab 2, nhìn nút ở thanh trên cùng: phải là **Host: TẮT**. Game nhớ trạng thái của lần chơi trước, nên nếu máy từng bật thì nút sẽ hiện *Host: BẬT*; bấm một lần để tắt. Không tắt thì tới lượt bà Tư game sẽ phủ màn mã QR lên bàn.
 
 ### Chạy offline (phòng mạng yếu)
 
@@ -61,6 +61,7 @@ Bản `preview` không cần mạng: font, âm thanh, chân dung đều nằm tr
 ### Chuẩn bị dự phòng
 
 - Tải sẵn một **thẻ kết quả** (PNG) của kết cục Người làm ngơ và một của Người kiến nghị, để chiếu nếu máy trục trặc.
+- Chụp sẵn màn lượt bà Tư (giấy đi đường, giấy khoán, Điều 2 trong sổ) để vẫn đọc được tình huống cho lớp nếu game không mở được.
 - Quay sẵn một video 1 phút: màn 1987 (thẻ chuyển cảnh, thằng Tí năm 18 tuổi, màn kết cục).
 
 ---
@@ -88,15 +89,6 @@ Thêm `?tu=` vào cuối địa chỉ rồi nhấn Enter (trang phải tải l�
 | `?tu=d6-t3` | Thằng Tí năm 1987 | Theo sổ thì năm 1981 thuốc của bố nó bị giữ, nên nó nhận ra Thành và không nói gì |
 
 Lưu ý: vì đi theo sổ, các nhân vật ở `?tu=` luôn mang nhánh đời "bị giữ" (bà Tư không chào, thằng Tí im lặng). Muốn nhánh vui hơn thì phải chơi tay từ đầu.
-
-### Chế độ Host và Bỏ phiếu lớp học: `?host=1`, `/host` và `/vote`
-
-Tính năng phục vụ biểu quyết tập thể thời gian thực tại lớp học bằng điện thoại di động:
-
-- **Bật Host trên bàn game:** Thêm `?host=1` hoặc `?room=<mã>` vào URL (ví dụ: `https://15-station.vercel.app/?host=1&room=T15&tu=d3-t3`). Ngoài ra có thể bấm nút **Host: BẬT / TẮT** trực tiếp trên thanh TopBar bất kỳ lúc nào.
-- **Hội đồng lớp học:** Tới lượt `dung-trinh-bay`, bàn game phủ màn hội đồng: mã QR cỡ lớn, số người đã vào phòng, hồ sơ dựng sẵn, đồng hồ đếm ngược, kết quả giữ kín tới lúc công bố, con dấu của lớp, bối cảnh lịch sử và câu thảo luận. Trang `/host?room=T15` dùng cùng màn này cho lượt tuỳ chọn.
-- **Trang bỏ phiếu điện thoại (`/vote?room=T15`):** Sinh viên quét QR vào phòng chờ; khi mở vòng thấy hồ sơ nhân vật, lý lẽ hai phía, thanh thời gian và 2 con dấu to; sau khi chốt thấy kết quả và biết mình thuộc phe đa số hay thiểu số.
-- **Tự động đóng dấu theo đa số:** Khi chốt vòng, game tự động đối chiếu số phiếu và đóng dấu theo kết quả đa số của cả lớp.
 
 ### Cheat code `Mr.NoBody`
 
@@ -153,7 +145,7 @@ Chiếu **Người làm ngơ** khi nói về thẻ kết quả: hai tỷ lệ 80
 
 ## 4. Kịch bản 10 phút
 
-Kịch bản đi theo một mạch: **mở bằng một câu hỏi, để cả lớp tự trả lời bằng con dấu, rồi quay lại đúng câu hỏi đó khi chốt.** Mỗi đoạn có hai phần:
+Kịch bản đi theo một mạch: **mở bằng một câu hỏi, để cả lớp tự trả lời bằng cách giơ tay chọn con dấu, rồi quay lại đúng câu hỏi đó khi chốt.** Mỗi đoạn có hai phần:
 
 - **Làm**: việc của người cầm máy. Người cầm máy không nói, chỉ làm theo hiệu của người dẫn.
 - **Nói**: lời gợi ý cho người dẫn. Nói bằng giọng của mình, nhìn lớp chứ đừng nhìn màn hình, **không đọc nguyên văn**. Chỗ ghi *(dừng)* là để im 2–3 giây cho lớp kịp nghĩ; đừng lấp chỗ im đó.
@@ -176,7 +168,7 @@ Ba nguyên tắc giữ suốt buổi:
 >
 > Bạn đóng dấu gì? *(dừng)*
 >
-> Mười phút tới, cả lớp sẽ cùng trả lời câu đó, bằng chính điện thoại của mình. Các bạn cứ lấy điện thoại ra sẵn."
+> Lát nữa em sẽ kể đủ tình huống đó, rồi nhờ cả lớp giơ tay chọn con dấu thay cho nhân vật."
 
 > "Đây là **Trạm 15**, game mô phỏng nhóm em làm, lấy cảm hứng từ *Papers, Please*. Bạn vào vai anh Thành, tổ trưởng một trạm kiểm soát liên huyện từ 1979 đến 1987, thời ngăn sông cấm chợ. Nhân vật, địa danh và số liệu là hư cấu. Còn các chủ trương, văn kiện là có thật, và đều ghi nguồn."
 
@@ -194,47 +186,51 @@ Ba nguyên tắc giữ suốt buổi:
 
 > "Các bạn nhớ tiếng này. *(dừng một nhịp sau tiếng dấu)* Cả game xoay quanh nó. Năm 1979 mọi thứ còn đơn giản: giấy đủ thì cho qua, thiếu thì giữ lại, và anh Thành thấy mình đang làm một việc đúng."
 
-**Làm:** Bấm *Lượt kế tiếp*, chuyển sang tab 3.
+**Làm:** Bấm *Lượt kế tiếp*, chuyển sang tab 2.
 
-### 2:00 – 5:00 · Bà Tư và 18 cân gạo: cả lớp đóng dấu (tab 3, tab 2 để dự phòng)
+### 2:00 – 4:30 · Bà Tư và 18 cân gạo: cả lớp đóng dấu (tab 2)
 
 **Nói** (lúc màn chuyển sang năm 1981):
 
 > "Hai năm sau, tháng 1 năm 1981, Ban Bí thư ra **Chỉ thị 100** về khoán sản phẩm. Làm vượt khoán thì phần vượt là của người nông dân. Chủ trương ở trên đã đổi. Còn cuốn sổ trên bàn anh Thành thì chưa đổi chữ nào."
 
-**Làm:** Màn **Hội đồng lớp học** tự hiện, có mã QR và mã phòng **T15**.
+**Làm:** Chiếu lượt bà Tư như chơi bình thường. Trên mặt bàn có dải *ĐIỂM DỪNG THẢO LUẬN LỚP HỌC*: cứ để nguyên, **không bấm** nút *Bật bỏ phiếu lớp học cho lượt này* bên cạnh. Người dẫn nói tới thứ gì thì chỉ chuột vào đúng thứ đó, theo thứ tự: lời bà Tư ở ô cửa → dòng **18 kg gạo** → nhãn **Điều 2** (bấm để sổ mở đúng dòng định mức 5 kg) → **giấy xác nhận sản phẩm khoán 13 kg** → dải đỏ *Trạm trưởng đứng sau lưng*.
 
-**Nói:**
+**Nói** — đọc tình huống chậm và rõ, mỗi ý một nhịp, để cả lớp nắm đủ trước khi chọn:
 
-> "Mời cả lớp quét mã, hoặc vào `15-station.vercel.app/vote` rồi gõ T15. Trong lúc chờ, mình gặp bà Tư."
-
-**Làm:** Bấm **Xem giấy tờ** để thu hội đồng xuống góc. Chỉ lần lượt: dòng 18 kg gạo, nhãn **Điều 2** (bấm để sổ mở đúng dòng *tối đa 5 kg lương thực*), **giấy xác nhận sản phẩm khoán 13 kg**, và dải đỏ *Trạm trưởng đứng sau lưng*.
-
-**Nói** (đọc chậm câu của bà Tư):
-
-> "Bà Tư nói: *'Gạo này là phần vượt khoán nhà tôi được hưởng, hợp tác xã có giấy xác nhận đây.'* Bà mang ra thị xã đổi thuốc cho thằng cháu đang sốt.
+> "Đây là bà Tư, nông dân xã Phú Hoà. Bà nói: *'Gạo này là phần vượt khoán nhà tôi được hưởng, hợp tác xã có giấy xác nhận đây. Tôi mang ra thị xã đổi thuốc cho thằng cháu. Nó sốt mấy hôm nay rồi.'*
 >
-> Các bạn cộng giúp em: 5 cân định mức cộng 13 cân khoán, vừa đúng 18. Chủ trương nói số gạo đó là của bà. Nhưng sổ của trạm chưa có dòng nào công nhận tờ giấy khoán.
+> Em tóm tình huống thành bốn ý:
 >
-> Và lần này trạm trưởng đang đứng ngay sau lưng anh Thành, nên có làm ngơ thì cũng bị ghi sổ."
+> 1. **Bà mang gì?** 18 cân gạo.
+> 2. **Sổ của trạm nói gì?** Điều 2: mỗi người mang không quá 5 cân lương thực; vượt là vận chuyển trái phép, phải tịch thu. Trong sổ chưa có dòng nào nhắc tới giấy khoán.
+> 3. **Bà có giấy gì?** Hợp tác xã xác nhận 13 cân là sản phẩm vượt khoán của bà. 5 cân định mức cộng 13 cân khoán, vừa đúng 18.
+> 4. **Chủ trương ở trên nói gì?** Chỉ thị 100 vừa ra: phần vượt khoán là của người nông dân.
+>
+> Tức là: **theo sổ thì phải giữ, theo chủ trương thì số gạo đó là của bà.** *(dừng)*
+>
+> Thêm một chi tiết: hôm nay trạm trưởng đứng ngay sau lưng anh Thành. Có làm ngơ thì cũng bị ghi sổ, nên anh Thành chỉ còn hai lựa chọn thật sự."
 
-**Làm:** Bấm **Mở lại hội đồng**, đợi số người vào phòng gần đủ, bấm **Bắt đầu bỏ phiếu** (45 giây).
+**Nói** — trao quyết định cho lớp:
 
-**Nói** (trong lúc lớp bỏ phiếu, đọc to hai lý lẽ, mỗi bên một câu):
+> "Giờ cả lớp là anh Thành.
+>
+> - **CHO QUA** là làm theo chủ trương. Bà Tư mang được gạo đi đổi thuốc cho cháu, nhưng anh Thành làm trái sổ ngay trước mặt cấp trên.
+> - **GIỮ LẠI** là làm theo sổ. Anh Thành làm đúng phận sự, nhưng 18 cân gạo bị tịch thu và cháu bà không có thuốc.
+>
+> Bên giữ lại sẽ nói: *sổ là sổ, hôm nay tôi linh động thì mai người khác cũng linh động, và trạm này mất ý nghĩa.* Bên cho qua sẽ nói: *chủ trương đã ra, giữ gạo của bà là làm trái chính điều Trung ương vừa cho phép.*
+>
+> Các bạn nghĩ vài giây. *(dừng hẳn)* Ai chọn **CHO QUA**, giơ tay. … Cảm ơn. Ai chọn **GIỮ LẠI**, giơ tay."
 
-> "Một bên nói: *sổ là sổ, hôm nay tôi linh động thì mai người khác cũng linh động, và trạm này mất ý nghĩa.* Bên kia nói: *chủ trương đã ra, giữ gạo của bà là làm trái chính cái Trung ương vừa cho phép.* Các bạn được đổi ý tới khi hết giờ."
-
-**Làm:** Hết giờ, hội đồng tự chốt (hoặc bấm **Chốt sớm**). Để hai thanh kết quả chạy lên và con dấu của lớp đập xuống. **Không nói gì trong 2 giây đó.**
+**Làm:** Người đỡ câu hỏi ước nhanh bên nào nhiều tay hơn (sát nhau thì đếm) rồi báo người dẫn. Người cầm máy kéo con dấu của bên đa số xuống giấy đi đường (hoặc phím `1` / `2`); hai bên ngang nhau thì người dẫn chọn. Để câu đáp của bà Tư hiện ra (CHO QUA: *"Tôi cảm ơn chú."* — GIỮ LẠI: *"Giấy hợp tác xã cấp đàng hoàng mà chú..."*). **Không nói gì trong 2 giây đó**, chưa bấm lượt kế tiếp.
 
 **Nói:**
 
-> "Lớp mình đã đóng dấu. *(đọc kết quả)* Em mời một bạn bên ít phiếu hơn nói lý do. Chỉ một câu thôi."
+> "Lớp mình đã đóng dấu *(nói tên dấu)*. Em mời một bạn bên ít tay hơn nói lý do. Chỉ một câu thôi."
 
-**Làm:** Bấm **Đóng dấu theo lớp** (nếu hoà phiếu thì người dẫn chọn một dấu), chưa bấm lượt kế tiếp.
+**Nói** (sau khi bạn đó trả lời):
 
-**Nói:**
-
-> "Theo nhóm em, cả hai con dấu đều có lý. Nhưng có một việc chắc chắn đúng mà chưa ai bấm: **ghi lại mâu thuẫn này và báo lên huyện.** Trong game, đó là **biên bản kiến nghị**."
+> "Theo nhóm em, cả hai con dấu đều có lý. Nhưng có một việc chắc chắn đúng mà lúc nãy chưa ai chọn: **ghi lại mâu thuẫn này và báo lên huyện.** Trong game, đó là **biên bản kiến nghị**."
 
 **Làm:** Chỉ lên đồng hồ ở thanh trên và hàng người ngoài cửa sổ.
 
@@ -244,9 +240,7 @@ Ba nguyên tắc giữ suốt buổi:
 >
 > 18 cân gạo của bà Tư chính là cái giáo trình Chương 3 gọi là *nền kinh tế nhiều thành phần*, một thứ **tất yếu tồn tại** trong thời kỳ quá độ. Cuốn sổ chưa theo kịp điều đó."
 
-*(Dự phòng: nếu wifi yếu, mở **Đường lui nhập tay** ở cuối cột trái hội đồng, cho cả lớp giơ tay, đếm rồi gõ số, bấm **Dùng số nhập tay**.)*
-
-### 5:00 – 6:00 · Anh Hùng: nhìn vào mặt người mình bắt lỗi (tab 4)
+### 4:30 – 5:30 · Anh Hùng: nhìn vào mặt người mình bắt lỗi (tab 3)
 
 **Nói:**
 
@@ -264,7 +258,7 @@ Ba nguyên tắc giữ suốt buổi:
 >
 > Đối chất không làm đổi đáp án. Game chỉ đếm hai con số: bạn **thấy** chỗ sai bao nhiêu lần, và bạn **làm theo** điều mình thấy bao nhiêu lần."
 
-### 6:00 – 7:30 · Cuối ngày: hai bảng, một gia đình
+### 5:30 – 7:00 · Cuối ngày: hai bảng, một gia đình
 
 **Làm:** Đóng dấu xong lượt anh Hùng, bấm tới **Báo cáo tổng kết cuối ngày**.
 
@@ -288,7 +282,7 @@ Ba nguyên tắc giữ suốt buổi:
 
 *(Nếu còn thời gian)* Kể thêm về bác Nga hàng xóm năm 1986. Bác mang thuốc huyết áp cho chính mẹ Thành, giấy tờ thiếu. Bác nói: *"Chú giữ thì tối nay chú lại phải đi mua chợ đen, giá gấp đôi đấy."*
 
-### 7:30 – 9:00 · Năm 1987 (tab 5, hoặc video dự phòng)
+### 7:00 – 8:30 · Năm 1987 (tab 4, hoặc video dự phòng)
 
 **Làm:** Gõ `Mr.NoBody`, bấm **D6 · 1987**. Để thẻ chuyển cảnh và tiếng đài tự chạy. **Người dẫn im lặng.**
 
@@ -308,17 +302,27 @@ Ba nguyên tắc giữ suốt buổi:
 >
 > Người làm ngơ tưởng mình đang tốt với dân. Nhưng lòng tốt không được ghi lại thì không ai sửa được cuốn sổ, và năm sau người khác ngồi sau ô cửa vẫn gặp đúng cuốn sổ ấy. Giáo trình Chương 4 viết: dân chủ phải *'gắn liền với kỷ luật, kỷ cương và phải được thể chế hóa bằng pháp luật'*. Vì vậy kết cục tốt nhất của game không dành cho người làm ngơ. Nó dành cho **người kiến nghị**."
 
-### 9:00 – 10:00 · Chốt: trở lại câu hỏi ban đầu
+### 8:30 – 10:00 · Chốt: trả lời câu hỏi ban đầu
 
 **Làm:** Chiếu mục 5, chỉ cần ba dòng in đậm.
 
+Mạch của đoạn này có ba bước. Người dẫn nắm chắc ba bước để nói bằng lời của mình, mỗi bước dừng một nhịp:
+
+1. **Con dấu nào cũng có lý.** Nhóm không chấm đúng sai cho lựa chọn của lớp.
+2. **Nhưng đóng dấu xong mà im lặng thì chưa đủ.** "Im lặng" ở đây nghĩa là đóng dấu rồi thôi, không báo cho ai biết cuốn sổ đang có vấn đề. Khi đó sổ giữ nguyên, người sau gặp lại đúng tình huống đó. "Không im lặng" nghĩa là viết biên bản báo lên huyện.
+3. **Liên hệ giáo trình.** Cái sai không nằm ở việc có quản lý, mà ở chỗ quy định không được sửa kịp theo thực tiễn: giáo điều, duy ý chí (Ch.1), không phải do chủ nghĩa xã hội. Đổi mới sửa nó bằng tổng kết thực tiễn, và tờ biên bản là việc tổng kết thực tiễn ở cấp nhỏ nhất.
+
 **Nói:**
 
-> "Mười phút trước em hỏi: một bà cụ đẩy 18 cân gạo qua ô cửa, bạn đóng dấu gì?
+> "Quay lại câu hỏi lúc đầu: bà Tư đẩy 18 cân gạo qua ô cửa, bạn đóng dấu gì? Lớp mình đã chọn *(nói tên dấu)*.
 >
-> Câu trả lời của nhóm em là: đóng dấu nào cũng được, miễn là **đừng im lặng**.
+> Nhóm em không chấm đúng sai cho con dấu đó. Cho qua là theo chủ trương, giữ lại là theo sổ, bên nào cũng có lý do của mình. *(dừng)*
 >
-> Cuốn sổ không sai vì có quản lý; game vẫn có những kẻ buôn lậu thật mà giữ lại là đúng. Nó sai vì chậm hơn đời sống. Giáo trình Chương 1 gọi tên cái sai đó: *giáo điều, chủ quan duy ý chí, bảo thủ*. Cũng câu đó khẳng định nguyên nhân **không phải do chủ nghĩa xã hội**. Và Đổi mới chính là lúc Đảng làm đúng điều giáo trình rút ra: *xuất phát từ thực tiễn, coi trọng tổng kết thực tiễn*.
+> Điều nhóm em muốn nói là: **đóng dấu xong mới làm được một nửa việc.** Nếu chỉ đóng dấu rồi thôi, dù là dấu nào, thì cuốn sổ vẫn y nguyên, và ngày mai lại có một bà cụ khác đứng trước đúng câu hỏi đó. Nửa việc còn lại là **viết biên bản báo lên huyện** rằng sổ đang chậm hơn chủ trương. Người làm ngơ bỏ qua đúng nửa việc này, nên cấp trên không bao giờ biết cuốn sổ có vấn đề. *(dừng)*
+>
+> Vì sao chuyện này gắn với môn học? Cuốn sổ không sai vì có quản lý; trong game vẫn có những kẻ buôn lậu thật mà giữ lại là đúng. Nó sai vì **không được sửa kịp theo đời sống**. Giáo trình Chương 1 gọi tên cái sai đó là *giáo điều, chủ quan duy ý chí, bảo thủ*, và nói rõ nguyên nhân **không phải do chủ nghĩa xã hội**, mà do cách làm. Đổi mới sửa cái sai ấy bằng cách *xuất phát từ thực tiễn, coi trọng tổng kết thực tiễn*. Một tờ biên bản ở Trạm 15 chính là việc tổng kết thực tiễn ở cấp nhỏ nhất: người ở cơ sở thấy chỗ chưa hợp lý thì báo lên, để cấp trên có căn cứ mà sửa.
+>
+> Gói lại trong một câu: **con dấu là để làm đúng phận sự hôm nay; tờ biên bản là để cuốn sổ ngày mai tốt hơn.**
 >
 > Nhóm em xin để lại câu hỏi cuối của game: *Đổi mới bắt đầu từ đâu, nếu không phải từ lòng dũng cảm nhìn thẳng vào sự thật ở chính cấp cơ sở?*
 >
@@ -350,7 +354,7 @@ Mốc lịch sử dùng trong game: Hội nghị Trung ương 6 khoá IV (8/1979
 Không. Theo giáo trình (Ch.1, mục 3.3), nguyên nhân không nằm ở chủ nghĩa xã hội mà ở cách nhận thức và hành động giáo điều, duy ý chí. Chính Đảng đã tự nhìn ra và tự sửa từ Đại hội VI. Game cũng cho thấy trạm chỉ là một trong nhiều nguyên nhân (dòng *Yếu tố khách quan*).
 
 **"Nếu em là Thành, em xử lý bà Tư thế nào?"**
-Không làm ngơ. Chỉ thị 100 đã ban hành, nên xử lý và lập biên bản báo lên huyện để sổ được cập nhật. Đó là con đường tổng kết thực tiễn — và trong game đó là con đường duy nhất làm sổ thay đổi.
+Con dấu nào cũng bảo vệ được: CHO QUA theo Chỉ thị 100, GIỮ LẠI theo sổ. Điều nhóm chắc chắn là không làm ngơ và không dừng ở con dấu: lập biên bản báo lên huyện để sổ được cập nhật. Đó là con đường tổng kết thực tiễn — và trong game đó là con đường duy nhất làm sổ thay đổi.
 
 **"Sao giữ lại thuốc của thằng Tí lại là 'đúng'?"**
 Đúng theo sổ: 20 viên quinin, đơn chỉ kê 10. Game cố ý để người chơi biết trước cái giá rồi mới bấm, vì chỗ đáng bàn không phải người chơi sai hay đúng mà là một quy định đúng về mục đích (quản lý thuốc) vẫn có thể gây hại khi áp dụng máy móc.
@@ -360,9 +364,6 @@ Có, ít nhất 5 lượt buôn lậu, đầu cơ thật: thuốc lá giấu, 40
 
 **"Đối chất để làm gì nếu không đổi đáp án?"**
 Để đo khoảng cách giữa **biết** và **làm**. Màn kết hiện: *"Bạn chỉ ra chỗ lệch ở X lượt. Bạn hành động theo điều mình thấy ở Y lượt."* Người gác cổng không phải không thấy; họ thấy rồi vẫn đóng dấu.
-
-**"Hệ thống bỏ phiếu qua điện thoại hoạt động thế nào, có sợ lộ thông tin hay sập server không?"**
-Hệ thống chạy trên Vercel Serverless Functions kết hợp Upstash Redis qua REST HTTPS, không duy trì kết nối WebSocket nặng nề. Cơ chế client polling có header CDN Cache (`s-maxage=1, stale-while-revalidate=2`) giúp gộp hàng chục request từ cả lớp thành 1 request duy nhất vào server mỗi giây, tiết kiệm tối đa tài nguyên. Sinh viên chỉ nhận một mã ngẫu nhiên `voterId` lưu trong trình duyệt máy mình, hoàn toàn ẩn danh, không thu thập bất kỳ dữ liệu cá nhân nào, và màn hình điện thoại không hiển thị số phiếu đang chạy để đảm bảo tính khách quan (tránh hiệu ứng hùa theo đám đông).
 
 **"Game minh hoạ chương nào?"**
 Chương 1 (bài học đổi mới), Chương 3 (kinh tế nhiều thành phần trong thời kỳ quá độ), Chương 4 (dân chủ gắn với kỷ cương, pháp luật), Chương 5 (liên minh công – nông – trí thức). Xem mục 5.
@@ -387,9 +388,9 @@ Khoảng 20–30 phút cho 6 ngày, 27 lượt.
 | Game mở ra ở giữa một ván cũ | Thêm `?tu=d1-t1` vào địa chỉ, hoặc gõ `Mr.NoBody` → *Nhảy tới đầu ngày 1*. |
 | Kéo dấu không ăn | Phải thả **trên mặt một tờ giấy** hoặc *Phiếu kiểm soát*. Hoặc bấm phím `1` / `2`. |
 | Máy chiếu hẹp, bố cục thành một cột | Máy chiếu đang dưới 1024 px ngang. Tăng độ phân giải hoặc thu nhỏ trình duyệt (`Ctrl` + `-`). |
-| Hết giờ giữa chừng | Bỏ đoạn 5:00–6:00 (đối chất) và phần bác Nga; đi thẳng tới thẻ kết quả và chốt. |
-| Wifi lớp học yếu / sinh viên không vào được trang vote | Bấm ngay mục **"Đường lui nhập tay (Khẩn cấp)"** trên màn `/host` hoặc ngay tại bàn game. Người dẫn đếm nhanh giơ tay, gõ số phiếu vào 2 ô và bấm **"Dùng số nhập tay"**. Hội đồng công bố ngay, bấm **Đóng dấu theo lớp** như thường. |
-| Hội đồng lớp học không tự hiện trên bàn game | Kiểm tra nút **"Host: BẬT / TẮT"** trên thanh TopBar, hoặc bấm dòng **"Bật bỏ phiếu lớp học cho lượt này"** xuất hiện ngay trên mặt bàn. |
+| Lượt bà Tư bị phủ màn mã QR | Máy đang bật Host. Bấm nút **Host: BẬT** ở thanh trên cùng để chuyển thành **Host: TẮT**, màn mã QR sẽ đóng. |
+| Lớp ngại giơ tay, hai bên quá ít | Người dẫn hỏi thẳng hai bạn ngồi gần: mỗi bạn chọn một dấu và nói một câu lý do. Người cầm máy đóng dấu theo bạn mà lớp vỗ tay to hơn. |
+| Hết giờ giữa chừng | Bỏ đoạn 4:30–5:30 (đối chất) và phần bác Nga; đi thẳng tới thẻ kết quả và chốt. |
 
 ---
 
